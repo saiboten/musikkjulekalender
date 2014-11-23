@@ -136,7 +136,7 @@ public class DefaultController {
 		return mav;
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping("/logmeon")
 	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;

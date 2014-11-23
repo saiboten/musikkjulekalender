@@ -6,28 +6,24 @@
 
 <%@ include file="before.jsp"%>
 
-<div id="page">
-	<div id="content">
+<img src="/static/images/santas.jpg" class="img-responsive" alt="Responsive image">
 
+<div class="row">
+	<div class="col-md-4">
 		<c:choose>
 			<c:when test="${today != null}">
-				<div class="post">
+				<div>
 					<h2 class="title">${today.realDate}.desember</h2>
 					<div style="clear: both;">&nbsp;</div>
 
 					<div class="entry">
-						<h3>Musikkjulekalender 2013!</h3>
-						<p>Gratulerer til Terje og co, som vant musikkjulekalenderen i
-							år 2013 med minst mulig margin! Godt jobbet! Krus og diplom
-							kommer i posten!</p>
+						<h3>Musikkjulekalender 2014!</h3>
+						<p>Velkommen til årets musikkjulekalender!</p>
 					</div>
 
 					<div class="entry">
 						<h3>Dagens oppgave</h3>
 						<p>${today.description}</p>
-						<p id="audioplayer_1">
-							Link: <a href="${today.link}">Last ned</a>
-						</p>
 						<audio controls="">
 							<source type="audio/mpeg" src="${today.link}"></source>
 							<a href="${today.link}">Last ned låt</a>
@@ -66,7 +62,7 @@
 			</c:when>
 			<c:otherwise>
 
-				<div class="post">
+				<div>
 					<h2 class="title">Julekalenderen!</h2>
 					<div style="clear: both;">&nbsp;</div>
 
@@ -78,91 +74,65 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-
-		<div style="clear: both;">&nbsp;</div>
+	</div>
+	<div class="col-md-4">
+		<h2 class="col-md-6" class="title">Sosiale medier</h2>
+		<p>
+			<a href="https://twitter.com/share" class="twitter-share-button"
+				data-text="Del" data-count="horizontal" data-via="saiboten">Tweet</a>
+			<script type="text/javascript"
+				src="//platform.twitter.com/widgets.js"></script>
+		</p>
 	</div>
 
+	<div class="col-md-4">
+		<c:if test="${bestUsers != null}">
+			<h2 class="title">Topplisten</h2>
 
-	<div id="sidebar">
+			<ul>
+				<c:forEach var="bestUser" items="${bestUsers}">
+					<li>${bestUser.totalScore}- ${bestUser.userNameNotMail}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 
-		<div id="social">
-			<h2 class="title">Sosiale medier</h2>
-			<p>
-				<iframe
-					src="http://www.facebook.com/plugins/like.php?href=http://musikkjulekalender2013.appspot.com"
-					scrolling="no" frameborder="0"
-					style="border: 1px dotted black; width: 250px; margin-top: 10px; height: 35px;"></iframe>
-
-				<a href="https://twitter.com/share" class="twitter-share-button"
-					data-text="Del" data-count="horizontal" data-via="saiboten">Tweet</a>
-				<script type="text/javascript"
-					src="//platform.twitter.com/widgets.js"></script>
-			</p>
-		</div>
-
-		<div class="splashText">
-			<c:if test="${bestUsers != null}">
-				<h2 class="title">Topplisten</h2>
-
-				<ul>
-					<c:forEach var="bestUser" items="${bestUsers}">
-						<li>${bestUser.totalScore}- ${bestUser.userNameNotMail}</li>
-					</c:forEach>
-				</ul>
+		<c:if test="${userStats != null}">
+			<c:if test="${user.daysCalculated != 0}">
+				<h2 class="title">Statistikk</h2>
+				<p>
+					Du har ${user.rightArtist} av ${user.daysCalculated} riktig
+					artister/band.<br /> Du har ${user.rightSong} av
+					${user.daysCalculated} riktige låter.<br /> Total poengsum:
+					${user.totalScore}
+				</p>
 			</c:if>
+		</c:if>
+	</div>
+	<div class="col-md-4">
+		<h2 class="title">Dagsvinnere!</h2>
 
-			<c:if test="${userStats != null}">
-				<c:if test="${user.daysCalculated != 0}">
-					<h2 class="title">Statistikk</h2>
-					<p>
-						Du har ${user.rightArtist} av ${user.daysCalculated} riktig
-						artister/band.<br /> Du har ${user.rightSong} av
-						${user.daysCalculated} riktige låter.<br /> Total poengsum:
-						${user.totalScore}
-					</p>
-				</c:if>
-			</c:if>
+		<div class="entry">
+
+			<c:choose>
+				<c:when test="${not empty longDays}">
+					<table>
+						<c:forEach var="longDay" items="${longDays}">
+							<tr>
+								<td>Dag ${days[longDay].realDate}: <c:out
+										value="${winners[longDay].userNameNotMail}" /></td>
+							</tr>
+						</c:forEach>
+
+					</table>
+				</c:when>
+				<c:otherwise>
+					<p>Ingen vinnere enda.</p>
+				</c:otherwise>
+			</c:choose>
 		</div>
 
-		<!-- end #content -->
-		<div style="clear: both;">&nbsp;</div>
 	</div>
-
-</div>
-
-<!-- end #page -->
-
-
-
-<div id="page">
-	<div id="content">
-		<div class="post">
-			<h2 class="title">Dagsvinnere!</h2>
-
-			<div class="entry">
-
-				<c:choose>
-					<c:when test="${not empty longDays}">
-						<table>
-							<c:forEach var="longDay" items="${longDays}">
-								<tr>
-									<td>Dag ${days[longDay].realDate}: <c:out
-											value="${winners[longDay].userNameNotMail}" /></td>
-								</tr>
-							</c:forEach>
-
-						</table>
-					</c:when>
-					<c:otherwise>
-						<p>Ingen vinnere enda.</p>
-					</c:otherwise>
-				</c:choose>
-			</div>
-
-		</div>
-	</div>
-	<!-- end #content -->
-	<div style="clear: both;">&nbsp;</div>
+	
 </div>
 
 

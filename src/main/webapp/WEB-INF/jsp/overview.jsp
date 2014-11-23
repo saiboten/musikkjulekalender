@@ -10,43 +10,17 @@
 <div id="page">
 	<div id="fullcontent">
 
-		<div class="post">
+		<div class="page-header">
 			<h2 class="title">
 				<a href="/overview#today">Gå til dagens luke</a>
 			</h2>
-			<div style="clear: both;">&nbsp;</div>
 		</div>
 
 		<c:forEach var="day" items="${days}" varStatus="rowCounter">
 
-			<script>
-				$(document).ready(function() {
-					$("#revealer_${day.revealDateAsInt}").click(function() {
-						$('#revealed_${day.revealDateAsInt}').dialog({
-							width : 460,
-							model: true,
-							 buttons: {
-					         "Lukk": function() {
-					         	$( this ).dialog( "close" );
-					         }}
-						});
-					});
-				});
-			</script>
-
-
-			<c:choose>
-				<c:when test="${rowCounter.count % 2 == 0}">
-					<div class="right">
-				</c:when>
-				<c:otherwise>
-					<div class="left">
-				</c:otherwise>
-			</c:choose>
-
-
-			<div class="post">
-
+		
+			<div class="col-md-6">
+		
 				<c:if test="${now > day.revealDate.time && now < day.solutionDate.time}">
 					<div id="today"></div>
 				</c:if>
@@ -187,13 +161,11 @@
 					</c:otherwise>
 					</c:choose>
 				</div>
-
-
-				<!-- 				<div style="clear: both;">&nbsp;</div> -->
-			</div>
 	</div>
 	</c:forEach>
 </div>
+
+
 <!-- end #content -->
 <div style="clear: both;">&nbsp;</div>
 </div>

@@ -1,8 +1,10 @@
+
+<div class="panel panel-default">
+  <div class="panel-body">
+   <footer>Laget av Tobias Rusås Olsen.</footer>
+  </div>
+</div>
 </div>
 
-<div id="footer">
-	<p>Laget av Tobias Rusås Olsen. Design av <a href="http://www.freecsstemplates.org/">Free CSS Templates</a> og Stig Bergan Solholm (ja, jeg kan ikke CSS).</p>
-</div>
-<!-- end #footer -->
 </body>
 </html>

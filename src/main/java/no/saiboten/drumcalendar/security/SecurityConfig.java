@@ -12,27 +12,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	  @Value("${admin.username}")
-	  private String username;
-	  
-	  @Value("${admin.password}")
-	  private String password;
-	
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser(username).password(password).roles("ADMIN");
-    }
-    
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
-            .antMatchers("/**").permitAll()                  
-                .and()
-            .formLogin()
-                .and()
-            .httpBasic();
-    }
+	@Value("${admin.username}")
+	private String username;
+
+	@Value("${admin.password}")
+	private String password;
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.inMemoryAuthentication().withUser(username).password(password)
+				.roles("ADMIN");
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests().antMatchers("/admin/**")
+				.hasRole("ADMIN")
+
+				.antMatchers("/**").permitAll().and().formLogin().and()
+				.httpBasic();
+	}
 }
