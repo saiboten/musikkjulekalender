@@ -59,11 +59,10 @@
 							<p id="audioplayer_${day.revealDateAsInt}">
 								<a href="${day.link}">Last ned spor</a>
 							</p>
-							<script type="text/javascript">
-								AudioPlayer.embed("audioplayer_${day.revealDateAsInt}", {
-									soundFile : "${day.link}"
-								});
-							</script>
+							<audio controls="">
+								<source type="audio/mpeg" src="${today.link}"></source>
+								<a href="${today.link}">Last ned låt</a>
+							</audio>
 							<c:if test='${now > day.solutionDate.time}'> 
 								<c:if test="${statistics != null}">
 									<c:if test="${now > day.solutionDate.time}">

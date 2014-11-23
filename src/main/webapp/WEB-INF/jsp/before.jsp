@@ -9,12 +9,6 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <script type="text/javascript" src="/static/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/static/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="/static/audio-player.js"></script>
-<script type="text/javascript">
-	AudioPlayer.setup("/player.swf", {
-		width : 290
-	});
-</script>
 <title>Julekalender - Musikkquiz!</title>
 <link rel="stylesheet" type="text/css" href="/static/style.css" />
 <link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.8.16.custom.css" />
