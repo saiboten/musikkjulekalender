@@ -31,8 +31,7 @@
 	
 	
 	<nav class="navbar navbar-default" role="navigation">
-	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
+	  <div>
 	    <div class="navbar-header">
 	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 	        <span class="sr-only">Toggle navigation</span>
@@ -40,16 +39,13 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      
-	     
-	      
-	      <a class="navbar-brand" href="#">Musikkjulekalender</a>
+	      <a class="navbar-brand" href="#">Musikkjulekalender 2014</a>
 	    </div>
 	
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	       <li class="col-md-3"><a href="/">Forsiden</a></li>
+	       <li class="col-md-3 active"><a href="/">Forsiden</a></li>
 			<li class="col-md-3"><a href="/overview">Oversikt og løsninger</a></li>
 			<li class="col-md-3"><a href="/om">Om kalenderen</a></li>
 			<li class="col-md-3"><a href="/logmeon">Logg inn/ut</a></li>
@@ -60,4 +56,4 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 	
-	 
+

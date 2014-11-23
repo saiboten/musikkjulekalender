@@ -17,10 +17,7 @@
 		</div>
 
 		<c:forEach var="day" items="${days}" varStatus="rowCounter">
-
-		
 			<div class="col-md-6">
-		
 				<c:if test="${now > day.revealDate.time && now < day.solutionDate.time}">
 					<div id="today"></div>
 				</c:if>
@@ -30,12 +27,9 @@
 					<c:choose>
 						<c:when test='${now > day.revealDate.time}'>
 							<p>${day.description}</p>
-							<p id="audioplayer_${day.revealDateAsInt}">
-								<a href="${day.link}">Last ned spor</a>
-							</p>
 							<audio controls="">
-								<source type="audio/mpeg" src="${today.link}"></source>
-								<a href="${today.link}">Last ned låt</a>
+								<source type="audio/mpeg" src="${day.link}"></source>
+								<a href="${day.link}">Last ned låt</a>
 							</audio>
 							<c:if test='${now > day.solutionDate.time}'> 
 								<c:if test="${statistics != null}">
@@ -74,12 +68,13 @@
 						</c:when>
 						<c:otherwise>
 							<p>
-								<input type="button" id="revealer_${day.revealDateAsInt}" value="Fasit"><span
-									class="hideme" title="Fasit" id="revealed_${day.revealDateAsInt}">
+								<input type="button" id="revealer_${day.revealDateAsInt}" value="Fasit">
+								<span title="Fasit" id="revealed_${day.revealDateAsInt}">
 									${day.optionalSolutionVideo} "${day.solutionsSong[0]}" av
 									"${day.solutionsArtist[0]}"
+									</span>
 							</p>
-							</span>
+							
 							</p>
 						</c:otherwise>
 					</c:choose>
@@ -129,28 +124,21 @@
 											</c:otherwise>
 										</c:choose>
 									</c:if>
-
-
 								</c:if>
 							</p>
 							<c:if test="${now > day.revealDate.time && now < day.solutionDate.time }">
-								<form action="/answer" method="POST">
-									<table>
-										<tr>
-											<td>Artist:</td>
-											<td><input type="text" name="artist" value="${answers[day.revealDateAsInt].answerArtist}" />
-											</td>
-										<tr>
-											<td>Sang:</td>
-											<td><input type="text" name="song" value="${answers[day.revealDateAsInt].answerSong}" />
-											</td>
-										</tr>
-										<tr>
-											<td></td>
-											<td><input type="submit" value="Lagre forslag" />
-											</td>
-										</tr>
-									</table>
+								<form role="form" action="/answer" method="POST">
+									 <div class="form-group">
+									    <label for="artistInput">Artist</label>
+									    <input type="text" class="form-control" id="artistInput" placeholder="Artist" name="artist" value="${answers[day.revealDateAsInt].answerArtist}">
+									  </div>
+									  
+									  <div class="form-group">
+									    <label for="songInput">Sang</label>
+									    <input type="text" class="form-control" id="songInput" placeholder="Sang" name="song" value="${answers[day.revealDateAsInt].answerSong}">
+									  </div>
+									  
+									  <button type="submit" class="btn btn-default">Lagre forslag</button>
 								</form>
 							</c:if>
 						</c:when>
