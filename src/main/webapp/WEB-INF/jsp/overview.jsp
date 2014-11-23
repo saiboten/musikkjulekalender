@@ -21,9 +21,13 @@
 				<c:if test="${now > day.revealDate.time && now < day.solutionDate.time}">
 					<div id="today"></div>
 				</c:if>
-				<h2 class="title">${day.realDate}. desember</h2>
-				<div style="clear: both;">&nbsp;</div>
-				<div class="calendar">
+				
+				
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">${day.realDate}. desember</h3>
+				  </div>
+				  <div class="panel-body">
 					<c:choose>
 						<c:when test='${now > day.revealDate.time}'>
 							<p>${day.description}</p>
@@ -148,7 +152,9 @@
 						<p>Luke ikke åpnet.</p>
 					</c:otherwise>
 					</c:choose>
+				  </div>
 				</div>
+				
 	</div>
 	</c:forEach>
 </div>
