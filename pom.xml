@@ -98,6 +98,16 @@
 		    <artifactId>morphia</artifactId>
 		    <version>0.107</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		  </dependency>
+		  <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		  </dependency>
 		        
 	</dependencies>
 

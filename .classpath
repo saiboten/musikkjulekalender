@@ -40,4 +40,7 @@
   <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/apis/google-api-services-oauth2/v2-rev81-1.19.0/google-api-services-oauth2-v2-rev81-1.19.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mongodb/morphia/morphia/0.107/morphia-0.107.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-web/3.2.5.RELEASE/spring-security-web-3.2.5.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-core/3.2.5.RELEASE/spring-security-core-3.2.5.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-config/3.2.5.RELEASE/spring-security-config-3.2.5.RELEASE.jar"/>
 </classpath>
