@@ -27,7 +27,7 @@
 					  </div>
 					  <div class="panel-body">
 					   <p>${today.description}</p>
-						<audio controls="">
+						<audio style="width: 15em" class="media" controls="">
 							<source type="audio/mpeg" src="${today.link}"></source>
 							<a href="${today.link}">Last ned låt</a>
 						</audio>
