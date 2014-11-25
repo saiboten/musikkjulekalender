@@ -1,6 +1,5 @@
 package no.saiboten.drumcalendar.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -29,15 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-
-import com.google.api.client.auth.oauth2.TokenResponseException;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.oauth2.Oauth2;
-import com.google.api.services.oauth2.model.Tokeninfo;
 
 @Controller
 public class DefaultController {
@@ -71,6 +61,8 @@ public class DefaultController {
 	@RequestMapping("")
 	public ModelAndView start() {
 		ModelAndView mav = new ModelAndView("main");
+		
+		mav.addObject("frontpage", "active");
 
 		mav.addObject("now", Calendar.getInstance().getTimeInMillis());
 
@@ -111,13 +103,16 @@ public class DefaultController {
 	}
 
 	@RequestMapping("/om")
-	public String om() {
-		return "om";
+	public ModelAndView om() {
+		ModelAndView mav = new ModelAndView("om");
+		mav.getModel().put("about","active");
+		return mav;
 	}
 
 	@RequestMapping("/overview")
 	public ModelAndView overview() {
 		ModelAndView mav = new ModelAndView("overview");
+		mav.addObject("overview", "active");
 		mav.addObject("now", Calendar.getInstance().getTimeInMillis());
 		mav.addObject("days", dayService.getDays());
 		mav.addObject("loggedIn", loggedIn.isLoggedIn());
@@ -139,6 +134,7 @@ public class DefaultController {
 	@RequestMapping("/logmeon")
 	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("login");
+		mav.addObject("logmein", "active");
 		return mav;
 	}
 

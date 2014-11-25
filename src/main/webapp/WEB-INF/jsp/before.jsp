@@ -46,14 +46,30 @@
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		       <ul class="nav nav-tabs">
-			       <li class="col-md-2 col-sm-2"><a href="/">Forsiden</a></li>
-					<li class="col-md-2 col-sm-2"><a href="/overview">Oversikt og løsninger</a></li>
-					<li class="col-md-2 col-sm-2"><a href="/om">Om kalenderen</a></li>
-					<li class="col-md-2 col-sm-2"><a href="/logmeon">Logg inn/ut</a></li>
-			      </ul>
-		    
-		      
+		       
+		       <ul class="nav navbar-nav">
+            <li class="${frontpage}">
+              <a href="/">
+                Forsiden
+              </a>
+            </li>
+            <li class="${overview}">
+              <a href="/overview">
+                Oversikt og løsninger
+              </a>
+            </li>
+              <li class="${about}">
+                  <a href="/om">
+                      Om kalenderen
+                  </a>
+              </li>
+              <li class="${logmein}">
+                  <a href="/logmeon">
+                      Logg inn/ut
+                  </a>
+              </li>
+          </ul>
+		  
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
