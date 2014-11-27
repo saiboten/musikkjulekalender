@@ -10,56 +10,125 @@
   </script>
   <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
   </script>
+  
+  
+  <script>
+  function statusChangeCallback(response) {
+    console.log("Response: ", response);
+    
+    if (response.status === 'connected') {
+    	
+    	console.log("This is what we send to the server: ", response.authResponse.accessToken);
+    	
+    	$.ajax({
+    		type: "POST",
+    		url: "/facebooklogin",
+    		data: response.authResponse.accessToken,
+    		success: function(response) {
+    			console.log("Response from server: ", response.result);
+    			if(response.result) {
+    				document.getElementById('status').style.display = "";
+    				 document.getElementById('status').innerHTML = 'Du er logget inn med Facebook!';
+    				 document.getElementById('signinButton').style.display = 'none';
+    			}
+    		},
+    		dataType: "json",
+    		contentType: "application/json"
+    		});
+    	
+    } else if (response.status === 'not_authorized') {
+      document.getElementById('status').innerHTML = 'Logg inn med Facebook. Klikk Log inn-knappen!';
+    } else {
+      document.getElementById('status').innerHTML = 'Du må logge inn på facebook for å logge inn på musikkjulekalenderen!';
+    }
+  }
 
-<div id="page">
-	<div id="fullcontent">
-		<div class="post">
-			<h2 class="title">Innlogging</h2>
-			<div style="clear: both;">&nbsp;</div>
-			<div class="entry">
-				<p>Du logger inn med din Googlekonto. Dette er kun for å
-					holde rede på svarene dine, og vi lover å ikke misbruke
-					informasjonen din på noen måte. Vi skal ikke engang sende ut
-					plagsomme eposter.</p>
-			</div>
-		</div>
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
 
-		<div class="post">
-			<c:choose>
-				<c:when test="${loggedIn}">
-					<h2 class="title"><a href="${logoutUrl}">Logg ut</a></h2>
-				</c:when>
-				<c:otherwise>
-					<!-- Add where you want your sign-in button to render -->
-					<div id="signinButton">
-					  <span class="g-signin"
-					    data-scope="profile email"
-					    data-clientid="814247292614-kvbdepicmv5sbk5ufocb5lf7agcqf907.apps.googleusercontent.com"
-					    data-redirecturi="postmessage"
-					    data-accesstype="offline"
-					    data-cookiepolicy="single_host_origin"
-					    data-callback="signInCallback">
-					  </span>
-					</div>
-					<div id="result"></div>
-				</c:otherwise>
-			</c:choose>
-		</div>
+  window.fbAsyncInit = function() {
+	  FB.init({
+	    appId      : '258625720859950',
+	    cookie     : true,  // enable cookies to allow the server to access 
+	                        // the session
+	    xfbml      : true,  // parse social plugins on this page
+	    version    : 'v2.1' // use version 2.1
+	  });
+	  
+	  FB.getLoginStatus(function(response) {
+	    statusChangeCallback(response);
+	  });
 
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/nb_NO/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function getUserData() {
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
+
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+
+
+
+
+	<div class="post">
+		<h2 class="title">Innlogging</h2>
 		<div style="clear: both;">&nbsp;</div>
+		<div class="entry">
+			<p id="info">Du kan velge mellom å logge inn med Google, eller med Facebook. Dette er kun for å
+				holde rede på svarene dine, og vi lover å ikke misbruke
+				informasjonen din på noen måte. Vi skal ikke engang sende ut
+				plagsomme eposter.</p>
+		</div>
 	</div>
-	<!-- end #content -->
-	<div style="clear: both;">&nbsp;</div>
-</div>
-<!-- end #page -->
 
+	<div id="loginButtons" class="well">
+	
+		<div id="signinButton">
+			  <span class="g-signin"
+			    data-scope="profile email"
+			    data-clientid="814247292614-kvbdepicmv5sbk5ufocb5lf7agcqf907.apps.googleusercontent.com"
+			    data-redirecturi="postmessage"
+			    data-accesstype="offline"
+			    data-cookiepolicy="single_host_origin"
+			    data-callback="signInCallback">
+			  </span>
+		</div>
+		
+		<fb:login-button id="facebookLoginButton" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
+	</div>
+	
+	<div id="status" style="display: none;" class="well">
+	
+	</div>
+	
 	<!-- Last part of BODY element in file index.html -->
 	<script>
 	function signInCallback(authResult) {
 	  if (authResult['code']) {
 		  
-		  console.log("Authresult: ", authResult);
-	
 	    // Hide the sign-in button now that the user is authorized, for example:
 	    $('#signinButton').attr('style', 'display: none');
 	
@@ -71,8 +140,14 @@
 	      success: function(result) {
 	    	  console.log("Raw result: ", result);
 	       	if(result.result === "SUCCESS") {
-	       		console.log("YES! Success!");
-	       		window.location = "/overview";
+	       		document.getElementById('status').style.display = "";
+				document.getElementById('facebookLoginButton').style.display = 'none';
+				document.getElementById('loginButtons').style.display = 'none';
+	       		$('#status').html("Du er nå logget inn med Google. For å logge ut... tja, gå til google.com og let etter en utloggingsknapp!");
+	       	}
+	       	else {
+	       		document.getElementById('status').style.display = "";
+	       		$('#status').html("Noe gikk galt med Google-påloggingen. Prøv igjen senere.");
 	       	}
 	      },
 	      processData: false,

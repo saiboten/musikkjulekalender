@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import no.saiboten.drumcalendar.day.Day;
 import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.service.FacebookLoginService;
 import no.saiboten.drumcalendar.service.GoogleLoginService;
 import no.saiboten.drumcalendar.service.WinnerService;
 import no.saiboten.drumcalendar.user.CalendarUser;
@@ -26,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -46,16 +49,19 @@ public class DefaultController {
 	
 	private final Logger LOGGER = Logger.getLogger(getClass());
 
+	private FacebookLoginService facebookLoginService;
+
 	@Autowired
 	public DefaultController(DayService dayService,
 			LoggedInRequestHolder loggedIn, CalendarUserService userService,
-			StatisticsService statsService, WinnerService winnerService, GoogleLoginService googleLoginService) {
+			StatisticsService statsService, WinnerService winnerService, GoogleLoginService googleLoginService, FacebookLoginService facebookLoginService) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
 		this.googleLoginService = googleLoginService;
+		this.facebookLoginService = facebookLoginService;
 	}
 
 	@RequestMapping("")
@@ -149,4 +155,21 @@ public class DefaultController {
 		return mav;
 		
 	}
+	
+	@RequestMapping(name="/facebooklogin", method=RequestMethod.POST)
+	public ModelAndView facebookLoginService(HttpServletRequest request,
+			HttpServletResponse response, @RequestBody String accessToken) {
+		ModelAndView mav = new ModelAndView();
+		mav.setView(new MappingJackson2JsonView());
+		
+		LOGGER.debug("Login in using Facebook");
+		mav.addObject("result", facebookLoginService.login(accessToken));
+		return mav;
+		
+	}
+	
+	
+	
+	
+	
 }
