@@ -21,6 +21,7 @@
 				</ul>
 				<p><a href="/admin/users">Se brukere</a></p>
 				<p><a href="/admin/day/add">Legg til dag</a></p>
+				<p><a href="/admin/overview">Overview</a></p>
 				
 			</div>
 		</div>

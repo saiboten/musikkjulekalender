@@ -1,15 +1,21 @@
 package no.saiboten.drumcalendar.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 import no.saiboten.drumcalendar.day.Day;
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.service.HelperService;
 import no.saiboten.drumcalendar.service.WinnerService;
+import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
+import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.utils.StatisticsService;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -35,15 +41,20 @@ public class AdminController {
 	private HelperService helperService;
 
 	private DayService dayService;
+	
+	private Logger LOGGER = Logger.getLogger(getClass());
 
+	private LoggedInRequestHolder loggedIn;
+	
 	@Autowired
 	public AdminController(CalendarUserService userService, StatisticsService statsService,
-			WinnerService winnerService, HelperService helperService, DayService dayService) {
+			WinnerService winnerService, HelperService helperService, DayService dayService, LoggedInRequestHolder loggedIn) {
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
 		this.helperService = helperService;
 		this.dayService = dayService;
+		this.loggedIn = loggedIn;
 	}
 
 	@RequestMapping(value = "/admin/resetday/{day}")
@@ -73,6 +84,28 @@ public class AdminController {
 		mav.addObject("users", userService.getAllUsers());
 		mav.addObject("days", dayService.getDays());
 		return mav;
+	}
+	
+	@RequestMapping(value = "/admin/overview")
+	public ModelAndView adminOverview() {
+			ModelAndView mav = new ModelAndView("overviewadmin");
+			mav.addObject("overview", "active");
+			mav.addObject("now", Calendar.getInstance().getTimeInMillis());
+			mav.addObject("days", dayService.getDays());
+			mav.addObject("loggedIn", loggedIn.isLoggedIn());
+			LOGGER.debug("Is the user logged in?" + loggedIn.isLoggedIn());
+			if (loggedIn.getCalendarUser() != null) {
+				LOGGER.debug("Do we have the calendar user? " + loggedIn.getCalendarUser());
+				mav.addObject("answers", loggedIn.getCalendarUser().getAnswers());
+			}
+
+			List<CalendarUser> users = userService.getAllUsers();
+			if (users != null) {
+				mav.addObject("numberOfUsers", users.size());
+			}
+
+			mav.addObject("statistics", statsService.getStatistics());
+			return mav;
 	}
 
 	@RequestMapping("/admin/newwinner/{day}")
@@ -124,6 +157,7 @@ public class AdminController {
 		mav.addObject("day", day);
 		if (day != null) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			format.setTimeZone(TimeZone.getTimeZone("Europe/Oslo"));
 			mav.addObject("revealDate", format.format(day.getRevealDate()));
 			mav.addObject("solutionDate", format.format(day.getSolutionDate()));
 		}
