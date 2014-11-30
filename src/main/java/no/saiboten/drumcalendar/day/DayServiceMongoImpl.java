@@ -37,11 +37,11 @@ public class DayServiceMongoImpl implements DayService {
 
 	@Override
 	public Day getDay(Long dayNumber) {
-		LOGGER.debug("Getting user: " + dayNumber);
+		LOGGER.debug("Getting day: " + dayNumber);
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
 		Day theCorrectDay = dataStore.find(Day.class).field("revealDateAsInt").equal(dayNumber).get();
-		LOGGER.debug("Did we find the correct user? " + theCorrectDay);
+		LOGGER.debug("Did we find the correct day? " + theCorrectDay);
 		return theCorrectDay;
 	}
 
@@ -105,14 +105,13 @@ public class DayServiceMongoImpl implements DayService {
 
 	@Override
 	public boolean updateDay(Day day) {
+		LOGGER.debug("Updating or creating day: " + day);
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
 		
 		Day dbDay = getDay(day.getRevealDateAsInt());
 		if(dbDay != null) {
 			LOGGER.debug("This is apparantly an update of an existing day");
-			day.setId(dbDay.getId());
-			
 			UpdateOperations<Day> ops;
 			Query<Day> updateQuery = dataStore.createQuery(Day.class).field("revealDate").equal(day.getRevealDate());
 			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionsArtist", day.getSolutionsArtist()).set("solutionsSong", day.getSolutionsSong());

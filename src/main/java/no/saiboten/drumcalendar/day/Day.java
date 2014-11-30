@@ -14,6 +14,17 @@ public class Day implements Comparable<Day> {
 	
 	@Id private ObjectId id;
 	
+	@Override
+	public String toString() {
+		return "Day [id=" + id + ", image=" + image + ", processed="
+				+ processed + ", description=" + description
+				+ ", solutionsArtist=" + solutionsArtist + ", solutionsSong="
+				+ solutionsSong + ", optionalSolutionVideo="
+				+ optionalSolutionVideo + ", revealDateAsInt="
+				+ revealDateAsInt + ", link=" + link + ", solutionDate="
+				+ solutionDate + ", revealDate=" + revealDate + "]";
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
