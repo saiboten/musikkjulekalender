@@ -2,6 +2,7 @@ package no.saiboten.drumcalendar.day;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import no.saiboten.drumcalendar.mongodb.MongoDBClientWrapper;
@@ -32,6 +33,7 @@ public class DayServiceMongoImpl implements DayService {
 		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
 		List<Day> allDays = dataStore.find(Day.class).asList();
 		LOGGER.debug("Did we find all the users? " + allDays);
+		Collections.sort(allDays);
 		return allDays;
 	}
 
@@ -121,6 +123,7 @@ public class DayServiceMongoImpl implements DayService {
 			LOGGER.debug("This must be a new day?");
 			addDay(day);
 		}
+	
 		return true;
 	}
 
