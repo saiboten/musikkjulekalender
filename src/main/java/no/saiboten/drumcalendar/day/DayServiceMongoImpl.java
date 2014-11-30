@@ -34,6 +34,7 @@ public class DayServiceMongoImpl implements DayService {
 		List<Day> allDays = dataStore.find(Day.class).asList();
 		LOGGER.debug("Did we find all the users? " + allDays);
 		Collections.sort(allDays);
+		Collections.reverse(allDays);
 		return allDays;
 	}
 
