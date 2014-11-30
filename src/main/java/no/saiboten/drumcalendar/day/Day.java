@@ -5,7 +5,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity("days")
 public class Day implements Comparable<Day> {
+	
+	@Id private ObjectId id;
+	
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
 	private String image;
 
 	private boolean processed;

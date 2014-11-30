@@ -138,7 +138,7 @@ public class AdminController {
 			redirectView = new RedirectView("/admin?feedback=changefailed");
 		}
 
-		dayService.addDay(day);
+		dayService.updateDay(day);
 		return redirectView;
 	}
 

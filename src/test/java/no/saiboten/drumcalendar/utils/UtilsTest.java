@@ -1,8 +1,9 @@
-package no.saiboten.drumcalendar.utils;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.UUID;
+
+import no.saiboten.drumcalendar.utils.Utils;
 
 import org.junit.Test;
 

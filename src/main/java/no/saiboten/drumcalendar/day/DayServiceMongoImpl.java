@@ -2,21 +2,18 @@ package no.saiboten.drumcalendar.day;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import no.saiboten.drumcalendar.mongodb.MongoDBClientWrapper;
 import no.saiboten.drumcalendar.utils.Utils;
 
 import org.apache.log4j.Logger;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 
 @Component
 public class DayServiceMongoImpl implements DayService {
@@ -31,41 +28,21 @@ public class DayServiceMongoImpl implements DayService {
 
 	@Override
 	public List<Day> getDays() {
-		List<Day> daysList = new ArrayList<Day>();
-
-		DB db = mongo.getMongoClient().getDB("musikkjulekalender");
-		DBCollection daysDb = db.getCollection("days");
-
-		DBCursor dbCursor = daysDb.find();
-		for (DBObject dayDbObject : dbCursor) {
-			Day day = new Day();
-			day.setDescription((String) dayDbObject.get("description"));
-			day.setImage((String) dayDbObject.get("image"));
-			day.setLink((String) dayDbObject.get("link"));
-			day.setOptionalSolutionVideo((String) dayDbObject
-					.get("optionalSolutionVideo"));
-			day.setRevealDate((Date) dayDbObject.get("revealDate"));
-			day.setSolutionDate((Date) dayDbObject.get("solutionDate"));
-			day.setSolutionsArtist((List<String>) dayDbObject
-					.get("solutionsArtist"));
-			day.setSolutionsSong((List<String>) dayDbObject
-					.get("solutionsSong"));
-			daysList.add(day);
-		}
-		return daysList;
+		Morphia morphia = new Morphia();
+		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
+		List<Day> allDays = dataStore.find(Day.class).asList();
+		LOGGER.debug("Did we find all the users? " + allDays);
+		return allDays;
 	}
 
 	@Override
 	public Day getDay(Long dayNumber) {
-		Day foundIt = null;
-		List<Day> days = getDays();
-		for (Day day : days) {
-			if (dayNumber == day.getRevealDateAsInt()) {
-				foundIt = day;
-				break;
-			}
-		}
-		return foundIt;
+		LOGGER.debug("Getting user: " + dayNumber);
+		Morphia morphia = new Morphia();
+		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
+		Day theCorrectDay = dataStore.find(Day.class).field("revealDateAsInt").equal(dayNumber).get();
+		LOGGER.debug("Did we find the correct user? " + theCorrectDay);
+		return theCorrectDay;
 	}
 
 	@Override
@@ -120,44 +97,41 @@ public class DayServiceMongoImpl implements DayService {
 
 	@Override
 	public boolean addDay(Day day) {
-		DB db = mongo.getMongoClient().getDB("musikkjulekalender");
-		DBCollection days = db.getCollection("days");
-
-		BasicDBObject doc = new BasicDBObject();
-		doc.put("description", day.getDescription());
-		doc.put("image", day.getImage());
-		doc.put("link", day.getLink());
-		doc.put("optionalSolutionVideo", day.getOptionalSolutionVideo());
-		doc.put("revealDate", day.getRevealDate());
-		doc.put("solutionDate", day.getSolutionDate());
-		doc.put("solutionsArtist", day.getSolutionsArtist());
-		doc.put("solutionsSong", day.getSolutionsSong());
-
-		days.insert(doc);
-		return false;
+		Morphia morphia = new Morphia();
+		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
+		dataStore.save(day);
+		return true;
 	}
 
 	@Override
 	public boolean updateDay(Day day) {
-		return false;
+		Morphia morphia = new Morphia();
+		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
+		
+		
+		Day dbDay = getDay(day.getSolutionDate().getTime());
+		if(dbDay != null) {
+			LOGGER.debug("This is apparantly an update of an existing day");
+			day.setId(dbDay.getId());
+			
+			UpdateOperations<Day> ops;
+			Query<Day> updateQuery = dataStore.createQuery(Day.class).field("revealDate").equal(day.getRevealDate());
+			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionsArtist", day.getSolutionsArtist()).set("solutionsSong", day.getSolutionsSong());
+			dataStore.update(updateQuery, ops);
+		}
+		else {
+			LOGGER.debug("This must be a new day?");
+			addDay(day);
+		}
+		return true;
 	}
 
 	@Override
 	public boolean deleteDay(Long dayNumber) {
-		DB db = mongo.getMongoClient().getDB("musikkjulekalender");
-		DBCollection daysDb = db.getCollection("days");
-		
-		DBCursor dbCursor = daysDb.find();
-		
-		for (DBObject dayDbObject : dbCursor) {
-			Day day = new Day();
-			day.setRevealDate((Date) dayDbObject.get("revealDate"));
-			if(day.getRevealDateAsInt() == dayNumber) {
-				LOGGER.debug("Found it!");
-				daysDb.remove(dayDbObject);
-			}
-		}
+		Morphia morphia = new Morphia();
+		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
 	
+		dataStore.delete(dataStore.createQuery(Day.class).field("revealDateAsInt").equal(dayNumber).get());
 		return true;
 	}
 }

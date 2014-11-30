@@ -9,7 +9,7 @@
 <p><img src="/static/images/santas.jpg" class="img-responsive" alt="Responsive image"></p>
 
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<c:choose>
 			<c:when test="${today != null}">
 					<div class="panel panel-default">
@@ -63,20 +63,19 @@
 			</c:when>
 			<c:otherwise>
 
-				<div>
-					<h2 class="title">Julekalenderen!</h2>
-					<div style="clear: both;">&nbsp;</div>
-
-					<div class="entry">
-						<h3>Musikkjulekalender!</h3>
-						<p>Da blir det jaggu kalender i år og!</p>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Musikkjulekalender 2014!</h3>
+					  </div>
+					  <div class="panel-body">
+						<p>Velkommen til årets musikkjulekalender!</p>
+					  </div>
 					</div>
 
-				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">Sosiale medier</h3>
@@ -91,7 +90,7 @@
 		
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<c:if test="${bestUsers != null}">
 			<h2 class="title">Topplisten</h2>
 
@@ -114,7 +113,7 @@
 			</c:if>
 		</c:if>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-6">
 	
 		<div class="panel panel-default">
 		  <div class="panel-heading">

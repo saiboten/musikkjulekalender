@@ -31,6 +31,7 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 		
 		if(loggedInRequestHolder.isLoggedIn()) {
 			LOGGER.info("User is already logged in. No need to do anything");
+			success = true;
 		}
 		else {
 			Facebook facebook = new FacebookTemplate(accessToken);

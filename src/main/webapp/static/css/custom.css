@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+.hideme {
+	display: none;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+body {
+	background-image: url(../images/christmas-snow-background.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+}

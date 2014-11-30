@@ -8,15 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="shortcut icon" href="favicon.ico" />
+
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
+<script src="/static/jquery-ui-1.11.2/jquery-ui.min.js"></script>
+
 <title>Julekalender - Musikkquiz!</title>
-<!-- <link rel="stylesheet" type="text/css" href="/static/style.css" />
-<link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.8.16.custom.css" /> -->
+<link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.11.2/jquery-ui.min.css" />
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/custom.css">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">

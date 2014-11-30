@@ -15,7 +15,7 @@
 					<li>
 						<p><a href="/admin/day/change/${day.revealDateAsInt}">${day.revealDateAsInt} - ${day.description}</a></p>
 						<p><a id="deletelink" href="/admin/day/delete/${day.revealDateAsInt}">Slett dag</a></p>
-						<p><a href="/cron/updateScores/${day.revealDateAsInt}">Oppdater dag</a></p>
+						<p><a href="/admin/updateScores/${day.revealDateAsInt}">Oppdater dag</a></p>
 					</li>
 				</c:forEach>
 				</ul>

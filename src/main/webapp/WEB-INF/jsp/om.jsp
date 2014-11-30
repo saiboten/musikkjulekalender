@@ -6,12 +6,14 @@
 
 <%@ include file="before.jsp"%>
 
-<div id="page">
-	<div id="fullcontent">
-		<div class="post">
-			<h2 class="title">Om kalenderen!</h2>
-			<div style="clear: both;">&nbsp;</div>
-			<div class="entry">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Om kalenderen</h3>
+			  </div>
+			  <div class="panel-body">
 				<p>Hver dag åpnes en luke i kalenderen. Hver luke
 					er et lydklipp, og din oppgave er å gjette
 					hvilken låt, og hvilken artist/band som spilles! </p>
@@ -20,22 +22,22 @@
 				<p>Du kan gjette flere ganger per dag, men det er det siste svaret som er gitt sist som er ditt gjeldende svar.</p>
 				<p>Hver dag vil det kåres en vinner. Kravet for å bli dagsvinner er at du har svart riktig låt OG riktig artist.</p>
 				<p>Den beste brukeren blir premiert med et vakkert krus, og et diplom!</p>
+			  </div>
 			</div>
-		</div>
+			
+				<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Kontakt</h3>
+			  </div>
+			  <div class="panel-body">
+				Har du spørsmål til kalenderen, er det mulig å kontakte mannen bak kalenderen, Tobias, på <a href="http://www.twitter.com/saiboten">twitter</a>
+			  </div>
+			</div>
+			
+			
 		
-		<div class="post">
-			<h2 class="title">Kontakt!</h2>
-			<div style="clear: both;">&nbsp;</div>
-			<div class="entry">
-				<p>Har du spørsmål til kalenderen, er det mulig å kontakte mannen bak kalenderen (ikke i en luke, dessverre), Tobias, på <a href="http://www.twitter.com/saiboten">twitter</a>.</p>
-			</div>
-		</div>
-
-		<div style="clear: both;">&nbsp;</div>
 	</div>
-	<!-- end #content -->
-	<div style="clear: both;">&nbsp;</div>
 </div>
-<!-- end #page -->
+		
 
 <%@ include file="after.jsp"%>

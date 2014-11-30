@@ -17,6 +17,22 @@
 		</div>
 
 		<c:forEach var="day" items="${days}" varStatus="rowCounter">
+		
+		<script>
+				$(document).ready(function() {
+					$("#revealer_${day.revealDateAsInt}").click(function() {
+						$('#revealed_${day.revealDateAsInt}').dialog({
+							model: true,
+							width: "auto",
+							 buttons: {
+					         "Lukk": function() {
+					         	$( this ).dialog( "close" );
+					         }}
+						});
+					});
+				});
+			</script>
+		
 			<div class="col-md-6">
 				<c:if test="${now > day.revealDate.time && now < day.solutionDate.time}">
 					<div id="today"></div>
@@ -63,9 +79,13 @@
 														<br />
 														<input type="button" id="revealer_${day.revealDateAsInt}"
 															value="Se video">
-														<span class="hideme" title="Video"
+														
+														  <span class="hideme" title="Video"
 															id="revealed_${day.revealDateAsInt}">
 															${day.optionalSolutionVideo}</span>
+														
+														
+														
 												</p>
 							</c:if>
 							</p>
@@ -73,10 +93,13 @@
 						<c:otherwise>
 							<p>
 								<input type="button" id="revealer_${day.revealDateAsInt}" value="Fasit">
+								
+								
 								<span title="Fasit" id="revealed_${day.revealDateAsInt}">
 									${day.optionalSolutionVideo} "${day.solutionsSong[0]}" av
 									"${day.solutionsArtist[0]}"
 									</span>
+								
 							</p>
 							
 							</p>
@@ -85,10 +108,12 @@
 					</c:when>
 					<c:otherwise>
 
+
 						<p>
 							<input type="button" id="revealer_${day.revealDateAsInt}" value="Fasit"><span
 								class="hideme" title="Fasit" id="revealed_${day.revealDateAsInt}">
-								${day.optionalSolutionVideo} "${day.solutionsSong[0]}" av
+								${day.optionalSolutionVideo}<br />
+								"${day.solutionsSong[0]}" av
 								"${day.solutionsArtist[0]}"
 						</p>
 						</span>
@@ -111,10 +136,10 @@
 											Du hadde
 											<c:choose>
 											<c:when test='${answers[day.revealDateAsInt].correctSong}'>
-												<span class="green">rett låt</span>
+												<span class="green">rett låt<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span></span>
 											</c:when>
 											<c:otherwise>
-												<span class="red"> feil låt</span>
+												<span class="red"> feil låt<span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span></span>
 											</c:otherwise>
 										</c:choose>
 

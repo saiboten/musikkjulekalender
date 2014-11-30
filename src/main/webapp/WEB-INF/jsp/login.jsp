@@ -14,12 +14,7 @@
   
   <script>
   function statusChangeCallback(response) {
-    console.log("Response: ", response);
-    
     if (response.status === 'connected') {
-    	
-    	console.log("This is what we send to the server: ", response.authResponse.accessToken);
-    	
     	$.ajax({
     		type: "POST",
     		url: "/facebooklogin",
@@ -28,8 +23,8 @@
     			console.log("Response from server: ", response.result);
     			if(response.result) {
     				document.getElementById('status').style.display = "";
-    				 document.getElementById('status').innerHTML = 'Du er logget inn med Facebook!';
-    				 document.getElementById('signinButton').style.display = 'none';
+    				document.getElementById('status').innerHTML = 'Du er logget inn med Facebook!';
+    				document.getElementById('signinButton').style.display = 'none';
     			}
     		},
     		dataType: "json",
@@ -72,16 +67,6 @@
     js.src = "//connect.facebook.net/nb_NO/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function getUserData() {
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
 </script>
 
 <!--
@@ -92,17 +77,20 @@
 
 
 
-
-	<div class="post">
-		<h2 class="title">Innlogging</h2>
-		<div style="clear: both;">&nbsp;</div>
-		<div class="entry">
-			<p id="info">Du kan velge mellom å logge inn med Google, eller med Facebook. Dette er kun for å
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Innlogging</h3>
+			  </div>
+			  <div class="panel-body">
+				<p>Du kan velge mellom å logge inn med Google, eller med Facebook. Dette er kun for å
 				holde rede på svarene dine, og vi lover å ikke misbruke
 				informasjonen din på noen måte. Vi skal ikke engang sende ut
 				plagsomme eposter.</p>
-		</div>
-	</div>
+			  </div>
+			</div>
+
 
 	<div id="loginButtons" class="well">
 	
@@ -124,7 +112,9 @@
 	
 	</div>
 	
-	<!-- Last part of BODY element in file index.html -->
+	</div>
+</div>
+	
 	<script>
 	function signInCallback(authResult) {
 	  if (authResult['code']) {
