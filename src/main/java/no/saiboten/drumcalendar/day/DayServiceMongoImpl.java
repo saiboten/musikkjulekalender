@@ -108,8 +108,7 @@ public class DayServiceMongoImpl implements DayService {
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender");
 		
-		
-		Day dbDay = getDay(day.getSolutionDate().getTime());
+		Day dbDay = getDay(day.getRevealDateAsInt());
 		if(dbDay != null) {
 			LOGGER.debug("This is apparantly an update of an existing day");
 			day.setId(dbDay.getId());
