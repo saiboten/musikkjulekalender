@@ -44,7 +44,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">Musikkjulekalender 2014</a>
+		      <a class="navbar-brand" href="#">Musikkjulekalender 2015</a>
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
