@@ -14,11 +14,10 @@
 			<c:when test="${today != null}">
 					<div class="panel panel-default">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">Musikkjulekalender 2014!</h3>
+					    <h3 class="panel-title">Musikkjulekalender 2015!</h3>
 					  </div>
 					  <div class="panel-body">
-						<p>Årets musikkjulekalender er over!</p>
-						<p>En stor gratulasjon til Eirik, også kjent som "face", som gikk av med seieren, etter at h.espedal lenge hadde ledelsen. Premie blir utlevert snart! Dere kan fremdeles lytte på oppgavene ved å gå til "Oversikt og løsninger".</p>
+						<p>Coming soon!</p>
 					  </div>
 					</div>
 					
@@ -66,11 +65,10 @@
 
 					<div class="panel panel-default">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">Musikkjulekalender 2014!</h3>
+					    <h3 class="panel-title">Musikkjulekalender 2015!</h3>
 					  </div>
 					  <div class="panel-body">
-						<p>Årets musikkjulekalender er over!</p>
-						<p>En stor gratulasjon til Eirik, også kjent som "face", som gikk av med seieren, etter at h.espedal lenge hadde ledelsen. Premie blir utlevert snart! Dere kan fremdeles lytte på oppgavene ved å gå til "Oversikt og løsninger".</p>
+						<p>Coming very soon!</p>
 					  </div>
 					</div>
 
