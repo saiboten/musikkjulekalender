@@ -17,7 +17,8 @@
 					    <h3 class="panel-title">Musikkjulekalender 2014!</h3>
 					  </div>
 					  <div class="panel-body">
-						<p>Velkommen til årets musikkjulekalender!</p>
+						<p>Årets musikkjulekalender er over!</p>
+						<p>En stor gratulasjon til Eirik, også kjent som "face", som gikk av med seieren, etter at h.espedal lenge hadde ledelsen. Premie blir utlevert snart! Dere kan fremdeles lytte på oppgavene ved å gå til "Oversikt og løsninger".</p>
 					  </div>
 					</div>
 					
@@ -68,7 +69,8 @@
 					    <h3 class="panel-title">Musikkjulekalender 2014!</h3>
 					  </div>
 					  <div class="panel-body">
-						<p>Velkommen til årets musikkjulekalender!</p>
+						<p>Årets musikkjulekalender er over!</p>
+						<p>En stor gratulasjon til Eirik, også kjent som "face", som gikk av med seieren, etter at h.espedal lenge hadde ledelsen. Premie blir utlevert snart! Dere kan fremdeles lytte på oppgavene ved å gå til "Oversikt og løsninger".</p>
 					  </div>
 					</div>
 
@@ -78,41 +80,42 @@
 	<div class="col-md-6">
 		<div class="panel panel-default">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Sosiale medier</h3>
+		    <h3 class="panel-title">Score</h3>
 		  </div>
 		  <div class="panel-body">
-		    <a href="https://twitter.com/share" class="twitter-share-button"
-				data-text="Del" data-count="horizontal" data-via="saiboten">Tweet</a>
-			<script type="text/javascript"
-				src="//platform.twitter.com/widgets.js"></script>
-		  </div>
-		</div>
-		
-	</div>
-
-	<div class="col-md-6">
-		<c:if test="${bestUsers != null}">
-			<h2 class="title">Topplisten</h2>
-
-			<ul>
-				<c:forEach var="bestUser" items="${bestUsers}">
-					<li>${bestUser.totalScore}- ${bestUser.userNameNotMail}</li>
+		  <ul>
+		  	<h4>Toppscore</h4>
+			  <c:forEach var="bestUser" items="${bestUsers}">
+					<li>${bestUser.totalScore} poeng: ${bestUser.userNameNotMail}</li>
 				</c:forEach>
 			</ul>
-		</c:if>
-
-		<c:if test="${userStats != null}">
-			<c:if test="${user.daysCalculated != 0}">
-				<h2 class="title">Statistikk</h2>
-				<p>
-					Du har ${user.rightArtist} av ${user.daysCalculated} riktig
-					artister/band.<br /> Du har ${user.rightSong} av
-					${user.daysCalculated} riktige låter.<br /> Total poengsum:
-					${user.totalScore}
-				</p>
-			</c:if>
-		</c:if>
+		</div>
 	</div>
+	</div>
+	
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Statistikk</h3>
+		  </div>
+		  <div class="panel-body">
+			  <c:if test="${userStats != null}">
+				<c:if test="${user.daysCalculated != 0}">
+					<h2 class="title">Statistikk</h2>
+					<p>
+						Du har ${user.rightArtist} av ${user.daysCalculated} riktig
+						artister/band.<br /> Du har ${user.rightSong} av
+						${user.daysCalculated} riktige låter.<br /> Total poengsum:
+						${user.totalScore}
+					</p>
+				</c:if>
+			</c:if>
+		</div>
+	</div>
+	</div>
+	
+		
+	
 	<div class="col-md-6">
 	
 		<div class="panel panel-default">

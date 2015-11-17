@@ -36,7 +36,7 @@ public class DayUpdaterCron {
 		this.winnerService = winnerService;
 	}
 	
-	@Scheduled(cron="0 0 8 * * *")
+	@Scheduled(cron="5 0 0 * * *")
 	public void updateScores() {
 		LOGGER.info("Updating scores!");
 		List<Day> days = dayService.getDays();

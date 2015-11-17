@@ -53,55 +53,11 @@
 									"${day.solutionsArtist[0]}"
 									</span>
 								
-								
-
-					<c:choose>
-						<c:when test='${loggedIn}'>
-							<p>
-								<c:if test="${answers[day.revealDateAsInt].answerSong != null}">
-										Du tippet "<c:out value="${answers[day.revealDateAsInt].answerSong}"></c:out>" av
-											"<c:out value="${answers[day.revealDateAsInt].answerArtist}"></c:out>".
-	
-											<br />
-
-									<c:if test="${answers[day.revealDateAsInt].revealAnswer}">
-											Du hadde
-											<c:choose>
-											<c:when test='${answers[day.revealDateAsInt].correctSong}'>
-												<span class="green">rett låt<span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span></span>
-											</c:when>
-											<c:otherwise>
-												<span class="red"> feil låt<span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span></span>
-											</c:otherwise>
-										</c:choose>
-
-											og
-											<c:choose>
-											<c:when test='${answers[day.revealDateAsInt].correctArtist}'>
-												<span class="green">rett artist</span>
-											</c:when>
-											<c:otherwise>
-												<span class="red">feil artist</span>
-											</c:otherwise>
-										</c:choose>
+								<c:forEach var="user" items="${users}">
+									<c:if test="${user.answers[day.revealDateAsInt] != null}">
+										<p><b>${user.userName}</b> (${user.rightArtist+user.rightSong} (${user.rightArtist} ${user.rightSong})): ${user.answers[day.revealDateAsInt].answerArtist} (${user.answers[day.revealDateAsInt].correctArtist}): ${user.answers[day.revealDateAsInt].answerSong} (${user.answers[day.revealDateAsInt].correctSong})</p>
 									</c:if>
-								</c:if>
-							</p>
-								<form role="form" action="/answer" method="POST">
-									 <div class="form-group">
-									    <label for="artistInput">Artist</label>
-									    <input type="text" class="form-control" id="artistInput" placeholder="Artist" name="artist" value="${answers[day.revealDateAsInt].answerArtist}">
-									  </div>
-									  
-									  <div class="form-group">
-									    <label for="songInput">Sang</label>
-									    <input type="text" class="form-control" id="songInput" placeholder="Sang" name="song" value="${answers[day.revealDateAsInt].answerSong}">
-									  </div>
-									  
-									  <button type="submit" class="btn btn-default">Lagre forslag</button>
-								</form>
-						</c:when>
-					</c:choose>
+								</c:forEach>
 				  </div>
 				</div>
 				

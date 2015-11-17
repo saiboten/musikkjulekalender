@@ -24,6 +24,14 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 
 	private int rightSong;
 
+	public void setRightSong(int rightSong) {
+		this.rightSong = rightSong;
+	}
+
+	public void setRightArtist(int rightArtist) {
+		this.rightArtist = rightArtist;
+	}
+
 	private int rightArtist;
 
 	private Map<Long, Answer> answers;

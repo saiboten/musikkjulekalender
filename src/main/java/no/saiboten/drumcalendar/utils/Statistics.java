@@ -3,8 +3,13 @@ package no.saiboten.drumcalendar.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity
 public class Statistics {
 
+	@Id
 	private String id;
 
 	public String getId() {

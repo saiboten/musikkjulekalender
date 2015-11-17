@@ -33,7 +33,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 	@Override
 	public void putUser(CalendarUser user) {
 		Morphia morphia = new Morphia();
-		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender");
+		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender2015");
 		dataStore.save(user);
 	}
 
@@ -41,7 +41,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 	public CalendarUser getUser(String uid) {
 		LOGGER.debug("Getting user: " + uid);
 		Morphia morphia = new Morphia();
-		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender");
+		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender2015");
 		CalendarUser theCorrectUser = dataStore.find(CalendarUser.class).field("userName").equal(uid).get();
 		LOGGER.debug("Did we find the correct user? " + theCorrectUser);
 		return theCorrectUser;
@@ -49,7 +49,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 
 	@Override
 	public void deleteAllUsers() {
-		DB db = mongoDBClientWrapper.getMongoClient().getDB("musikkjulekalender");
+		DB db = mongoDBClientWrapper.getMongoClient().getDB("musikkjulekalender2015");
 		DBCollection users = db.getCollection("users");
 		DBCursor userCursor = users.find();
 		
@@ -60,7 +60,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 
 	@Override
 	public void deleteUser(String uid) {
-		DB db = mongoDBClientWrapper.getMongoClient().getDB("musikkjulekalender");
+		DB db = mongoDBClientWrapper.getMongoClient().getDB("musikkjulekalender2015");
 		DBCollection users = db.getCollection("users");
 		DBCursor userCursor = users.find();
 		
@@ -79,7 +79,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 	@Override
 	public List<CalendarUser> getAllUsers() {
 		Morphia morphia = new Morphia();
-		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender");
+		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender2015");
 		List<CalendarUser> allUsers = dataStore.find(CalendarUser.class).asList();
 		LOGGER.debug("Did we find all the users? " + allUsers);
 		return allUsers;
@@ -155,6 +155,58 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 			if (answer != null) {
 				answer.setCorrectArtist(true);
 			}
+			putUser(user);
+		}
+	}
+
+	@Override
+	public void fixSongScore(String mail, Long day, int score) {
+		CalendarUser user = getUser(mail);
+		if (user != null) {
+
+			user.setRightSong(score);
+			putUser(user);
+		}
+	}
+	
+	@Override
+	public void fixArtistScore(String mail, Long day, int score) {
+		CalendarUser user = getUser(mail);
+		if (user != null) {
+
+			user.setRightArtist(score);
+			putUser(user);
+		}
+	}
+
+	@Override
+	public void setSongAnswer(String mail, Long day, String song) {
+		CalendarUser user = getUser(mail);
+		if (user != null) {
+			Map<Long, Answer> answers = user.getAnswers();
+			Answer answer = answers.get(day);
+			if(answer == null) {
+				answer = new Answer();
+			}
+			answer.setAnswerSong(song);
+			answers.put(day, answer);
+			user.setAnswers(answers);
+			putUser(user);
+		}
+	}
+
+	@Override
+	public void setArtistAnswer(String mail, Long day, String artist) {
+		CalendarUser user = getUser(mail);
+		if (user != null) {
+			Map<Long, Answer> answers = user.getAnswers();
+			Answer answer = answers.get(day);
+			if(answer == null) {
+				answer = new Answer();
+			}
+			answer.setAnswerArtist(artist);
+			answers.put(day, answer);
+			user.setAnswers(answers);
 			putUser(user);
 		}
 	}

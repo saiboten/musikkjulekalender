@@ -3,10 +3,15 @@ package no.saiboten.drumcalendar.bean;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity("winners")
 public class WinnersDbBean {
 
+	@Id 
 	private String key;
-
 
 	private Map<Long, String> winners;
 

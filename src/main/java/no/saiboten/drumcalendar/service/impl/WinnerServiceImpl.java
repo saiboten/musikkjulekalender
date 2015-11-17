@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.logging.Logger;
 
 import no.saiboten.drumcalendar.bean.WinnersDbBean;
 import no.saiboten.drumcalendar.day.Day;
@@ -15,13 +14,14 @@ import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WinnerServiceImpl implements WinnerService {
-
-	private final Logger LOGGER = Logger.getLogger(WinnerServiceImpl.class.getName());
+	
+	private final Logger LOGGER = Logger.getLogger(getClass());
 
 	CalendarUserService userService;
 
@@ -54,14 +54,14 @@ public class WinnerServiceImpl implements WinnerService {
 
 		String winner = findWinner(day);
 		if (winner == null) {
-			LOGGER.fine("No winner found...");
+			LOGGER.debug("No winner found...");
 			return;
 		}
 
 		WinnersDbBean winnersDbBean = winnerDao.getWinners();
 		winnersDbBean.getWinners().put(day, winner);
 
-		LOGGER.fine("Adding winner for day " + day + ": " + winner);
+		LOGGER.debug("Adding winner for day " + day + ": " + winner);
 		winnerDao.saveWinners(winnersDbBean);
 	}
 
@@ -70,6 +70,11 @@ public class WinnerServiceImpl implements WinnerService {
 		List<CalendarUser> possibleWinners = new ArrayList<CalendarUser>();
 		for (CalendarUser user : users) {
 			Answer answer = user.getAnswers().get(day);
+			if(answer != null) {
+				LOGGER.debug("Correct artist? " + answer.isCorrectArtist());
+				LOGGER.debug("Correct song? " + answer.isCorrectSong());
+			}
+			
 			if (answer != null && answer.isCorrectArtist() && answer.isCorrectSong()) {
 				possibleWinners.add(user);
 			}
@@ -77,7 +82,7 @@ public class WinnerServiceImpl implements WinnerService {
 
 		Random random = new Random();
 		if (possibleWinners.size() == 0) {
-			LOGGER.fine("No winners found this day");
+			LOGGER.debug("No winners found this day");
 			return null;
 		}
 		int winner = random.nextInt(possibleWinners.size());
