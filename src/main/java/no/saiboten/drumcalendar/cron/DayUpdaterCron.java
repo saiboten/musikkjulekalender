@@ -51,13 +51,12 @@ public class DayUpdaterCron {
 	}
 	
 	public void updateScoresDay(Long day) {
-		List<Day> days = dayService.getDays();
 		List<CalendarUser> users = userService.getAllUsers();
 
 		for (CalendarUser user : users) {
 			Answer answer = user.getAnswers().get(day);
-			if (answer != null && answer.getAnswerArtist() != null && answer.getAnswerSong() != null) {
-				updateAnswersAndCalculateScores(days, day, user, answer);
+			if (answer != null && answer.getAnswerSong() != null) {
+				updateAnswersAndCalculateScores(day, user, answer);
 			}
 		}
 
@@ -74,7 +73,8 @@ public class DayUpdaterCron {
 		}
 	}
 	
-	private void updateAnswersAndCalculateScores(List<Day> days, long dayLong, CalendarUser user, Answer answer) {
+	public void updateAnswersAndCalculateScores(long dayLong, CalendarUser user, Answer answer) {
+		List<Day> days = dayService.getDays();
 
 		for (Day day : days) {
 			if (day.getRevealDate().getTime() == dayLong) {
@@ -86,10 +86,6 @@ public class DayUpdaterCron {
 
 	private void update(Day day, CalendarUser user, Answer answer) {
 		if (!answer.isRevealAnswer()) {
-			if (containsCaseInsensitive(day.getSolutionsArtist(), answer.getAnswerArtist())) {
-				answer.setCorrectArtist(true);
-				user.incrementRightArtist();
-			}
 			if (containsCaseInsensitive(day.getSolutionsSong(), answer.getAnswerSong())) {
 				answer.setCorrectSong(true);
 				user.incrementRightSong();

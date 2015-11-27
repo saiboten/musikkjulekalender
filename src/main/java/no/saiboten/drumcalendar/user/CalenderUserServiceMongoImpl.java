@@ -99,9 +99,6 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 
 		for (Answer answer : answers.values()) {
 			if (answer.isRevealAnswer()) {
-				if (answer.isCorrectArtist()) {
-					correctAnswersArtist++;
-				}
 				if (answer.isCorrectSong()) {
 					correctAnswersSong++;
 				}
@@ -143,38 +140,11 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 	}
 
 	@Override
-	public void fixArtist(String mail, Long day) {
-		CalendarUser user = getUser(mail);
-		if (user != null) {
-
-			user.incrementRightArtist();
-
-			Map<Long, Answer> answers = user.getAnswers();
-
-			Answer answer = answers.get(day);
-			if (answer != null) {
-				answer.setCorrectArtist(true);
-			}
-			putUser(user);
-		}
-	}
-
-	@Override
 	public void fixSongScore(String mail, Long day, int score) {
 		CalendarUser user = getUser(mail);
 		if (user != null) {
 
 			user.setRightSong(score);
-			putUser(user);
-		}
-	}
-	
-	@Override
-	public void fixArtistScore(String mail, Long day, int score) {
-		CalendarUser user = getUser(mail);
-		if (user != null) {
-
-			user.setRightArtist(score);
 			putUser(user);
 		}
 	}
@@ -189,22 +159,6 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 				answer = new Answer();
 			}
 			answer.setAnswerSong(song);
-			answers.put(day, answer);
-			user.setAnswers(answers);
-			putUser(user);
-		}
-	}
-
-	@Override
-	public void setArtistAnswer(String mail, Long day, String artist) {
-		CalendarUser user = getUser(mail);
-		if (user != null) {
-			Map<Long, Answer> answers = user.getAnswers();
-			Answer answer = answers.get(day);
-			if(answer == null) {
-				answer = new Answer();
-			}
-			answer.setAnswerArtist(artist);
 			answers.put(day, answer);
 			user.setAnswers(answers);
 			putUser(user);

@@ -14,10 +14,7 @@ public class Answer implements Serializable {
 	private static final long serialVersionUID = -2227567075127415890L;
 	private Long day;
 	private String answerSong;
-	private String answerArtist;
-
 	private boolean correctSong;
-	private boolean correctArtist;
 
 	private boolean revealAnswer;
 
@@ -37,28 +34,12 @@ public class Answer implements Serializable {
 		this.correctSong = correctSong;
 	}
 
-	public boolean isCorrectArtist() {
-		return correctArtist;
-	}
-
-	public void setCorrectArtist(boolean correctArtist) {
-		this.correctArtist = correctArtist;
-	}
-
 	public String getAnswerSong() {
 		return answerSong;
 	}
 
 	public void setAnswerSong(String answerSong) {
 		this.answerSong = answerSong;
-	}
-
-	public String getAnswerArtist() {
-		return answerArtist;
-	}
-
-	public void setAnswerArtist(String answerArtist) {
-		this.answerArtist = answerArtist;
 	}
 
 	public Long getDay() {

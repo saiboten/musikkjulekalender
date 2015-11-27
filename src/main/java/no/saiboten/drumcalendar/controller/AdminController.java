@@ -130,31 +130,10 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping("/admin/setartistscore/{mail}/{day}/{score}")
-	public ModelAndView setArtistScore(@PathVariable String mail, @PathVariable Long day, @PathVariable Integer score) {
-		ModelAndView mav = new ModelAndView("users");
-		userService.fixArtistScore(mail, day, score);
-		return mav;
-	}
-	
 	@RequestMapping("/admin/setSongAnswer/{mail}/{day}/{answer}")
 	public ModelAndView setSongAnswer(@PathVariable String mail, @PathVariable Long day, @PathVariable String answer) {
 		ModelAndView mav = new ModelAndView("users");
 		userService.setSongAnswer(mail, day, answer);
-		return mav;
-	}
-	
-	@RequestMapping("/admin/setArtistAnswer/{mail}/{day}/{answer}")
-	public ModelAndView setArtistAnswer(@PathVariable String mail, @PathVariable Long day, @PathVariable String answer) {
-		ModelAndView mav = new ModelAndView("users");
-		userService.setArtistAnswer(mail, day, answer);
-		return mav;
-	}
-
-	@RequestMapping("/admin/fixartist/{mail}/{day}")
-	public ModelAndView fixArtist(@PathVariable String mail, @PathVariable Long day) {
-		ModelAndView mav = new ModelAndView("users");
-		userService.fixArtist(mail, day);
 		return mav;
 	}
 

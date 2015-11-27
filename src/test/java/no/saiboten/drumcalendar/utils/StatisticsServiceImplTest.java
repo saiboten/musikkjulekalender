@@ -41,16 +41,14 @@ public class StatisticsServiceImplTest {
 		CalendarUser user1 = new CalendarUser();
 		Map<Long, Answer> answersUser1 = new HashMap<Long, Answer>();
 		Answer answerDay1User1 = new Answer();
-		answerDay1User1.setAnswerArtist("rightArtist");
-		answerDay1User1.setAnswerArtist("rightSong");
+		answerDay1User1.setAnswerSong("rightSong");
 		user1.setAnswers(answersUser1);
 		answersUser1.put(new Long(1), answerDay1User1);
 
 		CalendarUser user2 = new CalendarUser();
 		Map<Long, Answer> answersUser2 = new HashMap<Long, Answer>();
 		Answer answerDay1User2 = new Answer();
-		answerDay1User1.setAnswerArtist("rightArtist");
-		answerDay1User1.setAnswerArtist("wrongSong");
+		answerDay1User1.setAnswerSong("wrongSong");
 		user2.setAnswers(answersUser2);
 		user2.setAnswers(answersUser1);
 		answersUser2.put(new Long(1), answerDay1User2);

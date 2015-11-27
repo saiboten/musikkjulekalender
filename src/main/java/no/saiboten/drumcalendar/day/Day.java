@@ -18,7 +18,7 @@ public class Day implements Comparable<Day> {
 	public String toString() {
 		return "Day [id=" + id + ", image=" + image + ", processed="
 				+ processed + ", description=" + description
-				+ ", solutionsArtist=" + solutionsArtist + ", solutionsSong="
+				+ ", solutionsSong="
 				+ solutionsSong + ", optionalSolutionVideo="
 				+ optionalSolutionVideo + ", revealDateAsInt="
 				+ revealDateAsInt + ", link=" + link + ", solutionDate="
@@ -54,8 +54,17 @@ public class Day implements Comparable<Day> {
 	}
 
 	private String description;
-	private List<String> solutionsArtist;
 	private List<String> solutionsSong;
+	private String solutionArtist;
+
+	public String getSolutionArtist() {
+		return solutionArtist;
+	}
+
+	public void setSolutionArtist(String solutionArtist) {
+		this.solutionArtist = solutionArtist;
+	}
+
 	private String optionalSolutionVideo;
 
 	public long getRevealDateAsInt() {
@@ -71,17 +80,10 @@ public class Day implements Comparable<Day> {
 	private Date revealDate;
 
 	public Day() {
-		solutionsArtist = new ArrayList<String>();
 		solutionsSong = new ArrayList<String>();
 	}
-
-	public List<String> getSolutionsArtist() {
-		return solutionsArtist;
-	}
-
-	public void setSolutionsArtist(List<String> solutionsArtist) {
-		this.solutionsArtist = solutionsArtist;
-	}
+	
+	
 
 	public List<String> getSolutionsSong() {
 		return solutionsSong;

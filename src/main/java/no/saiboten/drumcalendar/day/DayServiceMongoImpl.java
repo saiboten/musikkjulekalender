@@ -63,14 +63,14 @@ public class DayServiceMongoImpl implements DayService {
 				res.add(day);
 			} else if (Utils.isRevealed(Calendar.getInstance().getTime(),
 					day.getRevealDate())) {
-				day.setSolutionsArtist(null);
+				day.setSolutionArtist(null);
 				day.setSolutionsSong(null);
 				day.setOptionalSolutionVideo(null);
 				res.add(day);
 			} else {
 				day.setLink(null);
 				day.setDescription(null);
-				day.setSolutionsArtist(null);
+				day.setSolutionArtist(null);
 				day.setSolutionsSong(null);
 				day.setOptionalSolutionVideo(null);
 				res.add(day);
@@ -117,7 +117,7 @@ public class DayServiceMongoImpl implements DayService {
 			LOGGER.debug("This is apparantly an update of an existing day");
 			UpdateOperations<Day> ops;
 			Query<Day> updateQuery = dataStore.createQuery(Day.class).field("revealDate").equal(day.getRevealDate());
-			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("processed", day.isProcessed()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionsArtist", day.getSolutionsArtist()).set("solutionsSong", day.getSolutionsSong());
+			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("processed", day.isProcessed()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionArtist", day.getSolutionArtist()).set("solutionsSong", day.getSolutionsSong());
 			dataStore.update(updateQuery, ops);
 		}
 		else {

@@ -20,13 +20,7 @@ public interface CalendarUserService {
 	
 	public void fixSongScore(String mail, Long day, int score);
 	
-	public void fixArtistScore(String mail, Long day, int score);
-	
 	public void fixSong(String mail, Long day);
 
-	public void fixArtist(String mail, Long day);
-
 	public void setSongAnswer(String mail, Long day, String song);
-
-	public void setArtistAnswer(String mail, Long day, String artist);
 }

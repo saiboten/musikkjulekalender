@@ -14,14 +14,9 @@
 				<div><p>${feedback}</p></div>
 				<form:form modelAttribute="day" method="post" action="/admin/day/change">
 					Descr: <form:input path="description" size="80" value="${day.description}" /><br />
-					<ul id="solution_artists">
-					<c:forEach var="artist" items="${day.solutionsArtist}" varStatus="status">
-						<li>Svar artist: ${status.index}: <form:input path="solutionsArtist[${status.index}]" value="${day.solutionsArtist[status.index]}" /></li>
-						<script type="text/javascript">answersArtist++</script>
-					</c:forEach>
-					</ul>
-					<input type="button" id="addArtist" value="Legg til artist" /><br />
-					
+					Svar artist: ${day.solutionArtist}: <form:input path="solutionArtist" value="${day.solutionArtist}" /><br />
+					<script type="text/javascript">answersArtist++</script>
+										
 					<ul id="solution_songs">
 					<c:forEach var="song" items="${day.solutionsSong}" varStatus="status">
 						<li>Svar song: ${status.index}: <form:input path="solutionsSong[${status.index}]" value="${day.solutionsSong[status.index]}" /></li>

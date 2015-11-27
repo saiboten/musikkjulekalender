@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
 public class AnswerQuestionController {
@@ -28,28 +29,26 @@ public class AnswerQuestionController {
 	private LoggedInRequestHolder loggedIn;
 
 	@Autowired
-	private CalendarUserService cus;
+	private CalendarUserService calendarUserService;
 
 	@Autowired
 	private DayService dayService;
 
 	@RequestMapping("/answer")
-	public ModelAndView answerQuestion(@RequestParam(value = "song") String song,
-			@RequestParam(value = "artist") String artist) {
+	public ModelAndView answerQuestion(@RequestParam(value = "song") String song) {
 		ModelAndView mav = new ModelAndView("answergiven");
-
-		if (song == null || song.equals("") || artist == null || artist == "") {
-			mav.addObject("feedback", "Enten sang eller artist var tom. Vennligst prøv igjen..");
+		mav.setView(new MappingJackson2JsonView());
+	
+		if (song == null || song.equals("")) {
+			mav.addObject("feedback", "Sang var tom Vennligst prøv igjen..");
 			return mav;
 		}
 
 		song = song.trim();
-		artist = artist.trim();
 
 		Pattern pattern = Pattern.compile("(\\w|\\s|[0-9]|\\?|\\&|ø|æ|å)+");
-		Matcher matchArtist = pattern.matcher(artist);
 		Matcher matchSong = pattern.matcher(song);
-		if (!matchArtist.matches() || !matchSong.matches()) {
+		if (!matchSong.matches()) {
 			mav.addObject(
 					"feedback",
 					"Forslaget inneholdt ulovlige tegn. Kun bokstaver og tall er tillatt. Dersom svaret ditt inneholder spesielle tegn, kan du fjerne disse, vi har i så fall gjort det samme i fasiten");
@@ -64,25 +63,49 @@ public class AnswerQuestionController {
 		LOGGER.fine("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
 		if (user != null) {
 			Answer answer = new Answer();
-			answer.setAnswerArtist(artist);
 			answer.setAnswerSong(song);
 			answer.setDay(cal.getTimeInMillis());
+			
+			for(String songSolution : today.getSolutionsSong()) {
+				if(songSolution.equals(answer.getAnswerSong())) {
+					answer.setCorrectSong(true);
+				}
+			}
+
 			user.addAnswer(cal.getTimeInMillis(), answer);
-			cus.putUser(user);
-			LOGGER.fine("User updated with new answer: " + artist + ": " + song + " ");
-			mav.addObject("feedback", "Svar gitt: " + song + " av " + artist);
+			
+			calendarUserService.putUser(user);
+			LOGGER.fine("User updated with new answer: " + song );
+			
+			if(answer.isCorrectSong()) {
+				mav.addObject("feedback", "Riktig! Svaret var: " + song + ". Godt jobbet!");
+				mav.addObject("correct", true);
+			}
+			else {
+				mav.addObject("feedback", "Beklager, svaret var feil! Du tippet: " + song);
+				mav.addObject("correct", false);
+
+			}
+			
 		} else {
 			mav.addObject("feedback", "Noe gikk galt. Er du innlogget?");
+			mav.addObject("correct", false);
 		}
 
 		return mav;
 	}
 
 	@RequestMapping("answermobile")
-	public ModelAndView answerMobile(@RequestParam(value = "song") String song,
-			@RequestParam(value = "artist") String artist) {
-		ModelAndView mav = answerQuestion(song, artist);
+	public ModelAndView answerMobile(@RequestParam(value = "song") String song) {
+		ModelAndView mav = answerQuestion(song);
 		mav.setViewName("/mobile/answergiven");
+		return mav;
+	}
+	
+	@RequestMapping("answer.json")
+	public ModelAndView answerJson(@RequestParam(value = "song") String song) {
+		ModelAndView mav = answerQuestion(song);
+		mav.setView(new MappingJackson2JsonView());
 		return mav;
 	}
 
@@ -93,8 +116,7 @@ public class AnswerQuestionController {
 	}
 
 	@RequestMapping(value = "/admin/answerCheat", method = RequestMethod.POST)
-	public ModelAndView answerQuestion(@RequestParam(value = "song") String song,
-			@RequestParam(value = "artist") String artist, @RequestParam(value = "day") Long day) {
+	public ModelAndView answerQuestion(@RequestParam(value = "song") String song, @RequestParam(value = "day") Long day) {
 		ModelAndView mav = new ModelAndView("answergiven");
 
 		CalendarUser user = loggedIn.getCalendarUser();
@@ -102,13 +124,12 @@ public class AnswerQuestionController {
 		LOGGER.fine("Date is: " + date + ". User is: " + user);
 		if (user != null) {
 			Answer answer = new Answer();
-			answer.setAnswerArtist(artist);
 			answer.setAnswerSong(song);
 			answer.setDay(date);
 			user.addAnswer(date, answer);
-			cus.putUser(user);
-			LOGGER.fine("User updated with new answer: " + artist + ": " + song + " ");
-			mav.addObject("feedback", "Svar gitt: " + song + " av " + artist);
+			calendarUserService.putUser(user);
+			LOGGER.fine("User updated with new answer: " + song + " ");
+			mav.addObject("feedback", "Svar gitt: " + song);
 		} else {
 			mav.addObject("feedback", "Noe gikk galt. Er du innlogget?");
 		}

@@ -69,8 +69,6 @@ public class StatisticsServiceMongoImpl implements StatisticsService {
 	private OneDayStat populateDay(Long day) {
 		OneDayStat oneDayStat = new OneDayStat();
 
-		int rightArtist = 0;
-		int totalArtist = 0;
 		int rightSong = 0;
 		int totalSong = 0;
 
@@ -81,21 +79,15 @@ public class StatisticsServiceMongoImpl implements StatisticsService {
 				Answer answer = answers.get(day);
 				if (answer != null) {
 					if (answer.isRevealAnswer()) {
-						if (answer.isCorrectArtist()) {
-							rightArtist++;
-						}
 						if (answer.isCorrectSong()) {
 							rightSong++;
 						}
-						totalArtist++;
 						totalSong++;
 					}
 				}
 			}
 		}
 
-		oneDayStat.setCorrectArtist(rightArtist);
-		oneDayStat.setTotalArtist(totalArtist);
 		oneDayStat.setCorrectSong(rightSong);
 		oneDayStat.setTotalSong(totalSong);
 

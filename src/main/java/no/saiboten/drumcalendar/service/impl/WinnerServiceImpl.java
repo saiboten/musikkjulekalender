@@ -71,11 +71,10 @@ public class WinnerServiceImpl implements WinnerService {
 		for (CalendarUser user : users) {
 			Answer answer = user.getAnswers().get(day);
 			if(answer != null) {
-				LOGGER.debug("Correct artist? " + answer.isCorrectArtist());
 				LOGGER.debug("Correct song? " + answer.isCorrectSong());
 			}
 			
-			if (answer != null && answer.isCorrectArtist() && answer.isCorrectSong()) {
+			if (answer != null && answer.isCorrectSong()) {
 				possibleWinners.add(user);
 			}
 		}

@@ -59,7 +59,6 @@ public class WinnerServiceImplTest {
 
 		Map<Long, Answer> answersUser1 = new HashMap<Long, Answer>();
 		Answer answerUser1 = new Answer();
-		answerUser1.setCorrectArtist(true);
 		answerUser1.setCorrectSong(true);
 
 		answersUser1.put(new Long(1), answerUser1);
@@ -76,13 +75,11 @@ public class WinnerServiceImplTest {
 
 		Map<Long, Answer> answersUser1 = new HashMap<Long, Answer>();
 		Answer answerUser1 = new Answer();
-		answerUser1.setCorrectArtist(true);
 		answerUser1.setCorrectSong(true);
 		answersUser1.put(new Long(1), answerUser1);
 
 		Map<Long, Answer> answersUser2 = new HashMap<Long, Answer>();
 		Answer answerUser2 = new Answer();
-		answerUser2.setCorrectArtist(true);
 		answerUser2.setCorrectSong(false);
 		answersUser2.put(new Long(1), answerUser2);
 

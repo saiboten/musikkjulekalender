@@ -16,8 +16,7 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 	
 	@Override
 	public String toString() {
-		return "CalendarUser [daysCalculated=" + daysCalculated + ", rightSong=" + rightSong + ", rightArtist="
-				+ rightArtist + ", answers=" + answers + ", userName=" + userName + "]";
+		return "CalendarUser [daysCalculated=" + daysCalculated + ", rightSong=" + rightSong + ", answers=" + answers + ", userName=" + userName + "]";
 	}
 
 	private int daysCalculated;
@@ -28,27 +27,9 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 		this.rightSong = rightSong;
 	}
 
-	public void setRightArtist(int rightArtist) {
-		this.rightArtist = rightArtist;
-	}
-
-	private int rightArtist;
-
 	private Map<Long, Answer> answers;
 
 	private String userName;
-
-	public int getRightArtist() {
-		return rightArtist;
-	}
-
-	public void incrementRightArtist() {
-		this.rightArtist++;
-	}
-
-	public void decrementRightArtist() {
-		this.rightArtist--;
-	}
 
 	public int getRightSong() {
 		return rightSong;
@@ -63,7 +44,7 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 	}
 
 	public int getTotalScore() {
-		return rightSong + rightArtist;
+		return rightSong;
 	}
 
 	public int getDaysCalculated() {
