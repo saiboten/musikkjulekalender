@@ -13,7 +13,7 @@ var MusikkJulekalender = React.createClass({
     },
 
     componentDidMount() {
-        DayActions.getDays();
+      DayActions.getDays();
       //Get things  SongActions.getSong();
     },
 

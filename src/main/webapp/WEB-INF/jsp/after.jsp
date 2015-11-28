@@ -1,7 +1,7 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-   <footer>Laget av Tobias RusÃ¥s Olsen.</footer>
+   <footer>Laget av Tobias Rusås Olsen.</footer>
   </div>
 </div>
 </div>

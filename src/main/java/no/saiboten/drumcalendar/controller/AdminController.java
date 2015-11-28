@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -141,6 +142,14 @@ public class AdminController {
 	public ModelAndView addDayGet(@ModelAttribute("day") Day day) {
 		ModelAndView mav = new ModelAndView("change_day");
 		return mav;
+	}
+	
+	@RequestMapping(value = "/admin/fakelogin/{userid}", method = RequestMethod.GET)
+	public RedirectView addDayGet(@PathVariable("userid") String userid) {
+		RedirectView redirectView = new RedirectView("/admin");
+		loggedIn.setUserName(userid);
+		loggedIn.setLoggedIn(true);
+		return redirectView;
 	}
 
 	@RequestMapping(value = "/admin/day/add", method = RequestMethod.POST)

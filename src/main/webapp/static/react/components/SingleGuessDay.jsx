@@ -12,7 +12,6 @@ var Days = React.createClass({
     },
 
     render() {
-
         return (
             <span>
                 {this.props.days.map((day, i) => {

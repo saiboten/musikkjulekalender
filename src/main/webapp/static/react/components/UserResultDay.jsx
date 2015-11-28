@@ -5,26 +5,31 @@ var UserResultDayUser = require('./UserResultDayUser.jsx');
 var UserResultDay = React.createClass({
 
     componentDidMount() {
-        debug("this.props.userResult", this.props.userResult);
-        debug("this.props.day", this.props.day);
-
+      //  debug("this.props.userResult", this.props.userResult);
+      //  debug("this.props.day", this.props.day);
     },
 
     render() {
-        var userList = this.props.userResult[this.props.day.revealDate];
-        debug('userList.users', userList.users);
-        var maybeempty = userList.users.length === 0 ? <p>Ingen riktige svar</p> : ""
+        debug("props: ", this.props);
 
+        var userList = this.props.userResult ? this.props.userResult[this.props.day.revealDate] : undefined;
+
+        debug("userList", userList);
+        var maybeempty = "";
+        if(userList && userList.users && userList.users.length > 0) {
+          maybeempty = (<ul>
+           {userList.users.map((user, i) => {
+             return <UserResultDayUser user={user}  />;
+           })}
+         </ul>);
+        }
+        else {
+            maybeempty = (<p>Ingen riktige svar</p>);
+       }
         return (
           <div>
           <p>{this.props.day.realDate}. desember</p>
           {maybeempty}
-          <ul>
-          { userList.users.map((user, i) => {
-            debug('User: ', user);
-            return <UserResultDayUser user={user}  />;
-          })}
-          </ul>
           </div>
           );
     }

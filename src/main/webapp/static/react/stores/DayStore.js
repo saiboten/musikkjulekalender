@@ -9,6 +9,7 @@ class DayStore {
         this.date = undefined;
         this.user = undefined;
         this.userResult = undefined;
+        this.topList = [];
 
         this.bindListeners({
             setData: DayActions.SET_DATA
@@ -21,6 +22,7 @@ class DayStore {
         this.days = data.days;
         this.user = data.user;
         this.userResult = data.userResult;
+        this.topList = data.topList;
     }
 }
 

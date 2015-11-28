@@ -1,5 +1,6 @@
 var alt = require('../alt');
 var GuessAction = require('../actions/GuessAction');
+var DayStore = require('../stores/DayStore');
 var request = require('superagent');
 var debug = require('debug')('GuessStore');
 

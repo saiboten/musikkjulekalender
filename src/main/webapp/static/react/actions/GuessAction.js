@@ -6,10 +6,9 @@ var debug = require('debug')('SongActions');
 class GuessAction {
     guess(song) {
         // we dispatch an event here so we can have "loading" state.
-        this.dispatch();
         GuessSource.guess(song)
             .then((response) => {
-                debug("Got it baby! Got the songs: ", response);
+                debug("Guess complete, response: ", response);
                 this.actions.guessDone(response);
             })
             .catch((errorMessage) => {
@@ -18,12 +17,12 @@ class GuessAction {
     }
 
     guessDone(guessResult) {
-        debug("Guess done! Guess result: ", guessResult);
+        debug("dispatching guessDone: Guess done! Guess result: ", guessResult);
         this.dispatch(guessResult);
     }
 
     guessFailed(errorMessage) {
-      debug("Something failed when guessing: ", errorMessage);
+      debug("dispatching guessFailed: Something failed when guessing: ", errorMessage);
       this.dispatch(errorMessage);
     }
 

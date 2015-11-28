@@ -17,8 +17,11 @@ var UserStatistics = React.createClass({
         return (
             <div>
                 {this.props.days.map((day, i) => {
-                      debug("Er jeg her?", this.props.userResult);
-                      return <UserResultDay day={day} userResult={this.props.userResult}  />;
+                      debug("Er jeg her?", this.props);
+                      if(day.realDate === new Date(this.props.date).getDate().toString()) {
+                        return <UserResultDay day={day} userResult={this.props.userResult}  />;
+                      }
+
                 })}
             </div>
         );

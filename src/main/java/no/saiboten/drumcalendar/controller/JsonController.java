@@ -2,6 +2,7 @@ package no.saiboten.drumcalendar.controller;
 
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.service.impl.UserResultService;
+import no.saiboten.drumcalendar.toplist.TopListService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class JsonController {
 
 	private UserResultService userResultService;
 
+	private TopListService topListService;
+	
+
 	@Autowired
-	public JsonController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService) {
+	public JsonController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService, TopListService topListService) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.userResultService = userResultService;
+		this.topListService = topListService;
 	}
 
 	@RequestMapping("/days.json")
@@ -35,6 +40,7 @@ public class JsonController {
 		mav.addObject("isLoggedIn", loggedIn.isLoggedIn());
 		mav.addObject("date", System.currentTimeMillis());
 		mav.addObject("userResult", userResultService.getUserResults());
+		mav.addObject("topList", topListService.getTopList());
 		return mav;
 	}
 

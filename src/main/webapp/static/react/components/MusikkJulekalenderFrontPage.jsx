@@ -8,7 +8,7 @@ var SingleGuessDay = require('./SingleGuessDay.jsx');
 var MusikkJulekalenderFrontPage = React.createClass({
 
     componentDidMount() {
-        //DayActions.getDays();
+      
     },
 
     render() {

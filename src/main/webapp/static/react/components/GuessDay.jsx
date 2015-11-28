@@ -1,11 +1,22 @@
 var React = require('react');
 var debug = require('debug')('guessday');
 var GuessAction = require('../actions/GuessAction');
+var DayAction = require('../actions/DayAction');
+var GuessStore = require('../stores/GuessStore');
 
 var GuessDay = React.createClass({
 
     componentDidMount() {
-      debug("User!", this.props.user);
+      GuessStore.listen(this.guessChanged);
+    },
+
+    componentDidUnmount() {
+      GuessStore.unlisten(this.guessChanged);
+    },
+
+    guessChanged() {
+      debug("Guess changed, refetching data just in case something has changed");
+      DayAction.getDays();
     },
 
     getInitialState() {

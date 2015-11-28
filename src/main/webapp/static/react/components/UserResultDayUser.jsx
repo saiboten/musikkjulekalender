@@ -2,19 +2,17 @@ var React = require('react');
 var debug = require('debug')('UserResultDayUser');
 
 var UserResultDayUser = React.createClass({
-
-    componentDidMount() {
-
-    },
-
     render() {
-        debug("this.props.user", this.props.user);
+        var padZeroes = function(input) {
+          if(/^\d{1}$/.test(input)) {
+            return "0"+input.toString();
+          }
+          return input;
+        }
 
         var day = "";
         var date = new Date(this.props.user.time);
-        var timeOfResult = date.getHours() + ":" + date.getMinutes();
-
-        debug(timeOfResult);
+        var timeOfResult = padZeroes(date.getHours()) + ":" + padZeroes(date.getMinutes());
 
         return (
             <li>
