@@ -115,28 +115,6 @@ public class DefaultController {
 		return mav;
 	}
 
-	@RequestMapping("/overview")
-	public ModelAndView overview() {
-		ModelAndView mav = new ModelAndView("overview");
-		mav.addObject("overview", "active");
-		mav.addObject("now", Calendar.getInstance().getTimeInMillis());
-		mav.addObject("days", dayService.getDays());
-		mav.addObject("loggedIn", loggedIn.isLoggedIn());
-		LOGGER.debug("Is the user logged in?" + loggedIn.isLoggedIn());
-		if (loggedIn.getCalendarUser() != null) {
-			LOGGER.debug("Do we have the calendar user? " + loggedIn.getCalendarUser());
-			mav.addObject("answers", loggedIn.getCalendarUser().getAnswers());
-		}
-
-		List<CalendarUser> users = userService.getAllUsers();
-		if (users != null) {
-			mav.addObject("numberOfUsers", users.size());
-		}
-
-		mav.addObject("statistics", statsService.getStatistics());
-		return mav;
-	}
-
 	@RequestMapping("/logmeon")
 	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("login");

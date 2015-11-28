@@ -2,22 +2,16 @@ var React = require('react');
 var AltContainer = require('alt/AltContainer');
 var DayStore = require('../stores/DayStore');
 var DayActions = require('../actions/DayAction');
-var Days = require('./Days.jsx');
-var SingleGuessDay = require('./SingleGuessDay.jsx');
+var UserStatistics = require('./UserStatistics.jsx');
 
-var MusikkJulekalenderFrontPage = React.createClass({
-
-    componentDidMount() {
-        //DayActions.getDays();
-    },
-
+var UserStatisticsContainer = React.createClass({
     render() {
         return (
           <AltContainer store={DayStore}>
-                 <SingleGuessDay />
+                 <UserStatistics />
           </AltContainer>
         );
     }
 });
 
-module.exports = MusikkJulekalenderFrontPage;
+module.exports = UserStatisticsContainer;

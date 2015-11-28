@@ -16,8 +16,7 @@ public class Day implements Comparable<Day> {
 	
 	@Override
 	public String toString() {
-		return "Day [id=" + id + ", image=" + image + ", processed="
-				+ processed + ", description=" + description
+		return "Day [id=" + id + ", image=" + image + ", description=" + description
 				+ ", solutionsSong="
 				+ solutionsSong + ", optionalSolutionVideo="
 				+ optionalSolutionVideo + ", revealDateAsInt="
@@ -34,16 +33,6 @@ public class Day implements Comparable<Day> {
 	}
 
 	private String image;
-
-	private boolean processed;
-
-	public boolean isProcessed() {
-		return processed;
-	}
-
-	public void setProcessed(boolean processed) {
-		this.processed = processed;
-	}
 
 	public String getOptionalSolutionVideo() {
 		return optionalSolutionVideo;

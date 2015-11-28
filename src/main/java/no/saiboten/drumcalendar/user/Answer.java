@@ -1,6 +1,7 @@
 package no.saiboten.drumcalendar.user;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -15,6 +16,15 @@ public class Answer implements Serializable {
 	private Long day;
 	private String answerSong;
 	private boolean correctSong;
+	private Long timeOfCorrectAnswerInMillis;
+
+	public Long getTimeOfCorrectAnswerInMillis() {
+		return timeOfCorrectAnswerInMillis;
+	}
+
+	public void setTimeOfCorrectAnswerInMillis(Long timeOfCorrectAnswerInMillis) {
+		this.timeOfCorrectAnswerInMillis = timeOfCorrectAnswerInMillis;
+	}
 
 	private boolean revealAnswer;
 

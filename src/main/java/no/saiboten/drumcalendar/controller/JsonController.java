@@ -1,6 +1,7 @@
 package no.saiboten.drumcalendar.controller;
 
 import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.service.impl.UserResultService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,13 @@ public class JsonController {
 
 	private LoggedInRequestHolder loggedIn;
 
+	private UserResultService userResultService;
+
 	@Autowired
-	public JsonController(DayService dayService, LoggedInRequestHolder loggedIn) {
+	public JsonController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
+		this.userResultService = userResultService;
 	}
 
 	@RequestMapping("/days.json")
@@ -30,6 +34,7 @@ public class JsonController {
 		mav.addObject("user", loggedIn.getCalendarUser());
 		mav.addObject("isLoggedIn", loggedIn.isLoggedIn());
 		mav.addObject("date", System.currentTimeMillis());
+		mav.addObject("userResult", userResultService.getUserResults());
 		return mav;
 	}
 

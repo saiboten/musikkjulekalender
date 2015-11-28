@@ -1,6 +1,7 @@
 package no.saiboten.drumcalendar.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,8 +68,9 @@ public class AnswerQuestionController {
 			answer.setDay(cal.getTimeInMillis());
 			
 			for(String songSolution : today.getSolutionsSong()) {
-				if(songSolution.equals(answer.getAnswerSong())) {
+				if(songSolution.toLowerCase().equals(answer.getAnswerSong().toLowerCase())) {
 					answer.setCorrectSong(true);
+					answer.setTimeOfCorrectAnswerInMillis(System.currentTimeMillis());
 				}
 			}
 

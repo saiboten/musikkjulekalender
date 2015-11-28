@@ -54,14 +54,12 @@ var GuessDay = React.createClass({
       }
 
         return (
-
-
-          <div className="col-md-4 pane">
-              <h1>{this.props.day.realDate}. desember</h1>
+          <div className={this.props.class}>
+              <h3>{this.props.day.realDate}. desember</h3>
 
               <p>{this.props.day.description}</p>
 
-              <audio src={this.props.day.link} controls>
+              <audio src={this.props.day.link} preload="none" controls>
                   <a href={this.props.day.link}>Last ned låt</a>
               </audio>
 

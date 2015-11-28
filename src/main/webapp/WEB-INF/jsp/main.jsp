@@ -13,7 +13,23 @@
 
 	<c:choose>
 		<c:when test="${today != null}">
-				<div class="col-md-12 main" id="frontpage"></div>
+			<div class="col-md-12 main">
+
+				<h1>Dagens oppgave</h1>
+				<div class="col-md-6 main" id="frontpage"></div>
+				<div class="col-md-6 main">
+							<h1>Statistikk</h1>
+							<div id="userstatistics"></div>
+				</div>
+			</div>
+
+			<div class="col-md-12 main">
+						<h1>Løsninger</h1>
+						<div id="MusikkJulekalender"></div>
+			</div>
+
+
+
 		</c:when>
 		<c:otherwise>
 			<div class="col-md-12">

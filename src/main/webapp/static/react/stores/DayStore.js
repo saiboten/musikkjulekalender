@@ -8,27 +8,19 @@ class DayStore {
         this.days = [];
         this.date = undefined;
         this.user = undefined;
+        this.userResult = undefined;
 
         this.bindListeners({
-            addDays: DayActions.UPDATE_DAYS,
-            setDate: DayActions.SET_DATE,
-            setUser: DayActions.SET_USER
+            setData: DayActions.SET_DATA
         });
     }
 
-    addDays(days) {
-        debug("Days: ", days);
-        this.days = days;
-    }
-
-    setDate(date) {
-        debug("Date: ", date);
-        this.date = date;
-    }
-
-    setUser(user) {
-        debug("User: ", user);
-        this.user = user;
+    setData(data) {
+        debug("Data: ", data);
+        this.date = data.date;
+        this.days = data.days;
+        this.user = data.user;
+        this.userResult = data.userResult;
     }
 }
 

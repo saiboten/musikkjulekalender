@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import no.saiboten.drumcalendar.mongodb.MongoDBClientWrapper;
 import no.saiboten.drumcalendar.utils.Utils;
@@ -100,6 +101,7 @@ public class DayServiceMongoImpl implements DayService {
 
 	@Override
 	public boolean addDay(Day day) {
+		day.setLink("http://musikkjulekalender.no/songs/" + UUID.randomUUID().toString() + ".mp3");
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongo.getMongoClient(), "musikkjulekalender2015");
 		dataStore.save(day);
@@ -117,7 +119,7 @@ public class DayServiceMongoImpl implements DayService {
 			LOGGER.debug("This is apparantly an update of an existing day");
 			UpdateOperations<Day> ops;
 			Query<Day> updateQuery = dataStore.createQuery(Day.class).field("revealDate").equal(day.getRevealDate());
-			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("processed", day.isProcessed()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionArtist", day.getSolutionArtist()).set("solutionsSong", day.getSolutionsSong());
+			ops = dataStore.createUpdateOperations(Day.class).set("description", day.getDescription()).set("link", day.getLink()).set("optionalSolutionVideo", day.getOptionalSolutionVideo()).set("solutionArtist", day.getSolutionArtist()).set("solutionsSong", day.getSolutionsSong());
 			dataStore.update(updateQuery, ops);
 		}
 		else {
