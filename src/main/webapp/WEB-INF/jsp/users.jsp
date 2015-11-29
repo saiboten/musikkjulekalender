@@ -15,10 +15,10 @@
 			<div class="entry">
 			
 			<c:forEach var="user" items="${users}" varStatus="rowCounter">
-				<p># ${rowCounter.count}: ${user.userName} - Riktige artist: ${user.rightArtist}, riktige låter: ${user.rightSong}</p>
+				<p># ${rowCounter.count}: ${user.userName}: riktige låter: ${user.rightSong}</p>
 				<p>
 				<c:forEach var="answer" items="${user.answers}">	
-					Dag nummer ${answer.value.day}: ${answer.value.answerSong} ${answer.value.correctSong} - ${answer.value.answerArtist} - ${answer.value.correctArtist}<br /> 
+					Dag nummer ${answer.value.day}: ${answer.value.answerSong} - ${answer.value.correctSong}<br /> 
 				</c:forEach>
 				</p>
 			</c:forEach>

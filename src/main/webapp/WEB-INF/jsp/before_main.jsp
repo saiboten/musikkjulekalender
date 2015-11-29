@@ -10,10 +10,6 @@
 <link rel="shortcut icon" href="favicon.ico" />
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
-<script src="/static/jquery-ui-1.11.2/jquery-ui.min.js"></script>
-<script src="/static/script/script.js"></script>
 
 <title>Julekalender - Musikkquiz!</title>
 <link rel="stylesheet" type="text/css" href="/static/jquery-ui-1.11.2/jquery-ui.min.css" />
@@ -55,11 +51,6 @@
             <li class="${frontpage}">
               <a href="/">
                 Forsiden
-              </a>
-            </li>
-            <li class="${overview}">
-              <a href="/overview">
-                Oversikt og løsninger
               </a>
             </li>
               <li class="${about}">

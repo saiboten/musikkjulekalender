@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="before.jsp"%>
+<%@ include file="before_main.jsp"%>
 
 <div class="col-md-12 main">
 	<h1 style="text-align: center;">Musikkjulekalender 2015!</h1>
@@ -22,15 +22,17 @@
 			<div class="col-md-12 main">
 						<h1>Løsninger</h1>
 						<div id="MusikkJulekalender"></div>
-						<div class="col-md-6 main">
-									<h1>Dagens beste!</h1>
-									<div id="userstatistics"></div>
-						</div>
-						<div class="col-md-6 main">
-										<h1>TopScore!</h1>
-										<div id="topscore"></div>
-							</div>
 			</div>
+
+			<div class="col-md-6 main">
+						<h1>Dagens beste!</h1>
+						<div id="userstatistics"></div>
+			</div>
+			<div class="col-md-6 main">
+							<h1>TopScore!</h1>
+							<div id="topscore"></div>
+				</div>
+
 </div>
 
 <%@ include file="after.jsp"%>

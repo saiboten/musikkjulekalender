@@ -41,7 +41,7 @@ public class AnswerQuestionController {
 		mav.setView(new MappingJackson2JsonView());
 	
 		if (song == null || song.equals("")) {
-			mav.addObject("feedback", "Sang var tom Vennligst prøv igjen..");
+			mav.addObject("feedback", "Sang var tom. Vennligst prøv igjen..");
 			return mav;
 		}
 

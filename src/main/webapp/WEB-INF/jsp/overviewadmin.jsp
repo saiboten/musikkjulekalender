@@ -37,25 +37,15 @@
 								<source type="audio/mpeg" src="${day.link}"></source>
 								<a href="${day.link}">Last ned låt</a>
 							</audio>
-								<c:if test="${statistics != null}">
-										<p>
-											<fmt:formatNumber type="percent"
-												value="${statistics.dayMap[day.revealDateAsInt].correctArtist/numberOfUsers}" />
-											av alle brukere gjettet rett artist<br />
-											<fmt:formatNumber type="percent"
-												value="${statistics.dayMap[day.revealDateAsInt].correctSong/numberOfUsers}" />
-											av alle brukere gjettet rett låt
-										</p>
-								</c:if>
 								
 								<span title="Fasit" id="revealed_${day.revealDateAsInt}">
 									${day.optionalSolutionVideo} "${day.solutionsSong[0]}" av
-									"${day.solutionsArtist[0]}"
+									"${day.solutionArtist}"
 									</span>
 								
 								<c:forEach var="user" items="${users}">
 									<c:if test="${user.answers[day.revealDateAsInt] != null}">
-										<p><b>${user.userName}</b> (${user.rightArtist+user.rightSong} (${user.rightArtist} ${user.rightSong})): ${user.answers[day.revealDateAsInt].answerArtist} (${user.answers[day.revealDateAsInt].correctArtist}): ${user.answers[day.revealDateAsInt].answerSong} (${user.answers[day.revealDateAsInt].correctSong})</p>
+										<p><b>${user.userName}</b>: ${user.answers[day.revealDateAsInt].answerSong} (${user.answers[day.revealDateAsInt].correctSong})</p>
 									</c:if>
 								</c:forEach>
 				  </div>
