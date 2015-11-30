@@ -15,16 +15,34 @@
 			  <div class="panel-body">
 				<p>Hver dag åpnes en luke i kalenderen. Hver luke
 					er et lydklipp, og din oppgave er å gjette
-					hvilken låt, og hvilken artist/band som spilles! </p>
-				<p>Litt etter midnatt vil svaret på gårsdagens oppgave offentliggjøres, og du kan se
-					om du har svart riktig eller galt.</p>
-				<p>Du kan gjette flere ganger per dag, men det er det siste svaret som er gitt sist som er ditt gjeldende svar.</p>
-				<p>Hver dag vil det kåres en vinner. Kravet for å bli dagsvinner er at du har svart riktig låt OG riktig artist.</p>
-				<p>Den beste brukeren blir premiert med et vakkert krus, og et diplom!</p>
+					hvilken låt som spilles! Nytt i 2015: Nå er det bare låt, og ikke artist som gjelder.</p>
+				<p>Du vil få svar umiddelbart på om du hadde riktig eller feil svar.</p>
+				<p>Det er en toppscoreliste som viser hvem som leder konkurrensen, i tillegg til en dagsliste med de som har svart riktig på dagens oppgave.</p>
+				<p>Den beste brukeren blir premiert med et krus for to, og et diplom!</p>
 			  </div>
 			</div>
 			
-				<div class="panel panel-default">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Bidragsytere</h3>
+			  </div>
+			  <div class="panel-body">
+				<p>Kalenderen hadde ikke vært mulig uten følgende flotte mennesker:
+					<ul>
+						<li>Stein</li>
+						<li>Tomas</li>
+						<li>"Skøyerfanden"</li>
+						<li>Otto Egil</li>
+						<li>Håkon</li>
+						<li>Bjarte</li>
+						<li>Kim</li>
+					</ul>
+				</p>
+				<p>Det er mulig det utbroderes hvem disse menneske er etter hvert. Følg med for oppdateringer!</p>
+			  </div>
+			</div>
+			
+			<div class="panel panel-default">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">Kontakt</h3>
 			  </div>
