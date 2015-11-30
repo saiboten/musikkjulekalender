@@ -33,7 +33,7 @@
 				  <div class="panel-body">
 		
 							<p>${day.description}</p>
-							<audio style="width: 15em" controls="">
+							<audio preload="none" style="width: 15em" controls="">
 								<source type="audio/mpeg" src="${day.link}"></source>
 								<a href="${day.link}">Last ned låt</a>
 							</audio>
