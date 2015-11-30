@@ -23,7 +23,7 @@ body {
 }
 
 .headerImageWrapper {
-	width: 600px;
+	width: 400px;
 	padding: 20px;
 }
 
@@ -35,8 +35,6 @@ body {
 	border: 1px solid #ddd;
 	background-color: white;
 	padding: 10px;
-	height: 300px;
-	overflow: auto;
 }
 
 audio {
@@ -53,4 +51,11 @@ h2 {
 
 h3 {
 	font-size: 1.2em;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
 }
