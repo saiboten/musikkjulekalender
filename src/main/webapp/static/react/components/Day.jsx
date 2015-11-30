@@ -39,7 +39,7 @@ var Day = React.createClass({
              <span>
               <p>{this.props.day.description}</p>
               <p><button onClick={this.showSolution}>Vis fasit</button></p>
-              <audio src={this.props.day.link} preload="none" controls>
+              <audio class="audio" src={this.props.day.link} preload="none" controls>
                 <a href={this.props.day.link}>Last ned låt</a>
               </audio>
             </span>);

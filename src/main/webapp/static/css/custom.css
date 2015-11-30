@@ -32,9 +32,25 @@ body {
 }
 
 .pane {
-	border: 5px double black;
+	border: 1px solid #ddd;
 	background-color: white;
 	padding: 10px;
 	height: 300px;
 	overflow: auto;
+}
+
+audio {
+	width: 100%;
+}
+
+h1 {
+	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.2em;
 }

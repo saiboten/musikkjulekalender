@@ -1,12 +1,9 @@
 var React = require('react');
 var MusikkJulekalender = require('./components/MusikkJulekalender.jsx');
-var MusikkJulekalenderFrontPage = require('./components/MusikkJulekalenderFrontPage.jsx');
+var SingleGuessDayContainer = require('./components/SingleGuessDayContainer.jsx');
 var UserStatisticsContainer = require('./components/UserStatisticsContainer.jsx');
 var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStatisticsContainer.jsx');
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
-
-console.log("Yeah?");
-console.log(document.getElementById('frontpage'));
 
 if(document.getElementById('MusikkJulekalender')) {
     console.log("Musikkjulekalenderapp found, yeah!");
@@ -18,7 +15,7 @@ if(document.getElementById('MusikkJulekalender')) {
 
 if(document.getElementById('frontpage')) {
     React.render(
-        <MusikkJulekalenderFrontPage />,
+        <SingleGuessDayContainer />,
         document.getElementById('frontpage')
     );
 }

@@ -17,7 +17,8 @@ var Days = React.createClass({
                 {this.props.days.map((day, i) => {
                     if(day.realDate === new Date(this.props.date).getDate().toString()) {
                       return (<AltContainer store={GuessStore}>
-                          <GuessDay class="col-md-12 pane" key={day.revealDate} day={day} user={this.props.user} />
+                          <h1>Dagens oppgave</h1>
+                          <GuessDay key={day.revealDate} day={day} user={this.props.user} />
                       </AltContainer>);
                     }
                 })}
