@@ -34,7 +34,16 @@ body {
 .pane {
 	border: 1px solid #ddd;
 	background-color: white;
-	padding: 10px;
+/*	padding: 10px;*/
+}
+
+.row{
+    overflow: hidden;
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
 }
 
 audio {
@@ -43,6 +52,8 @@ audio {
 
 h1 {
 	font-size: 1.8em;
+	padding: 25px;
+	font-family: "Lucida Console";
 }
 
 h2 {
@@ -53,9 +64,6 @@ h3 {
 	font-size: 1.2em;
 }
 
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
+form {
+	padding: 10px;
 }

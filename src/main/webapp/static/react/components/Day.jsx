@@ -49,7 +49,7 @@ var Day = React.createClass({
         }
 
         return (
-            <div className="col-md-4 pane">
+            <div className="col-md-6 pane">
               <h3>{this.props.day.realDate}. desember</h3>
               {day}
             </div>
