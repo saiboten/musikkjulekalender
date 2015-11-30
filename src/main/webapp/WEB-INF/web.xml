@@ -25,7 +25,7 @@
 		  <init-param>
         <param-name>dirAllowed</param-name>
         <param-value>false</param-value>
-				<param-name>gzip</param-name>
+		<param-name>gzip</param-name>
         <param-value>true</param-value>
 		    <param-name>cacheControl</param-name>
 		    <param-value>max-age=3600,public</param-value>

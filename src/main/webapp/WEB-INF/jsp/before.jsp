@@ -57,11 +57,6 @@
                 Forsiden
               </a>
             </li>
-            <li class="${overview}">
-              <a href="/overview">
-                Oversikt og løsninger
-              </a>
-            </li>
               <li class="${about}">
                   <a href="/om">
                       Om kalenderen
