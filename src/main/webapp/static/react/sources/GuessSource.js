@@ -1,5 +1,6 @@
 var request = require('superagent');
 var debug = require('debug')('GuessSource');
+var Promise = require('promise');
 
 var GuessSource = {
 
