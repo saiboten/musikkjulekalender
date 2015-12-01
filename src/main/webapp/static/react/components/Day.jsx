@@ -19,6 +19,11 @@ var Day = React.createClass({
       });
     },
 
+    createMarkup() {
+      debug('Creating markup',this.props.day.optionalSolutionVideo);
+      return {__html: this.props.day.optionalSolutionVideo};
+    },
+
     render() {
         var day = "";
 
@@ -27,7 +32,7 @@ var Day = React.createClass({
             <div>
               <p>{this.props.day.description}</p>
               <p>
-                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong[0]} {this.props.day.optionalSolutionVideo ? this.props.day.optionalSolutionVideo : ""}</span>
+                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong[0]} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
               </p>
               <audio src={this.props.day.link} controls>
                 <a href={this.props.day.link}>Last ned låt</a>
