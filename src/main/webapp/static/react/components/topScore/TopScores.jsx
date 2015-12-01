@@ -26,7 +26,7 @@ var TopScores = React.createClass({
         return (
         <ol>
           {this.props.topList.map((topListUser, i) => {
-                  return (<TopScore topListUser={topListUser}  />);
+                  return (<TopScore user={this.props.user} topListUser={topListUser}  />);
           })}
         </ol>
         );

@@ -16,7 +16,7 @@
   <div class="col-md-6 pane" id="frontpage">
   </div>
   <div class="col-md-6 pane">
-    <h1>Din score</h1>
+    <h1>Dine resultater</h1>
     <div id="currentuserstatistics">
     </div>
   </div>

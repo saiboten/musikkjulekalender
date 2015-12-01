@@ -27009,10 +27009,12 @@ var TopScore = React.createClass({ displayName: "TopScore",
 
     componentDidMount: function componentDidMount() {
         debug("componentDidMount");
+        debug(this.props.user);
     },
 
     render: function render() {
-        return React.createElement("li", null, this.props.topListUser.user, ": ", this.props.topListUser.score);
+        var user = this.props.topListUser.user === this.props.user.userNameNotMail ? React.createElement("strong", null, this.props.topListUser.user, ": ", this.props.topListUser.score) : this.props.topListUser.user + " " + this.props.topListUser.score;
+        return React.createElement("li", null, user);
     }
 });
 
@@ -27058,11 +27060,12 @@ var TopScores = React.createClass({ displayName: "TopScores",
           }*/
 
     render: function render() {
+        var _this = this;
 
         debug("toplist", this.props.topList);
 
         return React.createElement("ol", null, this.props.topList.map(function (topListUser, i) {
-            return React.createElement(TopScore, { topListUser: topListUser });
+            return React.createElement(TopScore, { user: _this.props.user, topListUser: topListUser });
         }));
     }
 });
