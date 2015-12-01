@@ -23,6 +23,7 @@
     "morgan": "~1.6.1",
     "multer": "^1.0.6",
     "path": "^0.12.7",
+    "promise": "^7.0.4",
     "react": "^0.13.0",
     "react-dropzone": "^2.1.0",
     "reactify": "^1.1.1",

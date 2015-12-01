@@ -1,4 +1,5 @@
 var request = require('superagent');
+var Promise = require('promise');
 
 var DaySource = {
 
