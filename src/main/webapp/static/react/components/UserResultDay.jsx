@@ -17,8 +17,20 @@ var UserResultDay = React.createClass({
         debug("userList", userList);
         var maybeempty = "";
         if(userList && userList.users && userList.users.length > 0) {
+
+          var copy = userList.users;
+          copy.sort(function(a,b) {
+              debug("Sorting :", a,b);
+              if(a.time > b.time) {
+                return 1;
+              }
+              else {
+                return -1;
+              }
+          });
+
           maybeempty = (<ul>
-           {userList.users.map((user, i) => {
+           {copy.map((user, i) => {
              return <UserResultDayUser user={user}  />;
            })}
          </ul>);

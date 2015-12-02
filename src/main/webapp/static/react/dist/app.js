@@ -26914,7 +26914,18 @@ var UserResultDay = React.createClass({ displayName: "UserResultDay",
     debug("userList", userList);
     var maybeempty = "";
     if (userList && userList.users && userList.users.length > 0) {
-      maybeempty = React.createElement("ul", null, userList.users.map(function (user, i) {
+
+      var copy = userList.users;
+      copy.sort(function (a, b) {
+        debug("Sorting :", a, b);
+        if (a.time > b.time) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+
+      maybeempty = React.createElement("ul", null, copy.map(function (user, i) {
         return React.createElement(UserResultDayUser, { user: user });
       }));
     } else {

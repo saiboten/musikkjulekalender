@@ -13,7 +13,6 @@ var UserStatistics = React.createClass({
     },
 
     render() {
-
         return (
             <div>
                 {this.props.days.map((day, i) => {
