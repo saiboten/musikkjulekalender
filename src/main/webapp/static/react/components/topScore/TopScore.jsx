@@ -9,7 +9,7 @@ var TopScore = React.createClass({
     },
 
     render() {
-        var user = this.props.topListUser.user === this.props.user.userNameNotMail ? (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>) : this.props.topListUser.user + " " + this.props.topListUser.score;
+        var user = this.props.user && this.props.topListUser.user === this.props.user.userNameNotMail ? (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>) : this.props.topListUser.user + " " + this.props.topListUser.score;
         return (
           <li>{user}</li>
         );

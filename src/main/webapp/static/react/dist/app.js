@@ -27024,7 +27024,7 @@ var TopScore = React.createClass({ displayName: "TopScore",
     },
 
     render: function render() {
-        var user = this.props.topListUser.user === this.props.user.userNameNotMail ? React.createElement("strong", null, this.props.topListUser.user, ": ", this.props.topListUser.score) : this.props.topListUser.user + " " + this.props.topListUser.score;
+        var user = this.props.user && this.props.topListUser.user === this.props.user.userNameNotMail ? React.createElement("strong", null, this.props.topListUser.user, ": ", this.props.topListUser.score) : this.props.topListUser.user + " " + this.props.topListUser.score;
         return React.createElement("li", null, user);
     }
 });
