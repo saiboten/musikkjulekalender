@@ -10,8 +10,8 @@
   </script>
   <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
   </script>
-  
-  
+
+
   <script>
   function statusChangeCallback(response) {
     if (response.status === 'connected') {
@@ -30,7 +30,7 @@
     		dataType: "json",
     		contentType: "application/json"
     		});
-    	
+
     } else if (response.status === 'not_authorized') {
       document.getElementById('status').innerHTML = 'Logg inn med Facebook. Klikk Log inn-knappen!';
     } else {
@@ -47,12 +47,12 @@
   window.fbAsyncInit = function() {
 	  FB.init({
 	    appId      : '258625720859950',
-	    cookie     : true,  // enable cookies to allow the server to access 
+	    cookie     : true,  // enable cookies to allow the server to access
 	                        // the session
 	    xfbml      : true,  // parse social plugins on this page
 	    version    : 'v2.1' // use version 2.1
 	  });
-	  
+
 	  FB.getLoginStatus(function(response) {
 	    statusChangeCallback(response);
 	  });
@@ -93,7 +93,7 @@
 
 
 	<div id="loginButtons" class="well">
-	
+
 		<div id="signinButton">
 			  <span class="g-signin"
 			    data-scope="profile email"
@@ -104,24 +104,24 @@
 			    data-callback="signInCallback">
 			  </span>
 		</div>
-		
-		<fb:login-button id="facebookLoginButton" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
+
+		<fb:login-button id="facebookLoginButton"  show-faces="true"  width="200" max-rows="1" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
 	</div>
-	
+
 	<div id="status" style="display: none;" class="well">
-	
+
 	</div>
-	
+
 	</div>
 </div>
-	
+
 	<script>
 	function signInCallback(authResult) {
 	  if (authResult['code']) {
-		  
+
 	    // Hide the sign-in button now that the user is authorized, for example:
 	    $('#signinButton').attr('style', 'display: none');
-	
+
 	    // Send the code to the server
 	    $.ajax({
 	      type: 'POST',
