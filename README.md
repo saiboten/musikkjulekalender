@@ -1,4 +1,4 @@
 musikkjulekalender
 ==================
 
-Sjekk ut musikkjulekalender.no for den ekte musikkjulekalenderen!
+Sjekk ut http://musikkjulekalender.no for den ekte musikkjulekalenderen!
