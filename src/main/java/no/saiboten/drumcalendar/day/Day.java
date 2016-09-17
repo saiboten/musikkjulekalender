@@ -11,124 +11,28 @@ import org.mongodb.morphia.annotations.Id;
 
 @Entity("days")
 public class Day implements Comparable<Day> {
-	
-	@Id private ObjectId id;
-	
-	@Override
-	public String toString() {
-		return "Day [id=" + id + ", image=" + image + ", description=" + description
-				+ ", solutionsSong="
-				+ solutionsSong + ", optionalSolutionVideo="
-				+ optionalSolutionVideo + ", revealDateAsInt="
-				+ revealDateAsInt + ", link=" + link + ", solutionDate="
-				+ solutionDate + ", revealDate=" + revealDate + "]";
-	}
 
-	public ObjectId getId() {
-		return id;
-	}
-
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+	@Id
+	private ObjectId id;
 
 	private String image;
 
-	public String getOptionalSolutionVideo() {
-		return optionalSolutionVideo;
-	}
-
-	public void setOptionalSolutionVideo(String optionalSolutionVideo) {
-		this.optionalSolutionVideo = optionalSolutionVideo;
-	}
-
 	private String description;
+
 	private List<String> solutionsSong;
+
 	private String solutionArtist;
-
-	public String getSolutionArtist() {
-		return solutionArtist;
-	}
-
-	public void setSolutionArtist(String solutionArtist) {
-		this.solutionArtist = solutionArtist;
-	}
 
 	private String optionalSolutionVideo;
 
-	public long getRevealDateAsInt() {
-		return revealDateAsInt;
-	}
-	
 	private long revealDateAsInt;
 
 	private String link;
-
 	private Date solutionDate;
-
 	private Date revealDate;
 
 	public Day() {
 		solutionsSong = new ArrayList<String>();
-	}
-	
-	
-
-	public List<String> getSolutionsSong() {
-		return solutionsSong;
-	}
-
-	public void setSolutionsSong(List<String> solutionsSong) {
-		this.solutionsSong = solutionsSong;
-	}
-
-	public String getRealDate() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(revealDate);
-		return String.valueOf(cal.get(Calendar.DATE));
-	}
-
-	public Date getSolutionDate() {
-		return solutionDate;
-	}
-
-	public void setSolutionDate(Date solutionDate) {
-		this.solutionDate = solutionDate;
-	}
-
-	public Date getRevealDate() {
-		return revealDate;
-	}
-
-	public void setRevealDate(Date revealDate) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(revealDate);
-		this.revealDateAsInt = cal.getTimeInMillis();
-		this.revealDate = revealDate;
-	}
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	@Override
@@ -139,5 +43,100 @@ public class Day implements Comparable<Day> {
 			return -1;
 		}
 		return 0;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public ObjectId getId() {
+		return id;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public String getOptionalSolutionVideo() {
+		return optionalSolutionVideo;
+	}
+
+	public String getRealDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(revealDate);
+		return String.valueOf(cal.get(Calendar.DATE));
+	}
+
+	public Date getRevealDate() {
+		return revealDate;
+	}
+
+	public long getRevealDateAsInt() {
+		return revealDateAsInt;
+	}
+
+	public String getSolutionArtist() {
+		return solutionArtist;
+	}
+
+	public Date getSolutionDate() {
+		return solutionDate;
+	}
+
+	public List<String> getSolutionsSong() {
+		return solutionsSong;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public void setOptionalSolutionVideo(String optionalSolutionVideo) {
+		this.optionalSolutionVideo = optionalSolutionVideo;
+	}
+
+	public void setRevealDate(Date revealDate) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(revealDate);
+		this.revealDateAsInt = cal.getTimeInMillis();
+		this.revealDate = revealDate;
+	}
+
+	public void setSolutionArtist(String solutionArtist) {
+		this.solutionArtist = solutionArtist;
+	}
+
+	public void setSolutionDate(Date solutionDate) {
+		this.solutionDate = solutionDate;
+	}
+
+	public void setSolutionsSong(List<String> solutionsSong) {
+		this.solutionsSong = solutionsSong;
+	}
+
+	@Override
+	public String toString() {
+		return "Day [id=" + id + ", image=" + image + ", description="
+				+ description + ", solutionsSong=" + solutionsSong
+				+ ", optionalSolutionVideo=" + optionalSolutionVideo
+				+ ", revealDateAsInt=" + revealDateAsInt + ", link=" + link
+				+ ", solutionDate=" + solutionDate + ", revealDate="
+				+ revealDate + "]";
 	}
 }

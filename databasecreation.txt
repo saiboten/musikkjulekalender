@@ -1,0 +1,48 @@
+createdb.exe -U postgres musikkjulekalender
+
+psql.exe -U postgres musikkjulekalender
+
+CREATE TABLE day (
+    image varchar(80),
+    description varchar(80),
+	optionalSolutionVideo varchar(80),
+	revealDateAsInt bigint UNIQUE, 
+	link varchar(80),
+    solutionDate date,
+    revealDate date
+);
+
+CREATE TABLE solution (
+    day bigint references day(revealDateAsInt),
+    solutionArtist varchar(200),
+    solutionSong varchar(200)
+);
+
+CREATE TABLE winner (
+    day bigint references day(revealDateAsInt),
+    winner varchar(80)
+);
+
+CREATE TABLE participant (
+    userName varchar(200) UNIQUE,
+    daysCalculated int,
+    daysGuessedRight int
+);
+
+CREATE TABLE answer (
+    day bigint references day(revealDateAsInt),
+    userName varchar(200) references participant(userName),
+	guessedSong varchar(80),
+	correctSongAnswer boolean,
+	timeOfCorrectAnswerInMillis bigint,
+	answerIsRevealed boolean
+);
+
+// Drop all tables
+
+drop table answer;
+drop table participants;
+drop table winner;
+drop table solution;
+drop table day;
+

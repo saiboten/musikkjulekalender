@@ -18,46 +18,46 @@ public class Answer implements Serializable {
 	private boolean correctSong;
 	private Long timeOfCorrectAnswerInMillis;
 
-	public Long getTimeOfCorrectAnswerInMillis() {
-		return timeOfCorrectAnswerInMillis;
-	}
-
-	public void setTimeOfCorrectAnswerInMillis(Long timeOfCorrectAnswerInMillis) {
-		this.timeOfCorrectAnswerInMillis = timeOfCorrectAnswerInMillis;
-	}
-
 	private boolean revealAnswer;
-
-	public boolean isRevealAnswer() {
-		return revealAnswer;
-	}
-
-	public void setRevealAnswer(boolean revealAnswer) {
-		this.revealAnswer = revealAnswer;
-	}
-
-	public boolean isCorrectSong() {
-		return correctSong;
-	}
-
-	public void setCorrectSong(boolean correctSong) {
-		this.correctSong = correctSong;
-	}
 
 	public String getAnswerSong() {
 		return answerSong;
-	}
-
-	public void setAnswerSong(String answerSong) {
-		this.answerSong = answerSong;
 	}
 
 	public Long getDay() {
 		return day;
 	}
 
+	public Long getTimeOfCorrectAnswerInMillis() {
+		return timeOfCorrectAnswerInMillis;
+	}
+
+	public boolean isCorrectSong() {
+		return correctSong;
+	}
+
+	public boolean isRevealAnswer() {
+		return revealAnswer;
+	}
+
+	public void setAnswerSong(String answerSong) {
+		this.answerSong = answerSong;
+	}
+
+	public void setCorrectSong(boolean correctSong) {
+		this.correctSong = correctSong;
+	}
+
 	public void setDay(Long day) {
 		this.day = day;
+	}
+
+	public void setRevealAnswer(boolean revealAnswer) {
+		this.revealAnswer = revealAnswer;
+	}
+
+	public void setTimeOfCorrectAnswerInMillis(Long timeOfCorrectAnswerInMillis) {
+		this.timeOfCorrectAnswerInMillis = timeOfCorrectAnswerInMillis;
 	}
 
 }

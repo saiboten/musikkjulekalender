@@ -25,10 +25,10 @@ import no.saiboten.drumcalendar.utils.StatisticsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -64,7 +64,7 @@ public class DefaultController {
 		this.facebookLoginService = facebookLoginService;
 	}
 
-	@RequestMapping("")
+	@GetMapping(value="")
 	public ModelAndView start() {
 		ModelAndView mav = new ModelAndView("main");
 		

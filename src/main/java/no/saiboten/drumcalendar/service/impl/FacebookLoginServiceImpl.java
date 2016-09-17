@@ -1,7 +1,5 @@
 package no.saiboten.drumcalendar.service.impl;
 
-import java.io.IOException;
-
 import no.saiboten.drumcalendar.service.FacebookLoginService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 

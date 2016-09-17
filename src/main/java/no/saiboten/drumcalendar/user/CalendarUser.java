@@ -14,73 +14,20 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 
 	@Id ObjectId id;
 	
-	@Override
-	public String toString() {
-		return "CalendarUser [daysCalculated=" + daysCalculated + ", rightSong=" + rightSong + ", answers=" + answers + ", userName=" + userName + "]";
-	}
-
 	private int daysCalculated;
 
 	private int rightSong;
-
-	public void setRightSong(int rightSong) {
-		this.rightSong = rightSong;
-	}
 
 	private Map<Long, Answer> answers;
 
 	private String userName;
 
-	public int getRightSong() {
-		return rightSong;
-	}
-
-	public void incrementRightSong() {
-		this.rightSong++;
-	}
-
-	public void decrementRightSong() {
-		this.rightSong--;
-	}
-
-	public int getTotalScore() {
-		return rightSong;
-	}
-
-	public int getDaysCalculated() {
-		return daysCalculated;
-	}
-
-	public void incrementDaysCalculated() {
-		this.daysCalculated++;
-	}
-
-	public String getUserNameNotMail() {
-		return Utils.removeAtInMail(getUserName());
-	}
-
 	public CalendarUser() {
 		answers = new HashMap<Long, Answer>();
 	}
 
-	public void setAnswers(Map<Long, Answer> answers) {
-		this.answers = answers;
-	}
-
 	public void addAnswer(Long day, Answer answer) {
 		this.answers.put(day, answer);
-	}
-
-	public Map<Long, Answer> getAnswers() {
-		return answers;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	@Override
@@ -91,5 +38,58 @@ public class CalendarUser implements Comparable<CalendarUser>  {
 			return -1;
 		}
 		return 0;
+	}
+
+	public void decrementRightSong() {
+		this.rightSong--;
+	}
+
+	public Map<Long, Answer> getAnswers() {
+		return answers;
+	}
+
+	public int getDaysCalculated() {
+		return daysCalculated;
+	}
+
+	public int getRightSong() {
+		return rightSong;
+	}
+
+	public int getTotalScore() {
+		return rightSong;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getUserNameNotMail() {
+		return Utils.removeAtInMail(getUserName());
+	}
+
+	public void incrementDaysCalculated() {
+		this.daysCalculated++;
+	}
+
+	public void incrementRightSong() {
+		this.rightSong++;
+	}
+
+	public void setAnswers(Map<Long, Answer> answers) {
+		this.answers = answers;
+	}
+
+	public void setRightSong(int rightSong) {
+		this.rightSong = rightSong;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	@Override
+	public String toString() {
+		return "CalendarUser [daysCalculated=" + daysCalculated + ", rightSong=" + rightSong + ", answers=" + answers + ", userName=" + userName + "]";
 	}
 }
