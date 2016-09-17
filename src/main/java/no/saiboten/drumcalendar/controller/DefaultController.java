@@ -134,7 +134,7 @@ public class DefaultController {
 		
 	}
 	
-	@RequestMapping(name="/facebooklogin", method=RequestMethod.POST)
+	@RequestMapping(value="/facebooklogin", method=RequestMethod.POST)
 	public ModelAndView facebookLoginService(HttpServletRequest request,
 			HttpServletResponse response, @RequestBody String accessToken) {
 		ModelAndView mav = new ModelAndView();
