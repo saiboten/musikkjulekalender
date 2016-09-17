@@ -11,7 +11,7 @@
 	<groupId>no.saiboten</groupId>
 	<artifactId>musikkjulekalender</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>Musikkjulekalender</name>
 
 	<dependencies>

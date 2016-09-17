@@ -1,9 +1,9 @@
 package no.saiboten.drumcalendar.controller;
 
 import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.service.impl.UserResultService;
 import no.saiboten.drumcalendar.toplist.TopListService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
+import no.saiboten.drumcalendar.user.UserResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
