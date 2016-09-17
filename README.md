@@ -14,6 +14,7 @@ admin.password=YOUR PASSWORD HERE
 facebook.secret=facebook secret
 spring.mvc.view.prefix=/WEB-INF/jsp/
 spring.mvc.view.suffix=.jsp```
+
 * mvn sprint-boot:run
 * Open localhost:8080
 * To access admin pages to add new quiz questions, go to: localhost:8080/admin - username and password is found in application.properties.
