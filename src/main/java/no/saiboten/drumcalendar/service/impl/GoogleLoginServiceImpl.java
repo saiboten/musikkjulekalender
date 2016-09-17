@@ -15,6 +15,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeToken
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
 //import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Tokeninfo;
@@ -33,7 +34,6 @@ public class GoogleLoginServiceImpl implements GoogleLoginService {
 
 	@Override
 	public GooglePlusLoginResults login(String oneTimeCode) {
-		return null;
 		if(loggedInRequestHolder.isLoggedIn()) {
 			LOGGER.info("User is already logged in. No need to do anything");
 			return GooglePlusLoginResults.SUCCESS;
