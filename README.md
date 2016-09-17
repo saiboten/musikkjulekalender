@@ -9,11 +9,11 @@ This is the repo for musikkjulekalender, the annual music contest during christm
 * Start MongoDB
 * Create a file named application.properties - place it under src/main/resources/config. Let it have the following content:
 
-`admin.username=admin
+```admin.username=admin
 admin.password=YOUR PASSWORD HERE
 facebook.secret=facebook secret
 spring.mvc.view.prefix=/WEB-INF/jsp/
-spring.mvc.view.suffix=.jsp`
+spring.mvc.view.suffix=.jsp```
 * mvn sprint-boot:run
 * Open localhost:8080
 * To access admin pages to add new quiz questions, go to: localhost:8080/admin - username and password is found in application.properties.
