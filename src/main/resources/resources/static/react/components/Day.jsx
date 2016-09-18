@@ -32,7 +32,7 @@ var Day = React.createClass({
             <div>
               <p>{this.props.day.description}</p>
               <p>
-                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong[0]} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
+                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
               </p>
               <audio src={this.props.day.link} controls>
                 <a href={this.props.day.link}>Last ned låt</a>
@@ -55,7 +55,7 @@ var Day = React.createClass({
 
         return (
             <div className="col-md-6 pane">
-              <h3>{this.props.day.realDate}. desember</h3>
+              <h3>{this.props.day.revealDate}</h3>
               {day}
             </div>
         );

@@ -2,7 +2,8 @@ package no.saiboten.drumcalendar.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MusikkjulekalenderExceptionHandler {
 	
-	private final Logger logger = Logger.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(MusikkjulekalenderExceptionHandler.class);
 	
 	 @ExceptionHandler(Exception.class)
 	  public ModelAndView handleError(HttpServletRequest req, Exception exception) {

@@ -12,14 +12,15 @@ import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WinnerServiceImpl implements WinnerService {
 	
-	private final Logger LOGGER = Logger.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(WinnerServiceImpl.class);
 
 	CalendarUserService userService;
 
@@ -32,7 +33,6 @@ public class WinnerServiceImpl implements WinnerService {
 		this.userService = userService;
 		this.winnerDao = winnerDao;
 		this.dayService = dayService;
-
 	}
 
 	@Override
@@ -52,14 +52,14 @@ public class WinnerServiceImpl implements WinnerService {
 
 		String winner = findWinner(day);
 		if (winner == null) {
-			LOGGER.debug("No winner found...");
+			logger.debug("No winner found...");
 			return;
 		}
 
 		WinnersDbBean winnersDbBean = winnerDao.getWinners();
 		winnersDbBean.getWinners().put(day, winner);
 
-		LOGGER.debug("Adding winner for day " + day + ": " + winner);
+		logger.debug("Adding winner for day " + day + ": " + winner);
 		winnerDao.saveWinners(winnersDbBean);
 	}
 
@@ -69,7 +69,7 @@ public class WinnerServiceImpl implements WinnerService {
 		for (CalendarUser user : users) {
 			Answer answer = user.getAnswers().get(day);
 			if(answer != null) {
-				LOGGER.debug("Correct song? " + answer.isCorrectSong());
+				logger.debug("Correct song? " + answer.isCorrectSong());
 			}
 			
 			if (answer != null && answer.isCorrectSong()) {
@@ -79,7 +79,7 @@ public class WinnerServiceImpl implements WinnerService {
 
 		Random random = new Random();
 		if (possibleWinners.size() == 0) {
-			LOGGER.debug("No winners found this day");
+			logger.debug("No winners found this day");
 			return null;
 		}
 		int winner = random.nextInt(possibleWinners.size());

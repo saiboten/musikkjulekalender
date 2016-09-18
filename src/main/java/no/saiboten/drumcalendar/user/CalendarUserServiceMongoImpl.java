@@ -7,9 +7,10 @@ import java.util.Map;
 import no.saiboten.drumcalendar.mongodb.MongoDBClientWrapper;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,14 +20,14 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 @Component
-public class CalenderUserServiceMongoImpl implements CalendarUserService {
+public class CalendarUserServiceMongoImpl implements CalendarUserService {
 
 	private MongoDBClientWrapper mongoDBClientWrapper;
 
-	private final Logger LOGGER = Logger.getLogger(getClass());
-	
+    Logger logger = LoggerFactory.getLogger(CalendarUserServiceMongoImpl.class);
+
 	@Autowired
-	public CalenderUserServiceMongoImpl(MongoDBClientWrapper mongoDBClientWrapper) {
+	public CalendarUserServiceMongoImpl(MongoDBClientWrapper mongoDBClientWrapper) {
 		this.mongoDBClientWrapper = mongoDBClientWrapper;
 	}
 	
@@ -39,11 +40,11 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 
 	@Override
 	public CalendarUser getUser(String uid) {
-		LOGGER.debug("Getting user: " + uid);
+		logger.debug("Getting user: " + uid);
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender2015");
 		CalendarUser theCorrectUser = dataStore.find(CalendarUser.class).field("userName").equal(uid).get();
-		LOGGER.debug("Did we find the correct user? " + theCorrectUser);
+		logger.debug("Did we find the correct user? " + theCorrectUser);
 		return theCorrectUser;
 	}
 
@@ -81,7 +82,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 		Morphia morphia = new Morphia();
 		Datastore dataStore = morphia.createDatastore(mongoDBClientWrapper.getMongoClient(), "musikkjulekalender2015");
 		List<CalendarUser> allUsers = dataStore.find(CalendarUser.class).asList();
-		LOGGER.debug("Did we find all the users? " + allUsers);
+		logger.debug("Did we find all the users? " + allUsers);
 		return allUsers;
 	}
 
@@ -118,7 +119,7 @@ public class CalenderUserServiceMongoImpl implements CalendarUserService {
 
 	@Override
 	public void deleteAnswersUser(String uid) {
-		LOGGER.debug("Deleting answers for user: " + uid);
+		logger.debug("Deleting answers for user: " + uid);
 		CalendarUser user = getUser(uid);
 		user.setAnswers(new HashMap<Long, Answer>());
 		putUser(user);

@@ -1,10 +1,13 @@
 package no.saiboten.drumcalendar.rest;
 
+
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.toplist.TopListService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.user.UserResultService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,8 @@ public class RestController {
 
 	private TopListService topListService;
 	
+	Logger logger = LoggerFactory.getLogger(RestController.class);
+	
 
 	@Autowired
 	public RestController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService, TopListService topListService) {
@@ -33,6 +38,7 @@ public class RestController {
 
 	@RequestMapping("/days.json")
 	public ModelAndView getDays() {
+		logger.debug("Getting days");
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new MappingJackson2JsonView());
 		mav.addObject("days", dayService.getSpoilerFreeDays());

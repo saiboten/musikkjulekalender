@@ -66,7 +66,7 @@ var GuessDay = React.createClass({
 
         return (
           <div className={this.props.class}>
-              <h3>{this.props.day.realDate}. desember</h3>
+              <h3>{this.props.day.revealDate}</h3>
 
               <p>{this.props.day.description}</p>
 

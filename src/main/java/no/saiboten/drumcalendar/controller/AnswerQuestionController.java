@@ -1,7 +1,6 @@
 package no.saiboten.drumcalendar.controller;
 
 import java.util.Calendar;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +11,8 @@ import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Controller
 public class AnswerQuestionController {
 
-	final Logger LOGGER = Logger.getLogger(AnswerQuestionController.class.getName());
+	Logger LOGGER = LoggerFactory.getLogger(AnswerQuestionController.class);
 
 	@Autowired
 	private LoggedInRequestHolder loggedIn;
@@ -60,7 +61,7 @@ public class AnswerQuestionController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today.getRevealDate());
 
-		LOGGER.fine("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
+		LOGGER.debug("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
 		if (user != null) {
 			Answer answer = new Answer();
 			answer.setAnswerSong(song);
@@ -76,7 +77,7 @@ public class AnswerQuestionController {
 			user.addAnswer(cal.getTimeInMillis(), answer);
 			
 			calendarUserService.putUser(user);
-			LOGGER.fine("User updated with new answer: " + song );
+			LOGGER.debug("User updated with new answer: " + song );
 			
 			if(answer.isCorrectSong()) {
 				mav.addObject("feedback", "Riktig! Svaret var: " + song + ". Godt jobbet!");
@@ -122,14 +123,14 @@ public class AnswerQuestionController {
 
 		CalendarUser user = loggedIn.getCalendarUser();
 		Long date = day;
-		LOGGER.fine("Date is: " + date + ". User is: " + user);
+		LOGGER.debug("Date is: " + date + ". User is: " + user);
 		if (user != null) {
 			Answer answer = new Answer();
 			answer.setAnswerSong(song);
 			answer.setDay(date);
 			user.addAnswer(date, answer);
 			calendarUserService.putUser(user);
-			LOGGER.fine("User updated with new answer: " + song + " ");
+			LOGGER.debug("User updated with new answer: " + song + " ");
 			mav.addObject("feedback", "Svar gitt: " + song);
 		} else {
 			mav.addObject("feedback", "Noe gikk galt. Er du innlogget?");

@@ -11,9 +11,10 @@ import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 
-import org.apache.log4j.Logger;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +25,7 @@ public class StatisticsServiceMongoImpl implements StatisticsService {
 
 	CalendarUserService userService;
 
-	private final Logger LOGGER = Logger.getLogger(StatisticsServiceImpl.class
-			.getName());
+    Logger logger = LoggerFactory.getLogger(StatisticsServiceMongoImpl.class);
 
 	private MongoDBClientWrapper mongoDBClientWrapper;
 
@@ -102,10 +102,10 @@ public class StatisticsServiceMongoImpl implements StatisticsService {
 		LinkedList<CalendarUser> bestUsers = new LinkedList<CalendarUser>();
 		for (CalendarUser user : users) {
 			if (user.getTotalScore() == 0) {
-				LOGGER.debug("Score is 0 for user " + user.getUserName()
+				logger.debug("Score is 0 for user " + user.getUserName()
 						+ ". Not eligible");
 			} else if (bestUsers.size() < 5) {
-				LOGGER.debug("The list of best users are smaller than 3, and this user has score more than one:"
+				logger.debug("The list of best users are smaller than 3, and this user has score more than one:"
 						+ user.getUserName() + ": " + user.getTotalScore());
 				bestUsers.add(user);
 				if (user.getTotalScore() < worstScoreInBestList) {
@@ -113,7 +113,7 @@ public class StatisticsServiceMongoImpl implements StatisticsService {
 				}
 			} else {
 				if (user.getTotalScore() > worstScoreInBestList) {
-					LOGGER.debug("The user has a score better than the worst in the best list, adding user: "
+					logger.debug("The user has a score better than the worst in the best list, adding user: "
 							+ user.getUserName() + ": " + user.getTotalScore());
 					bestUsers.add(user);
 					Collections.sort(bestUsers);

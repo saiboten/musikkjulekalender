@@ -2,7 +2,8 @@ package no.saiboten.drumcalendar.authentication;
 
 import no.saiboten.drumcalendar.utils.GooglePlusLoginResults;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,8 +15,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Controller
 public class AuthenticationController {
 
-	private final Logger LOGGER = Logger.getLogger(getClass());
-
+    Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+	
 	private GoogleLoginService googleLoginService;
 	private FacebookLoginService facebookLoginService;
 
@@ -38,7 +39,7 @@ public class AuthenticationController {
 	public ModelAndView pluslogin(@RequestBody String code) {
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new MappingJackson2JsonView());
-		LOGGER.debug("Login in using Google plus");
+		logger.debug("Login in using Google plus");
 		GooglePlusLoginResults googlePlusLoginResults = googleLoginService
 				.login(code);
 		mav.addObject("result", googlePlusLoginResults.toString());
@@ -51,7 +52,7 @@ public class AuthenticationController {
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new MappingJackson2JsonView());
 
-		LOGGER.debug("Login in using Facebook");
+		logger.debug("Login in using Facebook");
 		mav.addObject("result", facebookLoginService.login(accessToken));
 		return mav;
 

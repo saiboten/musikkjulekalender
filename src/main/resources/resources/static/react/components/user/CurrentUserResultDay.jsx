@@ -16,10 +16,10 @@ var CurrentUserResultDay = React.createClass({
       debug('answer',answer);
 
       if(answer && answer.correctSong) {
-          answerComp = (<p>{this.props.day.realDate}. desember: {answer.answerSong} var riktig svar!</p>);
+          answerComp = (<p>{this.props.day.revealDate}: {answer.answerSong} var riktig svar!</p>);
       }
       else {
-          answerComp = (<p>{this.props.day.realDate}. desember: Du fant ikke riktig svar.</p>);
+          answerComp = (<p>{this.props.day.revealDate}: Du fant ikke riktig svar.</p>);
       }
 
       return (

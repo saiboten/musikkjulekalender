@@ -40,7 +40,7 @@ var UserResultDay = React.createClass({
        }
         return (
           <div>
-          <p>{this.props.day.realDate}. desember</p>
+          <p>{this.props.day.revealDate}</p>
           {maybeempty}
           </div>
           );

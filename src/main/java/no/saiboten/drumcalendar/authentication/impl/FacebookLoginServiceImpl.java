@@ -4,7 +4,8 @@ import no.saiboten.drumcalendar.authentication.FacebookLoginService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.UserOperations;
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class FacebookLoginServiceImpl implements FacebookLoginService {
 
-	private final Logger LOGGER = Logger.getLogger(getClass());
-
+    private Logger logger = LoggerFactory.getLogger(FacebookLoginServiceImpl.class);
+    
 	private LoggedInRequestHolder loggedInRequestHolder;
 
 	@Autowired
@@ -28,7 +29,7 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 		boolean success = false;
 		
 		if(loggedInRequestHolder.isLoggedIn()) {
-			LOGGER.info("User is already logged in. No need to do anything");
+			logger.info("User is already logged in. No need to do anything");
 			success = true;
 		}
 		else {
@@ -37,13 +38,13 @@ public class FacebookLoginServiceImpl implements FacebookLoginService {
 
 			String username = userOperations.getUserProfile().getEmail();
 			if(StringUtils.isNotEmpty(username)) {
-				LOGGER.debug("Facebook Username: " + username);
+				logger.debug("Facebook Username: " + username);
 				loggedInRequestHolder.setUserName(username);
 				loggedInRequestHolder.setLoggedIn(true);
 				success = true;
 			}
 			else {
-				LOGGER.warn("Facebook Username is empty! Something has gone wrong ...");
+				logger.warn("Facebook Username is empty! Something has gone wrong ...");
 			}
 		}
 		

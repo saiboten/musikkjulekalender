@@ -6,7 +6,8 @@ import no.saiboten.drumcalendar.authentication.GoogleLoginService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.utils.GooglePlusLoginResults;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,8 @@ import com.google.api.services.oauth2.model.Userinfoplus;
 @Service
 public class GoogleLoginServiceImpl implements GoogleLoginService {
 
-	private final Logger LOGGER = Logger.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(GoogleLoginServiceImpl.class);
+
 	private LoggedInRequestHolder loggedInRequestHolder;
 
 	@Autowired
@@ -35,7 +37,7 @@ public class GoogleLoginServiceImpl implements GoogleLoginService {
 	@Override
 	public GooglePlusLoginResults login(String oneTimeCode) {
 		if(loggedInRequestHolder.isLoggedIn()) {
-			LOGGER.info("User is already logged in. No need to do anything");
+			logger.info("User is already logged in. No need to do anything");
 			return GooglePlusLoginResults.SUCCESS;
 		}
 		else {
@@ -71,7 +73,7 @@ public class GoogleLoginServiceImpl implements GoogleLoginService {
 				else if (!tokenInfo
 						.getIssuedTo()
 						.equals("814247292614-kvbdepicmv5sbk5ufocb5lf7agcqf907.apps.googleusercontent.com")) {
-					LOGGER.error("Token's client ID does not match app's.");
+					logger.error("Token's client ID does not match app's.");
 					return GooglePlusLoginResults.TOKEN_MISMATCH;
 				}
 				// Store the token in the session for later use.
@@ -82,10 +84,10 @@ public class GoogleLoginServiceImpl implements GoogleLoginService {
 				}
 
 			} catch (TokenResponseException e) {
-				LOGGER.error("Failed to upgrade the authorization code.");
+				logger.error("Failed to upgrade the authorization code.");
 				return GooglePlusLoginResults.AUTH_CODE_UPDATE_ERROR;
 			} catch (IOException e) {
-				LOGGER.error("Failed to read token data from Google. "
+				logger.error("Failed to read token data from Google. "
 						+ e.getMessage());
 				return GooglePlusLoginResults.TOKEN_READ_ERROR;
 			}
@@ -99,7 +101,7 @@ public class GoogleLoginServiceImpl implements GoogleLoginService {
 		
 		try {
 			userinfo = oauth2.userinfo().get().execute();
-			LOGGER.debug("Retrieving username" + userinfo.getEmail());
+			logger.debug("Retrieving username" + userinfo.getEmail());
 			loggedInRequestHolder.setUserName(userinfo.getEmail());
 			loggedInRequestHolder.setLoggedIn(true);
 			success = true;
