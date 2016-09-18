@@ -1,19 +1,17 @@
-package no.saiboten.drumcalendar.controller;
+package no.saiboten.drumcalendar.admin;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.admin.bean.GenericResponse;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.service.HelperService;
-import no.saiboten.drumcalendar.service.WinnerService;
-import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
+import no.saiboten.drumcalendar.utils.HelperService;
 import no.saiboten.drumcalendar.utils.StatisticsService;
+import no.saiboten.drumcalendar.winner.WinnerService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,14 +41,16 @@ public class AdminController {
 	private HelperService helperService;
 
 	private DayService dayService;
-	
+
 	private Logger LOGGER = Logger.getLogger(getClass());
 
 	private LoggedInRequestHolder loggedIn;
-	
+
 	@Autowired
-	public AdminController(CalendarUserService userService, StatisticsService statsService,
-			WinnerService winnerService, HelperService helperService, DayService dayService, LoggedInRequestHolder loggedIn) {
+	public AdminController(CalendarUserService userService,
+			StatisticsService statsService, WinnerService winnerService,
+			HelperService helperService, DayService dayService,
+			LoggedInRequestHolder loggedIn) {
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
@@ -59,91 +60,82 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/resetday/{day}")
-	public ModelAndView resetDay(@PathVariable(value = "day") Long day) {
-		ModelAndView mav = new ModelAndView("answergiven");
+	public String resetDay(@PathVariable(value = "day") Long day) {
 		helperService.resetDay(day);
-		return mav;
+		return "answergiven";
 	}
 
+	// @RequestMapping("/admin/newwinner/{day}")
+
 	@RequestMapping(value = "/admin/deleteusers")
-	public ModelAndView deleteUsers() {
-		ModelAndView mav = new ModelAndView("answergiven");
+	public String deleteUsers() {
 		userService.deleteAllUsers();
-		return mav;
+		return "answergiven";
 	}
 
 	@RequestMapping(value = "/admin/deletestatistics")
-	public ModelAndView deleteStatistics() {
-		ModelAndView mav = new ModelAndView("answergiven");
+	public String deleteStatistics() {
 		statsService.deleteStatistics();
-		return mav;
+		return "answergiven";
 	}
 
 	@RequestMapping(value = "/admin/users")
-	public ModelAndView viewUsers() {
-		ModelAndView mav = new ModelAndView("users");
-		mav.addObject("users", userService.getAllUsers());
-		mav.addObject("days", dayService.getDays());
-		return mav;
+	public String viewUsers() {
+		return "users";
 	}
-	
+
 	@RequestMapping(value = "/admin/overview")
-	public ModelAndView adminOverview() {
-			ModelAndView mav = new ModelAndView("overviewadmin");
-			mav.addObject("overview", "active");
-			mav.addObject("now", Calendar.getInstance().getTimeInMillis());
-			mav.addObject("days", dayService.getDays());
-			mav.addObject("loggedIn", loggedIn.isLoggedIn());
-			LOGGER.debug("Is the user logged in?" + loggedIn.isLoggedIn());
-			if (loggedIn.getCalendarUser() != null) {
-				LOGGER.debug("Do we have the calendar user? " + loggedIn.getCalendarUser());
-				mav.addObject("answers", loggedIn.getCalendarUser().getAnswers());
-			}
-
-			List<CalendarUser> users = userService.getAllUsers();
-			if (users != null) {
-				mav.addObject("numberOfUsers", users.size());
-				mav.addObject("users", users);
-			}
-
-			mav.addObject("statistics", statsService.getStatistics());
-			return mav;
+	public String adminOverview() {
+		// ModelAndView mav = new ModelAndView("overviewadmin");
+		// mav.addObject("overview", "active");
+		// mav.addObject("now", Calendar.getInstance().getTimeInMillis());
+		// mav.addObject("days", dayService.getDays());
+		// mav.addObject("loggedIn", loggedIn.isLoggedIn());
+		// LOGGER.debug("Is the user logged in?" + loggedIn.isLoggedIn());
+		// if (loggedIn.getCalendarUser() != null) {
+		// LOGGER.debug("Do we have the calendar user? " +
+		// loggedIn.getCalendarUser());
+		// mav.addObject("answers", loggedIn.getCalendarUser().getAnswers());
+		// }
+		//
+		// List<CalendarUser> users = userService.getAllUsers();
+		// if (users != null) {
+		// mav.addObject("numberOfUsers", users.size());
+		// mav.addObject("users", users);
+		// }
+		//
+		// mav.addObject("statistics", statsService.getStatistics());
+		return "overviewadmin";
 	}
 
 	@RequestMapping("/admin/newwinner/{day}")
-	public ModelAndView addWinner(@PathVariable("day") Long day) {
-		ModelAndView mav = new ModelAndView("users");
+	public String addWinner(@PathVariable("day") Long day) {
 		winnerService.addWinner(day);
-		return mav;
+		return "users";
 	}
 
 	@RequestMapping("/admin/fixsong/{mail}/{day}")
-	public ModelAndView fixSong(@PathVariable String mail, @PathVariable Long day) {
-		ModelAndView mav = new ModelAndView("users");
+	public String fixSong(@PathVariable String mail, @PathVariable Long day) {
 		userService.fixSong(mail, day);
-		return mav;
-	}
-	
-	@RequestMapping("/admin/setsongscore/{mail}/{day}/{score}")
-	public ModelAndView setSongScore(@PathVariable String mail, @PathVariable Long day, @PathVariable Integer score) {
-		ModelAndView mav = new ModelAndView("users");
-		userService.fixSongScore(mail, day, score);
-		return mav;
-	}
-	
-	@RequestMapping("/admin/setSongAnswer/{mail}/{day}/{answer}")
-	public ModelAndView setSongAnswer(@PathVariable String mail, @PathVariable Long day, @PathVariable String answer) {
-		ModelAndView mav = new ModelAndView("users");
-		userService.setSongAnswer(mail, day, answer);
-		return mav;
+		return "users";
 	}
 
-	@RequestMapping(value = "/admin/day/add", method = RequestMethod.GET)
-	public ModelAndView addDayGet(@ModelAttribute("day") Day day) {
-		ModelAndView mav = new ModelAndView("change_day");
-		return mav;
+	@RequestMapping("/admin/setsongscore/{mail}/{day}/{score}")
+	public String setSongScore(@PathVariable String mail,
+			@PathVariable Long day, @PathVariable Integer score) {
+		userService.fixSongScore(mail, day, score);
+		return "users";
 	}
+
+	@RequestMapping("/admin/setSongAnswer/{mail}/{day}/{answer}")
+	public String setSongAnswer(@PathVariable String mail,
+			@PathVariable Long day, @PathVariable String answer) {
+		userService.setSongAnswer(mail, day, answer);
+		return "users";
+	}
+
 	
+
 	@RequestMapping(value = "/admin/fakelogin/{userid}", method = RequestMethod.GET)
 	public RedirectView addDayGet(@PathVariable("userid") String userid) {
 		RedirectView redirectView = new RedirectView("/admin");
@@ -152,25 +144,10 @@ public class AdminController {
 		return redirectView;
 	}
 
-	@RequestMapping(value = "/admin/day/add", method = RequestMethod.POST)
-	public ModelAndView addDayPost(@ModelAttribute("day") Day day, BindingResult result) {
-		ModelAndView mav = new ModelAndView("change_day");
-
-		if (result.hasErrors()) {
-			mav.addObject("error", "There are errors.");
-			return mav;
-		}
-
-		if (dayService.addDay(day)) {
-			mav.addObject("feedback", "La til ny dag! Great success!");
-		}
-		return mav;
-	}
-
 	@RequestMapping(value = "/admin/day/change/{dayNumber}", method = RequestMethod.GET)
 	public ModelAndView changeDayGet(@PathVariable Long dayNumber) {
 		ModelAndView mav = new ModelAndView("change_day");
-		Day day = dayService.getDay(dayNumber);
+		DayPostgres day = dayService.getDay(dayNumber);
 		mav.addObject("day", day);
 		if (day != null) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -182,7 +159,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/day/change", method = RequestMethod.POST)
-	public RedirectView changeDayPost(@ModelAttribute("day") Day day, BindingResult result) {
+	public RedirectView changeDayPost(@ModelAttribute("day") DayPostgres day,
+			BindingResult result) {
 		RedirectView redirectView = new RedirectView("/admin");
 
 		if (result.hasErrors()) {
@@ -194,7 +172,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/day/delete/{dayNumber}")
-	public ModelAndView deleteDay(@ModelAttribute("day") Day day, @PathVariable Long dayNumber) {
+	public ModelAndView deleteDay(@ModelAttribute("day") DayPostgres day,
+			@PathVariable Long dayNumber) {
 		ModelAndView mav = new ModelAndView("list_days");
 		dayService.deleteDay(dayNumber);
 		return mav;
@@ -211,7 +190,8 @@ public class AdminController {
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
 	}
 
 }

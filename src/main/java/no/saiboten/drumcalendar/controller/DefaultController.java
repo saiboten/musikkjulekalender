@@ -7,30 +7,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.service.FacebookLoginService;
-import no.saiboten.drumcalendar.service.GoogleLoginService;
-import no.saiboten.drumcalendar.service.WinnerService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.user.UserStatistics;
-import no.saiboten.drumcalendar.utils.GooglePlusLoginResults;
 import no.saiboten.drumcalendar.utils.StatisticsService;
+import no.saiboten.drumcalendar.winner.WinnerService;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
 public class DefaultController {
@@ -44,27 +34,21 @@ public class DefaultController {
 	private StatisticsService statsService;
 
 	private WinnerService winnerService;
-	
-	private GoogleLoginService googleLoginService;
-	
+		
 	private final Logger LOGGER = Logger.getLogger(getClass());
-
-	private FacebookLoginService facebookLoginService;
 
 	@Autowired
 	public DefaultController(DayService dayService,
 			LoggedInRequestHolder loggedIn, CalendarUserService userService,
-			StatisticsService statsService, WinnerService winnerService, GoogleLoginService googleLoginService, FacebookLoginService facebookLoginService) {
+			StatisticsService statsService, WinnerService winnerService) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
-		this.googleLoginService = googleLoginService;
-		this.facebookLoginService = facebookLoginService;
 	}
 
-	@GetMapping(value="")
+	@RequestMapping(value="/")
 	public ModelAndView start() {
 		ModelAndView mav = new ModelAndView("main");
 		
@@ -89,12 +73,12 @@ public class DefaultController {
 			mav.addObject("userStats", userStats);
 		}
 
-		Map<Day, CalendarUser> winnerMap = winnerService.getWinners();
+		Map<DayPostgres, CalendarUser> winnerMap = winnerService.getWinners();
 		Map<Long, CalendarUser> winners = new HashMap<Long, CalendarUser>();
-		Map<Long, Day> days = new HashMap<Long, Day>();
+		Map<Long, DayPostgres> days = new HashMap<Long, DayPostgres>();
 		List<Long> longDay = new ArrayList<Long>();
 
-		for (Day day : winnerMap.keySet()) {
+		for (DayPostgres day : winnerMap.keySet()) {
 			winners.put(day.getRevealDateAsInt(), winnerMap.get(day));
 			days.put(day.getRevealDateAsInt(), day);
 			longDay.add(day.getRevealDateAsInt());
@@ -115,36 +99,7 @@ public class DefaultController {
 		return mav;
 	}
 
-	@RequestMapping("/logmeon")
-	public ModelAndView login(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("login");
-		mav.addObject("logmein", "active");
-		return mav;
-	}
-
-	@RequestMapping("/plus")
-	public ModelAndView pluslogin(HttpServletRequest request,
-			HttpServletResponse response, @RequestBody String code) {
-		ModelAndView mav = new ModelAndView();
-		mav.setView(new MappingJackson2JsonView());
-		LOGGER.debug("Login in using Google plus");
-		GooglePlusLoginResults googlePlusLoginResults = googleLoginService.login(code);
-		mav.addObject("result", googlePlusLoginResults.toString());
-		return mav;
-		
-	}
 	
-	@RequestMapping(value="/facebooklogin", method=RequestMethod.POST)
-	public ModelAndView facebookLoginService(HttpServletRequest request,
-			HttpServletResponse response, @RequestBody String accessToken) {
-		ModelAndView mav = new ModelAndView();
-		mav.setView(new MappingJackson2JsonView());
-		
-		LOGGER.debug("Login in using Facebook");
-		mav.addObject("result", facebookLoginService.login(accessToken));
-		return mav;
-		
-	}
 	
 	
 	

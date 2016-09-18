@@ -1,21 +1,21 @@
 package no.saiboten.drumcalendar.winner;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.user.CalendarUser;
 
 public class Winner {
-	private Day day;
+	private DayPostgres day;
 	private CalendarUser user;
 
 	public CalendarUser getUser() {
 		return user;
 	}
 
-	public Day getDay() {
+	public DayPostgres getDay() {
 		return day;
 	}
 
-	public void setDay(Day day) {
+	public void setDay(DayPostgres day) {
 		this.day = day;
 	}
 

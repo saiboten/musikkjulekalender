@@ -1,12 +1,11 @@
 package no.saiboten.drumcalendar.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
@@ -57,7 +56,7 @@ public class AnswerQuestionController {
 		}
 
 		CalendarUser user = loggedIn.getCalendarUser();
-		Day today = dayService.getToday();
+		DayPostgres today = dayService.getToday();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today.getRevealDate());
 
@@ -67,12 +66,12 @@ public class AnswerQuestionController {
 			answer.setAnswerSong(song);
 			answer.setDay(cal.getTimeInMillis());
 			
-			for(String songSolution : today.getSolutionsSong()) {
-				if(songSolution.toLowerCase().equals(answer.getAnswerSong().toLowerCase())) {
-					answer.setCorrectSong(true);
-					answer.setTimeOfCorrectAnswerInMillis(System.currentTimeMillis());
-				}
-			}
+//			for(String songSolution : today.getSolutionsSong()) {
+//				if(songSolution.toLowerCase().equals(answer.getAnswerSong().toLowerCase())) {
+//					answer.setCorrectSong(true);
+//					answer.setTimeOfCorrectAnswerInMillis(System.currentTimeMillis());
+//				}
+//			} //FIXME
 
 			user.addAnswer(cal.getTimeInMillis(), answer);
 			
@@ -97,21 +96,21 @@ public class AnswerQuestionController {
 		return mav;
 	}
 
-	@RequestMapping("answermobile")
+	@RequestMapping("/answermobile")
 	public ModelAndView answerMobile(@RequestParam(value = "song") String song) {
 		ModelAndView mav = answerQuestion(song);
 		mav.setViewName("/mobile/answergiven");
 		return mav;
 	}
 	
-	@RequestMapping("answer.json")
+	@RequestMapping("/answer.json")
 	public ModelAndView answerJson(@RequestParam(value = "song") String song) {
 		ModelAndView mav = answerQuestion(song);
 		mav.setView(new MappingJackson2JsonView());
 		return mav;
 	}
 
-	@RequestMapping(value = "/admin/answerCheat", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/answerCheat")
 	public ModelAndView answerQuestionGet() {
 		ModelAndView mav = new ModelAndView("cheat");
 		return mav;

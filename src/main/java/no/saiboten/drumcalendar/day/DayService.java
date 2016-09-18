@@ -3,17 +3,17 @@ package no.saiboten.drumcalendar.day;
 import java.util.List;
 
 public interface DayService {
-	public List<Day> getDays();
+	public List<DayPostgres> getDays();
 
-	public Day getDay(Long dayNumber);
+	public DayPostgres getDay(Long dayNumber);
 
-	public List<Day> getSpoilerFreeDays();
+	public List<DayPostgres> getSpoilerFreeDays();
 
-	public Day getToday();
+	public DayPostgres getToday();
 
-	public boolean addDay(Day day);
+	public boolean addDay(DayPostgres day);
 
-	public boolean updateDay(Day day);
+	public boolean updateDay(DayPostgres day);
 
 	public boolean deleteDay(Long dayNumber);
 }

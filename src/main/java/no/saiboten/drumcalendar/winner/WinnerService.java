@@ -1,12 +1,12 @@
-package no.saiboten.drumcalendar.service;
+package no.saiboten.drumcalendar.winner;
 
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.user.CalendarUser;
 
 public interface WinnerService {
-	public Map<Day, CalendarUser> getWinners();
+	public Map<DayPostgres, CalendarUser> getWinners();
 
 	public void addWinner(Long day);
 }

@@ -1,4 +1,4 @@
-package no.saiboten.drumcalendar.controller;
+package no.saiboten.drumcalendar.rest;
 
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.toplist.TopListService;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
-public class JsonController {
+public class RestController {
 
 	private DayService dayService;
 
@@ -24,7 +24,7 @@ public class JsonController {
 	
 
 	@Autowired
-	public JsonController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService, TopListService topListService) {
+	public RestController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService, TopListService topListService) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.userResultService = userResultService;

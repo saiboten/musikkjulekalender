@@ -1,6 +1,6 @@
-package no.saiboten.drumcalendar.service.impl;
+package no.saiboten.drumcalendar.authentication.impl;
 
-import no.saiboten.drumcalendar.service.FacebookLoginService;
+import no.saiboten.drumcalendar.authentication.FacebookLoginService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 
 import org.apache.commons.lang3.StringUtils;

@@ -4,14 +4,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
-import no.saiboten.drumcalendar.utils.StatisticsServiceImpl;
 
-import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -34,7 +32,7 @@ public class StatisticsServiceImplTest {
 //	@Test
 	public void testGetTopThree() {
 
-		Day day1 = new Day();
+		DayPostgres day1 = new DayPostgres();
 		// day1.setSolutionArtist("rightArtist");
 		// day1.setSolutionSong("rightSong");
 

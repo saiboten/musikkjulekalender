@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.service.WinnerService;
 import no.saiboten.drumcalendar.user.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
@@ -37,8 +36,8 @@ public class WinnerServiceImpl implements WinnerService {
 	}
 
 	@Override
-	public Map<Day, CalendarUser> getWinners() {
-		Map<Day, CalendarUser> winnerMap = new HashMap<Day, CalendarUser>();
+	public Map<DayPostgres, CalendarUser> getWinners() {
+		Map<DayPostgres, CalendarUser> winnerMap = new HashMap<DayPostgres, CalendarUser>();
 		WinnersDbBean winnersDbBean = winnerDao.getWinners();
 
 		Map<Long, String> winnersDbMap = winnersDbBean.getWinners();

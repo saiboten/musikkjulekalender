@@ -1,10 +1,9 @@
-package no.saiboten.drumcalendar.service.impl;
+package no.saiboten.drumcalendar.utils;
 
 import java.util.List;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.service.HelperService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 
@@ -28,7 +27,7 @@ public class HelperServiceImpl implements HelperService {
 			userService.deleteAnswersUser(user.getUserName());
 		}
 
-		List<Day> days = dayService.getDays();
+		List<DayPostgres> days = dayService.getDays();
 	}
 
 }

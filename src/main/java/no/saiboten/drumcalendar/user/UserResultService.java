@@ -3,7 +3,7 @@ package no.saiboten.drumcalendar.user;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.Day;
+import no.saiboten.drumcalendar.day.DayPostgres;
 import no.saiboten.drumcalendar.day.DayService;
 import no.saiboten.drumcalendar.user.bean.UserResultSingleDay;
 import no.saiboten.drumcalendar.user.bean.UserResultSingleUser;
@@ -27,7 +27,7 @@ public class UserResultService {
 	public Map<Long,UserResultSingleDay> getUserResults() {
 		Map<Long,UserResultSingleDay> result = new HashMap<Long,UserResultSingleDay>();
 		
-		for(Day day : dayService.getDays()) {
+		for(DayPostgres day : dayService.getDays()) {
 			UserResultSingleDay userResultSingleDay = new UserResultSingleDay();
 			
 			for(CalendarUser user : calendarUserService.getAllUsers()) {

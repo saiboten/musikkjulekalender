@@ -1,8 +1,8 @@
-package no.saiboten.drumcalendar.service.impl;
+package no.saiboten.drumcalendar.authentication.impl;
 
 import java.io.IOException;
 
-import no.saiboten.drumcalendar.service.GoogleLoginService;
+import no.saiboten.drumcalendar.authentication.GoogleLoginService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.utils.GooglePlusLoginResults;
 
