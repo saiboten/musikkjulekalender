@@ -1,7 +1,9 @@
-package no.saiboten.drumcalendar.day;
+package no.saiboten.drumcalendar.day.postgres;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import no.saiboten.drumcalendar.day.service.DayService;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;

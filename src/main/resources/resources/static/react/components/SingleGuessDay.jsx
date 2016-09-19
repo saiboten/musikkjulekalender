@@ -1,6 +1,7 @@
 var React = require('react');
 var debug = require('debug')('days');
-var Day = require('./Day.jsx')
+var moment = require('moment');
+var Day = require('./Day.jsx');
 var GuessDay = require('./GuessDay.jsx');
 var AltContainer = require('alt/AltContainer');
 var GuessStore = require('../stores/GuessStore');
@@ -15,10 +16,10 @@ var Days = React.createClass({
         return (
             <span>
                 {this.props.days.map((day, i) => {
-                    if(day.realDate === new Date(this.props.date).getDate().toString()) {
+                    if(moment(day.revealDateAsInt).format('YYYY MM DD') === moment(this.props.date).format('YYYY MM DD') ) {
                       return (<AltContainer store={GuessStore}>
                           <h1>Dagens oppgave</h1>
-                          <GuessDay key={day.revealDate} day={day} user={this.props.user} />
+                          <GuessDay key={day.revealDateAsInt} day={day} user={this.props.user} />
                       </AltContainer>);
                     }
                 })}

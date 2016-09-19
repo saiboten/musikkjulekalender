@@ -1,12 +1,11 @@
-package no.saiboten.drumcalendar.controller;
+package no.saiboten.drumcalendar.answer;
 
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
-import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.user.Answer;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;

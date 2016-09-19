@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import no.saiboten.drumcalendar.user.Answer;
+import no.saiboten.drumcalendar.answer.Answer;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 
@@ -24,7 +24,6 @@ public class TopListService {
 	
 	public List<TopListModel> getTopList() {
 		List<TopListModel> topList = new ArrayList<TopListModel>();
-		
 		
 		List<CalendarUser> calendarUsers = calendarUserService.getAllUsers();
 		for(CalendarUser user : calendarUsers) {

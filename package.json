@@ -19,6 +19,7 @@
     "gulp-watch-less": "^1.0.1",
     "gulp-webserver": "^0.9.1",
     "jade": "~1.11.0",
+    "moment": "^2.15.0",
     "mongoose": "^4.1.10",
     "morgan": "~1.6.1",
     "multer": "^1.0.6",

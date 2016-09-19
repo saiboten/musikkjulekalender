@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import no.saiboten.drumcalendar.answer.Answer;
 import no.saiboten.drumcalendar.mongodb.MongoDBClientWrapper;
 
 import org.apache.commons.lang3.StringUtils;

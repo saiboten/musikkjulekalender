@@ -1,5 +1,6 @@
 var React = require('react');
 var debug = require('debug')('day');
+var moment = require('moment');
 
 var Day = React.createClass({
 
@@ -55,7 +56,7 @@ var Day = React.createClass({
 
         return (
             <div className="col-md-6 pane">
-              <h3>{this.props.day.revealDate}</h3>
+              <h3>{moment(this.props.day.revealDateAsInt).format('DD. MMMM')}</h3>
               {day}
             </div>
         );

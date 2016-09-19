@@ -1,8 +1,11 @@
-package no.saiboten.drumcalendar.day;
+package no.saiboten.drumcalendar.day.controller;
 
 import java.util.List;
 
 import no.saiboten.drumcalendar.admin.bean.GenericResponse;
+import no.saiboten.drumcalendar.day.bean.Day;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
 public class DayController {
@@ -26,6 +31,8 @@ public class DayController {
 	public DayController(DayService dayService) {
 		this.dayService = dayService;
 	}
+	
+	
 	
 	@RequestMapping(value = "/admin/day", method = RequestMethod.POST)
 	public @ResponseBody GenericResponse addDay(@RequestBody Day day) {

@@ -1,8 +1,14 @@
-package no.saiboten.drumcalendar.day;
+package no.saiboten.drumcalendar.day.bean;
 
 import java.util.Date;
 
-public class Day  {
+/**
+ * This is the model for Day used from the client
+ * 
+ * @author Tobias
+ *
+ */
+public class Day {
 
 	private String image;
 	private String description;
@@ -11,7 +17,7 @@ public class Day  {
 	private Date revealDate;
 	private String solutionArtist;
 	private String solutionSong;
-	
+
 	public String getSolutionArtist() {
 		return solutionArtist;
 	}

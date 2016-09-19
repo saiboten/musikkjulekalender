@@ -3,6 +3,7 @@ var debug = require('debug')('guessday');
 var GuessAction = require('../actions/GuessAction');
 var DayAction = require('../actions/DayAction');
 var GuessStore = require('../stores/GuessStore');
+var moment = require('moment');
 
 var GuessDay = React.createClass({
 
@@ -66,7 +67,7 @@ var GuessDay = React.createClass({
 
         return (
           <div className={this.props.class}>
-              <h3>{this.props.day.revealDate}</h3>
+              <h3>{moment(this.props.day.revealDateAsInt).format('DD. MMMM')}</h3>
 
               <p>{this.props.day.description}</p>
 

@@ -1,6 +1,6 @@
 package no.saiboten.drumcalendar.winner;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.user.CalendarUser;
 
 public class Winner {

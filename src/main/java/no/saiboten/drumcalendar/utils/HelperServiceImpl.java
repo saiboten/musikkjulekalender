@@ -2,8 +2,8 @@ package no.saiboten.drumcalendar.utils;
 
 import java.util.List;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
-import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 

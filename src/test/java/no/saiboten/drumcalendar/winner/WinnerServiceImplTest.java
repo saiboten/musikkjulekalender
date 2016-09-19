@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.user.Answer;
+import no.saiboten.drumcalendar.answer.Answer;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.winner.WinnerDao;

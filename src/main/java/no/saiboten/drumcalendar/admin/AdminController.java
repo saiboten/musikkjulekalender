@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
-import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.utils.HelperService;

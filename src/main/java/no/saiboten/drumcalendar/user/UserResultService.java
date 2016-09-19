@@ -3,8 +3,9 @@ package no.saiboten.drumcalendar.user;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
-import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.answer.Answer;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.bean.UserResultSingleDay;
 import no.saiboten.drumcalendar.user.bean.UserResultSingleUser;
 

@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.day.DayPostgres;
-import no.saiboten.drumcalendar.day.DayService;
-import no.saiboten.drumcalendar.user.Answer;
+import no.saiboten.drumcalendar.answer.Answer;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 

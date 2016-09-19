@@ -1,4 +1,4 @@
-package no.saiboten.drumcalendar.user;
+package no.saiboten.drumcalendar.answer;
 
 import java.io.Serializable;
 import java.util.Date;

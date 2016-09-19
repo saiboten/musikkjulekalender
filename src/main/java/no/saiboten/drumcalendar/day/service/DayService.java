@@ -1,6 +1,8 @@
-package no.saiboten.drumcalendar.day;
+package no.saiboten.drumcalendar.day.service;
 
 import java.util.List;
+
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 
 public interface DayService {
 	public List<DayPostgres> getDays();

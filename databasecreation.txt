@@ -14,11 +14,6 @@ CREATE TABLE day_postgres (
     solutionSong varchar(200)
 );
 
-CREATE TABLE solutionArtist (
-    day bigint references day_postgres(revealDateAsInt),
-    solutionArtist varchar(200)
-);
-
 CREATE TABLE solutionSong (
     day bigint references day_postgres(revealDateAsInt),
     solutionSong varchar(200)

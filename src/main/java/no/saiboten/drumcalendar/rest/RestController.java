@@ -1,7 +1,7 @@
 package no.saiboten.drumcalendar.rest;
 
 
-import no.saiboten.drumcalendar.day.DayService;
+import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.toplist.TopListService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.user.UserResultService;
@@ -27,7 +27,6 @@ public class RestController {
 	
 	Logger logger = LoggerFactory.getLogger(RestController.class);
 	
-
 	@Autowired
 	public RestController(DayService dayService, LoggedInRequestHolder loggedIn, UserResultService userResultService, TopListService topListService) {
 		this.dayService = dayService;

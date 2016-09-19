@@ -23,11 +23,5 @@ public class DefaultController {
 		mav.getModel().put("about","active");
 		return mav;
 	}
-
-	
-	
-	
-	
-	
 	
 }

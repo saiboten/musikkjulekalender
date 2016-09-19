@@ -3,6 +3,7 @@ package no.saiboten.drumcalendar.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import no.saiboten.drumcalendar.answer.Answer;
 import no.saiboten.drumcalendar.utils.Utils;
 
 import org.bson.types.ObjectId;
