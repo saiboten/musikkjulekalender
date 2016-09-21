@@ -8,5 +8,5 @@ import no.saiboten.drumcalendar.user.CalendarUser;
 public interface WinnerService {
 	public Map<DayPostgres, CalendarUser> getWinners();
 
-	public void addWinner(Long day);
+	public void addWinner(String day);
 }

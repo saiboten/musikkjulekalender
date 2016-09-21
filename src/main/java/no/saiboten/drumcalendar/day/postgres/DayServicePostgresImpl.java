@@ -6,6 +6,8 @@ import java.util.List;
 import no.saiboten.drumcalendar.day.service.DayService;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class DayServicePostgresImpl implements DayService {
 
 	private DayRepository dayRepository;
+	
+	private final static Logger logger = LoggerFactory.getLogger(DayServicePostgresImpl.class);
 
 	@Autowired
 	public DayServicePostgresImpl(DayRepository dayRepository) {
@@ -29,8 +33,8 @@ public class DayServicePostgresImpl implements DayService {
 	}
 
 	@Override
-	public DayPostgres getDay(Long dayNumber) {
-		return dayRepository.findByRevealDateAsInt(dayNumber);
+	public DayPostgres getDay(String dayNumber) {
+		return dayRepository.findByRevealDateAsString(dayNumber);
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public class DayServicePostgresImpl implements DayService {
 		List<DayPostgres> days= getDays();
 		if(days != null) {
 			for(DayPostgres day : days) {
-				DateTime dayRevealTime = new DateTime(day.getRevealDateAsInt());
+				DateTime dayRevealTime = new DateTime(day.getRevealDateAsString());
 				if(dayRevealTime.isBeforeNow()) {
 					spoilerFreeDays.add(day);
 				}
@@ -70,6 +74,7 @@ public class DayServicePostgresImpl implements DayService {
 
 	@Override
 	public boolean addDay(DayPostgres day) {
+		logger.debug("Day: " + day);
 		DayPostgres res = dayRepository.save(day);
 		return res != null;
 	}
@@ -81,8 +86,8 @@ public class DayServicePostgresImpl implements DayService {
 	}
 
 	@Override
-	public boolean deleteDay(Long dayNumber) {
-		dayRepository.delete(dayNumber);
+	public boolean deleteDay(String dayNumber) {
+		//dayRepository.delete(dayNumber); //FIXME must use day - not id.
 		return true;
 	}
 

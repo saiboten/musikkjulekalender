@@ -6,7 +6,7 @@ var GuessSource = {
 
     guess(song) {
         return new Promise(function (resolve, reject) {
-            request.get('/answer.json?song=' + song).end(function(err, res) {
+            request.get('/answer?song=' + song).end(function(err, res) {
                 if(err) {
                     debug("Nope, something is wrong: ", err);
                     reject(err);

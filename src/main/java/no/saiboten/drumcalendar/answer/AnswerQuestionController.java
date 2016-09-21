@@ -1,11 +1,19 @@
 package no.saiboten.drumcalendar.answer;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import no.saiboten.drumcalendar.answer.postgres.AnswerPostgres;
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
+import no.saiboten.drumcalendar.solution.Solution;
+import no.saiboten.drumcalendar.solution.SolutionRepository;
 import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
@@ -14,34 +22,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AnswerQuestionController {
 
 	Logger LOGGER = LoggerFactory.getLogger(AnswerQuestionController.class);
 
-	@Autowired
-	private LoggedInRequestHolder loggedIn;
-
-	@Autowired
-	private CalendarUserService calendarUserService;
-
-	@Autowired
 	private DayService dayService;
 
-	@RequestMapping("/answer")
-	public ModelAndView answerQuestion(@RequestParam(value = "song") String song) {
-		ModelAndView mav = new ModelAndView("answergiven");
-		mav.setView(new MappingJackson2JsonView());
+	private LoggedInRequestHolder loggedIn;
+
+	private AnswerRepository answerRepository;
+
+	private SolutionRepository solutionRepository;
 	
+	@Autowired
+	public AnswerQuestionController(DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository, SolutionRepository solutionRepository) {
+		this.dayService = dayService;
+		this.loggedIn = loggedIn;
+		this.answerRepository = answerRepository;
+		this.solutionRepository = solutionRepository;
+	}
+
+	@RequestMapping("/answer")
+	public @ResponseBody Map<String,Object> answerQuestion(@RequestParam(value = "song") String song) {
+		Map<String,Object> answerMap = new HashMap<String,Object>();
 		if (song == null || song.equals("")) {
-			mav.addObject("feedback", "Sang var tom. Vennligst prøv igjen..");
-			return mav;
+			answerMap.put("feedback", "Sang var tom. Vennligst prøv igjen..");
+			return answerMap;
 		}
 
 		song = song.trim();
@@ -49,10 +61,9 @@ public class AnswerQuestionController {
 		Pattern pattern = Pattern.compile("(\\w|\\s|[0-9]|\\?|\\&|ø|æ|å)+");
 		Matcher matchSong = pattern.matcher(song);
 		if (!matchSong.matches()) {
-			mav.addObject(
-					"feedback",
+			answerMap.put("feedback",
 					"Forslaget inneholdt ulovlige tegn. Kun bokstaver og tall er tillatt. Dersom svaret ditt inneholder spesielle tegn, kan du fjerne disse, vi har i så fall gjort det samme i fasiten");
-			return mav;
+			return answerMap;
 		}
 
 		CalendarUser user = loggedIn.getCalendarUser();
@@ -62,79 +73,52 @@ public class AnswerQuestionController {
 
 		LOGGER.debug("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
 		if (user != null) {
-			Answer answer = new Answer();
-			answer.setAnswerSong(song);
-			answer.setDay(cal.getTimeInMillis());
+			AnswerPostgres answerPostgres = new AnswerPostgres();
 			
-//			for(String songSolution : today.getSolutionsSong()) {
-//				if(songSolution.toLowerCase().equals(answer.getAnswerSong().toLowerCase())) {
-//					answer.setCorrectSong(true);
-//					answer.setTimeOfCorrectAnswerInMillis(System.currentTimeMillis());
-//				}
-//			} //FIXME
-
-			user.addAnswer(cal.getTimeInMillis(), answer);
+			List<Solution> solutions = solutionRepository.findByDay(today.getRevealDateAsString());
 			
-			calendarUserService.putUser(user);
-			LOGGER.debug("User updated with new answer: " + song );
+			LOGGER.debug("Solutions: " + solutions);
+			answerPostgres.setDay(today.getRevealDateAsString());
+			answerPostgres.setGuessedSong(song);
+			answerPostgres.setUserName(user.getUserName());
 			
-			if(answer.isCorrectSong()) {
-				mav.addObject("feedback", "Riktig! Svaret var: " + song + ". Godt jobbet!");
-				mav.addObject("correct", true);
+			for(Solution songSolution : solutions) {
+				if(songSolution.getSolution().toLowerCase().equals(song.toLowerCase())) {
+					answerPostgres.setCorrectSongAnswer(true);
+					answerPostgres.setTimeOfCorrectAnswerInMillis(new Date().getTime());
+				}
+			}
+			
+			answerRepository.save(answerPostgres);
+			
+			if(answerPostgres.isCorrectSongAnswer()) {
+				answerMap.put("feedback", "Riktig! Svaret var: " + song + ". Godt jobbet!");
+				answerMap.put("correct", true);
 			}
 			else {
-				mav.addObject("feedback", "Beklager, svaret var feil! Du tippet: " + song);
-				mav.addObject("correct", false);
+				answerMap.put("feedback", "Beklager, svaret var feil! Du tippet: " + song);
+				answerMap.put("correct", false);
 
 			}
 			
 		} else {
-			mav.addObject("feedback", "Noe gikk galt. Er du innlogget?");
-			mav.addObject("correct", false);
+			answerMap.put("feedback", "Noe gikk galt. Er du innlogget?");
+			answerMap.put("correct", false);
 		}
 
-		return mav;
-	}
-
-	@RequestMapping("/answermobile")
-	public ModelAndView answerMobile(@RequestParam(value = "song") String song) {
-		ModelAndView mav = answerQuestion(song);
-		mav.setViewName("/mobile/answergiven");
-		return mav;
+		return answerMap;
 	}
 	
-	@RequestMapping("/answer.json")
-	public ModelAndView answerJson(@RequestParam(value = "song") String song) {
-		ModelAndView mav = answerQuestion(song);
-		mav.setView(new MappingJackson2JsonView());
-		return mav;
+	@RequestMapping("/admin/addsolution/{day}/{solution}")
+	public @ResponseBody Map<String,Object> addSolution(@PathVariable String day, @PathVariable(value="solution") String solutionString) {
+		Solution solution = new Solution();
+		solution.setDay(day);
+		solution.setSolution(solutionString);
+		solutionRepository.save(solution);
+		
+		Map<String,Object> response = new HashMap<String,Object>();
+		response.put("success", true);
+		return response;
 	}
-
-	@RequestMapping(value = "/admin/answerCheat")
-	public ModelAndView answerQuestionGet() {
-		ModelAndView mav = new ModelAndView("cheat");
-		return mav;
-	}
-
-	@RequestMapping(value = "/admin/answerCheat", method = RequestMethod.POST)
-	public ModelAndView answerQuestion(@RequestParam(value = "song") String song, @RequestParam(value = "day") Long day) {
-		ModelAndView mav = new ModelAndView("answergiven");
-
-		CalendarUser user = loggedIn.getCalendarUser();
-		Long date = day;
-		LOGGER.debug("Date is: " + date + ". User is: " + user);
-		if (user != null) {
-			Answer answer = new Answer();
-			answer.setAnswerSong(song);
-			answer.setDay(date);
-			user.addAnswer(date, answer);
-			calendarUserService.putUser(user);
-			LOGGER.debug("User updated with new answer: " + song + " ");
-			mav.addObject("feedback", "Svar gitt: " + song);
-		} else {
-			mav.addObject("feedback", "Noe gikk galt. Er du innlogget?");
-		}
-
-		return mav;
-	}
+	
 }

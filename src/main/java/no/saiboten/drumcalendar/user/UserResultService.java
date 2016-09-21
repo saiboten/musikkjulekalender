@@ -25,14 +25,14 @@ public class UserResultService {
 		
 	}
 	
-	public Map<Long,UserResultSingleDay> getUserResults() {
-		Map<Long,UserResultSingleDay> result = new HashMap<Long,UserResultSingleDay>();
+	public Map<String,UserResultSingleDay> getUserResults() {
+		Map<String,UserResultSingleDay> result = new HashMap<String,UserResultSingleDay>();
 		
 		for(DayPostgres day : dayService.getDays()) {
 			UserResultSingleDay userResultSingleDay = new UserResultSingleDay();
 			
 			for(CalendarUser user : calendarUserService.getAllUsers()) {
-				Answer answer = user.getAnswers().get(day.getRevealDateAsInt());
+				Answer answer = user.getAnswers().get(day.getRevealDateAsString());
 				if(answer != null && answer.isCorrectSong()) {
 					UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
 					userResultSingleUser.setName(user.getUserNameNotMail());
@@ -40,7 +40,7 @@ public class UserResultService {
 					userResultSingleDay.addUser(userResultSingleUser);
 				}
 			}
-			result.put(day.getRevealDateAsInt(), userResultSingleDay);
+			result.put(day.getRevealDateAsString(), userResultSingleDay);
 		}
 		
 		return result;

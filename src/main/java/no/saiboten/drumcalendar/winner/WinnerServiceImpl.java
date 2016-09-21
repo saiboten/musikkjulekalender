@@ -40,15 +40,15 @@ public class WinnerServiceImpl implements WinnerService {
 		Map<DayPostgres, CalendarUser> winnerMap = new HashMap<DayPostgres, CalendarUser>();
 		WinnersDbBean winnersDbBean = winnerDao.getWinners();
 
-		Map<Long, String> winnersDbMap = winnersDbBean.getWinners();
-		for (Long dayId : winnersDbMap.keySet()) {
+		Map<String, String> winnersDbMap = winnersDbBean.getWinners();
+		for (String dayId : winnersDbMap.keySet()) {
 			winnerMap.put(dayService.getDay(dayId), userService.getUser(winnersDbMap.get(dayId)));
 		}
 		return winnerMap;
 	}
 
 	@Override
-	public void addWinner(Long day) {
+	public void addWinner(String day) {
 
 		String winner = findWinner(day);
 		if (winner == null) {
@@ -63,7 +63,7 @@ public class WinnerServiceImpl implements WinnerService {
 		winnerDao.saveWinners(winnersDbBean);
 	}
 
-	protected String findWinner(Long day) {
+	protected String findWinner(String day) {
 		List<CalendarUser> users = userService.getAllUsers();
 		List<CalendarUser> possibleWinners = new ArrayList<CalendarUser>();
 		for (CalendarUser user : users) {

@@ -8,6 +8,8 @@ import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Controller
 public class DayController {
@@ -60,7 +60,8 @@ public class DayController {
 		dayPostgres.setRevealDate(day.getRevealDate());
 		DateTime solutionDate = new DateTime(day.getRevealDate()).plusDays(1);
 		dayPostgres.setSolutionDate(solutionDate.toDate());
-		dayPostgres.setRevealDateAsInt(day.getRevealDate().getTime());
+		 DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+		dayPostgres.setRevealDateAsString(fmt.print(new DateTime(day.getRevealDate())));
 		dayPostgres.setSolutionArtist(day.getSolutionArtist());
 		dayPostgres.setSolutionSong(day.getSolutionSong());
 		return dayPostgres;
@@ -84,9 +85,9 @@ public class DayController {
 	}
 	
 	@RequestMapping(value = "/admin/day/{id}", method = RequestMethod.GET)
-	public @ResponseBody DayPostgres getDay(@PathVariable("id") Long revealDateAsInt) {
-		logger.debug("Getting day: " + revealDateAsInt);
-		return dayService.getDay(revealDateAsInt);
+	public @ResponseBody DayPostgres getDay(@PathVariable("id") String revealDateAsString) {
+		logger.debug("Getting day: " + revealDateAsString);
+		return dayService.getDay(revealDateAsString);
 	}
 	
 	@RequestMapping(value = "/admin/days", method = RequestMethod.GET)
@@ -95,11 +96,11 @@ public class DayController {
 	}
 	
 	
-	@RequestMapping(value = "/admin/day", method = RequestMethod.DELETE)
-	public @ResponseBody GenericResponse deleteDay(Long revealDateAsInt) {
+	@RequestMapping(value = "/admin/day/{day}", method = RequestMethod.DELETE)
+	public @ResponseBody GenericResponse deleteDay(@PathVariable(value="day") String revealDateAsString) {
 		GenericResponse response = new GenericResponse();
 
-		boolean success = dayService.deleteDay(revealDateAsInt);
+		boolean success = dayService.deleteDay(revealDateAsString);
 		if (success) {
 			response.setSuccess(true);
 			response.setFeedback("Slettet dag. Great success!");

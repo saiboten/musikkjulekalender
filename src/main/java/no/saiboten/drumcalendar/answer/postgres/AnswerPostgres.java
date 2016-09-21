@@ -21,18 +21,17 @@ public class AnswerPostgres extends AbstractPersistable<Long> {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	private long day;
+	private String day;
 	private String userName;
 	private String guessedSong;
 	private boolean correctSongAnswer;
 	private long timeOfCorrectAnswerInMillis;
-	private boolean answerIsRevealed;
 
-	public long getDay() {
+	public String getDay() {
 		return day;
 	}
 
-	public void setDay(long day) {
+	public void setDay(String day) {
 		this.day = day;
 	}
 
@@ -68,12 +67,15 @@ public class AnswerPostgres extends AbstractPersistable<Long> {
 		this.timeOfCorrectAnswerInMillis = timeOfCorrectAnswerInMillis;
 	}
 
-	public boolean isAnswerIsRevealed() {
-		return answerIsRevealed;
+	@Override
+	public String toString() {
+		return "AnswerPostgres [id=" + id + ", day=" + day + ", userName="
+				+ userName + ", guessedSong=" + guessedSong
+				+ ", correctSongAnswer=" + correctSongAnswer
+				+ ", timeOfCorrectAnswerInMillis="
+				+ timeOfCorrectAnswerInMillis + "]";
 	}
-
-	public void setAnswerIsRevealed(boolean answerIsRevealed) {
-		this.answerIsRevealed = answerIsRevealed;
-	}
+	
+	
 
 }

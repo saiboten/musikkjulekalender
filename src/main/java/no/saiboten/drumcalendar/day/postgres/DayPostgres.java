@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-@Entity
+@Entity(name="day")
 public class DayPostgres extends AbstractPersistable<Long> {
 
 	/**
@@ -24,7 +24,7 @@ public class DayPostgres extends AbstractPersistable<Long> {
 	private Long id;
 
 	@Column(unique = true)
-	private long revealDateAsInt;
+	private String revealDateAsString;
 
 	private String image;
 	private String description;
@@ -52,12 +52,12 @@ public class DayPostgres extends AbstractPersistable<Long> {
 		this.solutionSong = solutionSong;
 	}
 
-	public long getRevealDateAsInt() {
-		return revealDateAsInt;
+	public String getRevealDateAsString() {
+		return revealDateAsString;
 	}
 
-	public void setRevealDateAsInt(long revealDateAsInt) {
-		this.revealDateAsInt = revealDateAsInt;
+	public void setRevealDateAsString(String revealDateAsInt) {
+		this.revealDateAsString = revealDateAsInt;
 	}
 
 	public String getImage() {
@@ -107,4 +107,16 @@ public class DayPostgres extends AbstractPersistable<Long> {
 	public void setRevealDate(Date revealDate) {
 		this.revealDate = revealDate;
 	}
+
+	@Override
+	public String toString() {
+		return "DayPostgres [id=" + id + ", revealDateAsInt=" + revealDateAsString
+				+ ", image=" + image + ", description=" + description
+				+ ", optionalSolutionVideo=" + optionalSolutionVideo
+				+ ", link=" + link + ", solutionDate=" + solutionDate
+				+ ", revealDate=" + revealDate + ", solutionArtist="
+				+ solutionArtist + ", solutionSong=" + solutionSong + "]";
+	}
+	
+	
 }

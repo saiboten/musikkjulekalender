@@ -13,7 +13,7 @@ public class WinnersDbBean {
 	@Id 
 	private String key;
 
-	private Map<Long, String> winners;
+	private Map<String, String> winners;
 
 	public String getKey() {
 		return key;
@@ -23,19 +23,19 @@ public class WinnersDbBean {
 		this.key = key;
 	}
 
-	public void setWinners(Map<Long, String> winners) {
+	public void setWinners(Map<String, String> winners) {
 		this.winners = winners;
 	}
 
-	public Map<Long, String> getWinners() {
+	public Map<String, String> getWinners() {
 		return winners;
 	}
 
-	public void addWinner(Long day, String winner) {
+	public void addWinner(String day, String winner) {
 		this.winners.put(day, winner);
 	}
 
 	public WinnersDbBean() {
-		winners = new HashMap<Long, String>();
+		winners = new HashMap<String, String>();
 	}
 }

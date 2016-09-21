@@ -7,7 +7,7 @@ import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 public interface DayService {
 	public List<DayPostgres> getDays();
 
-	public DayPostgres getDay(Long dayNumber);
+	public DayPostgres getDay(String dayNumber);
 
 	public List<DayPostgres> getSpoilerFreeDays();
 
@@ -17,5 +17,5 @@ public interface DayService {
 
 	public boolean updateDay(DayPostgres day);
 
-	public boolean deleteDay(Long dayNumber);
+	public boolean deleteDay(String dayNumber);
 }

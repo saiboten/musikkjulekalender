@@ -108,7 +108,7 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admin/newwinner/{day}")
-	public String addWinner(@PathVariable("day") Long day) {
+	public String addWinner(@PathVariable("day") String day) {
 		winnerService.addWinner(day);
 		return "users";
 	}
@@ -144,7 +144,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin/day/change/{dayNumber}", method = RequestMethod.GET)
-	public ModelAndView changeDayGet(@PathVariable Long dayNumber) {
+	public ModelAndView changeDayGet(@PathVariable String dayNumber) {
 		ModelAndView mav = new ModelAndView("change_day");
 		DayPostgres day = dayService.getDay(dayNumber);
 		mav.addObject("day", day);
@@ -168,14 +168,6 @@ public class AdminController {
 
 		dayService.updateDay(day);
 		return redirectView;
-	}
-
-	@RequestMapping(value = "/admin/day/delete/{dayNumber}")
-	public ModelAndView deleteDay(@ModelAttribute("day") DayPostgres day,
-			@PathVariable Long dayNumber) {
-		ModelAndView mav = new ModelAndView("list_days");
-		dayService.deleteDay(dayNumber);
-		return mav;
 	}
 
 	@RequestMapping(value = "/admin")
