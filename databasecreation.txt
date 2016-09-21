@@ -21,7 +21,7 @@ CREATE TABLE solution (
 
 CREATE TABLE winner (
     day varchar(20) references day(reveal_date_as_string),
-    winner varchar(80)
+    winner varchar(80) references participant(user_name)
 );
 
 CREATE TABLE participant (

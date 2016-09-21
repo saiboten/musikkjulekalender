@@ -1,5 +1,7 @@
 package no.saiboten.drumcalendar.user;
 
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -22,13 +24,13 @@ public class LoggedInRequestHolder {
 		this.userName = userName;
 	}
 
-	private CalendarUser calendarUser;
+	private CalendarUserPostgres calendarUser;
 
-	public CalendarUser getCalendarUser() {
+	public CalendarUserPostgres getCalendarUser() {
 		return calendarUser;
 	}
 
-	public void setCalendarUser(CalendarUser calendarUser) {
+	public void setCalendarUser(CalendarUserPostgres calendarUser) {
 		this.calendarUser = calendarUser;
 	}
 

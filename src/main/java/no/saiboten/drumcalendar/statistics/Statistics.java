@@ -1,12 +1,14 @@
-package no.saiboten.drumcalendar.utils;
+package no.saiboten.drumcalendar.statistics;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import no.saiboten.drumcalendar.utils.OneDayStat;
+
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity
+
 public class Statistics {
 
 	@Id

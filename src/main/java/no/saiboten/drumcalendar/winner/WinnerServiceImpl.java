@@ -6,12 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import no.saiboten.drumcalendar.answer.Answer;
+import no.saiboten.drumcalendar.answer.postgres.AnswerPostgres;
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
-import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
+import no.saiboten.drumcalendar.winner.postgres.WinnerPostgres;
+import no.saiboten.drumcalendar.winner.postgres.WinnerRepository;
 
+import org.joda.time.Days;
+import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,24 +31,27 @@ public class WinnerServiceImpl implements WinnerService {
 
 	DayService dayService;
 
-	WinnerDao winnerDao;
+	private WinnerRepository winnerRepository;
+
+	private AnswerRepository answerRepository;
+
 
 	@Autowired
-	public WinnerServiceImpl(CalendarUserService userService, WinnerDao winnerDao, DayService dayService) {
+	public WinnerServiceImpl(CalendarUserService userService, DayService dayService, WinnerRepository winnerRepository, AnswerRepository answerRepository) {
 		this.userService = userService;
-		this.winnerDao = winnerDao;
 		this.dayService = dayService;
+		this.winnerRepository = winnerRepository;
+		this.answerRepository = answerRepository;
 	}
 
 	@Override
-	public Map<DayPostgres, CalendarUser> getWinners() {
-		Map<DayPostgres, CalendarUser> winnerMap = new HashMap<DayPostgres, CalendarUser>();
-		WinnersDbBean winnersDbBean = winnerDao.getWinners();
-
-		Map<String, String> winnersDbMap = winnersDbBean.getWinners();
-		for (String dayId : winnersDbMap.keySet()) {
-			winnerMap.put(dayService.getDay(dayId), userService.getUser(winnersDbMap.get(dayId)));
+	public Map<DayPostgres, CalendarUserPostgres> getWinners() {
+		Map<DayPostgres, CalendarUserPostgres> winnerMap = new HashMap<DayPostgres, CalendarUserPostgres>();
+		
+		for(WinnerPostgres winner : winnerRepository.findAll()) {
+			winnerMap.put(dayService.getDay(winner.getDay()), userService.getUser(winner.getWinner()));
 		}
+	
 		return winnerMap;
 	}
 
@@ -55,24 +63,27 @@ public class WinnerServiceImpl implements WinnerService {
 			logger.debug("No winner found...");
 			return;
 		}
-
-		WinnersDbBean winnersDbBean = winnerDao.getWinners();
-		winnersDbBean.getWinners().put(day, winner);
-
+		
+	
 		logger.debug("Adding winner for day " + day + ": " + winner);
-		winnerDao.saveWinners(winnersDbBean);
+		WinnerPostgres winnerPostgres = new WinnerPostgres();
+		winnerPostgres.setDay(day);
+		winnerPostgres.setWinner(winner);
+		winnerRepository.save(winnerPostgres);
 	}
 
 	protected String findWinner(String day) {
-		List<CalendarUser> users = userService.getAllUsers();
-		List<CalendarUser> possibleWinners = new ArrayList<CalendarUser>();
-		for (CalendarUser user : users) {
-			Answer answer = user.getAnswers().get(day);
+		List<CalendarUserPostgres> users = userService.getAllUsers();
+		List<CalendarUserPostgres> possibleWinners = new ArrayList<CalendarUserPostgres>();
+		for (CalendarUserPostgres user : users) {
+			
+			AnswerPostgres answer = answerRepository.findByUserNameAndDay(user.getUserName(), day);
+			
 			if(answer != null) {
-				logger.debug("Correct song? " + answer.isCorrectSong());
+				logger.debug("Correct song? " + answer.isCorrectSongAnswer());
 			}
 			
-			if (answer != null && answer.isCorrectSong()) {
+			if (answer != null && answer.isCorrectSongAnswer()) {
 				possibleWinners.add(user);
 			}
 		}
@@ -83,7 +94,7 @@ public class WinnerServiceImpl implements WinnerService {
 			return null;
 		}
 		int winner = random.nextInt(possibleWinners.size());
-		CalendarUser winnerUser = possibleWinners.get(winner);
+		CalendarUserPostgres winnerUser = possibleWinners.get(winner);
 		if (winnerUser != null) {
 			return winnerUser.getUserName();
 		}

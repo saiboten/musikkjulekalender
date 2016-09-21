@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import no.saiboten.drumcalendar.answer.Answer;
+import no.saiboten.drumcalendar.answer.postgres.AnswerPostgres;
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.service.DayService;
-import no.saiboten.drumcalendar.user.CalendarUser;
 import no.saiboten.drumcalendar.user.CalendarUserService;
-import no.saiboten.drumcalendar.winner.WinnerDao;
-import no.saiboten.drumcalendar.winner.WinnerServiceImpl;
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
+import no.saiboten.drumcalendar.winner.postgres.WinnerRepository;
 
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,19 +27,22 @@ public class WinnerServiceImplTest {
 	CalendarUserService calendarUserService;
 
 	@Mock
-	WinnerDao winnerDao;
+	WinnerRepository winnerDao;
 
 	@Mock
 	DayService dayService;
+	
+	@Mock
+	AnswerRepository answerRepository;
 
-	CalendarUser user1 = new CalendarUser();
-	CalendarUser user2 = new CalendarUser();
+	CalendarUserPostgres user1 = new CalendarUserPostgres();
+	CalendarUserPostgres user2 = new CalendarUserPostgres();
 
-	List<CalendarUser> calendarUsers = new ArrayList<CalendarUser>();
+	List<CalendarUserPostgres> calendarUsers = new ArrayList<CalendarUserPostgres>();
 
 	public WinnerServiceImplTest() {
 		MockitoAnnotations.initMocks(this);
-		winnerServiceImpl = new WinnerServiceImpl(calendarUserService, winnerDao, dayService);
+		winnerServiceImpl = new WinnerServiceImpl(calendarUserService, dayService, winnerDao,answerRepository);
 
 		calendarUsers.add(user1);
 		user1.setUserName("myuser@gmail.com");
@@ -52,42 +55,39 @@ public class WinnerServiceImplTest {
 
 		Mockito.when(calendarUserService.getAllUsers()).thenReturn(calendarUsers);
 
-		String winner = winnerServiceImpl.findWinner(new Long(1));
+		String winner = winnerServiceImpl.findWinner("2015-01-01");
 		assertNull(winner);
 	}
 
 	@Test
 	public void test_when_only_one_winner_select_that_one() {
 
-		Map<Long, Answer> answersUser1 = new HashMap<Long, Answer>();
-		Answer answerUser1 = new Answer();
-		answerUser1.setCorrectSong(true);
+		Map<Long, AnswerPostgres> answersUser1 = new HashMap<Long, AnswerPostgres>();
+		AnswerPostgres answerUser1 = new AnswerPostgres();
+		answerUser1.setCorrectSongAnswer(true);
 
 		answersUser1.put(new Long(1), answerUser1);
 
-		user1.setAnswers(answersUser1);
 		Mockito.when(calendarUserService.getAllUsers()).thenReturn(calendarUsers);
 
-		String winner = winnerServiceImpl.findWinner(new Long(1));
+		String winner = winnerServiceImpl.findWinner("2015-01-01");
 		assertEquals("myuser@gmail.com", winner);
 	}
 
 	@Test
 	public void test_one_winner_among_two_answers() {
 
-		Map<Long, Answer> answersUser1 = new HashMap<Long, Answer>();
-		Answer answerUser1 = new Answer();
-		answerUser1.setCorrectSong(true);
+		Map<Long, AnswerPostgres> answersUser1 = new HashMap<Long, AnswerPostgres>();
+		AnswerPostgres answerUser1 = new AnswerPostgres();
+		answerUser1.setCorrectSongAnswer(true);
 		answersUser1.put(new Long(1), answerUser1);
 
-		Map<Long, Answer> answersUser2 = new HashMap<Long, Answer>();
-		Answer answerUser2 = new Answer();
-		answerUser2.setCorrectSong(false);
+		Map<Long, AnswerPostgres> answersUser2 = new HashMap<Long, AnswerPostgres>();
+		AnswerPostgres answerUser2 = new AnswerPostgres();
+		answerUser2.setCorrectSongAnswer(false);
 		answersUser2.put(new Long(1), answerUser2);
 
-		user1.setAnswers(answersUser1);
-		user2.setAnswers(answersUser2);
 		Mockito.when(calendarUserService.getAllUsers()).thenReturn(calendarUsers);
-		assertEquals("myuser@gmail.com", winnerServiceImpl.findWinner(new Long(1)));
+		assertEquals("myuser@gmail.com", winnerServiceImpl.findWinner("2015-01-01"));
 	}
 }

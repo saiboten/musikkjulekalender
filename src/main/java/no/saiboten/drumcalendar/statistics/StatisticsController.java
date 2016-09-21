@@ -1,4 +1,4 @@
-package no.saiboten.drumcalendar.utils;
+package no.saiboten.drumcalendar.statistics;
 
 import java.util.Calendar;
 

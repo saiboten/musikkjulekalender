@@ -2,25 +2,15 @@ package no.saiboten.drumcalendar.user;
 
 import java.util.List;
 
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
+
 public interface CalendarUserService {
 
-	public void putUser(CalendarUser user);
+	public void putUser(CalendarUserPostgres user);
 
-	public CalendarUser getUser(String uid);
-
-	public void deleteAllUsers();
+	public CalendarUserPostgres getUser(String uid);
 
 	public void deleteUser(String uid);
 
-	public List<CalendarUser> getAllUsers();
-
-	public UserStatistics getUserStatistics(String uid);
-
-	public void deleteAnswersUser(String uid);
-	
-	public void fixSongScore(String mail, Long day, int score);
-	
-	public void fixSong(String mail, Long day);
-
-	public void setSongAnswer(String mail, Long day, String song);
+	public List<CalendarUserPostgres> getAllUsers();
 }

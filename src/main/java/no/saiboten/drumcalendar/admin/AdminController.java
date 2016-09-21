@@ -6,10 +6,9 @@ import java.util.TimeZone;
 
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
+import no.saiboten.drumcalendar.statistics.StatisticsService;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
-import no.saiboten.drumcalendar.utils.HelperService;
-import no.saiboten.drumcalendar.utils.StatisticsService;
 import no.saiboten.drumcalendar.winner.WinnerService;
 
 import org.slf4j.Logger;
@@ -36,8 +35,6 @@ public class AdminController {
 
 	private WinnerService winnerService;
 
-	private HelperService helperService;
-
 	private DayService dayService;
 
     Logger logger = LoggerFactory.getLogger(AdminController.class);
@@ -47,29 +44,13 @@ public class AdminController {
 
 	@Autowired
 	public AdminController(CalendarUserService userService,
-			StatisticsService statsService, WinnerService winnerService,
-			HelperService helperService, DayService dayService,
+			StatisticsService statsService, WinnerService winnerService, DayService dayService,
 			LoggedInRequestHolder loggedIn) {
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
-		this.helperService = helperService;
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
-	}
-
-	@RequestMapping(value = "/admin/resetday/{day}")
-	public String resetDay(@PathVariable(value = "day") Long day) {
-		helperService.resetDay(day);
-		return "answergiven";
-	}
-
-	// @RequestMapping("/admin/newwinner/{day}")
-
-	@RequestMapping(value = "/admin/deleteusers")
-	public String deleteUsers() {
-		userService.deleteAllUsers();
-		return "answergiven";
 	}
 
 	@RequestMapping(value = "/admin/deletestatistics")
@@ -83,57 +64,11 @@ public class AdminController {
 		return "users";
 	}
 
-	@RequestMapping(value = "/admin/overview")
-	public String adminOverview() {
-		// ModelAndView mav = new ModelAndView("overviewadmin");
-		// mav.addObject("overview", "active");
-		// mav.addObject("now", Calendar.getInstance().getTimeInMillis());
-		// mav.addObject("days", dayService.getDays());
-		// mav.addObject("loggedIn", loggedIn.isLoggedIn());
-		// LOGGER.debug("Is the user logged in?" + loggedIn.isLoggedIn());
-		// if (loggedIn.getCalendarUser() != null) {
-		// LOGGER.debug("Do we have the calendar user? " +
-		// loggedIn.getCalendarUser());
-		// mav.addObject("answers", loggedIn.getCalendarUser().getAnswers());
-		// }
-		//
-		// List<CalendarUser> users = userService.getAllUsers();
-		// if (users != null) {
-		// mav.addObject("numberOfUsers", users.size());
-		// mav.addObject("users", users);
-		// }
-		//
-		// mav.addObject("statistics", statsService.getStatistics());
-		return "overviewadmin";
-	}
-
 	@RequestMapping("/admin/newwinner/{day}")
 	public String addWinner(@PathVariable("day") String day) {
 		winnerService.addWinner(day);
 		return "users";
 	}
-
-	@RequestMapping("/admin/fixsong/{mail}/{day}")
-	public String fixSong(@PathVariable String mail, @PathVariable Long day) {
-		userService.fixSong(mail, day);
-		return "users";
-	}
-
-	@RequestMapping("/admin/setsongscore/{mail}/{day}/{score}")
-	public String setSongScore(@PathVariable String mail,
-			@PathVariable Long day, @PathVariable Integer score) {
-		userService.fixSongScore(mail, day, score);
-		return "users";
-	}
-
-	@RequestMapping("/admin/setSongAnswer/{mail}/{day}/{answer}")
-	public String setSongAnswer(@PathVariable String mail,
-			@PathVariable Long day, @PathVariable String answer) {
-		userService.setSongAnswer(mail, day, answer);
-		return "users";
-	}
-
-	
 
 	@RequestMapping(value = "/admin/fakelogin/{userid}", method = RequestMethod.GET)
 	public RedirectView addDayGet(@PathVariable("userid") String userid) {

@@ -14,9 +14,8 @@ import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.solution.Solution;
 import no.saiboten.drumcalendar.solution.SolutionRepository;
-import no.saiboten.drumcalendar.user.CalendarUser;
-import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +65,7 @@ public class AnswerQuestionController {
 			return answerMap;
 		}
 
-		CalendarUser user = loggedIn.getCalendarUser();
+		CalendarUserPostgres user = loggedIn.getCalendarUser();
 		DayPostgres today = dayService.getToday();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today.getRevealDate());

@@ -1,13 +1,13 @@
 package no.saiboten.drumcalendar.winner;
 
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
-import no.saiboten.drumcalendar.user.CalendarUser;
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
 public class Winner {
 	private DayPostgres day;
-	private CalendarUser user;
+	private CalendarUserPostgres user;
 
-	public CalendarUser getUser() {
+	public CalendarUserPostgres getUser() {
 		return user;
 	}
 
@@ -19,7 +19,7 @@ public class Winner {
 		this.day = day;
 	}
 
-	public void setUser(CalendarUser user) {
+	public void setUser(CalendarUserPostgres user) {
 		this.user = user;
 	}
 }

@@ -1,8 +1,8 @@
-package no.saiboten.drumcalendar.utils;
+package no.saiboten.drumcalendar.statistics;
 
 import java.util.List;
 
-import no.saiboten.drumcalendar.user.CalendarUser;
+import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
 public interface StatisticsService {
 	public Statistics getStatistics();
@@ -13,5 +13,5 @@ public interface StatisticsService {
 
 	public void deleteStatistics();
 
-	public List<CalendarUser> getBestUsers();
+	public List<CalendarUserPostgres> getBestUsers();
 }
