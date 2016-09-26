@@ -6,6 +6,8 @@ import no.saiboten.drumcalendar.admin.bean.GenericResponse;
 import no.saiboten.drumcalendar.day.bean.Day;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
+import no.saiboten.drumcalendar.solution.Solution;
+import no.saiboten.drumcalendar.solution.SolutionRepository;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -26,10 +28,13 @@ public class DayController {
 	private DayService dayService;
 
     Logger logger = LoggerFactory.getLogger(DayController.class);
+
+	private SolutionRepository solutionRepository;
 	
 	@Autowired
-	public DayController(DayService dayService) {
+	public DayController(DayService dayService, SolutionRepository solutionRepository) {
 		this.dayService = dayService;
+		this.solutionRepository = solutionRepository;
 	}
 	
 	
@@ -37,9 +42,13 @@ public class DayController {
 	@RequestMapping(value = "/admin/day", method = RequestMethod.POST)
 	public @ResponseBody GenericResponse addDay(@RequestBody Day day) {
 		GenericResponse response = new GenericResponse();
-
-		boolean success = dayService.addDay(convertToPostgresDay(day));
+		DayPostgres postGresDay = convertToPostgresDay(day);
+		boolean success = dayService.addDay(postGresDay);
 		if (success) {
+			Solution solution = new Solution();
+			solution.setDay(postGresDay.getRevealDateAsString());
+			solution.setSolution(postGresDay.getSolutionSong());
+			solutionRepository.save(solution);
 			response.setSuccess(true);
 			response.setFeedback("La til ny dag! Great success!");
 

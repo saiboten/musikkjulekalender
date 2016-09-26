@@ -56,7 +56,7 @@ var Day = React.createClass({
 
         return (
             <div className="col-md-6 pane">
-              <h3>{moment(this.props.day.revealDateAsInt).format('DD. MMMM')}</h3>
+              <h3>{moment(this.props.day.revealDateAsString).format('DD. MMMM')}</h3>
               {day}
             </div>
         );

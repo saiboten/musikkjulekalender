@@ -30951,7 +30951,7 @@ var Day = React.createClass({ displayName: "Day",
       day = React.createElement("p", null, "Luke ikke åpnet");
     }
 
-    return React.createElement("div", { className: "col-md-6 pane" }, React.createElement("h3", null, moment(this.props.day.revealDateAsInt).format('DD. MMMM')), day);
+    return React.createElement("div", { className: "col-md-6 pane" }, React.createElement("h3", null, moment(this.props.day.revealDateAsString).format('DD. MMMM')), day);
   }
 });
 
@@ -30998,54 +30998,56 @@ var moment = require('moment');
 
 var GuessDay = React.createClass({ displayName: "GuessDay",
 
-  componentDidMount: function componentDidMount() {
-    GuessStore.listen(this.guessChanged);
-  },
+    componentDidMount: function componentDidMount() {
+        GuessStore.listen(this.guessChanged);
+    },
 
-  componentDidUnmount: function componentDidUnmount() {
-    GuessStore.unlisten(this.guessChanged);
-  },
+    componentDidUnmount: function componentDidUnmount() {
+        GuessStore.unlisten(this.guessChanged);
+    },
 
-  guessChanged: function guessChanged() {
-    debug("Guess changed, refetching data just in case something has changed");
-    DayAction.getDays();
-  },
+    guessChanged: function guessChanged() {
+        debug("Guess changed, refetching data just in case something has changed");
+        DayAction.getDays();
+    },
 
-  getInitialState: function getInitialState() {
-    return {
-      guess: ""
-    };
-  },
+    getInitialState: function getInitialState() {
+        return {
+            guess: ""
+        };
+    },
 
-  submit: function submit(e) {
-    e.preventDefault();
-    debug("Submit!", this.state.guess);
-    GuessAction.guess(this.state.guess);
-  },
+    submit: function submit(e) {
+        e.preventDefault();
+        debug("Submit!", this.state.guess);
+        GuessAction.guess(this.state.guess);
+    },
 
-  handleChange: function handleChange(event) {
-    this.setState({ guess: event.target.value });
-  },
+    handleChange: function handleChange(event) {
+        this.setState({ guess: event.target.value });
+    },
 
-  render: function render() {
+    render: function render() {
 
-    var correctAnswer = false;
+        var that = this;
 
-    if (this.props.user && this.props.user.answers && this.props.user.answers[this.props.day.revealDate] && this.props.user.answers[this.props.day.revealDate].correctSong) {
-      correctAnswer = true;
+        var answerThisDay = this.props.answers.find(function (el) {
+            return el.day == that.props.date;
+        });
+
+        debug("Answer this day: ", answerThisDay);
+
+        var formOrFeedback = "";
+
+        if (answerThisDay.correctSongAnswer) {
+            formOrFeedback = React.createElement("p", null, "Du har allerede svart rett på denne oppgaven! Svaret" + ' ' + "var: ", answerThisDay.guessedSong, " ");
+        } else {
+            formOrFeedback = React.createElement("form", { onSubmit: this.submit }, React.createElement("div", { className: "form-group" }, React.createElement("label", { 'for': "songInput" }, "Sang"), React.createElement("input", { type: "text", ref: "song", className: "form-control", id: "songInput", placeholder: "Sang",
+                name: "song", onChange: this.handleChange, value: this.state.guess })), React.createElement("p", null, this.props.guess.feedback), React.createElement("button", { type: "submit", className: "btn btn-default" }, "Lagre forslag"));
+        }
+
+        return React.createElement("div", { className: this.props['class'] }, React.createElement("h3", null, this.props.date), React.createElement("p", null, this.props.day.description), React.createElement("audio", { src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")), formOrFeedback);
     }
-
-    var formOrFeedback = "";
-    if (this.props.guess.correct) {
-      formOrFeedback = React.createElement("p", null, this.props.guess.feedback);
-    } else if (correctAnswer) {
-      formOrFeedback = React.createElement("p", null, "Du har allerede svart rett på denne oppgaven! Svaret var: ", this.props.user.answers[this.props.day.revealDate].answerSong, " ");
-    } else {
-      formOrFeedback = React.createElement("form", { onSubmit: this.submit }, React.createElement("div", { className: "form-group" }, React.createElement("label", { 'for': "songInput" }, "Sang"), React.createElement("input", { type: "text", ref: "song", className: "form-control", id: "songInput", placeholder: "Sang", name: "song", onChange: this.handleChange, value: this.state.guess })), React.createElement("p", null, this.props.guess.feedback), React.createElement("button", { type: "submit", className: "btn btn-default" }, "Lagre forslag"));
-    }
-
-    return React.createElement("div", { className: this.props['class'] }, React.createElement("h3", null, moment(this.props.day.revealDateAsInt).format('DD. MMMM')), React.createElement("p", null, this.props.day.description), React.createElement("audio", { src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")), formOrFeedback);
-  }
 });
 
 module.exports = GuessDay;
@@ -31083,7 +31085,7 @@ module.exports = MusikkJulekalender;
 'use strict';
 
 var React = require('react');
-var debug = require('debug')('days');
+var debug = require('debug')('SingleGuessDay');
 var moment = require('moment');
 var Day = require('./Day.jsx');
 var GuessDay = require('./GuessDay.jsx');
@@ -31099,9 +31101,13 @@ var Days = React.createClass({ displayName: "Days",
     render: function render() {
         var _this = this;
 
+        debug("Props: ", this.props);
         return React.createElement("span", null, this.props.days.map(function (day, i) {
-            if (moment(day.revealDateAsInt).format('YYYY MM DD') === moment(_this.props.date).format('YYYY MM DD')) {
-                return React.createElement(AltContainer, { store: GuessStore }, React.createElement("h1", null, "Dagens oppgave"), React.createElement(GuessDay, { key: day.revealDateAsInt, day: day, user: _this.props.user }));
+            console.log("Day: ", day);
+            console.log("Day: ", day.revealDateAsString, _this.props.date);
+            if (day.revealDateAsString === _this.props.date) {
+                console.log("They are the same.");
+                return React.createElement(AltContainer, { store: GuessStore }, React.createElement("h1", null, "Dagens oppgave"), React.createElement(GuessDay, { key: day.revealDateAsInt, date: _this.props.date, day: day, answers: _this.props.answers, user: _this.props.user }));
             }
         }));
     }
@@ -31409,7 +31415,7 @@ var DaySource = {
 
     fetchDays: function fetchDays() {
         return new Promise(function (resolve, reject) {
-            request.get('/days.json').end(function (err, res) {
+            request.get('/alldata').end(function (err, res) {
                 if (err) {
                     console.log("Nope, something is wrong: ", err);
                     reject(err);
@@ -31470,6 +31476,7 @@ var DayStore = (function () {
         this.date = undefined;
         this.user = undefined;
         this.userResult = undefined;
+        this.answers = undefined;
         this.topList = [];
 
         this.bindListeners({
@@ -31486,6 +31493,7 @@ var DayStore = (function () {
             this.user = data.user;
             this.userResult = data.userResult;
             this.topList = data.topList;
+            this.answers = data.answers;
         }
     }]);
 

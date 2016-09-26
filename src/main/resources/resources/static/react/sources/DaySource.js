@@ -5,7 +5,7 @@ var DaySource = {
 
     fetchDays() {
         return new Promise(function (resolve, reject) {
-            request.get('/days.json').end(function(err, res) {
+            request.get('/alldata').end(function(err, res) {
                 if(err) {
                     console.log("Nope, something is wrong: ", err);
                     reject(err);

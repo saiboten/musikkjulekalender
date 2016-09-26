@@ -9,6 +9,7 @@ class DayStore {
         this.date = undefined;
         this.user = undefined;
         this.userResult = undefined;
+        this.answers = undefined;
         this.topList = [];
 
         this.bindListeners({
@@ -23,6 +24,7 @@ class DayStore {
         this.user = data.user;
         this.userResult = data.userResult;
         this.topList = data.topList;
+        this.answers = data.answers;
     }
 }
 

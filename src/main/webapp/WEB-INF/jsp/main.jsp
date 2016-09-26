@@ -13,15 +13,15 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6 pane" id="frontpage">
+   <div class="col-md-6 pane" id="frontpage">
   </div>
-  <div class="col-md-6 pane">
+  <!-- <div class="col-md-6 pane">
     <h1>Dine resultater</h1>
     <div id="currentuserstatistics">
     </div>
-  </div>
+  </div> -->
 </div>
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6 pane">
     <h1>Dagens beste!</h1>
     <div id="userstatistics">
@@ -32,12 +32,12 @@
     <div id="topscore">
     </div>
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col-md-12 main">
     <h1>Løsninger</h1>
     <div id="MusikkJulekalender">
     </div>
   </div>
-</div>
+</div>-->
 <%@ include file="after.jsp"%>
