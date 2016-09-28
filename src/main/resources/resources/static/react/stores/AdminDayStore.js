@@ -1,10 +1,10 @@
 var alt = require('../alt');
-var DayActions = require('../actions/DayAction');
+var AdminDayAction = require('../actions/AdminDayAction');
 
 var request = require('superagent');
 var debug = require('debug')('DayStore');
 
-class DayStore {
+class AdminDayStore {
     constructor() {
         this.days = [];
         this.date = undefined;
@@ -14,7 +14,7 @@ class DayStore {
         this.topList = [];
 
         this.bindListeners({
-            setData: DayActions.SET_DATA,
+            setData: AdminDayAction.SET_DATA
         });
     }
 
@@ -29,4 +29,4 @@ class DayStore {
     }
 }
 
-module.exports = alt.createStore(DayStore, 'DayStore');
+module.exports = alt.createStore(AdminDayStore, 'AdminDayStore');

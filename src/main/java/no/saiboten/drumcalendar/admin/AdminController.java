@@ -2,8 +2,11 @@ package no.saiboten.drumcalendar.admin;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.statistics.StatisticsService;
@@ -11,6 +14,9 @@ import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.winner.WinnerService;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -37,20 +44,22 @@ public class AdminController {
 
 	private DayService dayService;
 
-    Logger logger = LoggerFactory.getLogger(AdminController.class);
-
+	Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	private LoggedInRequestHolder loggedIn;
 
+	private AnswerRepository answerRepository;
+
 	@Autowired
 	public AdminController(CalendarUserService userService,
-			StatisticsService statsService, WinnerService winnerService, DayService dayService,
-			LoggedInRequestHolder loggedIn) {
+			StatisticsService statsService, WinnerService winnerService,
+			DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository) {
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
+		this.answerRepository = answerRepository;
 	}
 
 	@RequestMapping(value = "/admin/deletestatistics")
@@ -106,10 +115,25 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin")
-	public ModelAndView getAllDays() {
-		ModelAndView mav = new ModelAndView("list_days");
-		mav.addObject("days", dayService.getDays());
-		return mav;
+	public String adminPage() {
+		return "admin";
+	}
+	
+	@RequestMapping("/admin/alldata")
+	public @ResponseBody Map<String,Object> getDays() {
+		logger.debug("Getting data");
+		
+		Map<String,Object> returnMap = new HashMap<String,Object>();
+		
+		returnMap.put("days", dayService.getDays());
+		returnMap.put("user", loggedIn.getCalendarUser());
+		returnMap.put("answers",
+				answerRepository.findByUserName(loggedIn.getUserName()));
+		returnMap.put("isLoggedIn", loggedIn.isLoggedIn());
+
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+		returnMap.put("date", fmt.print(new DateTime()));
+		return returnMap;
 	}
 
 	@InitBinder

@@ -40,7 +40,7 @@ var Day = React.createClass({
               </audio>
             </div>);
         }
-        else if (this.props.day.solutionArtist) {
+        else if (this.props.day.description) {
            day = (
              <span>
               <p>{this.props.day.description}</p>

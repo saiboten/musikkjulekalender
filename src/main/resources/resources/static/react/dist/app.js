@@ -30781,6 +30781,7 @@ var SingleGuessDayContainer = require('./components/SingleGuessDayContainer.jsx'
 var UserStatisticsContainer = require('./components/UserStatisticsContainer.jsx');
 var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStatisticsContainer.jsx');
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
+var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
 
 if (document.getElementById('MusikkJulekalender')) {
     console.log("Musikkjulekalenderapp found, yeah!");
@@ -30789,6 +30790,10 @@ if (document.getElementById('MusikkJulekalender')) {
 
 if (document.getElementById('frontpage')) {
     React.render(React.createElement(SingleGuessDayContainer, null), document.getElementById('frontpage'));
+}
+
+if (document.getElementById('admin')) {
+    React.render(React.createElement(AdminOverviewContainer, null), document.getElementById('admin'));
 }
 
 if (document.getElementById('userstatistics')) {
@@ -30806,7 +30811,55 @@ if (document.getElementById('topscore')) {
     React.render(React.createElement(TopScoreContainer, null), document.getElementById('topscore'));
 }
 
-},{"./components/MusikkJulekalender.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\MusikkJulekalender.jsx","./components/SingleGuessDayContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\SingleGuessDayContainer.jsx","./components/UserStatisticsContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\UserStatisticsContainer.jsx","./components/topScore/TopScoreContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\topScore\\TopScoreContainer.jsx","./components/user/CurrentUserStatisticsContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\user\\CurrentUserStatisticsContainer.jsx","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\DayAction.js":[function(require,module,exports){
+},{"./components/MusikkJulekalender.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\MusikkJulekalender.jsx","./components/SingleGuessDayContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\SingleGuessDayContainer.jsx","./components/UserStatisticsContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\UserStatisticsContainer.jsx","./components/admin/AdminOverviewContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminOverviewContainer.jsx","./components/topScore/TopScoreContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\topScore\\TopScoreContainer.jsx","./components/user/CurrentUserStatisticsContainer.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\user\\CurrentUserStatisticsContainer.jsx","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\AdminDayAction.js":[function(require,module,exports){
+"use strict";
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var alt = require('../alt');
+var AdminDaySource = require('../sources/AdminDaySource');
+var debug = require('debug')('AdminDayAction');
+
+var AdminDayAction = (function () {
+    function AdminDayAction() {
+        _classCallCheck(this, AdminDayAction);
+    }
+
+    _createClass(AdminDayAction, [{
+        key: 'getDays',
+        value: function getDays() {
+            var _this = this;
+
+            AdminDaySource.fetchDays().then(function (data) {
+                debug("Got it baby! Got the songs: ", data);
+                _this.actions.setData(data);
+            })['catch'](function (errorMessage) {
+                debug("Error: ", errorMessage);
+                _this.actions.getDaysFailed(errorMessage);
+            });
+        }
+    }, {
+        key: 'setData',
+        value: function setData(data) {
+            debug("dispatching setData: Calling set data action. Data: ", data);
+            this.dispatch(data);
+        }
+    }, {
+        key: 'getDaysFailed',
+        value: function getDaysFailed(errorMessage) {
+            debug("dispatching getDaysFailed");
+            this.dispatch(errorMessage);
+        }
+    }]);
+
+    return AdminDayAction;
+})();
+
+module.exports = alt.createActions(AdminDayAction);
+
+},{"../alt":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\alt.js","../sources/AdminDaySource":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\sources\\AdminDaySource.js","debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\DayAction.js":[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -30945,7 +30998,7 @@ var Day = React.createClass({ displayName: "Day",
 
     if (this.state.showSolution && this.props.day.solutionArtist) {
       day = React.createElement("div", null, React.createElement("p", null, this.props.day.description), React.createElement("p", null, React.createElement("span", null, this.props.day.solutionArtist, " - ", this.props.day.solutionsSong, " ", this.props.day.optionalSolutionVideo ? React.createElement("span", { className: "youtube", dangerouslySetInnerHTML: this.createMarkup() }) : "")), React.createElement("audio", { src: this.props.day.link, controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")));
-    } else if (this.props.day.solutionArtist) {
+    } else if (this.props.day.description) {
       day = React.createElement("span", null, React.createElement("p", null, this.props.day.description), React.createElement("p", null, React.createElement("button", { onClick: this.showSolution }, "Vis fasit")), React.createElement("audio", { 'class': "audio", src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")));
     } else {
       day = React.createElement("p", null, "Luke ikke åpnet");
@@ -30990,7 +31043,7 @@ module.exports = Days;
 'use strict';
 
 var React = require('react');
-var debug = require('debug')('guessday');
+var debug = require('debug')('GuessDay');
 var GuessAction = require('../actions/GuessAction');
 var DayAction = require('../actions/DayAction');
 var GuessStore = require('../stores/GuessStore');
@@ -31039,14 +31092,14 @@ var GuessDay = React.createClass({ displayName: "GuessDay",
 
         var formOrFeedback = "";
 
-        if (answerThisDay.correctSongAnswer) {
+        if (answerThisDay && answerThisDay.correctSongAnswer) {
             formOrFeedback = React.createElement("p", null, "Du har allerede svart rett på denne oppgaven! Svaret" + ' ' + "var: ", answerThisDay.guessedSong, " ");
         } else {
             formOrFeedback = React.createElement("form", { onSubmit: this.submit }, React.createElement("div", { className: "form-group" }, React.createElement("label", { 'for': "songInput" }, "Sang"), React.createElement("input", { type: "text", ref: "song", className: "form-control", id: "songInput", placeholder: "Sang",
                 name: "song", onChange: this.handleChange, value: this.state.guess })), React.createElement("p", null, this.props.guess.feedback), React.createElement("button", { type: "submit", className: "btn btn-default" }, "Lagre forslag"));
         }
 
-        return React.createElement("div", { className: this.props['class'] }, React.createElement("h3", null, this.props.date), React.createElement("p", null, this.props.day.description), React.createElement("audio", { src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")), formOrFeedback);
+        return React.createElement("div", { className: this.props['class'] }, React.createElement("h3", null, moment(this.props.date).format("DD. MMMM")), React.createElement("p", null, this.props.day.description), React.createElement("audio", { src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")), formOrFeedback);
     }
 });
 
@@ -31103,10 +31156,9 @@ var Days = React.createClass({ displayName: "Days",
 
         debug("Props: ", this.props);
         return React.createElement("span", null, this.props.days.map(function (day, i) {
-            console.log("Day: ", day);
-            console.log("Day: ", day.revealDateAsString, _this.props.date);
+            debug("Reveal day as string + this.props.date: ", day.revealDateAsString, _this.props.date);
             if (day.revealDateAsString === _this.props.date) {
-                console.log("They are the same.");
+                debug("They are the same.");
                 return React.createElement(AltContainer, { store: GuessStore }, React.createElement("h1", null, "Dagens oppgave"), React.createElement(GuessDay, { key: day.revealDateAsInt, date: _this.props.date, day: day, answers: _this.props.answers, user: _this.props.user }));
             }
         }));
@@ -31254,7 +31306,98 @@ var UserStatisticsContainer = React.createClass({ displayName: "UserStatisticsCo
 
 module.exports = UserStatisticsContainer;
 
-},{"../actions/DayAction":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\DayAction.js","../stores/DayStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js","./UserStatistics.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\UserStatistics.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\topScore\\TopScore.jsx":[function(require,module,exports){
+},{"../actions/DayAction":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\DayAction.js","../stores/DayStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js","./UserStatistics.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\UserStatistics.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminDay.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var debug = require('debug')('day');
+var moment = require('moment');
+
+var AdminDay = React.createClass({ displayName: "AdminDay",
+
+    componentDidMount: function componentDidMount() {
+        debug("this.day", this.props.day);
+    },
+
+    getInitialState: function getInitialState() {
+        return {
+            showSolution: false
+        };
+    },
+
+    showSolution: function showSolution() {
+        this.setState({
+            showSolution: true
+        });
+    },
+
+    createMarkup: function createMarkup() {
+        debug('Creating markup', this.props.day.optionalSolutionVideo);
+        return { __html: this.props.day.optionalSolutionVideo };
+    },
+
+    render: function render() {
+        var day = "";
+
+        return React.createElement("div", { className: "col-md-6 pane" }, React.createElement("h3", null, moment(this.props.day.revealDateAsString).format('DD. MMMM')), React.createElement("div", null, React.createElement("p", null, this.props.day.description), React.createElement("p", null, React.createElement("span", null, this.props.day.solutionArtist, " - ", this.props.day.solutionsSong, " ", this.props.day.optionalSolutionVideo ? React.createElement("span", { className: "youtube", dangerouslySetInnerHTML: this.createMarkup() }) : "")), React.createElement("audio", { src: this.props.day.link, controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt"))));
+    }
+});
+
+module.exports = AdminDay;
+
+},{"debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js","moment":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\moment\\moment.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminOverview.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var debug = require('debug')('days');
+var AdminDay = require('./AdminDay.jsx');
+var GuessDay = require('./../GuessDay.jsx');
+var AltContainer = require('alt/AltContainer');
+var GuessStore = require('../../stores/GuessStore');
+
+var AdminOverview = React.createClass({ displayName: "AdminOverview",
+
+    componentDidMount: function componentDidMount() {
+        debug("Day! Woho");
+    },
+
+    render: function render() {
+        var _this = this;
+
+        debug("this.props.days: ", this.props.days);
+        return React.createElement("div", { className: "col-md-12" }, this.props.days.map(function (day, i) {
+            if (day.realDate !== new Date(_this.props.date).getDate().toString()) {
+                return React.createElement(AdminDay, { key: day.revealDate, day: day });
+            }
+        }));
+    }
+});
+
+module.exports = AdminOverview;
+
+},{"../../stores/GuessStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\GuessStore.js","./../GuessDay.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\GuessDay.jsx","./AdminDay.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminDay.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminOverviewContainer.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var AltContainer = require('alt/AltContainer');
+var AdminDayStore = require('../../stores/AdminDayStore');
+var AdminDayActions = require('../../actions/AdminDayAction');
+var AdminOverview = require('./AdminOverview.jsx');
+
+var AdminOverviewContainer = React.createClass({ displayName: "AdminOverviewContainer",
+
+    componentDidMount: function componentDidMount() {
+        AdminDayActions.getDays();
+    },
+
+    render: function render() {
+        return React.createElement(AltContainer, { store: AdminDayStore }, React.createElement(AdminOverview, null));
+    }
+});
+
+module.exports = AdminOverviewContainer;
+
+},{"../../actions/AdminDayAction":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\AdminDayAction.js","../../stores/AdminDayStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\AdminDayStore.js","./AdminOverview.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\admin\\AdminOverview.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\topScore\\TopScore.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -31405,7 +31548,32 @@ var CurrentUserStatisticsContainer = React.createClass({ displayName: "CurrentUs
 
 module.exports = CurrentUserStatisticsContainer;
 
-},{"../../stores/DayStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js","./CurrentUserStatistics.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\user\\CurrentUserStatistics.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\sources\\DaySource.js":[function(require,module,exports){
+},{"../../stores/DayStore":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js","./CurrentUserStatistics.jsx":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\components\\user\\CurrentUserStatistics.jsx","alt/AltContainer":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\alt\\AltContainer.js","react":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\react\\react.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\sources\\AdminDaySource.js":[function(require,module,exports){
+'use strict';
+
+var request = require('superagent');
+var Promise = require('promise');
+
+var AdminDaySource = {
+
+    fetchDays: function fetchDays() {
+        return new Promise(function (resolve, reject) {
+            request.get('/admin/alldata').end(function (err, res) {
+                if (err) {
+                    console.log("Nope, something is wrong: ", err);
+                    reject(err);
+                } else {
+                    console.log("Got all songs :", res.body);
+                    resolve(res.body);
+                }
+            });
+        });
+    }
+};
+
+module.exports = AdminDaySource;
+
+},{"promise":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\promise\\index.js","superagent":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\superagent\\lib\\client.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\sources\\DaySource.js":[function(require,module,exports){
 'use strict';
 
 var request = require('superagent');
@@ -31456,7 +31624,54 @@ var GuessSource = {
 
 module.exports = GuessSource;
 
-},{"debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js","promise":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\promise\\index.js","superagent":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\superagent\\lib\\client.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js":[function(require,module,exports){
+},{"debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js","promise":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\promise\\index.js","superagent":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\superagent\\lib\\client.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\AdminDayStore.js":[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var alt = require('../alt');
+var AdminDayAction = require('../actions/AdminDayAction');
+
+var request = require('superagent');
+var debug = require('debug')('DayStore');
+
+var AdminDayStore = (function () {
+    function AdminDayStore() {
+        _classCallCheck(this, AdminDayStore);
+
+        this.days = [];
+        this.date = undefined;
+        this.user = undefined;
+        this.userResult = undefined;
+        this.answers = undefined;
+        this.topList = [];
+
+        this.bindListeners({
+            setData: AdminDayAction.SET_DATA
+        });
+    }
+
+    _createClass(AdminDayStore, [{
+        key: 'setData',
+        value: function setData(data) {
+            debug("Data: ", data);
+            this.date = data.date;
+            this.days = data.days;
+            this.user = data.user;
+            this.userResult = data.userResult;
+            this.topList = data.topList;
+            this.answers = data.answers;
+        }
+    }]);
+
+    return AdminDayStore;
+})();
+
+module.exports = alt.createStore(AdminDayStore, 'AdminDayStore');
+
+},{"../actions/AdminDayAction":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\actions\\AdminDayAction.js","../alt":"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\alt.js","debug":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\debug\\browser.js","superagent":"C:\\utv\\workspace-2014\\musikkjulekalender\\node_modules\\superagent\\lib\\client.js"}],"C:\\utv\\workspace-2014\\musikkjulekalender\\src\\main\\resources\\resources\\static\\react\\stores\\DayStore.js":[function(require,module,exports){
 'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -31465,6 +31680,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var alt = require('../alt');
 var DayActions = require('../actions/DayAction');
+
 var request = require('superagent');
 var debug = require('debug')('DayStore');
 

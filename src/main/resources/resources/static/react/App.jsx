@@ -4,6 +4,7 @@ var SingleGuessDayContainer = require('./components/SingleGuessDayContainer.jsx'
 var UserStatisticsContainer = require('./components/UserStatisticsContainer.jsx');
 var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStatisticsContainer.jsx');
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
+var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
 
 if(document.getElementById('MusikkJulekalender')) {
     console.log("Musikkjulekalenderapp found, yeah!");
@@ -17,6 +18,13 @@ if(document.getElementById('frontpage')) {
     React.render(
         <SingleGuessDayContainer />,
         document.getElementById('frontpage')
+    );
+}
+
+if(document.getElementById('admin')) {
+    React.render(
+        <AdminOverviewContainer />,
+        document.getElementById('admin')
     );
 }
 

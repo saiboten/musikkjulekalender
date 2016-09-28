@@ -1,5 +1,5 @@
 var React = require('react');
-var debug = require('debug')('guessday');
+var debug = require('debug')('GuessDay');
 var GuessAction = require('../actions/GuessAction');
 var DayAction = require('../actions/DayAction');
 var GuessStore = require('../stores/GuessStore');
@@ -48,7 +48,7 @@ var GuessDay = React.createClass({
 
         var formOrFeedback = "";
 
-        if(answerThisDay.correctSongAnswer) {
+        if(answerThisDay && answerThisDay.correctSongAnswer) {
             formOrFeedback = (<p>Du har allerede svart rett på denne oppgaven! Svaret
                 var: {answerThisDay.guessedSong} </p>);
         }
@@ -69,7 +69,7 @@ var GuessDay = React.createClass({
 
         return (
             <div className={this.props.class}>
-                <h3>{this.props.date}</h3>
+                <h3>{moment(this.props.date).format("DD. MMMM")}</h3>
 
                 <p>{this.props.day.description}</p>
 

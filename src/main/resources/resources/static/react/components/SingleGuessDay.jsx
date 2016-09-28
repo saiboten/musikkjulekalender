@@ -17,10 +17,9 @@ var Days = React.createClass({
         return (
             <span>
                 {this.props.days.map((day, i) => {
-                    console.log("Day: ", day);
-                    console.log("Day: ", day.revealDateAsString, this.props.date);
+                    debug("Reveal day as string + this.props.date: ", day.revealDateAsString, this.props.date);
                     if(day.revealDateAsString === this.props.date) {
-                        console.log("They are the same.");
+                        debug("They are the same.");
                         return (<AltContainer store={GuessStore}>
                           <h1>Dagens oppgave</h1>
                           <GuessDay key={day.revealDateAsInt} date={this.props.date} day={day} answers={this.props.answers} user={this.props.user} />

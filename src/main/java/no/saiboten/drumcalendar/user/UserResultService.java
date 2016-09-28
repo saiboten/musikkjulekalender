@@ -1,6 +1,7 @@
 package no.saiboten.drumcalendar.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import no.saiboten.drumcalendar.answer.postgres.AnswerPostgres;
@@ -38,13 +39,14 @@ public class UserResultService {
 			for(CalendarUserPostgres user : calendarUserService.getAllUsers()) {
 				
 				AnswerPostgres answer = answerRepository.findByUserNameAndDay(user.getUserName(), day.getRevealDateAsString());
-				
 				if(answer != null && answer.isCorrectSongAnswer()) {
 					UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
 					userResultSingleUser.setName(user.getUserNameNotMail());
 					userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
 					userResultSingleDay.addUser(userResultSingleUser);
 				}
+				
+				
 			}
 			result.put(day.getRevealDateAsString(), userResultSingleDay);
 		}
