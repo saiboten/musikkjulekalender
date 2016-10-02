@@ -1,13 +1,9 @@
 var React = require('react');
-var debug = require('debug')('day');
+var debug = require('debug')('Day');
 var moment = require('moment');
 var GuessDay = require('./GuessDay.jsx');
 
 var Day = React.createClass({
-
-    componentDidMount() {
-        debug("this.day", this.props.day);
-    },
 
     getInitialState() {
       return {
@@ -29,8 +25,8 @@ var Day = React.createClass({
     render() {
         var day = "";
 
-        debug("this.props.day.revealDateAsString: ", this.props.day.revealDateAsString);
-        debug("this.props.user: ", this.props.user);
+        debug("day.props", this.props);
+
 
         if(this.state.showSolution && this.props.day.solutionArtist) {
           day = (
@@ -45,7 +41,7 @@ var Day = React.createClass({
             </div>);
         }
         else if(this.props.day.revealDateAsString === this.props.date) {
-            day = (<GuessDay date={this.props.day.revealDateAsString} day={this.props.day} answers={this.props.day.answers} user={this.props.user} />);
+            day = (<GuessDay date={this.props.day.revealDateAsString} day={this.props.day} answers={this.props.answers} user={this.props.user} />);
         }
         else if (this.props.day.description) {
            day = (

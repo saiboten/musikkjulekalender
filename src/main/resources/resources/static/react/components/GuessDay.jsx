@@ -15,14 +15,19 @@ var GuessDay = React.createClass({
         GuessStore.unlisten(this.guessChanged);
     },
 
-    guessChanged() {
-        debug("Guess changed, refetching data just in case something has changed");
-    },
-
     getInitialState() {
         return {
-            guess: ""
+            guess: "",
+            guessResponse: GuessStore.getState()
         }
+    },
+
+    guessChanged() {
+        debug("Guess changed, refetching data just in case something has changed");
+        this.setState({
+
+            guessResponse: GuessStore.getState()
+        });
     },
 
     submit(e) {
@@ -43,7 +48,7 @@ var GuessDay = React.createClass({
 
         var answerThisDay = undefined;
         if(this.props.answers) {
-            this.props.answers.find(function(el) {
+            answerThisDay = this.props.answers.find(function(el) {
                 return el.correctSongAnswer;
             });
         }
@@ -60,18 +65,18 @@ var GuessDay = React.createClass({
             formOrFeedback = (
                 <form onSubmit={this.submit}>
                     <div className="form-group">
-                    <label htmlFor="songInput">Sang</label>
-                    <input type="text" ref="song" className="form-control" id="songInput" placeholder="Sang"
-                           name="song" onChange={this.handleChange} value={this.state.guess}/>
+                        <label htmlFor="songInput">Sang</label>
+                        <input type="text" ref="song" className="form-control" id="songInput" placeholder="Sang"
+                               name="song" onChange={this.handleChange} value={this.state.guess.guess}/>
                     </div>
-                    <p>{this.props.guess ? this.props.guess.feedback : ""}</p>
+                    <p>{this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : ""}</p>
                     <button type="submit" className="btn btn-default">Lagre forslag</button>
                 </form>
             );
         }
 
         return (
-                <span><p>{this.props.day.description}</p>
+            <span><p>{this.props.day.description}</p>
 
                 <audio src={this.props.day.link} preload="none" controls>
                     <a href={this.props.day.link}>Last ned låt</a>

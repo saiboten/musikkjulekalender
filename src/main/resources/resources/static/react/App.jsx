@@ -7,6 +7,7 @@ var UserStatisticsContainer = require('./components/UserStatisticsContainer.jsx'
 var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStatisticsContainer.jsx');
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
 var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
+var DayActions = require('./actions/DayAction');
 
 if(document.getElementById('MusikkJulekalender')) {
     console.log("Musikkjulekalenderapp found, yeah!");
@@ -53,3 +54,5 @@ if(document.getElementById('topscore')) {
         document.getElementById('topscore')
     );
 }
+
+DayActions.getDays();
