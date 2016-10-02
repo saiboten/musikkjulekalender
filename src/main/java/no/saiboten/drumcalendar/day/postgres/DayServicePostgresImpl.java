@@ -1,6 +1,8 @@
 package no.saiboten.drumcalendar.day.postgres;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import no.saiboten.drumcalendar.day.service.DayService;
@@ -30,6 +32,19 @@ public class DayServicePostgresImpl implements DayService {
 		for (DayPostgres dayp : dayRepository.findAll()) {
 			returnDays.add(dayp);
 		}
+		
+		Collections.sort(returnDays, new Comparator<DayPostgres>() {
+
+			@Override
+			public int compare(DayPostgres arg0, DayPostgres arg1) {
+				// TODO Auto-generated method stub
+				if(arg0.getRevealDate().before(arg1.getRevealDate())) {
+					return -1;
+				}
+				return 1;
+			}
+		});
+		logger.debug("Returning days: " + returnDays);
 		return returnDays;
 	}
 

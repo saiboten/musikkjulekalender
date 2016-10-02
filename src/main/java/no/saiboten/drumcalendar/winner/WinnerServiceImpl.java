@@ -73,18 +73,23 @@ public class WinnerServiceImpl implements WinnerService {
 	}
 
 	protected String findWinner(String day) {
+		
+		DayPostgres dayPostgres = dayService.getDay(day);
+		
 		List<CalendarUserPostgres> users = userService.getAllUsers();
 		List<CalendarUserPostgres> possibleWinners = new ArrayList<CalendarUserPostgres>();
 		for (CalendarUserPostgres user : users) {
 			
-			AnswerPostgres answer = answerRepository.findByUserNameAndDay(user.getUserName(), day);
-			
-			if(answer != null) {
-				logger.debug("Correct song? " + answer.isCorrectSongAnswer());
-			}
-			
-			if (answer != null && answer.isCorrectSongAnswer()) {
-				possibleWinners.add(user);
+			List<AnswerPostgres> answers = answerRepository.findByUserNameAndDay(user.getUserName(), dayPostgres.getId());
+			for(AnswerPostgres answer : answers) {
+				if(answer != null) {
+					logger.debug("Correct song? " + answer.isCorrectSongAnswer());
+				}
+				
+				if (answer != null && answer.isCorrectSongAnswer()) {
+					possibleWinners.add(user);
+					break;
+				}
 			}
 		}
 

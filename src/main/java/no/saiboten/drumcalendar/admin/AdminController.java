@@ -9,6 +9,7 @@ import java.util.TimeZone;
 import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
+import no.saiboten.drumcalendar.solution.SolutionRepository;
 import no.saiboten.drumcalendar.statistics.StatisticsService;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
@@ -50,16 +51,19 @@ public class AdminController {
 
 	private AnswerRepository answerRepository;
 
+	private SolutionRepository solutionRepository;
+
 	@Autowired
 	public AdminController(CalendarUserService userService,
 			StatisticsService statsService, WinnerService winnerService,
-			DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository) {
+			DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository, SolutionRepository solutionRepository) {
 		this.userService = userService;
 		this.statsService = statsService;
 		this.winnerService = winnerService;
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.answerRepository = answerRepository;
+		this.solutionRepository = solutionRepository;
 	}
 
 	@RequestMapping(value = "/admin/deletestatistics")
@@ -130,6 +134,7 @@ public class AdminController {
 		returnMap.put("answers",
 				answerRepository.findByUserName(loggedIn.getUserName()));
 		returnMap.put("isLoggedIn", loggedIn.isLoggedIn());
+		returnMap.put("solutions", solutionRepository.findAll());
 
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 		returnMap.put("date", fmt.print(new DateTime()));

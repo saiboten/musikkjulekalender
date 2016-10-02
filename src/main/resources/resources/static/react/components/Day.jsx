@@ -1,6 +1,7 @@
 var React = require('react');
 var debug = require('debug')('day');
 var moment = require('moment');
+var GuessDay = require('./GuessDay.jsx');
 
 var Day = React.createClass({
 
@@ -28,6 +29,9 @@ var Day = React.createClass({
     render() {
         var day = "";
 
+        debug("this.props.day.revealDateAsString: ", this.props.day.revealDateAsString);
+        debug("this.props.user: ", this.props.user);
+
         if(this.state.showSolution && this.props.day.solutionArtist) {
           day = (
             <div>
@@ -40,18 +44,21 @@ var Day = React.createClass({
               </audio>
             </div>);
         }
+        else if(this.props.day.revealDateAsString === this.props.date) {
+            day = (<GuessDay date={this.props.day.revealDateAsString} day={this.props.day} answers={this.props.day.answers} user={this.props.user} />);
+        }
         else if (this.props.day.description) {
            day = (
              <span>
               <p>{this.props.day.description}</p>
               <p><button onClick={this.showSolution}>Vis fasit</button></p>
-              <audio class="audio" src={this.props.day.link} preload="none" controls>
+              <audio className="audio" src={this.props.day.link} preload="none" controls>
                 <a href={this.props.day.link}>Last ned låt</a>
               </audio>
             </span>);
         }
         else {
-          day =   <p>Luke ikke åpnet</p>;
+          day = (<p>Luke ikke åpnet</p>);
         }
 
         return (

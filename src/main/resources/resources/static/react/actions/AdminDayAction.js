@@ -8,6 +8,7 @@ class AdminDayAction {
         AdminDaySource.fetchDays()
             .then((data) => {
                 debug("Got it baby! Got the songs: ", data);
+                debug("This actions: ", this);
                 this.actions.setData(data);
             })
             .catch((errorMessage) => {
@@ -21,10 +22,38 @@ class AdminDayAction {
         this.dispatch(data);
     }
 
+    updateDay(day) {
+        debug("Updating day: ", day);
+        AdminDaySource.updateDay(day).then((response) => {
+            debug("Got some reply? ", response);
+            this.actions.getDays();
+        })
+            .catch((errorMessage) => {
+                debug("Error: ", errorMessage);
+                this.actions.updateDaysFailed(errorMessage);
+            });
+    }
+
+    addSolution(solutionObject) {
+        AdminDaySource.addSolution(solutionObject)
+            .then((response) => {
+                this.actions.getDays();
+            })
+            .catch((errorMessage) => {
+                debug("Error: ", errorMessage);
+            })
+    }
+
+    updateDaysFailed(errorMessage) {
+        debug("dispatching getDaysFailed");
+        this.dispatch(errorMessage);
+    }
+
     getDaysFailed(errorMessage) {
         debug("dispatching getDaysFailed");
-      this.dispatch(errorMessage);
+        this.dispatch(errorMessage);
     }
 }
 
+debug("ALT:", AdminDayAction);
 module.exports = alt.createActions(AdminDayAction);

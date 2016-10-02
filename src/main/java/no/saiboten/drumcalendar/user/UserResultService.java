@@ -38,15 +38,15 @@ public class UserResultService {
 			
 			for(CalendarUserPostgres user : calendarUserService.getAllUsers()) {
 				
-				AnswerPostgres answer = answerRepository.findByUserNameAndDay(user.getUserName(), day.getRevealDateAsString());
-				if(answer != null && answer.isCorrectSongAnswer()) {
-					UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
-					userResultSingleUser.setName(user.getUserNameNotMail());
-					userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
-					userResultSingleDay.addUser(userResultSingleUser);
+				List<AnswerPostgres> answers = answerRepository.findByUserNameAndDay(user.getUserName(), day.getId());
+				for(AnswerPostgres answer: answers) {
+					if(answer != null && answer.isCorrectSongAnswer()) {
+						UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
+						userResultSingleUser.setName(user.getUserNameNotMail());
+						userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
+						userResultSingleDay.addUser(userResultSingleUser);
+					}
 				}
-				
-				
 			}
 			result.put(day.getRevealDateAsString(), userResultSingleDay);
 		}

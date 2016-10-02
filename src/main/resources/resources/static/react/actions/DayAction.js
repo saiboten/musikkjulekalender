@@ -3,6 +3,7 @@ var alt = require('../alt');
 var DaySource = require('../sources/DaySource');
 var debug = require('debug')('DayAction');
 
+
 class DayAction {
     getDays() {
         DaySource.fetchDays()
@@ -26,5 +27,7 @@ class DayAction {
       this.dispatch(errorMessage);
     }
 }
+
+debug("ALT:", DayAction);
 
 module.exports = alt.createActions(DayAction);

@@ -43,37 +43,42 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-<!-- 			 <exclusions> -->
-<!-- 		        <exclusion> -->
-<!-- 		            <groupId>org.springframework.boot</groupId> -->
-<!-- 		            <artifactId>spring-boot-starter-logging</artifactId> -->
-<!-- 		        </exclusion> -->
-<!-- 		    </exclusions> -->
+			<!-- <exclusions> -->
+			<!-- <exclusion> -->
+			<!-- <groupId>org.springframework.boot</groupId> -->
+			<!-- <artifactId>spring-boot-starter-logging</artifactId> -->
+			<!-- </exclusion> -->
+			<!-- </exclusions> -->
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.springframework.boot</groupId> -->
-<!-- 		    <artifactId>spring-boot-starter-log4j2</artifactId> -->
-<!-- 		</dependency> -->
-<!-- 	 <dependency> -->
-<!-- 	    <groupId>org.apache.logging.log4j</groupId> -->
-<!-- 	    <artifactId>log4j-api</artifactId> -->
-<!-- 	</dependency> -->
-<!-- 	<dependency> -->
-<!-- 	    <groupId>org.apache.logging.log4j</groupId> -->
-<!-- 	    <artifactId>log4j-core</artifactId> -->
-<!-- 	</dependency> -->
-	
-	<!-- Begin logback -->
-<dependency>
-    <groupId>ch.qos.logback</groupId>
-    <artifactId>logback-classic</artifactId>
-</dependency>
-<!-- End logback -->
-	
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-log4j2</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.logging.log4j</groupId> -->
+		<!-- <artifactId>log4j-api</artifactId> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.logging.log4j</groupId> -->
+		<!-- <artifactId>log4j-core</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- Begin logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<!-- End logback -->
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

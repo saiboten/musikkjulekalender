@@ -3,6 +3,7 @@ createdb.exe -U postgres musikkjulekalender
 psql.exe -U postgres musikkjulekalender
 
 CREATE TABLE day (
+	id bigint UNIQUE,
     image varchar(80),
     description varchar(80),
 	optional_solution_video varchar(80),
@@ -15,23 +16,27 @@ CREATE TABLE day (
 );
 
 CREATE TABLE solution (
-    day varchar(20) references day(reveal_date_as_string),
+	id bigint,
+    day bigint references day(id),
     solution varchar(200)
 );
 
 CREATE TABLE winner (
-    day varchar(20) references day(reveal_date_as_string),
+	id bigint,
+    day bigint references day(id),
     winner varchar(80) references participant(user_name)
 );
 
 CREATE TABLE participant (
+	id bigint,
     user_name varchar(200) UNIQUE,
     days_calculated int,
     days_guessed_right int
 );
 
 CREATE TABLE answer (
-    day varchar(20) references day(reveal_date_as_string),
+	id bigint,
+    day bigint references day(id),
     user_name varchar(200) references participant(user_name),
 	guessed_song varchar(80),
 	correct_song_answer boolean,

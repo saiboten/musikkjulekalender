@@ -64,6 +64,7 @@ public class RestController {
 		returnMap.put("date", fmt.print(new DateTime()));
 		returnMap.put("userResult", userResultService.getUserResults());
 		returnMap.put("topList", topListService.getTopList());
+
 		return returnMap;
 	}
 

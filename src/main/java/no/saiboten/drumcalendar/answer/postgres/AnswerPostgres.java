@@ -21,17 +21,17 @@ public class AnswerPostgres extends AbstractPersistable<Long> {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	private String day;
+	private Long day;
 	private String userName;
 	private String guessedSong;
 	private boolean correctSongAnswer;
 	private long timeOfCorrectAnswerInMillis;
 
-	public String getDay() {
+	public Long getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Long day) {
 		this.day = day;
 	}
 

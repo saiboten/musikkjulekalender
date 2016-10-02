@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -74,10 +75,10 @@ public class AnswerQuestionController {
 		if (user != null) {
 			AnswerPostgres answerPostgres = new AnswerPostgres();
 			
-			List<Solution> solutions = solutionRepository.findByDay(today.getRevealDateAsString());
+			List<Solution> solutions = solutionRepository.findByDay(today.getId());
 			
 			LOGGER.debug("Solutions: " + solutions);
-			answerPostgres.setDay(today.getRevealDateAsString());
+			answerPostgres.setDay(today.getId());
 			answerPostgres.setGuessedSong(song);
 			answerPostgres.setUserName(user.getUserName());
 			
@@ -108,8 +109,8 @@ public class AnswerQuestionController {
 		return answerMap;
 	}
 	
-	@RequestMapping("/admin/addsolution/{day}/{solution}")
-	public @ResponseBody Map<String,Object> addSolution(@PathVariable String day, @PathVariable(value="solution") String solutionString) {
+	@RequestMapping(method=RequestMethod.POST, value="/admin/addsolution/{day}/{solution}")
+	public @ResponseBody Map<String,Object> addSolution(@PathVariable Long day, @PathVariable(value="solution") String solutionString) {
 		Solution solution = new Solution();
 		solution.setDay(day);
 		solution.setSolution(solutionString);

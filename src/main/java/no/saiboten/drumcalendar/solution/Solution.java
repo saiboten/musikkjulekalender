@@ -21,14 +21,14 @@ public class Solution extends AbstractPersistable<Long> {
 	@Column(name = "id", nullable = false)
 	private Long id;
 
-	private String day;
+	private Long day;
 	private String solution;
 
-	public String getDay() {
+	public Long getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Long day) {
 		this.day = day;
 	}
 

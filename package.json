@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "alt": "^0.16.0",
+    "alt-container": "^1.0.2",
     "babelify": "^6.3.0",
     "body-parser": "~1.13.2",
     "browserify": "^11.2.0",
@@ -25,7 +26,9 @@
     "multer": "^1.0.6",
     "path": "^0.12.7",
     "promise": "^7.0.4",
-    "react": "^0.13.0",
+    "react": "^15.3.2",
+    "react-datepicker": "^0.29.0",
+    "react-dom": "^15.3.2",
     "react-dropzone": "^2.1.0",
     "reactify": "^1.1.1",
     "serve-favicon": "~2.3.0",

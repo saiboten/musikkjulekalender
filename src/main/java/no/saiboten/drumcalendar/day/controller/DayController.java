@@ -37,8 +37,6 @@ public class DayController {
 		this.solutionRepository = solutionRepository;
 	}
 	
-	
-	
 	@RequestMapping(value = "/admin/day", method = RequestMethod.POST)
 	public @ResponseBody GenericResponse addDay(@RequestBody Day day) {
 		GenericResponse response = new GenericResponse();
@@ -46,7 +44,7 @@ public class DayController {
 		boolean success = dayService.addDay(postGresDay);
 		if (success) {
 			Solution solution = new Solution();
-			solution.setDay(postGresDay.getRevealDateAsString());
+			solution.setDay(postGresDay.getId());
 			solution.setSolution(postGresDay.getSolutionSong());
 			solutionRepository.save(solution);
 			response.setSuccess(true);

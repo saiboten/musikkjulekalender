@@ -1,5 +1,5 @@
 var React = require('react');
-var AltContainer = require('alt/AltContainer');
+var AltContainer = require('alt-container');
 var CurrentUserStatistics = require('./CurrentUserStatistics.jsx');
 var DayStore = require('../../stores/DayStore');
 

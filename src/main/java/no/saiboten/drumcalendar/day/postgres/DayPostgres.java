@@ -107,6 +107,14 @@ public class DayPostgres extends AbstractPersistable<Long> {
 	public void setRevealDate(Date revealDate) {
 		this.revealDate = revealDate;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {
