@@ -34,6 +34,18 @@ class AdminDayAction {
             });
     }
 
+    addDay(day) {
+        debug("Updating day: ", day);
+        AdminDaySource.addDay(day).then((response) => {
+            debug("Got some reply? ", response);
+            this.actions.getDays();
+        })
+            .catch((errorMessage) => {
+                debug("Error: ", errorMessage);
+                this.actions.updateDaysFailed(errorMessage);
+            });
+    }
+
     addSolution(solutionObject) {
         AdminDaySource.addSolution(solutionObject)
             .then((response) => {

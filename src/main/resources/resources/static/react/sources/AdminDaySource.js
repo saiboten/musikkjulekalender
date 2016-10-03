@@ -37,6 +37,24 @@ var AdminDaySource = {
         });
     },
 
+    addDay(day) {
+        return new Promise(function(resolve, reject) {
+            request.post('/admin/day')
+                .send(day)
+                .set('Accept', 'application/json')
+                .end(function(err, res) {
+                    if(err) {
+                        debug("Nope, something is wrong: ", err);
+                        reject(err);
+                    }
+                    else {
+                        debug("Update ok? ", res.body);
+                        resolve(res.body);
+                    }
+                });
+        });
+    },
+
     addSolution(solution) {
         return new Promise(function(resolve, reject) {
             request.post('/admin/addsolution/' + solution.id + '/' + solution.solution)

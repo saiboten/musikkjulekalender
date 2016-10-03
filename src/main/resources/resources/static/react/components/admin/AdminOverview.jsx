@@ -4,6 +4,7 @@ var AdminDay = require('./AdminDay.jsx')
 var GuessDay = require('./../GuessDay.jsx');
 var AltContainer = require('alt-container');
 var GuessStore = require('../../stores/GuessStore');
+var AdminAddDay = require('./AdminAddDay.jsx');
 
 var AdminOverview = React.createClass({
 
@@ -14,14 +15,14 @@ var AdminOverview = React.createClass({
     render() {
         debug("this.props.days: ", this.props.days);
         return (
-            <div className="col-md-12">
-
+            <span>
                 {this.props.days.map((day, i) => {
                     if(day.realDate !== new Date(this.props.date).getDate().toString()) {
                         return <AdminDay key={day.revealDate} day={day} />;
                     }
                 })}
-            </div>
+                <AdminAddDay />
+            </span>
         );
     }
 });

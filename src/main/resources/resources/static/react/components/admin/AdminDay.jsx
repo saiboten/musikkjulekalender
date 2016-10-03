@@ -121,7 +121,7 @@ var AdminDay = React.createClass({
                                 <td><input type="text" onChange={this.changeDescription} value={this.state.description}/></td>
                             </tr>
                             <tr>
-                                <td>Arist</td>
+                                <td>Artist</td>
                                 <td><input type="text" onChange={this.changeSolutionArtist} value={this.state.solutionArtist}/></td>
                             </tr>
                             <tr>
