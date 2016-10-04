@@ -5,15 +5,17 @@ This is the repo for musikkjulekalender, the annual music contest during christm
 ## Setup/Running the project locally
 
 * Clone the repo
-* Install MongoDB (latest confirmed working version 2.6.4)
-* Start MongoDB
+* Install and start Postgres
+* See the `databasecreation.txt` for instructions of how to create the database tables.
 * Create a file named application.properties - place it under src/main/resources/config. Let it have the following content:
 
-``admin.username=admin  
+```
+admin.username=admin  
 admin.password=YOUR PASSWORD HERE  
 facebook.secret=facebook secret  
 spring.mvc.view.prefix=/WEB-INF/jsp/  
-spring.mvc.view.suffix=.jsp``
+spring.mvc.view.suffix=.jsp
+```
 
 * mvn sprint-boot:run
 * Open localhost:8080
@@ -30,7 +32,7 @@ Front end:
 
 Back end:
 * Spring MVC
-* MongoDB
+* Postgres
 * Spring Boot
 * Spring Security
 
