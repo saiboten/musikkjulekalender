@@ -21,6 +21,7 @@ var AdminDay = React.createClass({
             revealDate: moment(this.props.day.revealDate),
             solutionDate: moment(this.props.day.solutionDate),
             addSolution: undefined,
+            confirmDelete: false
         }
     },
 
@@ -98,6 +99,17 @@ var AdminDay = React.createClass({
         return {__html: this.state.optionalSolutionVideo};
     },
 
+    deleteDay() {
+      if(this.state.confirmDelete) {
+          adminDayAction.deleteDay(this.props.day.id);
+      }
+      else {
+          this.setState({
+              confirmDelete: true
+          })
+      }
+    },
+
     render() {
         var day = "";
 
@@ -155,6 +167,7 @@ var AdminDay = React.createClass({
                     </p>
                     <p>
                         <button onClick={this.saveChanges}>Lagre endringer</button>
+                        <button onClick={this.deleteDay}>Slett dag</button><p>{this.state.confirmDelete ? "Bekreft":""}</p>
                     </p>
                     <audio src={this.state.link} controls>
                         <a href={this.state.link}>Last ned låt</a>

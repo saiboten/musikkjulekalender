@@ -34,6 +34,18 @@ class AdminDayAction {
             });
     }
 
+    deleteDay(id) {
+        debug("Updating day: ", id);
+        AdminDaySource.deleteDay(id).then((response) => {
+            debug("Got some reply? ", response);
+            this.actions.getDays();
+        })
+            .catch((errorMessage) => {
+                debug("Error: ", errorMessage);
+                this.actions.updateDaysFailed(errorMessage);
+            });
+    }
+
     addDay(day) {
         debug("Updating day: ", day);
         AdminDaySource.addDay(day).then((response) => {

@@ -17,5 +17,5 @@ public interface DayService {
 
 	public boolean updateDay(DayPostgres day);
 
-	public boolean deleteDay(String dayNumber);
+	public boolean deleteDay(Long dayId);
 }

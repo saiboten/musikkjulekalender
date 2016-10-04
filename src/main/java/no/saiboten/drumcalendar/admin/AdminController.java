@@ -91,33 +91,6 @@ public class AdminController {
 		return redirectView;
 	}
 
-	@RequestMapping(value = "/admin/day/change/{dayNumber}", method = RequestMethod.GET)
-	public ModelAndView changeDayGet(@PathVariable String dayNumber) {
-		ModelAndView mav = new ModelAndView("change_day");
-		DayPostgres day = dayService.getDay(dayNumber);
-		mav.addObject("day", day);
-		if (day != null) {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			format.setTimeZone(TimeZone.getTimeZone("Europe/Oslo"));
-			mav.addObject("revealDate", format.format(day.getRevealDate()));
-			mav.addObject("solutionDate", format.format(day.getSolutionDate()));
-		}
-		return mav;
-	}
-
-	@RequestMapping(value = "/admin/day/change", method = RequestMethod.POST)
-	public RedirectView changeDayPost(@ModelAttribute("day") DayPostgres day,
-			BindingResult result) {
-		RedirectView redirectView = new RedirectView("/admin");
-
-		if (result.hasErrors()) {
-			redirectView = new RedirectView("/admin?feedback=changefailed");
-		}
-
-		dayService.updateDay(day);
-		return redirectView;
-	}
-
 	@RequestMapping(value = "/admin")
 	public String adminPage() {
 		return "admin";
@@ -141,12 +114,5 @@ public class AdminController {
 		return returnMap;
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				dateFormat, false));
-	}
 
 }

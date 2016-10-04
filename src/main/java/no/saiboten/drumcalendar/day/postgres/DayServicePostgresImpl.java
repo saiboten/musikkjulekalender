@@ -132,8 +132,8 @@ public class DayServicePostgresImpl implements DayService {
 	}
 
 	@Override
-	public boolean deleteDay(String dayNumber) {
-		// dayRepository.delete(dayNumber); //FIXME must use day - not id.
+	public boolean deleteDay(Long dayNumber) {
+		dayRepository.delete(dayNumber);
 		return true;
 	}
 

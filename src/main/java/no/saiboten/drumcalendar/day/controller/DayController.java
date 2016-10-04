@@ -3,6 +3,7 @@ package no.saiboten.drumcalendar.day.controller;
 import java.util.List;
 
 import no.saiboten.drumcalendar.admin.bean.GenericResponse;
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.bean.Day;
 import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
@@ -30,11 +31,14 @@ public class DayController {
     Logger logger = LoggerFactory.getLogger(DayController.class);
 
 	private SolutionRepository solutionRepository;
+
+	private AnswerRepository answerRepository;
 	
 	@Autowired
-	public DayController(DayService dayService, SolutionRepository solutionRepository) {
+	public DayController(DayService dayService, SolutionRepository solutionRepository, AnswerRepository answerRepository) {
 		this.dayService = dayService;
 		this.solutionRepository = solutionRepository;
+		this.answerRepository = answerRepository;
 	}
 	
 	@RequestMapping(value = "/admin/day", method = RequestMethod.POST)
@@ -104,8 +108,17 @@ public class DayController {
 	
 	
 	@RequestMapping(value = "/admin/day/{day}", method = RequestMethod.DELETE)
-	public @ResponseBody GenericResponse deleteDay(@PathVariable(value="day") String revealDateAsString) {
+	public @ResponseBody GenericResponse deleteDay(@PathVariable(value="day") Long revealDateAsString) {
 		GenericResponse response = new GenericResponse();
+		if(answerRepository.findByDay(revealDateAsString) != null) {
+			logger.debug("Answer exists, lets delete :", revealDateAsString);
+			answerRepository.deleteByDay(revealDateAsString);
+		}
+		
+		if(solutionRepository.findByDay(revealDateAsString) != null) {
+			logger.debug("Solution exists, lets delete : ", revealDateAsString);
+			solutionRepository.deleteByDay(revealDateAsString);
+		}
 
 		boolean success = dayService.deleteDay(revealDateAsString);
 		if (success) {
