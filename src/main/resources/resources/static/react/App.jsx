@@ -10,7 +10,6 @@ var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.
 var DayActions = require('./actions/DayAction');
 
 if(document.getElementById('MusikkJulekalender')) {
-    console.log("Musikkjulekalenderapp found, yeah!");
     ReactDOM.render(
         <MusikkJulekalender />,
         document.getElementById('MusikkJulekalender')
@@ -32,7 +31,6 @@ if(document.getElementById('admin')) {
 }
 
 if(document.getElementById('userstatistics')) {
-    console.log("Musikkjulekalenderapp found, yeah!");
     ReactDOM.render(
         <UserStatisticsContainer />,
         document.getElementById('userstatistics')
@@ -40,7 +38,6 @@ if(document.getElementById('userstatistics')) {
 }
 
 if(document.getElementById('currentuserstatistics')) {
-    console.log("Current user statistics found, yeah!");
     ReactDOM.render(
         <CurrentUserStatisticsContainer />,
         document.getElementById('currentuserstatistics')
@@ -48,7 +45,6 @@ if(document.getElementById('currentuserstatistics')) {
 }
 
 if(document.getElementById('topscore')) {
-    console.log("Current topscore found, yeah!");
     ReactDOM.render(
         <TopScoreContainer />,
         document.getElementById('topscore')

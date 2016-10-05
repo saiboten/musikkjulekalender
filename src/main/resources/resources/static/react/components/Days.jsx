@@ -13,7 +13,7 @@ var Days = React.createClass({
             <div className="col-md-12">
                 {this.props.days.map((day, i) => {
                     if(day.realDate !== new Date(this.props.date).getDate().toString()) {
-                      return <Day key={day.id} answers={this.props.answers} user={this.props.user} date={this.props.date} day={day} />;
+                      return <Day key={day.id} answers={this.props.answers} user={this.props.user} today={this.props.today} date={this.props.date} day={day} />;
                     }
                 })}
             </div>

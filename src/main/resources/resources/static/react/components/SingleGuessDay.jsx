@@ -9,7 +9,7 @@ var GuessStore = require('../stores/GuessStore');
 var Days = React.createClass({
 
     componentDidMount() {
-        debug("Day! Woho");
+        debug("SingleGuessDay props");
     },
 
     render() {
@@ -23,7 +23,7 @@ var Days = React.createClass({
                           <h1>Dagens oppgave</h1>
                             <div className={this.props.class}>
                                 <h3>{moment(this.props.date).format("DD. MMMM")}</h3>
-                                <GuessDay key={day.revealDateAsInt} date={this.props.date} day={day} answers={this.props.answers} user={this.props.user} />
+                                <GuessDay key={day.revealDateAsInt} today={this.props.today} date={this.props.date} day={day} answers={this.props.answers} user={this.props.user} />
                             </div>
                       </AltContainer>);
                     }

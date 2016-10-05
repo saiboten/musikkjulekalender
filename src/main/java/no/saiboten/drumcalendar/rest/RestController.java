@@ -62,6 +62,8 @@ public class RestController {
 
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 		returnMap.put("date", fmt.print(new DateTime()));
+		returnMap.put("today", dayService.getToday().getId());
+
 		returnMap.put("userResult", userResultService.getUserResults());
 		returnMap.put("topList", topListService.getTopList());
 

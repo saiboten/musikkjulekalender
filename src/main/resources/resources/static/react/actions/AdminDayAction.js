@@ -79,5 +79,4 @@ class AdminDayAction {
     }
 }
 
-debug("ALT:", AdminDayAction);
 module.exports = alt.createActions(AdminDayAction);

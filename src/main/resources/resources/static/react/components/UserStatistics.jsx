@@ -13,11 +13,12 @@ var UserStatistics = React.createClass({
     },
 
     render() {
+        debug("User statistics props", this.props);
+
         return (
             <div>
                 {this.props.days.map((day, i) => {
-                      debug("Er jeg her?", this.props);
-                      if(day.realDateAsString === this.props.date) {
+                      if(day.id === this.props.today) {
                         return <UserResultDay key={day.id} day={day} userResult={this.props.userResult}  />;
                       }
 

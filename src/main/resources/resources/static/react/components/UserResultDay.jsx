@@ -1,6 +1,7 @@
 var React = require('react');
 var debug = require('debug')('UserResultDay');
 var UserResultDayUser = require('./UserResultDayUser.jsx');
+var moment = require('moment');
 
 var UserResultDay = React.createClass({
 
@@ -12,7 +13,7 @@ var UserResultDay = React.createClass({
     render() {
         debug("props: ", this.props);
 
-        var userList = this.props.userResult ? this.props.userResult[this.props.day.revealDate] : undefined;
+        var userList = this.props.userResult ? this.props.userResult[this.props.day.revealDateAsString] : undefined;
 
         debug("userList", userList);
         var maybeempty = "";
@@ -40,7 +41,7 @@ var UserResultDay = React.createClass({
        }
         return (
           <div>
-          <p>{this.props.day.revealDate}</p>
+              <h3>{moment(this.props.day.revealDateAsString).format('DD. MMMM')}</h3>
           {maybeempty}
           </div>
           );

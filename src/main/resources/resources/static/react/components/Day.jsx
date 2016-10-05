@@ -25,8 +25,7 @@ var Day = React.createClass({
     render() {
         var day = "";
 
-        debug("day.props", this.props);
-
+        debug("Day.props", this.props);
 
         if(this.state.showSolution && this.props.day.solutionArtist) {
           day = (
@@ -41,7 +40,7 @@ var Day = React.createClass({
             </div>);
         }
         else if(this.props.day.revealDateAsString === this.props.date) {
-            day = (<GuessDay date={this.props.day.revealDateAsString} day={this.props.day} answers={this.props.answers} user={this.props.user} />);
+            day = (<GuessDay date={this.props.day.revealDateAsString} today={this.props.today} day={this.props.day} answers={this.props.answers} user={this.props.user} />);
         }
         else if (this.props.day.description) {
            day = (

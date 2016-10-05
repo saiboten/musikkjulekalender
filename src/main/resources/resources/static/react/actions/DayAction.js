@@ -8,7 +8,7 @@ class DayAction {
     getDays() {
         DaySource.fetchDays()
             .then((data) => {
-                debug("Got it baby! Got the songs: ", data);
+                debug("Days retrieved from DaySource: ", data);
                 this.actions.setData(data);
             })
             .catch((errorMessage) => {
@@ -27,7 +27,5 @@ class DayAction {
       this.dispatch(errorMessage);
     }
 }
-
-debug("ALT:", DayAction);
 
 module.exports = alt.createActions(DayAction);

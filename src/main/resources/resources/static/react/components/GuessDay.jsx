@@ -42,15 +42,13 @@ var GuessDay = React.createClass({
 
     render() {
 
-        var that = this;
-
         debug("Props: ", this.props);
 
         var answerThisDay = undefined;
         if(this.props.answers) {
             answerThisDay = this.props.answers.find(function(el) {
-                return el.correctSongAnswer;
-            });
+                return el.correctSongAnswer && el.day === this.props.today;
+            },this);
         }
 
         debug("Answer this day: ", answerThisDay);
