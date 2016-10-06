@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.toplist.TopListService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
@@ -62,7 +63,8 @@ public class RestController {
 
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 		returnMap.put("date", fmt.print(new DateTime()));
-		returnMap.put("today", dayService.getToday().getId());
+		DayPostgres today = dayService.getToday();
+		returnMap.put("today", today != null ? today.getId() : null);
 
 		returnMap.put("userResult", userResultService.getUserResults());
 		returnMap.put("topList", topListService.getTopList());

@@ -1,27 +1,27 @@
 package no.saiboten.drumcalendar.controller;
 
+import no.saiboten.drumcalendar.rest.RestController;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class DefaultController {
 
-	public DefaultController() {
+	private final Logger logger = LoggerFactory.getLogger(RestController.class);
 
-	}
-
-	@RequestMapping(value="/")
-	public ModelAndView frontpage() {
-		ModelAndView mav = new ModelAndView("main");
-		return mav;
+	@RequestMapping(value="/" )
+	public String frontpage(Model model) {
+		logger.debug("Request for front page");
+		return "main";
 	}
 
 	@RequestMapping("/om")
-	public ModelAndView om() {
-		ModelAndView mav = new ModelAndView("om");
-		mav.getModel().put("about","active");
-		return mav;
+	public String om() {
+		return "om";
 	}
 	
 }
