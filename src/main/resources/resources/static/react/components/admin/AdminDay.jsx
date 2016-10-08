@@ -4,6 +4,7 @@ var moment = require('moment');
 var adminDayAction = require('../../actions/AdminDayAction');
 var DatePicker = require('react-datepicker');
 var AdminDaySolution = require('./AdminDaySolution');
+var DateHeader = require('../DateHeader.jsx');
 
 var AdminDay = React.createClass({
 
@@ -115,7 +116,7 @@ var AdminDay = React.createClass({
 
         return (
             <div className="col-md-6 pane">
-                <h3>{moment(this.props.day.revealDateAsString).format('DD. MMMM')}</h3>
+                <DateHeader unixDate={this.props.day.revealDateAsString}></DateHeader>
 
                 <div>
                     <table>

@@ -2,6 +2,7 @@ var React = require('react');
 var debug = require('debug')('Day');
 var moment = require('moment');
 var GuessDay = require('./GuessDay.jsx');
+var DateHeader = require('./DateHeader.jsx');
 
 var Day = React.createClass({
 
@@ -58,7 +59,7 @@ var Day = React.createClass({
 
         return (
             <div className="col-md-6 pane">
-              <h3>{moment(this.props.day.revealDateAsString).format('DD. MMMM')}</h3>
+                <DateHeader unixDate={this.props.day.revealDateAsString}></DateHeader>
               {day}
             </div>
         );

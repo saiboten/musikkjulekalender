@@ -30479,7 +30479,7 @@ var Day = React.createClass({ displayName: "Day",
     } else if (this.props.day.revealDateAsString === this.props.date) {
       day = React.createElement(GuessDay, { date: this.props.day.revealDateAsString, today: this.props.today, day: this.props.day, answers: this.props.answers, user: this.props.user });
     } else if (this.props.day.description) {
-      day = React.createElement("span", null, React.createElement("p", null, this.props.day.description), React.createElement("p", null, React.createElement("button", { onClick: this.showSolution }, "Vis fasit")), React.createElement("audio", { className: "audio", src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")));
+      day = React.createElement("span", null, React.createElement("p", null, this.props.day.description), React.createElement("p", null, React.createElement("button", { onClick: this.showSolution }, "Vis fasits")), React.createElement("audio", { className: "audio", src: this.props.day.link, preload: "none", controls: true }, React.createElement("a", { href: this.props.day.link }, "Last ned låt")));
     } else {
       day = React.createElement("p", null, "Luke ikke åpnet");
     }

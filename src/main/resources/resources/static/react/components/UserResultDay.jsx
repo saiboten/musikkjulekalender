@@ -5,11 +5,6 @@ var moment = require('moment');
 
 var UserResultDay = React.createClass({
 
-    componentDidMount() {
-      //  debug("this.props.userResult", this.props.userResult);
-      //  debug("this.props.day", this.props.day);
-    },
-
     render() {
         debug("props: ", this.props);
 
