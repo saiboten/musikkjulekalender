@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<div th:replace="before :: header"></div>
+</head>
+<body>
+
+	<div class="container" id="wrapper">
+		<div th:replace="before :: menu"></div>
+
+
+		<div class="row">
+			<div class="col-md-12 main">
+				<h1 style="text-align: center;">Musikkjulekalender 2016!</h1>
+				<div class="headerImageDiv">
+					<img src="/static/images/santas.jpg"
+						class="img-responsive headerImage" alt="Responsive image"> </img>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12 main">
+				<p>Velkommen til julekalenderen. Logg inn oppe til høyre!
+				<a href="/secure">Logg inn</a>
+				</p>
+			</div>
+		</div>
+		
+	</div>
+
+	<div th:replace="after :: footer">&copy; 2013 The Static
+		Templates</div>
+
+</body>
+</html>

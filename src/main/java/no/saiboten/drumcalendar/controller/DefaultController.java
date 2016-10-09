@@ -16,6 +16,12 @@ public class DefaultController {
 	@RequestMapping(value="/" )
 	public String frontpage(Model model) {
 		logger.debug("Request for front page");
+		return "start";
+	}
+	
+	@RequestMapping(value="/secure" )
+	public String secure(Model model) {
+		logger.debug("Request for front page");
 		return "main";
 	}
 

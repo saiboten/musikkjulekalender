@@ -1,5 +1,6 @@
 package no.saiboten.drumcalendar.rest;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,8 +51,8 @@ public class RestController {
 	}
 
 	@RequestMapping("/alldata")
-	public @ResponseBody Map<String,Object> getDays() {
-		logger.debug("Getting data");
+	public @ResponseBody Map<String,Object> getDays(Principal principal) {
+		logger.debug("Principal: " + principal);
 		
 		Map<String,Object> returnMap = new HashMap<String,Object>();
 		
