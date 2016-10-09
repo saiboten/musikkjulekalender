@@ -7,6 +7,7 @@ import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
+import org.keycloak.KeycloakSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 
 	@Autowired
 	CalendarUserService userService;
+	
 
 	public SecurityInterceptor() {
 
@@ -33,8 +35,11 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object arg2) throws Exception {
 		
-		logger.debug("The interceptor is connected. Yeah");
+		KeycloakSecurityContext sc = (KeycloakSecurityContext) request
+	    .getAttribute(KeycloakSecurityContext.class.getName());
 		
+		logger.debug("Security context: ", sc);
+				
 		if (loggedIn.isLoggedIn()) {
 			logger.debug("User is logged in!");
 			CalendarUserPostgres user = userService.getUser(loggedIn.getUserName());

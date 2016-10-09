@@ -1,13 +1,10 @@
 package no.saiboten.drumcalendar.admin;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
-import no.saiboten.drumcalendar.day.postgres.DayPostgres;
 import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.solution.SolutionRepository;
 import no.saiboten.drumcalendar.statistics.StatisticsService;
@@ -21,17 +18,11 @@ import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -92,7 +83,8 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/admin")
-	public String adminPage() {
+	public String adminPage(Principal principal) {
+		logger.debug("Principal :", principal);
 		return "admin";
 	}
 	

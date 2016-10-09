@@ -24,4 +24,9 @@ public class DefaultController {
 		return "om";
 	}
 	
+	@RequestMapping("/login")
+	public String login() {
+		return "login2";
+	}
+	
 }

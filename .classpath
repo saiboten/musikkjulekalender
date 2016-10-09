@@ -108,4 +108,16 @@
   <classpathentry kind="var" path="M2_REPO/org/aspectj/aspectjrt/1.8.9/aspectjrt-1.8.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/postgresql/postgresql/9.1-901-1.jdbc4/postgresql-9.1-901-1.jdbc4.jar"/>
   <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/2.9.4/joda-time-2.9.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-spring-boot-adapter/2.2.1.Final/keycloak-spring-boot-adapter-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-core/2.2.1.Final/keycloak-core-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-common/2.2.1.Final/keycloak-common-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcprov-jdk15on/1.52/bcprov-jdk15on-1.52.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcpkix-jdk15on/1.52/bcpkix-jdk15on-1.52.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-tomcat8-adapter/2.2.1.Final/keycloak-tomcat8-adapter-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-adapter-core/2.2.1.Final/keycloak-adapter-core-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-tomcat-core-adapter/2.2.1.Final/keycloak-tomcat-core-adapter-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-adapter-spi/2.2.1.Final/keycloak-adapter-spi-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-tomcat-adapter-spi/2.2.1.Final/keycloak-tomcat-adapter-spi-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-authz-client/2.2.1.Final/keycloak-authz-client-2.2.1.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/keycloak/keycloak-spring-security-adapter/2.2.1.Final/keycloak-spring-security-adapter-2.2.1.Final.jar"/>
 </classpath>
