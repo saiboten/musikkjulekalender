@@ -14,14 +14,24 @@ public class LoggedInRequestHolder {
 	/**
 	 * Username should really be email to make it unique
 	 */
-	private String userName;
+	private String email;
+	
+	private String nickName;
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 
 	public String getUserName() {
-		return userName;
+		return email;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.email = userName;
 	}
 
 	private CalendarUserPostgres calendarUser;

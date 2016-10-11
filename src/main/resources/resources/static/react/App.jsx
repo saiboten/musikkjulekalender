@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var debug = require('debug')('App');
 
 var MusikkJulekalender = require('./components/MusikkJulekalender.jsx');
 var SingleGuessDayContainer = require('./components/SingleGuessDayContainer.jsx');
@@ -8,6 +9,7 @@ var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStati
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
 var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
 var DayActions = require('./actions/DayAction');
+var keycloak = require('./sources/KeycloakSource');
 
 if(document.getElementById('MusikkJulekalender')) {
     ReactDOM.render(
@@ -51,4 +53,3 @@ if(document.getElementById('topscore')) {
     );
 }
 
-DayActions.getDays();

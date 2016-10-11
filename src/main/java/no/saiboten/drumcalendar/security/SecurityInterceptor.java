@@ -41,29 +41,32 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 			HttpServletResponse response, Object arg2) throws Exception {
 
 		final Principal userPrincipal = request.getUserPrincipal();
+		
+		logger.debug("URL: " + request.getRequestURI());
+
 		logger.debug("User principal: " + userPrincipal);
+		
 		if (userPrincipal instanceof KeycloakAuthenticationToken) {
 			logger.debug("Its instance of alright");
 			KeycloakAuthenticationToken kp = (KeycloakAuthenticationToken) userPrincipal;
-			logger.debug("Name: " + kp.getName());
-			logger.debug("Email: " + kp.getAccount().getKeycloakSecurityContext().getIdToken().getEmail());
-			logger.debug("Nickname: " + kp.getAccount().getKeycloakSecurityContext().getIdToken().getNickName());
-			logger.debug("Preferred username: " + kp.getAccount().getKeycloakSecurityContext().getIdToken().getPreferredUsername());
+			String email = kp.getAccount().getKeycloakSecurityContext().getToken().getEmail();
+
+			if(email != null) {
+				loggedIn.setLoggedIn(true);
+				loggedIn.setUserName(email);
+				loggedIn.setNickName(kp.getAccount().getKeycloakSecurityContext().getToken().getPreferredUsername());
+			}
 		}
 
-		KeycloakSecurityContext sc = (KeycloakSecurityContext) request
-				.getAttribute(KeycloakSecurityContext.class.getName());
-
-		logger.debug("Security context: ", sc);
-
 		if (loggedIn.isLoggedIn()) {
-			logger.debug("User is logged in!");
+			logger.debug("User is logged in, user is :" +loggedIn.getUserName());
 			CalendarUserPostgres user = userService.getUser(loggedIn
 					.getUserName());
 			if (user == null) {
 				logger.debug("User does not exist in db. Creating user in db!");
 				user = new CalendarUserPostgres();
 				user.setUserName(loggedIn.getUserName());
+				user.setNickName(loggedIn.getNickName());
 				userService.putUser(user);
 			}
 

@@ -20,13 +20,13 @@ public class DefaultController {
 	@RequestMapping(value="/" )
 	public String frontpage(Model model) {
 		logger.debug("Request for front page");
-		return "start";
+		return "main";
 	}
 	
 	@RequestMapping(value="/secure" )
-	public String secure(Model model) {
-		logger.debug("Request for front page");
-		return "main";
+	public RedirectView login(Model model) {
+		logger.debug("/secure is secured - will be a login");
+		return new RedirectView("/");
 	}
 	
 	@RequestMapping(value="/logout" )
