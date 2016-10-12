@@ -9,7 +9,6 @@ var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStati
 var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
 var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
 var DayActions = require('./actions/DayAction');
-var keycloak = require('./sources/KeycloakSource');
 
 if(document.getElementById('MusikkJulekalender')) {
     ReactDOM.render(
@@ -53,3 +52,4 @@ if(document.getElementById('topscore')) {
     );
 }
 
+DayActions.getDays();
