@@ -9,6 +9,8 @@
 
 <title>Julekalender - Musikkquiz!</title>
 
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
@@ -77,7 +79,7 @@
 					<ul class="nav navbar-nav">
 						<li class=""><a href="/"> Forsiden </a></li>
 						<li class=""><a href="/om"> Om kalenderen </a></li>
-						<li class=""><a href="/logmeon"> Logg inn/ut </a></li>
+						<li class=""><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a></li>						
 					</ul>
 
 				</div>

@@ -1,6 +1,5 @@
 package no.saiboten.drumcalendar.admin;
 
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,34 +57,16 @@ public class AdminController {
 		this.solutionRepository = solutionRepository;
 	}
 
-	@RequestMapping(value = "/admin/deletestatistics")
-	public String deleteStatistics() {
-		statsService.deleteStatistics();
-		return "answergiven";
-	}
-
-	@RequestMapping(value = "/admin/users")
-	public String viewUsers() {
-		return "users";
-	}
-
 	@RequestMapping("/admin/newwinner/{day}")
 	public String addWinner(@PathVariable("day") String day) {
 		winnerService.addWinner(day);
 		return "users";
 	}
 
-	@RequestMapping(value = "/admin/fakelogin/{userid}", method = RequestMethod.GET)
-	public RedirectView addDayGet(@PathVariable("userid") String userid) {
-		RedirectView redirectView = new RedirectView("/admin");
-		loggedIn.setUserName(userid);
-		loggedIn.setLoggedIn(true);
-		return redirectView;
-	}
-
 	@RequestMapping(value = "/admin")
-	public String adminPage(Principal principal) {
-		logger.debug("Principal :", principal);
+	public String adminPage(Model model) {
+		model.addAttribute("loggedin", loggedIn.isLoggedIn());
+
 		return "admin";
 	}
 	
@@ -92,6 +74,8 @@ public class AdminController {
 	public @ResponseBody Map<String,Object> getDays() {
 		logger.debug("Getting data");
 		
+
+
 		Map<String,Object> returnMap = new HashMap<String,Object>();
 		
 		returnMap.put("days", dayService.getDays());
