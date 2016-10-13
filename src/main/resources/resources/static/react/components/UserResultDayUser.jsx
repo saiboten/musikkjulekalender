@@ -1,22 +1,15 @@
 var React = require('react');
 var debug = require('debug')('UserResultDayUser');
+var moment = require('moment');
 
 var UserResultDayUser = React.createClass({
     render() {
-        var padZeroes = function(input) {
-          if(/^\d{1}$/.test(input)) {
-            return "0"+input.toString();
-          }
-          return input;
-        }
 
-        var day = "";
-        var date = new Date(this.props.user.time);
-        var timeOfResult = padZeroes(date.getHours()) + ":" + padZeroes(date.getMinutes());
+        var momentTime = moment(this.props.user.time).format("HH:mm");
 
         return (
             <li>
-              <p>{this.props.user.name}: {timeOfResult}</p>
+              <p>{this.props.user.name}: {momentTime} </p>
             </li>
         );
     }
