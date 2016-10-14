@@ -6,7 +6,6 @@ import java.util.Map;
 import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.day.service.DayService;
 import no.saiboten.drumcalendar.solution.SolutionRepository;
-import no.saiboten.drumcalendar.statistics.StatisticsService;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.winner.WinnerService;
@@ -21,16 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AdminController {
 
 	private CalendarUserService userService;
-
-	private StatisticsService statsService;
 
 	private WinnerService winnerService;
 
@@ -46,10 +41,9 @@ public class AdminController {
 
 	@Autowired
 	public AdminController(CalendarUserService userService,
-			StatisticsService statsService, WinnerService winnerService,
+			 WinnerService winnerService,
 			DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository, SolutionRepository solutionRepository) {
 		this.userService = userService;
-		this.statsService = statsService;
 		this.winnerService = winnerService;
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;

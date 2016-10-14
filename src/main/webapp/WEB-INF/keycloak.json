@@ -1,7 +1,7 @@
 {
   "realm": "musikkjulekalender",
   "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApwtqq68Ng+AtbU3uQqNgrJAeUnp3r00S99o7N2O7Up+74W8aT0XfDRWR5yKRG2q4DjA8Zqgne4+EMuqFVC/CODuhO0Zj4U+d8aMQXtL06bujpz8rwosQfLiIWJ5SZzN1vxYok+rHKddI3MK/LXLti8tfmDk3zwcipOr6g7/1G4Z/1FibYZC03waVVTtef7YBfyEK4NgoquW9gF6/HbIi84kNLvm2Hh5Wgl6n2SZ+4iuTCri/gxpWdjK79ezntK9/xvssOsxPNTDUHdqVQ90P1mkjfV5ctY1eXz82QAbRLejXV7L4fJvXci1corT9zynoOymEFJZr12Vb/UeECejQIwIDAQAB",
-  "auth-server-url": "http://localhost:8180/auth",
+  "auth-server-url": "http://mjk.no:8180/auth",
   "ssl-required": "external",
   "resource": "musikkjulekalender",
   "credentials": {
