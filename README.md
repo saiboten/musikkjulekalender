@@ -44,8 +44,10 @@ spring.devtools.livereload.port=35729
 * Open localhost:8080
 * To log in - you need a Keycloak server set up correctly.
   * Download Keycloak 2.2.1
-  * The first time you should load the settings ( TODO attach realm config json and description of how to import)
   * Run bin/standalone.sh (or .bat for windows) -Djboss.socket.binding.port-offset=100
+    * This will launch keycloak on port 8180.
+  * Open localhost:8180 - Go to admin panel, create admin user.
+  * Create realm "musikkjulekalender". Click through settings and set things up!
 
 ## Technology
 
