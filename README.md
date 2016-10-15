@@ -43,9 +43,9 @@ spring.devtools.livereload.port=35729
 * mvn sprint-boot:run
 * Open localhost:8080
 * To log in - you need a Keycloak server set up correctly.
-** Download Keycloak 2.2.1
-** The first time you should load the settings ( TODO attach realm config json and description of how to import)
-** Run bin/standalone.sh (or .bat for windows) -Djboss.socket.binding.port-offset=100
+  * Download Keycloak 2.2.1
+  * The first time you should load the settings ( TODO attach realm config json and description of how to import)
+  * Run bin/standalone.sh (or .bat for windows) -Djboss.socket.binding.port-offset=100
 
 ## Technology
 
