@@ -72,6 +72,28 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 
 			loggedIn.setCalendarUser(user);
 		}
+		
+		
+		if (request.getParameter("mock") != null) {
+			
+			loggedIn.setLoggedIn(true);
+			loggedIn.setUserName("test@test.no");
+			loggedIn.setNickName("testuser");
+			
+			logger.debug("User is mocking login. Giving him user test");
+			CalendarUserPostgres user = userService.getUser(loggedIn
+					.getUserName());
+			if (user == null) {
+				logger.debug("User does not exist in db. Creating user in db!");
+				user = new CalendarUserPostgres();
+				user.setUserName(loggedIn.getUserName());
+				user.setNickName(loggedIn.getNickName());
+				userService.putUser(user);
+			}
+
+			loggedIn.setCalendarUser(user);
+		}
+		
 		return true;
 	}
 }

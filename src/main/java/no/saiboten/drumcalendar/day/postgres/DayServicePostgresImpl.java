@@ -44,7 +44,6 @@ public class DayServicePostgresImpl implements DayService {
 				return 1;
 			}
 		});
-		logger.debug("Returning days: " + returnDays);
 		return returnDays;
 	}
 

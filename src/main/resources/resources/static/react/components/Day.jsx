@@ -3,6 +3,8 @@ var debug = require('debug')('Day');
 var moment = require('moment');
 var GuessDay = require('./GuessDay.jsx');
 var DateHeader = require('./DateHeader.jsx');
+var ShowSolution = require('./ShowSolution.jsx');
+var Day4Realz = require('./Day4Realz.jsx');
 
 var Day = React.createClass({
 
@@ -30,28 +32,16 @@ var Day = React.createClass({
 
         if(this.state.showSolution && this.props.day.solutionArtist) {
           day = (
-            <div>
-              <p>{this.props.day.description}</p>
-              <p>
-                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
-              </p>
-              <audio src={this.props.day.link} controls>
-                <a href={this.props.day.link}>Last ned låt</a>
-              </audio>
-            </div>);
+            <ShowSolution day={this.props.day} />
+              );
         }
         else if(this.props.day.revealDateAsString === this.props.date) {
             day = (<GuessDay date={this.props.day.revealDateAsString} today={this.props.today} day={this.props.day} answers={this.props.answers} user={this.props.user} />);
         }
         else if (this.props.day.description) {
            day = (
-             <span>
-              <p>{this.props.day.description}</p>
-              <p><button onClick={this.showSolution}>Vis fasit</button></p>
-              <audio className="audio" src={this.props.day.link} preload="none" controls>
-                <a href={this.props.day.link}>Last ned låt</a>
-              </audio>
-            </span>);
+               <Day4Realz day={this.props.day} showSolutionCallback={this.showSolution} />
+             );
         }
         else {
           day = (<p>Luke ikke åpnet</p>);

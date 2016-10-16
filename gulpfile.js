@@ -35,7 +35,7 @@ gulp.task('browserify', function() {
             return notify().write(err);
         }) // Create the initial bundle when starting the task
         .pipe(source('app.js'))
-        .pipe(gulp.dest('./target/classes/resources/static/react/dist'));
+        .pipe(gulp.dest('../target/classes/resources/static/react/dist'));
 });
 
 // The default task (called when you run `gulp` from cli)
