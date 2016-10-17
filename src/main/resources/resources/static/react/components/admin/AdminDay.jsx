@@ -168,7 +168,7 @@ var AdminDay = React.createClass({
                     </p>
                     <p>
                         <button onClick={this.saveChanges}>Lagre endringer</button>
-                        <button onClick={this.deleteDay}>Slett dag</button><p>{this.state.confirmDelete ? "Bekreft":""}</p>
+                        <button onClick={this.deleteDay}>Slett dag</button>{this.state.confirmDelete ? "Bekreft":""}
                     </p>
                     <audio src={this.state.link} controls>
                         <a href={this.state.link}>Last ned låt</a>

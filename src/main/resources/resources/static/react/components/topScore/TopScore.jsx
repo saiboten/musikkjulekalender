@@ -9,10 +9,12 @@ var TopScore = React.createClass({
     },
 
     render() {
-        var user = this.props.user && this.props.topListUser.user === this.props.user.userNameNotMail ? (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>) : this.props.topListUser.user + " " + this.props.topListUser.score;
-        return (
-          <li>{user}</li>
-        );
+      //  var user = this.props.user && this.props.topListUser.user === this.props.user.userNameNotMail ? (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>) : this.props.topListUser.user + " " + this.props.topListUser.score;
+
+        return (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>);
+      //  return (
+      //    <li>{user}</li>
+      //  );
     }
 });
 

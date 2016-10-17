@@ -23,7 +23,9 @@ var GuessDay = React.createClass({
     },
 
     guessChanged() {
-        debug("Guess changed, refetching data just in case something has changed");
+        debug("Guess changed, refetching data just in case something has changed", GuessState.getState());
+        
+
         this.setState({
             guessResponse: GuessStore.getState()
         });
