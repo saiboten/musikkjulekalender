@@ -9,27 +9,9 @@
 
 <title>Julekalender - Musikkquiz!</title>
 
-<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></link>
-<link rel="stylesheet" href="/static/css/custom.css"></link>
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-</link>
-
 <link rel="stylesheet"
 	href="static/css/react-datepicker.css">
 </link>
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-  
 
 <script>
 	(function(i, s, o, g, r, a, m) {
@@ -50,10 +32,6 @@
 </head>
 
 <body>
-
-
-
-
 
 	<!-- Svaret på dagens spørsmålet ligger skjult i denne koden: 0101010001110010011011110111001000100000011001000111010100100000011101100110100101110010011010110110010101101100011010010110011100100000011010100110010101100111001000000111001011111000011100000110010101110010001000000111001101110110011000010111001001100101011101000010000001101001001000000110101101101001011011000110010001100101011010110110111101100100011001010110111000111111001000000100001101101111011011010110010100100000011011110110111000100001 -->
 
@@ -79,7 +57,7 @@
 					<ul class="nav navbar-nav">
 						<li class=""><a href="/"> Forsiden </a></li>
 						<li class=""><a href="/om"> Om kalenderen </a></li>
-						<li class=""><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a></li>						
+						<li class=""><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a></li>
 					</ul>
 
 				</div>
@@ -91,5 +69,3 @@
 
 </body>
 </html>
-
-
