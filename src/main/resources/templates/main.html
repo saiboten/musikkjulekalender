@@ -5,42 +5,33 @@
 </head>
 <body>
 
-	<div class="container" id="wrapper">
+	<div>
 		<div th:replace="before :: menu"></div>
 
 
-		<div class="row">
-			<div class="col-md-12 main">
-				<h1 style="text-align: center;">Musikkjulekalender 2016!</h1>
-				<div class="headerImageDiv">
-					<img src="/static/images/santas.jpg"
-						class="img-responsive headerImage" alt="Responsive image"> </img>
-				</div>
+		<div>
+			<h1>Musikkjulekalender 2016!</h1>
+			<div>
+				<img src="/static/images/santas.jpg" alt="Responsive image" />
 			</div>
+
 		</div>
-		<div class="row">
-			<div class="col-md-6 pane" id="frontpage"></div>
-			<!-- <div class="col-md-6 pane">
+		<div id="frontpage"></div>
+		<!-- <div class="col-md-6 pane">
 			    <h1>Dine resultater</h1>
 			    <div id="currentuserstatistics">
 			    </div>
 			  </div> -->
+		<div>
+			<h1>Dagens beste!</h1>
+			<div id="userstatistics"></div>
+
+			<h1>Toppscorelisten!</h1>
+			<div id="topscore"></div>
 		</div>
-		<div class="row">
-			<div class="col-md-6 pane">
-				<h1>Dagens beste!</h1>
-				<div id="userstatistics"></div>
-			</div>
-			<div class="col-md-6 pane">
-				<h1>Toppscorelisten!</h1>
-				<div id="topscore"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 main">
-				<h1>Løsninger</h1>
-				<div id="DaysContainer"></div>
-			</div>
+		<div>
+			<h1>Løsninger</h1>
+			<div id="DaysContainer"></div>
 		</div>
 	</div>
 

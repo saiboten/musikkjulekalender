@@ -6,6 +6,8 @@ var DatePicker = require('react-datepicker');
 var AdminDaySolution = require('./AdminDaySolution');
 var DateHeader = require('../DateHeader.jsx');
 
+require('react-datepicker/dist/react-datepicker.css');
+
 var AdminDay = React.createClass({
 
     componentDidMount() {
