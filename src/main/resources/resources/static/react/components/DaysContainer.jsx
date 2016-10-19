@@ -3,9 +3,9 @@ var AltContainer = require('alt-container');
 var DayStore = require('../stores/DayStore');
 var DayActions = require('../actions/DayAction');
 var Days = require('./Days.jsx');
-var debug = require('debug')('MusikkJulekalender');
+var debug = require('debug')('DaysContainer');
 
-var MusikkJulekalender = React.createClass({
+var DaysContainer = React.createClass({
 
     getInitialState() {
         return {
@@ -26,4 +26,4 @@ var MusikkJulekalender = React.createClass({
     }
 });
 
-module.exports = MusikkJulekalender;
+module.exports = DaysContainer;

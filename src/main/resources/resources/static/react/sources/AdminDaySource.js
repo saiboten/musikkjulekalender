@@ -1,6 +1,6 @@
 var request = require('superagent');
 var Promise = require('promise');
-var debug = require('debug', 'AdminDaySource');
+var debug = require('debug')('AdminDaySource');
 
 var AdminDaySource = {
 
@@ -10,7 +10,7 @@ var AdminDaySource = {
                 .get('/admin/alldata')
                 .end(function(err, res) {
                 if(err) {
-                    debug("Nope, something is wrong: ", err);
+                    debug("Nope, something is not right: ", err);
                     reject(err);
                 }
                 else {

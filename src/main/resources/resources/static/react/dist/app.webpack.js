@@ -50,7 +50,7 @@
 	var ReactDOM = __webpack_require__(34);
 	var debug = __webpack_require__(172)('App');
 
-	var DaysContainer = __webpack_require__(360);
+	var MusikkJulekalender = __webpack_require__(175);
 	var SingleGuessDayContainer = __webpack_require__(338);
 	var UserStatisticsContainer = __webpack_require__(340);
 	var CurrentUserStatisticsContainer = __webpack_require__(344);
@@ -58,8 +58,8 @@
 	var AdminOverviewContainer = __webpack_require__(350);
 	var DayActions = __webpack_require__(204);
 
-	if (document.getElementById('DaysContainer')) {
-	    ReactDOM.render(React.createElement(DaysContainer, null), document.getElementById('DaysContainer'));
+	if (document.getElementById('MusikkJulekalender')) {
+	    ReactDOM.render(React.createElement(MusikkJulekalender, null), document.getElementById('MusikkJulekalender'));
 	}
 
 	if (document.getElementById('frontpage')) {
@@ -21960,7 +21960,40 @@
 
 
 /***/ },
-/* 175 */,
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var AltContainer = __webpack_require__(176);
+	var DayStore = __webpack_require__(188);
+	var DayActions = __webpack_require__(204);
+	var Days = __webpack_require__(222);
+	var debug = __webpack_require__(172)('MusikkJulekalender');
+
+	var MusikkJulekalender = React.createClass({
+	    displayName: 'MusikkJulekalender',
+	    getInitialState: function getInitialState() {
+	        return {
+	            error: ""
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        //Get things  SongActions.getSong();
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            AltContainer,
+	            { store: DayStore },
+	            React.createElement(Days, null)
+	        );
+	    }
+	});
+
+	module.exports = MusikkJulekalender;
+
+/***/ },
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -42855,7 +42888,7 @@
 	        return new Promise(function (resolve, reject) {
 	            request.get('/admin/alldata').end(function (err, res) {
 	                if (err) {
-	                    debug("Nope, something is not right: ", err);
+	                    debug("Nope, something is wrong: ", err);
 	                    reject(err);
 	                } else {
 	                    debug("Got all songs :", res.body);
@@ -43628,40 +43661,6 @@
 	});
 
 	module.exports = AdminAddDay;
-
-/***/ },
-/* 360 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var DayStore = __webpack_require__(188);
-	var DayActions = __webpack_require__(204);
-	var Days = __webpack_require__(222);
-	var debug = __webpack_require__(172)('DaysContainer');
-
-	var DaysContainer = React.createClass({
-	    displayName: 'DaysContainer',
-	    getInitialState: function getInitialState() {
-	        return {
-	            error: ""
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        //Get things  SongActions.getSong();
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            AltContainer,
-	            { store: DayStore },
-	            React.createElement(Days, null)
-	        );
-	    }
-	});
-
-	module.exports = DaysContainer;
 
 /***/ }
 /******/ ]);

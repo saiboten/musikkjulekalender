@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var debug = require('debug')('App');
 
-var MusikkJulekalender = require('./components/MusikkJulekalender.jsx');
+var DaysContainer = require('./components/DaysContainer.jsx');
 var SingleGuessDayContainer = require('./components/SingleGuessDayContainer.jsx');
 var UserStatisticsContainer = require('./components/UserStatisticsContainer.jsx');
 var CurrentUserStatisticsContainer = require('./components/user/CurrentUserStatisticsContainer.jsx');
@@ -10,10 +10,10 @@ var TopScoreContainer = require('./components/topScore/TopScoreContainer.jsx');
 var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
 var DayActions = require('./actions/DayAction');
 
-if(document.getElementById('MusikkJulekalender')) {
+if(document.getElementById('DaysContainer')) {
     ReactDOM.render(
-        <MusikkJulekalender />,
-        document.getElementById('MusikkJulekalender')
+        <DaysContainer />,
+        document.getElementById('DaysContainer')
     );
 }
 
