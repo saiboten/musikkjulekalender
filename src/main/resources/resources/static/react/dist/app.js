@@ -21984,9 +21984,13 @@
 	    },
 	    render: function render() {
 	        return React.createElement(
-	            AltContainer,
-	            { store: DayStore },
-	            React.createElement(Days, null)
+	            Block,
+	            null,
+	            React.createElement(
+	                AltContainer,
+	                { store: DayStore },
+	                React.createElement(Days, null)
+	            )
 	        );
 	    }
 	});
@@ -42141,7 +42145,7 @@
 	      null,
 	      React.createElement(
 	        Block,
-	        { color: 'red' },
+	        null,
 	        this.props.day.description
 	      ),
 	      React.createElement(

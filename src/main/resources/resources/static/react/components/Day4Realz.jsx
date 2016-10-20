@@ -8,7 +8,7 @@ var Block = require('jsxstyle/Block');
 var Day4Realz = React.createClass({
     render() {
        return (<span>
-              <Block color="red">{this.props.day.description}</Block>
+              <Block >{this.props.day.description}</Block>
               <p><button onClick={this.props.showSolutionCallback}>Vis fasit</button></p>
               <audio className="audio" src={this.props.day.link} preload="none" controls>
                 <a href={this.props.day.link}>Last ned låt</a>

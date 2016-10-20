@@ -19,9 +19,11 @@ var DaysContainer = React.createClass({
 
     render() {
         return (
+          <Block>
           <AltContainer store={DayStore}>
                  <Days />
           </AltContainer>
+          </Block>
         );
     }
 });
