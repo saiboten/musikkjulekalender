@@ -6,9 +6,12 @@ var TopScores = require('./TopScores.jsx');
 var TopScoreContainer = React.createClass({
     render() {
         return (
-          <AltContainer store={DayStore}>
-                 <TopScores />
-          </AltContainer>
+            <div>
+                <h1>Toppscorelisten!</h1>
+                <AltContainer store={DayStore}>
+                    <TopScores />
+                </AltContainer>
+            </div>
         );
     }
 });

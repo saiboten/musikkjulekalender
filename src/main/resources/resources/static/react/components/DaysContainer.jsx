@@ -4,6 +4,7 @@ var DayStore = require('../stores/DayStore');
 var DayActions = require('../actions/DayAction');
 var Days = require('./Days.jsx');
 var debug = require('debug')('DaysContainer');
+var Block = require('jsxstyle/Block');
 
 var DaysContainer = React.createClass({
 
@@ -14,16 +15,17 @@ var DaysContainer = React.createClass({
     },
 
     componentDidMount() {
-      //Get things  SongActions.getSong();
+        //Get things  SongActions.getSong();
     },
 
     render() {
         return (
-          <Block>
-          <AltContainer store={DayStore}>
-                 <Days />
-          </AltContainer>
-          </Block>
+            <Block>
+                <h1>Løsninger</h1>
+                <AltContainer store={DayStore}>
+                    <Days />
+                </AltContainer>
+            </Block>
         );
     }
 });

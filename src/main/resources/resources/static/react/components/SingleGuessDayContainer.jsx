@@ -4,6 +4,7 @@ var DayStore = require('../stores/DayStore');
 var DayActions = require('../actions/DayAction');
 var Days = require('./Days.jsx');
 var SingleGuessDay = require('./SingleGuessDay.jsx');
+var Block = require('jsxstyle/Block');
 
 var SingleGuessDayContainer = React.createClass({
 
@@ -13,9 +14,11 @@ var SingleGuessDayContainer = React.createClass({
 
     render() {
         return (
-          <AltContainer store={DayStore}>
-                 <SingleGuessDay />
-          </AltContainer>
+            <Block width="700px" margin="20px auto" padding="10px"  borderRadius="5px" backgroundColor="white">
+                <AltContainer store={DayStore}>
+                    <SingleGuessDay />
+                </AltContainer>
+            </Block>
         );
     }
 });

@@ -7,9 +7,12 @@ var UserStatistics = require('./UserStatistics.jsx');
 var UserStatisticsContainer = React.createClass({
     render() {
         return (
-          <AltContainer store={DayStore}>
-                 <UserStatistics />
-          </AltContainer>
+            <div>
+                <h1>Dagens beste!</h1>
+                <AltContainer store={DayStore}>
+                     <UserStatistics />
+              </AltContainer>
+            </div>
         );
     }
 });
