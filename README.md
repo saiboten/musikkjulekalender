@@ -10,22 +10,48 @@ This is the repo for musikkjulekalender, the annual music contest during christm
 * Create a file named application.properties - place it under src/main/resources/config. Let it have the following content:
 
 ```
-admin.username=admin  
-admin.password=YOUR PASSWORD HERE  
-facebook.secret=facebook secret  
-spring.mvc.view.prefix=/WEB-INF/jsp/  
-spring.mvc.view.suffix=.jsp
+spring.datasource.url=jdbc:postgresql://localhost:5432/musikkjulekalender
+spring.datasource.username=postgres
+spring.datasource.password=INSERT_POSTGRES_PASSWORD
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.generate-ddl=true
+
+logging.level.root=WARN
+logging.level.no.saiboten.drumcalendar=DEBUG
+
+keycloak.realm=musikkjulekalender
+keycloak.realmKey=INSERT_REAL_KEY
+keycloak.auth-server-url=http://mkj.no:8180/auth (example)
+keycloak.ssl-required=external
+keycloak.resource=musikkjulekalender
+keycloak.credentials.secret=INSERT_CREDENTIAL_SECRET
+keycloak.use-resource-role-mappings = false
+
+keycloak.securityConstraints[0].securityCollections[1].name = admin stuff
+keycloak.securityConstraints[0].securityCollections[1].authRoles[0] = admin
+keycloak.securityConstraints[0].securityCollections[1].patterns[0] = /admin*
+
+# Below is for local development
+spring.resources.chain.enabled=false
+spring.resources.chain.cache=false
+spring.resources.cache-period=0
+spring.cache.type=none
+spring.devtools.livereload.enabled=true
+spring.devtools.livereload.port=35729
 ```
 
 * mvn sprint-boot:run
 * Open localhost:8080
-* To access admin pages to add new quiz questions, go to: localhost:8080/admin - username and password is found in application.properties.
+* To log in - you need a Keycloak server set up correctly.
+** Download Keycloak 2.2.1
+** The first time you should load the settings ( TODO attach realm config json and description of how to import)
+** Run bin/standalone.sh (or .bat for windows) -Djboss.socket.binding.port-offset=100
 
 ## Technology
 
 Front end:
 * React
-* JSP for html rendering
+* Thymeleaf for html rendering
 * Gulp
 * browserify
 * bootstrap
@@ -35,7 +61,14 @@ Back end:
 * Postgres
 * Spring Boot
 * Spring Security
+* Keycloak Client Adapters
 
+External
+* Keycloak
+
+## Plans ahead
+* Switch to webpack
+* Remove bootstrap - create all CSS some other way.
 
 ## Contributing
 
