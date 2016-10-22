@@ -2,85 +2,186 @@
 <html>
 
 <head th:fragment="header">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
-<link rel="shortcut icon" href="/static/favicon.ico"></link>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
+    <link rel="shortcut icon" href="/static/favicon.ico"></link>
 
-<title>Julekalender - Musikkquiz!</title>
+    <title>Julekalender - Musikkquiz!</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet"/>
+
+    <style>
+        body {
+            background-color: #adc3de;
+        }
+
+        .main-wrapper {
+            width: 980px;
+        }
+
+        h1 {
+            margin: 10px;
+        }
+
+        h3 {
+            margin: 10px;
+        }
+
+        nav.header {
+            margin: 10px auto;
+            background: white;
+            width: 500px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .day__container {
+            width: 50%;
+        }
+
+        .footer-copyright {
+            background-color: white;
+            text-align: center;
+            margin: 10px auto;
+            width: 225px;
+            padding :10px;
+            border-radius: 5px;
+        }
+
+        .guess-day__container {
+            width: 60%;
+        }
+
+        .wrapper {
+            background: none;
+            font-family: 'Rubik', sans-serif;
+            background-image: url('/static/images/s1.png'), url('/static/images/s2.png'), url('/static/images/s3.png');
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+            -webkit-animation: snow 10s linear infinite;
+            -moz-animation: snow 10s linear infinite;
+            -ms-animation: snow 10s linear infinite;
+            animation: snow 10s linear infinite;
+        }
+
+        .guess-form__input {
+            width: 80%;
+            margin: 10px 0;
+        }
+
+        .guess-form__submitbutton {
+            width: 15%;
+            margin: 10px 0;
+        }
+
+        @keyframes snow {
+            0% {
+                background-position: 0px 0px, 0px 0px, 0px 0px;
+            }
+            50% {
+                background-position: 500px 500px, 100px 200px, -100px 150px;
+            }
+            100% {
+                background-position: 500px 1000px, 200px 400px, -100px 300px;
+            }
+        }
+
+        @-moz-keyframes snow {
+            0% {
+                background-position: 0px 0px, 0px 0px, 0px 0px;
+            }
+            50% {
+                background-position: 500px 500px, 100px 200px, -100px 150px;
+            }
+            100% {
+                background-position: 400px 1000px, 200px 400px, 100px 300px;
+            }
+        }
+
+        @-webkit-keyframes snow {
+            0% {
+                background-position: 0px 0px, 0px 0px, 0px 0px;
+            }
+            50% {
+                background-position: 500px 500px, 100px 200px, -100px 150px;
+            }
+            100% {
+                background-position: 500px 1000px, 200px 400px, -100px 300px;
+            }
+        }
+
+        @-ms-keyframes snow {
+            0% {
+                background-position: 0px 0px, 0px 0px, 0px 0px;
+            }
+            50% {
+                background-position: 500px 500px, 100px 200px, -100px 150px;
+            }
+            100% {
+                background-position: 500px 1000px, 200px 400px, -100px 300px;
+            }
+        }
 
 
-<style>
-body { background-color:#adc3de; }
-.wrapper{
-	background: none;
-	font-family: Androgyne;
-	background-image: url('/static/images/s1.png'), url('/static/images/s2.png'), url('/static/images/s3.png');
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index:1;
-	-webkit-animation: snow 10s linear infinite;
-	-moz-animation: snow 10s linear infinite;
-	-ms-animation: snow 10s linear infinite;
-	animation: snow 10s linear infinite;
-}
-@keyframes snow {
-  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-}
-@-moz-keyframes snow {
-  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-  100% {background-position: 400px 1000px, 200px 400px, 100px 300px;}
-}
-@-webkit-keyframes snow {
-  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-}
-@-ms-keyframes snow {
-  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
-  50% {background-position: 500px 500px, 100px 200px, -100px 150px;}
-  100% {background-position: 500px 1000px, 200px 400px, -100px 300px;}
-}	
-</style>
+        @media (max-width: 500px) {
+            .main-wrapper {
+                width: 320px;
+            }
 
-<script>
-	(function(i, s, o, g, r, a, m) {
-		i['GoogleAnalyticsObject'] = r;
-		i[r] = i[r] || function() {
-			(i[r].q = i[r].q || []).push(arguments)
-		}, i[r].l = 1 * new Date();
-		a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-		a.async = 1;
-		a.src = g;
-		m.parentNode.insertBefore(a, m)
-	})(window, document, 'script', '//www.google-analytics.com/analytics.js',
-			'ga');
+            nav.header {
+                width: 300px;
+            }
 
-	ga('create', 'UA-70967404-1', 'auto');
-	ga('send', 'pageview');
-</script>
+            .day__container {
+                width: 100%;
+            }
+
+            .guess-day__container {
+                width: 100%;
+            }
+        }
+
+
+    </style>
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js',
+                'ga');
+
+        ga('create', 'UA-70967404-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 
 <body>
 
-	<!-- Svaret på dagens spørsmålet ligger skjult i denne koden: 0101010001110010011011110111001000100000011001000111010100100000011101100110100101110010011010110110010101101100011010010110011100100000011010100110010101100111001000000111001011111000011100000110010101110010001000000111001101110110011000010111001001100101011101000010000001101001001000000110101101101001011011000110010001100101011010110110111101100100011001010110111000111111001000000100001101101111011011010110010100100000011011110110111000100001 -->
+<!-- Svaret på dagens spørsmålet ligger skjult i denne koden: 0101010001110010011011110111001000100000011001000111010100100000011101100110100101110010011010110110010101101100011010010110011100100000011010100110010101100111001000000111001011111000011100000110010101110010001000000111001101110110011000010111001001100101011101000010000001101001001000000110101101101001011011000110010001100101011010110110111101100100011001010110111000111111001000000100001101101111011011010110010100100000011011110110111000100001 -->
 
-	<div th:fragment="menu">
-		<nav>
-				<a href="#">Musikkjulekalender 2016</a>
-					<ul>
-						<li><a href="/"> Forsiden </a></li>
-						<li><a href="/om"> Om kalenderen </a></li>
-						<li><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a></li>
-					</ul>
-		</nav>
-	</div>
+<div th:fragment="menu">
+    <nav class="header">
+        <a href="#">Musikkjulekalender 2016</a>
+        <ul>
+            <li><a href="/"> Forsiden </a></li>
+            <li><a href="/om"> Om kalenderen </a></li>
+            <li><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 </body>
 </html>

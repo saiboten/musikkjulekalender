@@ -51,10 +51,10 @@ var Day = React.createClass({
         }
 
         return (
-            <Flex width="50%">
+            <Block className="day__container">
                 <DateHeader unixDate={this.props.day.revealDateAsString}></DateHeader>
                 {day}
-            </Flex>
+            </Block>
         );
     }
 });

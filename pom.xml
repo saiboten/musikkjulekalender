@@ -129,6 +129,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>false</executable>
+					<addResources>true</addResources>
 				</configuration>
 			</plugin>
 

@@ -50,9 +50,9 @@
 	var ReactDOM = __webpack_require__(34);
 	var debug = __webpack_require__(172)('App');
 
-	var Main = __webpack_require__(264);
-	var AdminOverviewContainer = __webpack_require__(250);
-	var DayActions = __webpack_require__(204);
+	var Main = __webpack_require__(175);
+	var AdminOverviewContainer = __webpack_require__(248);
+	var DayActions = __webpack_require__(205);
 
 	if (document.getElementById('main')) {
 	    ReactDOM.render(React.createElement(Main, null), document.getElementById('main'));
@@ -21946,45 +21946,77 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var DayStore = __webpack_require__(188);
-	var DayActions = __webpack_require__(204);
-	var Days = __webpack_require__(218);
-	var debug = __webpack_require__(172)('DaysContainer');
-	var Block = __webpack_require__(229);
+	var SingleGuessDayContainer = __webpack_require__(176);
+	var UserStatisticsContainer = __webpack_require__(240);
+	var TopScoreContainer = __webpack_require__(244);
+	var DaysContainer = __webpack_require__(247);
+	var Block = __webpack_require__(230);
 
-	var DaysContainer = React.createClass({
-	    displayName: 'DaysContainer',
-	    getInitialState: function getInitialState() {
-	        return {
-	            error: ""
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        //Get things  SongActions.getSong();
-	    },
+	var Main = React.createClass({
+	    displayName: 'Main',
+
+
+	    render: function render() {
+
+	        var imgStyle = { width: "100%" };
+
+	        return React.createElement(
+	            Block,
+	            { className: 'main-wrapper', backgroundColor: 'white', borderRadius: '5px', margin: '0 auto' },
+	            React.createElement(
+	                Block,
+	                null,
+	                React.createElement(
+	                    Block,
+	                    { component: 'h1', textAlign: 'center' },
+	                    'Musikkjulekalender 2016!'
+	                ),
+	                React.createElement('img', { style: imgStyle, src: '/static/images/santas.jpg', alt: 'Responsive image' })
+	            ),
+	            React.createElement(SingleGuessDayContainer, null),
+	            React.createElement(UserStatisticsContainer, null),
+	            React.createElement(TopScoreContainer, null),
+	            React.createElement(DaysContainer, null)
+	        );
+	    }
+	});
+
+	module.exports = Main;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var AltContainer = __webpack_require__(177);
+	var DayStore = __webpack_require__(189);
+	var DayActions = __webpack_require__(205);
+	var Days = __webpack_require__(219);
+	var SingleGuessDay = __webpack_require__(239);
+	var Block = __webpack_require__(230);
+
+	var SingleGuessDayContainer = React.createClass({
+	    displayName: 'SingleGuessDayContainer',
+	    componentDidMount: function componentDidMount() {},
 	    render: function render() {
 	        return React.createElement(
 	            Block,
-	            null,
-	            React.createElement(
-	                'h1',
-	                null,
-	                'L\xF8sninger'
-	            ),
+	            { className: 'guess-day__container', margin: '20px auto', padding: '10px', borderRadius: '5px', backgroundColor: 'white' },
 	            React.createElement(
 	                AltContainer,
 	                { store: DayStore },
-	                React.createElement(Days, null)
+	                React.createElement(SingleGuessDay, null)
 	            )
 	        );
 	    }
 	});
 
-	module.exports = DaysContainer;
+	module.exports = SingleGuessDayContainer;
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*eslint-disable*/
@@ -22064,7 +22096,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _objectAssign = __webpack_require__(177);
+	var _objectAssign = __webpack_require__(178);
 
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -22271,16 +22303,16 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defineProperties = __webpack_require__(178);
+	var defineProperties = __webpack_require__(179);
 
-	var implementation = __webpack_require__(182);
-	var getPolyfill = __webpack_require__(186);
-	var shim = __webpack_require__(187);
+	var implementation = __webpack_require__(183);
+	var getPolyfill = __webpack_require__(187);
+	var shim = __webpack_require__(188);
 
 	var polyfill = getPolyfill();
 
@@ -22294,13 +22326,13 @@
 
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var keys = __webpack_require__(179);
-	var foreach = __webpack_require__(181);
+	var keys = __webpack_require__(180);
+	var foreach = __webpack_require__(182);
 	var hasSymbols = typeof Symbol === 'function' && typeof Symbol() === 'symbol';
 
 	var toStr = Object.prototype.toString;
@@ -22356,7 +22388,7 @@
 
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22365,7 +22397,7 @@
 	var has = Object.prototype.hasOwnProperty;
 	var toStr = Object.prototype.toString;
 	var slice = Array.prototype.slice;
-	var isArgs = __webpack_require__(180);
+	var isArgs = __webpack_require__(181);
 	var isEnumerable = Object.prototype.propertyIsEnumerable;
 	var hasDontEnumBug = !isEnumerable.call({ toString: null }, 'toString');
 	var hasProtoEnumBug = isEnumerable.call(function () {}, 'prototype');
@@ -22502,7 +22534,7 @@
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22525,7 +22557,7 @@
 
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports) {
 
 	
@@ -22553,18 +22585,18 @@
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	// modified from https://github.com/es-shims/es6-shim
-	var keys = __webpack_require__(179);
-	var bind = __webpack_require__(183);
+	var keys = __webpack_require__(180);
+	var bind = __webpack_require__(184);
 	var canBeObject = function (obj) {
 		return typeof obj !== 'undefined' && obj !== null;
 	};
-	var hasSymbols = __webpack_require__(185)();
+	var hasSymbols = __webpack_require__(186)();
 	var toObject = Object;
 	var push = bind.call(Function.call, Array.prototype.push);
 	var propIsEnumerable = bind.call(Function.call, Object.prototype.propertyIsEnumerable);
@@ -22600,16 +22632,16 @@
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var implementation = __webpack_require__(184);
+	var implementation = __webpack_require__(185);
 
 	module.exports = Function.prototype.bind || implementation;
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports) {
 
 	var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
@@ -22663,12 +22695,12 @@
 
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var keys = __webpack_require__(179);
+	var keys = __webpack_require__(180);
 
 	module.exports = function hasSymbols() {
 		if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
@@ -22710,12 +22742,12 @@
 
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var implementation = __webpack_require__(182);
+	var implementation = __webpack_require__(183);
 
 	var lacksProperEnumerationOrder = function () {
 		if (!Object.assign) {
@@ -22767,13 +22799,13 @@
 
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var define = __webpack_require__(178);
-	var getPolyfill = __webpack_require__(186);
+	var define = __webpack_require__(179);
+	var getPolyfill = __webpack_require__(187);
 
 	module.exports = function shimAssign() {
 		var polyfill = getPolyfill();
@@ -22787,7 +22819,7 @@
 
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22808,10 +22840,10 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var DayActions = __webpack_require__(204);
+	var alt = __webpack_require__(190);
+	var DayActions = __webpack_require__(205);
 
-	var request = __webpack_require__(206);
+	var request = __webpack_require__(207);
 	var debug = __webpack_require__(172)('DayStore');
 
 	var DayStore = function () {
@@ -22851,18 +22883,18 @@
 	module.exports = alt.createStore(DayStore, 'DayStore');
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Alt = __webpack_require__(190);
+	var Alt = __webpack_require__(191);
 	var alt = new Alt();
 
 	module.exports = alt;
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*global window*/
@@ -22885,29 +22917,29 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _flux = __webpack_require__(191);
+	var _flux = __webpack_require__(192);
 
-	var _utilsStateFunctions = __webpack_require__(194);
+	var _utilsStateFunctions = __webpack_require__(195);
 
 	var StateFunctions = _interopRequireWildcard(_utilsStateFunctions);
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsFunctions = __webpack_require__(197);
+	var _utilsFunctions = __webpack_require__(198);
 
 	var fn = _interopRequireWildcard(_utilsFunctions);
 
-	var _store = __webpack_require__(198);
+	var _store = __webpack_require__(199);
 
 	var store = _interopRequireWildcard(_store);
 
-	var _utilsAltUtils = __webpack_require__(200);
+	var _utilsAltUtils = __webpack_require__(201);
 
 	var utils = _interopRequireWildcard(_utilsAltUtils);
 
-	var _actions = __webpack_require__(203);
+	var _actions = __webpack_require__(204);
 
 	var _actions2 = _interopRequireDefault(_actions);
 
@@ -23177,7 +23209,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23189,11 +23221,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(192)
+	module.exports.Dispatcher = __webpack_require__(193)
 
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -23210,7 +23242,7 @@
 
 	"use strict";
 
-	var invariant = __webpack_require__(193);
+	var invariant = __webpack_require__(194);
 
 	var _lastID = 1;
 	var _prefix = 'ID_';
@@ -23449,7 +23481,7 @@
 
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports) {
 
 	/**
@@ -23508,7 +23540,7 @@
 
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23523,11 +23555,11 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsFunctions = __webpack_require__(197);
+	var _utilsFunctions = __webpack_require__(198);
 
 	var fn = _interopRequireWildcard(_utilsFunctions);
 
@@ -23581,7 +23613,7 @@
 	}
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23592,7 +23624,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _esSymbol = __webpack_require__(196);
+	var _esSymbol = __webpack_require__(197);
 
 	var _esSymbol2 = _interopRequireDefault(_esSymbol);
 
@@ -23645,7 +23677,7 @@
 	exports.STATE_CONTAINER = STATE_CONTAINER;
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23801,7 +23833,7 @@
 
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23837,7 +23869,7 @@
 	}
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23862,27 +23894,27 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-	var _eventemitter3 = __webpack_require__(199);
+	var _eventemitter3 = __webpack_require__(200);
 
 	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsAltUtils = __webpack_require__(200);
+	var _utilsAltUtils = __webpack_require__(201);
 
 	var utils = _interopRequireWildcard(_utilsAltUtils);
 
-	var _utilsFunctions = __webpack_require__(197);
+	var _utilsFunctions = __webpack_require__(198);
 
 	var fn = _interopRequireWildcard(_utilsFunctions);
 
-	var _AltStore = __webpack_require__(201);
+	var _AltStore = __webpack_require__(202);
 
 	var _AltStore2 = _interopRequireDefault(_AltStore);
 
-	var _StoreMixin = __webpack_require__(202);
+	var _StoreMixin = __webpack_require__(203);
 
 	var _StoreMixin2 = _interopRequireDefault(_StoreMixin);
 
@@ -24017,7 +24049,7 @@
 	}
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24252,7 +24284,7 @@
 
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -24315,7 +24347,7 @@
 	}
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24332,19 +24364,19 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _eventemitter3 = __webpack_require__(199);
+	var _eventemitter3 = __webpack_require__(200);
 
 	var _eventemitter32 = _interopRequireDefault(_eventemitter3);
 
-	var _esSymbol = __webpack_require__(196);
+	var _esSymbol = __webpack_require__(197);
 
 	var _esSymbol2 = _interopRequireDefault(_esSymbol);
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsFunctions = __webpack_require__(197);
+	var _utilsFunctions = __webpack_require__(198);
 
 	var fn = _interopRequireWildcard(_utilsFunctions);
 
@@ -24454,7 +24486,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24467,15 +24499,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _esSymbol = __webpack_require__(196);
+	var _esSymbol = __webpack_require__(197);
 
 	var _esSymbol2 = _interopRequireDefault(_esSymbol);
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsFunctions = __webpack_require__(197);
+	var _utilsFunctions = __webpack_require__(198);
 
 	var fn = _interopRequireWildcard(_utilsFunctions);
 
@@ -24664,7 +24696,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24683,15 +24715,15 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _esSymbol = __webpack_require__(196);
+	var _esSymbol = __webpack_require__(197);
 
 	var _esSymbol2 = _interopRequireDefault(_esSymbol);
 
-	var _symbolsSymbols = __webpack_require__(195);
+	var _symbolsSymbols = __webpack_require__(196);
 
 	var Sym = _interopRequireWildcard(_symbolsSymbols);
 
-	var _utilsAltUtils = __webpack_require__(200);
+	var _utilsAltUtils = __webpack_require__(201);
 
 	var utils = _interopRequireWildcard(_utilsAltUtils);
 
@@ -24757,7 +24789,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24778,8 +24810,8 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var DaySource = __webpack_require__(205);
+	var alt = __webpack_require__(190);
+	var DaySource = __webpack_require__(206);
 	var debug = __webpack_require__(172)('DayAction');
 
 	var DayAction = function () {
@@ -24820,13 +24852,13 @@
 	module.exports = alt.createActions(DayAction);
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var request = __webpack_require__(206);
-	var Promise = __webpack_require__(209);
+	var request = __webpack_require__(207);
+	var Promise = __webpack_require__(210);
 	var debug = __webpack_require__(172)("DaySource");
 
 	var DaySource = {
@@ -24848,15 +24880,15 @@
 	module.exports = DaySource;
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module dependencies.
 	 */
 
-	var Emitter = __webpack_require__(207);
-	var reduce = __webpack_require__(208);
+	var Emitter = __webpack_require__(208);
+	var reduce = __webpack_require__(209);
 
 	/**
 	 * Root reference for iframes.
@@ -26011,7 +26043,7 @@
 
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports) {
 
 	
@@ -26181,7 +26213,7 @@
 
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports) {
 
 	
@@ -26210,25 +26242,12 @@
 	};
 
 /***/ },
-/* 209 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(210)
-
-
-/***/ },
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(211);
-	__webpack_require__(213);
-	__webpack_require__(214);
-	__webpack_require__(215);
-	__webpack_require__(216);
+	module.exports = __webpack_require__(211)
 
 
 /***/ },
@@ -26237,7 +26256,20 @@
 
 	'use strict';
 
-	var asap = __webpack_require__(212);
+	module.exports = __webpack_require__(212);
+	__webpack_require__(214);
+	__webpack_require__(215);
+	__webpack_require__(216);
+	__webpack_require__(217);
+
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var asap = __webpack_require__(213);
 
 	function noop() {}
 
@@ -26422,7 +26454,7 @@
 
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
@@ -26649,12 +26681,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Promise = __webpack_require__(211);
+	var Promise = __webpack_require__(212);
 
 	module.exports = Promise;
 	Promise.prototype.done = function (onFulfilled, onRejected) {
@@ -26668,12 +26700,12 @@
 
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Promise = __webpack_require__(211);
+	var Promise = __webpack_require__(212);
 
 	module.exports = Promise;
 	Promise.prototype['finally'] = function (f) {
@@ -26690,14 +26722,14 @@
 
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	//This file contains the ES6 extensions to the core Promises/A+ API
 
-	var Promise = __webpack_require__(211);
+	var Promise = __webpack_require__(212);
 
 	module.exports = Promise;
 
@@ -26803,7 +26835,7 @@
 
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26811,8 +26843,8 @@
 	// This file contains then/promise specific extensions that are only useful
 	// for node.js interop
 
-	var Promise = __webpack_require__(211);
-	var asap = __webpack_require__(217);
+	var Promise = __webpack_require__(212);
+	var asap = __webpack_require__(218);
 
 	module.exports = Promise;
 
@@ -26880,13 +26912,13 @@
 
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	// rawAsap provides everything we need except exception management.
-	var rawAsap = __webpack_require__(212);
+	var rawAsap = __webpack_require__(213);
 	// RawTasks are recycled to reduce GC churn.
 	var freeTasks = [];
 	// We queue errors to ensure they are thrown in right order (FIFO).
@@ -26952,17 +26984,17 @@
 
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('days');
-	var Day = __webpack_require__(219);
-	var GuessDay = __webpack_require__(222);
-	var GuessStore = __webpack_require__(225);
-	var Flex = __webpack_require__(236);
+	var Day = __webpack_require__(220);
+	var GuessDay = __webpack_require__(223);
+	var GuessStore = __webpack_require__(226);
+	var Flex = __webpack_require__(237);
 
 	var Days = React.createClass({
 	    displayName: 'Days',
@@ -26986,20 +27018,20 @@
 	module.exports = Days;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('Day');
-	var moment = __webpack_require__(220);
-	var GuessDay = __webpack_require__(222);
-	var DateHeader = __webpack_require__(226);
-	var ShowSolution = __webpack_require__(227);
-	var Day4Realz = __webpack_require__(228);
-	var Block = __webpack_require__(229);
-	var Flex = __webpack_require__(236);
+	var moment = __webpack_require__(221);
+	var GuessDay = __webpack_require__(223);
+	var DateHeader = __webpack_require__(227);
+	var ShowSolution = __webpack_require__(228);
+	var Day4Realz = __webpack_require__(229);
+	var Block = __webpack_require__(230);
+	var Flex = __webpack_require__(237);
 
 	var Day = React.createClass({
 	    displayName: 'Day',
@@ -27038,8 +27070,8 @@
 	        }
 
 	        return React.createElement(
-	            Flex,
-	            { width: '50%' },
+	            Block,
+	            { className: 'day__container' },
 	            React.createElement(DateHeader, { unixDate: this.props.day.revealDateAsString }),
 	            day
 	        );
@@ -27049,7 +27081,7 @@
 	module.exports = Day;
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -31286,10 +31318,10 @@
 	    return _moment;
 
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(221)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(222)(module)))
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -31305,17 +31337,19 @@
 
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('GuessDay');
-	var GuessAction = __webpack_require__(223);
-	var DayAction = __webpack_require__(204);
-	var GuessStore = __webpack_require__(225);
-	var moment = __webpack_require__(220);
+	var GuessAction = __webpack_require__(224);
+	var DayAction = __webpack_require__(205);
+	var GuessStore = __webpack_require__(226);
+	var moment = __webpack_require__(221);
+	var Inline = __webpack_require__(238);
+	var Block = __webpack_require__(230);
 
 	var GuessDay = React.createClass({
 	    displayName: 'GuessDay',
@@ -31332,7 +31366,7 @@
 	        };
 	    },
 	    guessChanged: function guessChanged() {
-	        debug("Guess changed, refetching data just in case something has changed", GuessState.getState());
+	        debug("Guess changed, refetching data just in case something has changed", GuessStore.getState());
 
 	        this.setState({
 	            guessResponse: GuessStore.getState()
@@ -31352,6 +31386,11 @@
 	    render: function render() {
 
 	        debug("Props: ", this.props);
+	        var audioProps = {
+	            src: this.props.day.link,
+	            preload: "none",
+	            controls: "yes"
+	        };
 
 	        var answerThisDay = undefined;
 	        if (this.props.answers) {
@@ -31378,24 +31417,23 @@
 	                { onSubmit: this.submit },
 	                React.createElement(
 	                    'div',
-	                    { className: 'form-group' },
+	                    null,
+	                    React.createElement('input', { className: 'guess-form__input', placeholder: 'Sang', onChange: this.handleChange, value: this.state.guess.guess }),
 	                    React.createElement(
-	                        'label',
-	                        { htmlFor: 'songInput' },
-	                        'Sang'
-	                    ),
-	                    React.createElement('input', { type: 'text', ref: 'song', className: 'form-control', id: 'songInput', placeholder: 'Sang',
-	                        name: 'song', onChange: this.handleChange, value: this.state.guess.guess })
+	                        Inline,
+	                        { margin: '10px' },
+	                        React.createElement(
+	                            'button',
+	                            { className: 'guess-form__submitbutton', type: 'submit' },
+	                            'Gjett!'
+	                        )
+	                    )
 	                ),
 	                React.createElement(
 	                    'p',
 	                    null,
-	                    this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : ""
-	                ),
-	                React.createElement(
-	                    'button',
-	                    { type: 'submit', className: 'btn btn-default' },
-	                    'Lagre forslag'
+	                    this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : "",
+	                    '  '
 	                )
 	            );
 	        }
@@ -31409,8 +31447,8 @@
 	                this.props.day.description
 	            ),
 	            React.createElement(
-	                'audio',
-	                { src: this.props.day.link, preload: 'none', controls: true },
+	                Block,
+	                { width: '100%', component: 'audio', props: audioProps },
 	                React.createElement(
 	                    'a',
 	                    { href: this.props.day.link },
@@ -31425,7 +31463,7 @@
 	module.exports = GuessDay;
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31446,9 +31484,9 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var GuessSource = __webpack_require__(224);
-	var debug = __webpack_require__(172)('SongActions');
+	var alt = __webpack_require__(190);
+	var GuessSource = __webpack_require__(225);
+	var debug = __webpack_require__(172)('GuessAction');
 
 	var GuessAction = function () {
 	    function GuessAction() {
@@ -31488,14 +31526,14 @@
 	module.exports = alt.createActions(GuessAction);
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var request = __webpack_require__(206);
+	var request = __webpack_require__(207);
 	var debug = __webpack_require__(172)('GuessSource');
-	var Promise = __webpack_require__(209);
+	var Promise = __webpack_require__(210);
 
 	var GuessSource = {
 	    guess: function guess(song) {
@@ -31516,7 +31554,7 @@
 	module.exports = GuessSource;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31537,10 +31575,10 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var GuessAction = __webpack_require__(223);
-	var DayStore = __webpack_require__(188);
-	var request = __webpack_require__(206);
+	var alt = __webpack_require__(190);
+	var GuessAction = __webpack_require__(224);
+	var DayStore = __webpack_require__(189);
+	var request = __webpack_require__(207);
 	var debug = __webpack_require__(172)('GuessStore');
 
 	var GuessStore = function () {
@@ -31568,13 +31606,13 @@
 	module.exports = alt.createStore(GuessStore, 'GuessStore');
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var moment = __webpack_require__(220);
+	var moment = __webpack_require__(221);
 	var debug = __webpack_require__(172)("DateHeader");
 
 	var DateHeader = React.createClass({
@@ -31593,7 +31631,7 @@
 	module.exports = DateHeader;
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31651,7 +31689,7 @@
 	module.exports = ShowSolution;
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31660,9 +31698,9 @@
 	 * Created by Tobias on 16.10.2016.
 	 */
 	var React = __webpack_require__(1);
-	var Block = __webpack_require__(229);
-	var Flex = __webpack_require__(236);
-	var Inline = __webpack_require__(237);
+	var Block = __webpack_require__(230);
+	var Flex = __webpack_require__(237);
+	var Inline = __webpack_require__(238);
 
 	var Day4Realz = React.createClass({
 	  displayName: 'Day4Realz',
@@ -31700,20 +31738,20 @@
 	module.exports = Day4Realz;
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(230).Block;
+	module.exports = __webpack_require__(231).Block;
 
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var CSSDisplayNames = __webpack_require__(231);
-	var makeStyleComponentClass = __webpack_require__(232);
+	var CSSDisplayNames = __webpack_require__(232);
+	var makeStyleComponentClass = __webpack_require__(233);
 
 	var Display = {};
 
@@ -31726,7 +31764,7 @@
 
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31746,12 +31784,12 @@
 
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var GlobalStylesheets = __webpack_require__(233);
+	var GlobalStylesheets = __webpack_require__(234);
 	var React = __webpack_require__(1);
 
 	var assign = __webpack_require__(4);
@@ -31821,7 +31859,7 @@
 
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31829,8 +31867,8 @@
 	var CSSPropertyOperations = __webpack_require__(97);
 
 	var assign = __webpack_require__(4);
-	var autoprefix = __webpack_require__(234);
-	var invariant = __webpack_require__(235);
+	var autoprefix = __webpack_require__(235);
+	var invariant = __webpack_require__(236);
 
 	var PREFIX = 'jsxstyle';
 
@@ -31934,7 +31972,7 @@
 
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32033,7 +32071,7 @@
 
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -32091,50 +32129,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(230).Flex;
-
-
-/***/ },
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(230).Inline;
+	module.exports = __webpack_require__(231).Flex;
 
 
 /***/ },
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	module.exports = __webpack_require__(231).Inline;
 
-	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var DayStore = __webpack_require__(188);
-	var DayActions = __webpack_require__(204);
-	var Days = __webpack_require__(218);
-	var SingleGuessDay = __webpack_require__(239);
-	var Block = __webpack_require__(229);
-
-	var SingleGuessDayContainer = React.createClass({
-	    displayName: 'SingleGuessDayContainer',
-	    componentDidMount: function componentDidMount() {},
-	    render: function render() {
-	        return React.createElement(
-	            Block,
-	            { width: '700px', margin: '20px auto', padding: '10px', borderRadius: '5px', backgroundColor: 'white' },
-	            React.createElement(
-	                AltContainer,
-	                { store: DayStore },
-	                React.createElement(SingleGuessDay, null)
-	            )
-	        );
-	    }
-	});
-
-	module.exports = SingleGuessDayContainer;
 
 /***/ },
 /* 239 */
@@ -32144,11 +32150,11 @@
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('SingleGuessDay');
-	var moment = __webpack_require__(220);
-	var Day = __webpack_require__(219);
-	var GuessDay = __webpack_require__(222);
-	var AltContainer = __webpack_require__(176);
-	var GuessStore = __webpack_require__(225);
+	var moment = __webpack_require__(221);
+	var Day = __webpack_require__(220);
+	var GuessDay = __webpack_require__(223);
+	var AltContainer = __webpack_require__(177);
+	var GuessStore = __webpack_require__(226);
 
 	var Days = React.createClass({
 	    displayName: 'Days',
@@ -32175,7 +32181,7 @@
 	                        ),
 	                        React.createElement(
 	                            'div',
-	                            { className: _this.props.class },
+	                            null,
 	                            React.createElement(
 	                                'h3',
 	                                null,
@@ -32199,9 +32205,9 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var DayStore = __webpack_require__(188);
-	var DayActions = __webpack_require__(204);
+	var AltContainer = __webpack_require__(177);
+	var DayStore = __webpack_require__(189);
+	var DayActions = __webpack_require__(205);
 	var UserStatistics = __webpack_require__(241);
 
 	var UserStatisticsContainer = React.createClass({
@@ -32234,10 +32240,10 @@
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('UserStatistics');
-	var Day = __webpack_require__(219);
-	var GuessDay = __webpack_require__(222);
-	var AltContainer = __webpack_require__(176);
-	var GuessStore = __webpack_require__(225);
+	var Day = __webpack_require__(220);
+	var GuessDay = __webpack_require__(223);
+	var AltContainer = __webpack_require__(177);
+	var GuessStore = __webpack_require__(226);
 	var UserResultDay = __webpack_require__(242);
 
 	var UserStatistics = React.createClass({
@@ -32273,7 +32279,8 @@
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('UserResultDay');
 	var UserResultDayUser = __webpack_require__(243);
-	var moment = __webpack_require__(220);
+	var moment = __webpack_require__(221);
+	var Block = __webpack_require__(230);
 
 	var UserResultDay = React.createClass({
 	    displayName: 'UserResultDay',
@@ -32305,8 +32312,8 @@
 	            );
 	        } else {
 	            maybeempty = React.createElement(
-	                'p',
-	                null,
+	                Block,
+	                { padding: '10px' },
 	                'Ingen riktige svar'
 	            );
 	        }
@@ -32333,7 +32340,7 @@
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('UserResultDayUser');
-	var moment = __webpack_require__(220);
+	var moment = __webpack_require__(221);
 
 	var UserResultDayUser = React.createClass({
 	    displayName: 'UserResultDayUser',
@@ -32359,18 +32366,15 @@
 	module.exports = UserResultDayUser;
 
 /***/ },
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var DayStore = __webpack_require__(188);
-	var TopScores = __webpack_require__(248);
+	var AltContainer = __webpack_require__(177);
+	var DayStore = __webpack_require__(189);
+	var TopScores = __webpack_require__(245);
 
 	var TopScoreContainer = React.createClass({
 	    displayName: 'TopScoreContainer',
@@ -32395,14 +32399,14 @@
 	module.exports = TopScoreContainer;
 
 /***/ },
-/* 248 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('TopScores');
-	var TopScore = __webpack_require__(249);
+	var TopScore = __webpack_require__(246);
 
 	var TopScores = React.createClass({
 	  displayName: 'TopScores',
@@ -32441,7 +32445,7 @@
 	module.exports = TopScores;
 
 /***/ },
-/* 249 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32474,16 +32478,60 @@
 	module.exports = TopScore;
 
 /***/ },
-/* 250 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var AltContainer = __webpack_require__(176);
-	var AdminDayStore = __webpack_require__(251);
-	var AdminDayActions = __webpack_require__(252);
-	var AdminOverview = __webpack_require__(254);
+	var AltContainer = __webpack_require__(177);
+	var DayStore = __webpack_require__(189);
+	var DayActions = __webpack_require__(205);
+	var Days = __webpack_require__(219);
+	var debug = __webpack_require__(172)('DaysContainer');
+	var Block = __webpack_require__(230);
+
+	var DaysContainer = React.createClass({
+	    displayName: 'DaysContainer',
+	    getInitialState: function getInitialState() {
+	        return {
+	            error: ""
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        //Get things  SongActions.getSong();
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            Block,
+	            null,
+	            React.createElement(
+	                'h1',
+	                null,
+	                'L\xF8sninger'
+	            ),
+	            React.createElement(
+	                AltContainer,
+	                { store: DayStore },
+	                React.createElement(Days, null)
+	            )
+	        );
+	    }
+	});
+
+	module.exports = DaysContainer;
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var AltContainer = __webpack_require__(177);
+	var AdminDayStore = __webpack_require__(249);
+	var AdminDayActions = __webpack_require__(250);
+	var AdminOverview = __webpack_require__(252);
 	var debug = __webpack_require__(172)('AdminOverviewContainer');
 
 	var AdminOverviewContainer = React.createClass({
@@ -32504,7 +32552,7 @@
 	module.exports = AdminOverviewContainer;
 
 /***/ },
-/* 251 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32525,10 +32573,10 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var AdminDayAction = __webpack_require__(252);
+	var alt = __webpack_require__(190);
+	var AdminDayAction = __webpack_require__(250);
 
-	var request = __webpack_require__(206);
+	var request = __webpack_require__(207);
 	var debug = __webpack_require__(172)('DayStore');
 
 	var AdminDayStore = function () {
@@ -32586,7 +32634,7 @@
 	module.exports = alt.createStore(AdminDayStore, 'AdminDayStore');
 
 /***/ },
-/* 252 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32607,8 +32655,8 @@
 	    }
 	}
 
-	var alt = __webpack_require__(189);
-	var AdminDaySource = __webpack_require__(253);
+	var alt = __webpack_require__(190);
+	var AdminDaySource = __webpack_require__(251);
 	var debug = __webpack_require__(172)('AdminDayAction');
 
 	var AdminDayAction = function () {
@@ -32709,13 +32757,13 @@
 	module.exports = alt.createActions(AdminDayAction);
 
 /***/ },
-/* 253 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var request = __webpack_require__(206);
-	var Promise = __webpack_require__(209);
+	var request = __webpack_require__(207);
+	var Promise = __webpack_require__(210);
 	var debug = __webpack_require__(172)('AdminDaySource');
 
 	var AdminDaySource = {
@@ -32789,18 +32837,18 @@
 	module.exports = AdminDaySource;
 
 /***/ },
-/* 254 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('days');
-	var AdminDay = __webpack_require__(255);
-	var GuessDay = __webpack_require__(222);
-	var AltContainer = __webpack_require__(176);
-	var GuessStore = __webpack_require__(225);
-	var AdminAddDay = __webpack_require__(263);
+	var AdminDay = __webpack_require__(253);
+	var GuessDay = __webpack_require__(223);
+	var AltContainer = __webpack_require__(177);
+	var GuessStore = __webpack_require__(226);
+	var AdminAddDay = __webpack_require__(261);
 
 	var AdminOverview = React.createClass({
 	    displayName: 'AdminOverview',
@@ -32827,20 +32875,20 @@
 	module.exports = AdminOverview;
 
 /***/ },
-/* 255 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var React = __webpack_require__(1);
 	var debug = __webpack_require__(172)('day');
-	var moment = __webpack_require__(220);
-	var adminDayAction = __webpack_require__(252);
-	var DatePicker = __webpack_require__(256);
-	var AdminDaySolution = __webpack_require__(258);
-	var DateHeader = __webpack_require__(226);
+	var moment = __webpack_require__(221);
+	var adminDayAction = __webpack_require__(250);
+	var DatePicker = __webpack_require__(254);
+	var AdminDaySolution = __webpack_require__(256);
+	var DateHeader = __webpack_require__(227);
 
-	__webpack_require__(259);
+	__webpack_require__(257);
 
 	var AdminDay = React.createClass({
 	    displayName: 'AdminDay',
@@ -33115,10 +33163,10 @@
 	module.exports = AdminDay;
 
 /***/ },
-/* 256 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	!function(e,t){ true?module.exports=t(__webpack_require__(220),__webpack_require__(1),__webpack_require__(257),__webpack_require__(34)):"function"==typeof define&&define.amd?define(["moment","react","react-onclickoutside","react-dom"],t):"object"==typeof exports?exports.DatePicker=t(require("moment"),require("react"),require("react-onclickoutside"),require("react-dom")):e.DatePicker=t(e.moment,e.React,e.OnClickOutside,e.ReactDOM)}(this,function(e,t,n,o){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=n(1),i=o(a),s=n(5),l=o(s),p=n(3),d=o(p),f=n(13),u=o(f),c=n(12),h=o(c),m=n(4),y="react-datepicker-ignore-onclickoutside",g=d["default"].createClass({displayName:"DatePicker",propTypes:{autoComplete:d["default"].PropTypes.string,className:d["default"].PropTypes.string,dateFormat:d["default"].PropTypes.oneOfType([d["default"].PropTypes.string,d["default"].PropTypes.array]),dateFormatCalendar:d["default"].PropTypes.string,disabled:d["default"].PropTypes.bool,endDate:d["default"].PropTypes.object,excludeDates:d["default"].PropTypes.array,filterDate:d["default"].PropTypes.func,fixedHeight:d["default"].PropTypes.bool,id:d["default"].PropTypes.string,includeDates:d["default"].PropTypes.array,inline:d["default"].PropTypes.bool,isClearable:d["default"].PropTypes.bool,locale:d["default"].PropTypes.string,maxDate:d["default"].PropTypes.object,minDate:d["default"].PropTypes.object,name:d["default"].PropTypes.string,onBlur:d["default"].PropTypes.func,onChange:d["default"].PropTypes.func.isRequired,onFocus:d["default"].PropTypes.func,openToDate:d["default"].PropTypes.object,placeholderText:d["default"].PropTypes.string,popoverAttachment:d["default"].PropTypes.string,popoverTargetAttachment:d["default"].PropTypes.string,popoverTargetOffset:d["default"].PropTypes.string,readOnly:d["default"].PropTypes.bool,renderCalendarTo:d["default"].PropTypes.any,required:d["default"].PropTypes.bool,selected:d["default"].PropTypes.object,showYearDropdown:d["default"].PropTypes.bool,startDate:d["default"].PropTypes.object,tabIndex:d["default"].PropTypes.number,tetherConstraints:d["default"].PropTypes.array,title:d["default"].PropTypes.string,todayButton:d["default"].PropTypes.string},getDefaultProps:function(){return{dateFormatCalendar:"MMMM YYYY",onChange:function(){},disabled:!1,onFocus:function(){},onBlur:function(){},popoverAttachment:"top left",popoverTargetAttachment:"bottom left",popoverTargetOffset:"10px 0",tetherConstraints:[{to:"window",attachment:"together"}]}},getInitialState:function(){return{open:!1}},setOpen:function(e){this.setState({open:e})},handleFocus:function(e){this.props.onFocus(e),this.setOpen(!0)},handleBlur:function(e){this.state.open?this.refs.input.focus():this.props.onBlur(e)},handleCalendarClickOutside:function(e){this.setOpen(!1)},handleSelect:function(e){this.setSelected(e),this.setOpen(!1)},setSelected:function(e){(0,m.isSameDay)(this.props.selected,e)||this.props.onChange(e)},onInputClick:function(){this.props.disabled||this.setOpen(!0)},onInputKeyDown:function(e){"Enter"===e.key||"Escape"===e.key?(e.preventDefault(),this.setOpen(!1)):"Tab"===e.key&&this.setOpen(!1)},onClearClick:function(e){e.preventDefault(),this.props.onChange(null)},renderCalendar:function(){return this.props.inline||this.state.open&&!this.props.disabled?d["default"].createElement(l["default"],{ref:"calendar",locale:this.props.locale,dateFormat:this.props.dateFormatCalendar,selected:this.props.selected,onSelect:this.handleSelect,openToDate:this.props.openToDate,minDate:this.props.minDate,maxDate:this.props.maxDate,startDate:this.props.startDate,endDate:this.props.endDate,excludeDates:this.props.excludeDates,filterDate:this.props.filterDate,onClickOutside:this.handleCalendarClickOutside,includeDates:this.props.includeDates,showYearDropdown:this.props.showYearDropdown,todayButton:this.props.todayButton,outsideClickIgnoreClass:y,fixedHeight:this.props.fixedHeight}):null},renderDateInput:function(){var e=(0,h["default"])(this.props.className,r({},y,this.state.open));return d["default"].createElement(i["default"],{ref:"input",id:this.props.id,name:this.props.name,date:this.props.selected,locale:this.props.locale,minDate:this.props.minDate,maxDate:this.props.maxDate,excludeDates:this.props.excludeDates,includeDates:this.props.includeDates,filterDate:this.props.filterDate,dateFormat:this.props.dateFormat,onFocus:this.handleFocus,onBlur:this.handleBlur,onClick:this.onInputClick,onKeyDown:this.onInputKeyDown,onChangeDate:this.setSelected,placeholder:this.props.placeholderText,disabled:this.props.disabled,autoComplete:this.props.autoComplete,className:e,title:this.props.title,readOnly:this.props.readOnly,required:this.props.required,tabIndex:this.props.tabIndex})},renderClearButton:function(){return this.props.isClearable&&null!=this.props.selected?d["default"].createElement("a",{className:"react-datepicker__close-icon",href:"#",onClick:this.onClearClick}):null},render:function(){var e=this.renderCalendar();return this.props.inline?e:d["default"].createElement(u["default"],{classPrefix:"react-datepicker__tether",attachment:this.props.popoverAttachment,targetAttachment:this.props.popoverTargetAttachment,targetOffset:this.props.popoverTargetOffset,renderElementTo:this.props.renderCalendarTo,constraints:this.props.tetherConstraints},d["default"].createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),e)}});e.exports=g},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){var n={};for(var o in e)t.indexOf(o)>=0||Object.prototype.hasOwnProperty.call(e,o)&&(n[o]=e[o]);return n}var a=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},i=n(2),s=o(i),l=n(3),p=o(l),d=n(4),f=p["default"].createClass({displayName:"DateInput",propTypes:{date:p["default"].PropTypes.object,dateFormat:p["default"].PropTypes.oneOfType([p["default"].PropTypes.string,p["default"].PropTypes.array]),disabled:p["default"].PropTypes.bool,excludeDates:p["default"].PropTypes.array,filterDate:p["default"].PropTypes.func,includeDates:p["default"].PropTypes.array,locale:p["default"].PropTypes.string,maxDate:p["default"].PropTypes.object,minDate:p["default"].PropTypes.object,onBlur:p["default"].PropTypes.func,onChange:p["default"].PropTypes.func,onChangeDate:p["default"].PropTypes.func},getDefaultProps:function(){return{dateFormat:"L"}},getInitialState:function(){return{value:this.safeDateFormat(this.props)}},componentWillReceiveProps:function(e){(0,d.isSameDay)(e.date,this.props.date)&&e.locale===this.props.locale&&e.dateFormat===this.props.dateFormat||this.setState({value:this.safeDateFormat(e)})},handleChange:function(e){this.props.onChange&&this.props.onChange(e),e.isDefaultPrevented()||this.handleChangeDate(e.target.value)},handleChangeDate:function(e){if(this.props.onChangeDate){var t=(0,s["default"])(e,this.props.dateFormat,this.props.locale||s["default"].locale(),!0);t.isValid()&&!(0,d.isDayDisabled)(t,this.props)?this.props.onChangeDate(t):""===e&&this.props.onChangeDate(null)}this.setState({value:e})},safeDateFormat:function(e){return e.date&&e.date.clone().locale(e.locale||s["default"].locale()).format(Array.isArray(e.dateFormat)?e.dateFormat[0]:e.dateFormat)||""},handleBlur:function(e){this.setState({value:this.safeDateFormat(this.props)}),this.props.onBlur&&this.props.onBlur(e)},focus:function(){this.refs.input.focus()},render:function(){var e=this.props,t=(e.date,e.locale,e.minDate,e.maxDate,e.excludeDates,e.includeDates,e.filterDate,e.dateFormat,e.onChangeDate,r(e,["date","locale","minDate","maxDate","excludeDates","includeDates","filterDate","dateFormat","onChangeDate"]));return p["default"].createElement("input",a({ref:"input",type:"text"},t,{value:this.state.value,onBlur:this.handleBlur,onChange:this.handleChange}))}});e.exports=f},function(t,n){t.exports=e},function(e,n){e.exports=t},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){return e&&t?e.isSame(t,"day"):!e&&!t}function a(e){var t=arguments.length<=1||void 0===arguments[1]?{}:arguments[1],n=t.minDate,o=t.maxDate,a=t.excludeDates,i=t.includeDates,s=t.filterDate;return n&&e.isBefore(n,"day")||o&&e.isAfter(o,"day")||a&&a.some(function(t){return r(e,t)})||i&&!i.some(function(t){return r(e,t)})||s&&!s(e.clone())||!1}function i(e,t){var n=arguments.length<=2||void 0===arguments[2]?{}:arguments[2],o=n.minDate,r=n.includeDates,a=e.clone().subtract(1,t);return o&&a.isBefore(o,t)||r&&r.every(function(e){return a.isBefore(e,t)})||!1}function s(e,t){var n=arguments.length<=2||void 0===arguments[2]?{}:arguments[2],o=n.maxDate,r=n.includeDates,a=e.clone().add(1,t);return o&&a.isAfter(o,t)||r&&r.every(function(e){return a.isAfter(e,t)})||!1}function l(e){var t=e.minDate,n=e.includeDates;return n&&t?f["default"].min(n.filter(function(e){return t.isSameOrBefore(e,"day")})):n?f["default"].min(n):t}function p(e){var t=e.maxDate,n=e.includeDates;return n&&t?f["default"].max(n.filter(function(e){return t.isSameOrAfter(e,"day")})):n?f["default"].max(n):t}Object.defineProperty(t,"__esModule",{value:!0}),t.isSameDay=r,t.isDayDisabled=a,t.allDaysDisabledBefore=i,t.allDaysDisabledAfter=s,t.getEffectiveMinDate=l,t.getEffectiveMaxDate=p;var d=n(2),f=o(d)},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(2),a=o(r),i=n(6),s=o(i),l=n(9),p=o(l),d=n(3),f=o(d),u=n(4),c=f["default"].createClass({displayName:"Calendar",propTypes:{dateFormat:f["default"].PropTypes.string.isRequired,endDate:f["default"].PropTypes.object,excludeDates:f["default"].PropTypes.array,filterDate:f["default"].PropTypes.func,fixedHeight:f["default"].PropTypes.bool,includeDates:f["default"].PropTypes.array,locale:f["default"].PropTypes.string,maxDate:f["default"].PropTypes.object,minDate:f["default"].PropTypes.object,onClickOutside:f["default"].PropTypes.func.isRequired,onSelect:f["default"].PropTypes.func.isRequired,openToDate:f["default"].PropTypes.object,selected:f["default"].PropTypes.object,showYearDropdown:f["default"].PropTypes.bool,startDate:f["default"].PropTypes.object,todayButton:f["default"].PropTypes.string},mixins:[n(8)],getInitialState:function(){return{date:this.localizeMoment(this.getDateInView())}},componentWillReceiveProps:function(e){e.selected&&!(0,u.isSameDay)(e.selected,this.props.selected)&&this.setState({date:this.localizeMoment(e.selected)})},handleClickOutside:function(e){this.props.onClickOutside(e)},getDateInView:function(){var e=this.props,t=e.selected,n=e.openToDate,o=(0,u.getEffectiveMinDate)(this.props),r=(0,u.getEffectiveMaxDate)(this.props),i=(0,a["default"])();return t?t:o&&r&&n&&n.isBetween(o,r)?n:o&&n&&n.isAfter(o)?n:o&&o.isAfter(i)?o:r&&n&&n.isBefore(r)?n:r&&r.isBefore(i)?r:n?n:i},localizeMoment:function(e){return e.clone().locale(this.props.locale||a["default"].locale())},increaseMonth:function(){this.setState({date:this.state.date.clone().add(1,"month")})},decreaseMonth:function(){this.setState({date:this.state.date.clone().subtract(1,"month")})},handleDayClick:function(e){this.props.onSelect(e)},changeYear:function(e){this.setState({date:this.state.date.clone().set("year",e)})},header:function(){var e=this.state.date.clone().startOf("week");return[0,1,2,3,4,5,6].map(function(t){var n=e.clone().add(t,"days");return f["default"].createElement("div",{key:t,className:"react-datepicker__day-name"},n.localeData().weekdaysMin(n))})},renderPreviousMonthButton:function(){if(!(0,u.allDaysDisabledBefore)(this.state.date,"month",this.props))return f["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--previous",onClick:this.decreaseMonth})},renderNextMonthButton:function(){if(!(0,u.allDaysDisabledAfter)(this.state.date,"month",this.props))return f["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--next",onClick:this.increaseMonth})},renderCurrentMonth:function(){var e=["react-datepicker__current-month"];return this.props.showYearDropdown&&e.push("react-datepicker__current-month--hasYearDropdown"),f["default"].createElement("div",{className:e.join(" ")},this.state.date.format(this.props.dateFormat))},renderYearDropdown:function(){if(this.props.showYearDropdown)return f["default"].createElement(s["default"],{onChange:this.changeYear,year:this.state.date.year()})},renderTodayButton:function(){var e=this;if(this.props.todayButton)return f["default"].createElement("div",{className:"react-datepicker__today-button",onClick:function(){return e.props.onSelect((0,a["default"])())}},this.props.todayButton)},render:function(){return f["default"].createElement("div",{className:"react-datepicker"},f["default"].createElement("div",{className:"react-datepicker__triangle"}),f["default"].createElement("div",{className:"react-datepicker__header"},this.renderPreviousMonthButton(),this.renderCurrentMonth(),this.renderYearDropdown(),this.renderNextMonthButton(),f["default"].createElement("div",null,this.header())),f["default"].createElement(p["default"],{day:this.state.date,onDayClick:this.handleDayClick,minDate:this.props.minDate,maxDate:this.props.maxDate,excludeDates:this.props.excludeDates,includeDates:this.props.includeDates,fixedHeight:this.props.fixedHeight,filterDate:this.props.filterDate,selected:this.props.selected,startDate:this.props.startDate,endDate:this.props.endDate}),this.renderTodayButton())}});e.exports=c},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(7),s=o(i),l=a["default"].createClass({displayName:"YearDropdown",propTypes:{onChange:a["default"].PropTypes.func.isRequired,year:a["default"].PropTypes.number.isRequired},getInitialState:function(){return{dropdownVisible:!1}},renderReadView:function(){return a["default"].createElement("div",{className:"react-datepicker__year-read-view",onClick:this.toggleDropdown},a["default"].createElement("span",{className:"react-datepicker__year-read-view--selected-year"},this.props.year),a["default"].createElement("span",{className:"react-datepicker__year-read-view--down-arrow"}))},renderDropdown:function(){return a["default"].createElement(s["default"],{ref:"options",year:this.props.year,onChange:this.onChange,onCancel:this.toggleDropdown})},onChange:function(e){this.toggleDropdown(),e!==this.props.year&&this.props.onChange(e)},toggleDropdown:function(){this.setState({dropdownVisible:!this.state.dropdownVisible})},render:function(){return a["default"].createElement("div",null,this.state.dropdownVisible?this.renderDropdown():this.renderReadView())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e){for(var t=[],n=0;n<5;n++)t.push(e-n);return t}var a=n(3),i=o(a),s=i["default"].createClass({displayName:"YearDropdownOptions",propTypes:{onCancel:i["default"].PropTypes.func.isRequired,onChange:i["default"].PropTypes.func.isRequired,year:i["default"].PropTypes.number.isRequired},mixins:[n(8)],getInitialState:function(){return{yearsList:r(this.props.year)}},renderOptions:function(){var e=this,t=this.props.year,n=this.state.yearsList.map(function(n){return i["default"].createElement("div",{className:"react-datepicker__year-option",key:n,onClick:e.onChange.bind(e,n)},t===n?i["default"].createElement("span",{className:"react-datepicker__year-option--selected"},"✓"):"",n)});return n.unshift(i["default"].createElement("div",{className:"react-datepicker__year-option",ref:"upcoming",key:"upcoming",onClick:this.incrementYears},i["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-upcoming"}))),n.push(i["default"].createElement("div",{className:"react-datepicker__year-option",ref:"previous",key:"previous",onClick:this.decrementYears},i["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-previous"}))),n},onChange:function(e){this.props.onChange(e)},handleClickOutside:function(){this.props.onCancel()},shiftYears:function(e){var t=this.state.yearsList.map(function(t){return t+e});this.setState({yearsList:t})},incrementYears:function(){return this.shiftYears(1)},decrementYears:function(){return this.shiftYears(-1)},render:function(){return i["default"].createElement("div",{className:"react-datepicker__year-dropdown"},this.renderOptions())}});e.exports=s},function(e,t){e.exports=n},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(10),s=o(i),l=a["default"].createClass({displayName:"Month",propTypes:{day:a["default"].PropTypes.object.isRequired,endDate:a["default"].PropTypes.object,excludeDates:a["default"].PropTypes.array,filterDate:a["default"].PropTypes.func,fixedHeight:a["default"].PropTypes.bool,includeDates:a["default"].PropTypes.array,maxDate:a["default"].PropTypes.object,minDate:a["default"].PropTypes.object,onDayClick:a["default"].PropTypes.func,selected:a["default"].PropTypes.object,startDate:a["default"].PropTypes.object},handleDayClick:function(e){this.props.onDayClick&&this.props.onDayClick(e)},isWeekInMonth:function(e){var t=this.props.day,n=e.clone().add(6,"days");return e.isSame(t,"month")||n.isSame(t,"month")},renderWeeks:function(){var e=this,t=this.props.day.clone().startOf("month").startOf("week");return[0,1,2,3,4,5].map(function(e){return t.clone().add(e,"weeks")}).filter(function(t){return e.props.fixedHeight||e.isWeekInMonth(t)}).map(function(t,n){return a["default"].createElement(s["default"],{key:n,day:t,month:e.props.day.month(),onDayClick:e.handleDayClick,minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,filterDate:e.props.filterDate,selected:e.props.selected,startDate:e.props.startDate,endDate:e.props.endDate})})},render:function(){return a["default"].createElement("div",{className:"react-datepicker__month",role:"listbox"},this.renderWeeks())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(11),s=o(i),l=a["default"].createClass({displayName:"Week",propTypes:{day:a["default"].PropTypes.object.isRequired,endDate:a["default"].PropTypes.object,excludeDates:a["default"].PropTypes.array,filterDate:a["default"].PropTypes.func,includeDates:a["default"].PropTypes.array,maxDate:a["default"].PropTypes.object,minDate:a["default"].PropTypes.object,month:a["default"].PropTypes.number,onDayClick:a["default"].PropTypes.func,selected:a["default"].PropTypes.object,startDate:a["default"].PropTypes.object},handleDayClick:function(e){this.props.onDayClick&&this.props.onDayClick(e)},renderDays:function(){var e=this,t=this.props.day.clone().startOf("week");return[0,1,2,3,4,5,6].map(function(n){var o=t.clone().add(n,"days");return a["default"].createElement(s["default"],{key:n,day:o,month:e.props.month,onClick:e.handleDayClick.bind(e,o),minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,filterDate:e.props.filterDate,selected:e.props.selected,startDate:e.props.startDate,endDate:e.props.endDate})})},render:function(){return a["default"].createElement("div",{className:"react-datepicker__week"},this.renderDays())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(2),a=o(r),i=n(3),s=o(i),l=n(12),p=o(l),d=n(4),f=s["default"].createClass({displayName:"Day",propTypes:{day:s["default"].PropTypes.object.isRequired,endDate:s["default"].PropTypes.object,excludeDates:s["default"].PropTypes.array,filterDate:s["default"].PropTypes.func,includeDates:s["default"].PropTypes.array,maxDate:s["default"].PropTypes.object,minDate:s["default"].PropTypes.object,month:s["default"].PropTypes.number,onClick:s["default"].PropTypes.func,selected:s["default"].PropTypes.object,startDate:s["default"].PropTypes.object},handleClick:function(e){!this.isDisabled()&&this.props.onClick&&this.props.onClick(e)},isSameDay:function(e){return(0,d.isSameDay)(this.props.day,e)},isDisabled:function(){return(0,d.isDayDisabled)(this.props.day,this.props)},isInRange:function(){var e=this.props,t=e.day,n=e.startDate,o=e.endDate;if(!n||!o)return!1;var r=n.clone().startOf("day").subtract(1,"seconds"),a=o.clone().startOf("day").add(1,"seconds");return t.clone().startOf("day").isBetween(r,a)},isWeekend:function(){var e=this.props.day.day();return 0===e||6===e},isOutsideMonth:function(){return void 0!==this.props.month&&this.props.month!==this.props.day.month()},getClassNames:function(){return(0,p["default"])("react-datepicker__day",{"react-datepicker__day--disabled":this.isDisabled(),"react-datepicker__day--selected":this.isSameDay(this.props.selected),"react-datepicker__day--in-range":this.isInRange(),"react-datepicker__day--today":this.isSameDay((0,a["default"])()),"react-datepicker__day--weekend":this.isWeekend(),"react-datepicker__day--outside-month":this.isOutsideMonth()})},render:function(){return s["default"].createElement("div",{className:this.getClassNames(),onClick:this.handleClick,"aria-label":"day-"+this.props.day.date(),role:"option"},this.props.day.date())}});e.exports=f},function(e,t,n){var o,r;/*!
+	!function(e,t){ true?module.exports=t(__webpack_require__(221),__webpack_require__(1),__webpack_require__(255),__webpack_require__(34)):"function"==typeof define&&define.amd?define(["moment","react","react-onclickoutside","react-dom"],t):"object"==typeof exports?exports.DatePicker=t(require("moment"),require("react"),require("react-onclickoutside"),require("react-dom")):e.DatePicker=t(e.moment,e.React,e.OnClickOutside,e.ReactDOM)}(this,function(e,t,n,o){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=n(1),i=o(a),s=n(5),l=o(s),p=n(3),d=o(p),f=n(13),u=o(f),c=n(12),h=o(c),m=n(4),y="react-datepicker-ignore-onclickoutside",g=d["default"].createClass({displayName:"DatePicker",propTypes:{autoComplete:d["default"].PropTypes.string,className:d["default"].PropTypes.string,dateFormat:d["default"].PropTypes.oneOfType([d["default"].PropTypes.string,d["default"].PropTypes.array]),dateFormatCalendar:d["default"].PropTypes.string,disabled:d["default"].PropTypes.bool,endDate:d["default"].PropTypes.object,excludeDates:d["default"].PropTypes.array,filterDate:d["default"].PropTypes.func,fixedHeight:d["default"].PropTypes.bool,id:d["default"].PropTypes.string,includeDates:d["default"].PropTypes.array,inline:d["default"].PropTypes.bool,isClearable:d["default"].PropTypes.bool,locale:d["default"].PropTypes.string,maxDate:d["default"].PropTypes.object,minDate:d["default"].PropTypes.object,name:d["default"].PropTypes.string,onBlur:d["default"].PropTypes.func,onChange:d["default"].PropTypes.func.isRequired,onFocus:d["default"].PropTypes.func,openToDate:d["default"].PropTypes.object,placeholderText:d["default"].PropTypes.string,popoverAttachment:d["default"].PropTypes.string,popoverTargetAttachment:d["default"].PropTypes.string,popoverTargetOffset:d["default"].PropTypes.string,readOnly:d["default"].PropTypes.bool,renderCalendarTo:d["default"].PropTypes.any,required:d["default"].PropTypes.bool,selected:d["default"].PropTypes.object,showYearDropdown:d["default"].PropTypes.bool,startDate:d["default"].PropTypes.object,tabIndex:d["default"].PropTypes.number,tetherConstraints:d["default"].PropTypes.array,title:d["default"].PropTypes.string,todayButton:d["default"].PropTypes.string},getDefaultProps:function(){return{dateFormatCalendar:"MMMM YYYY",onChange:function(){},disabled:!1,onFocus:function(){},onBlur:function(){},popoverAttachment:"top left",popoverTargetAttachment:"bottom left",popoverTargetOffset:"10px 0",tetherConstraints:[{to:"window",attachment:"together"}]}},getInitialState:function(){return{open:!1}},setOpen:function(e){this.setState({open:e})},handleFocus:function(e){this.props.onFocus(e),this.setOpen(!0)},handleBlur:function(e){this.state.open?this.refs.input.focus():this.props.onBlur(e)},handleCalendarClickOutside:function(e){this.setOpen(!1)},handleSelect:function(e){this.setSelected(e),this.setOpen(!1)},setSelected:function(e){(0,m.isSameDay)(this.props.selected,e)||this.props.onChange(e)},onInputClick:function(){this.props.disabled||this.setOpen(!0)},onInputKeyDown:function(e){"Enter"===e.key||"Escape"===e.key?(e.preventDefault(),this.setOpen(!1)):"Tab"===e.key&&this.setOpen(!1)},onClearClick:function(e){e.preventDefault(),this.props.onChange(null)},renderCalendar:function(){return this.props.inline||this.state.open&&!this.props.disabled?d["default"].createElement(l["default"],{ref:"calendar",locale:this.props.locale,dateFormat:this.props.dateFormatCalendar,selected:this.props.selected,onSelect:this.handleSelect,openToDate:this.props.openToDate,minDate:this.props.minDate,maxDate:this.props.maxDate,startDate:this.props.startDate,endDate:this.props.endDate,excludeDates:this.props.excludeDates,filterDate:this.props.filterDate,onClickOutside:this.handleCalendarClickOutside,includeDates:this.props.includeDates,showYearDropdown:this.props.showYearDropdown,todayButton:this.props.todayButton,outsideClickIgnoreClass:y,fixedHeight:this.props.fixedHeight}):null},renderDateInput:function(){var e=(0,h["default"])(this.props.className,r({},y,this.state.open));return d["default"].createElement(i["default"],{ref:"input",id:this.props.id,name:this.props.name,date:this.props.selected,locale:this.props.locale,minDate:this.props.minDate,maxDate:this.props.maxDate,excludeDates:this.props.excludeDates,includeDates:this.props.includeDates,filterDate:this.props.filterDate,dateFormat:this.props.dateFormat,onFocus:this.handleFocus,onBlur:this.handleBlur,onClick:this.onInputClick,onKeyDown:this.onInputKeyDown,onChangeDate:this.setSelected,placeholder:this.props.placeholderText,disabled:this.props.disabled,autoComplete:this.props.autoComplete,className:e,title:this.props.title,readOnly:this.props.readOnly,required:this.props.required,tabIndex:this.props.tabIndex})},renderClearButton:function(){return this.props.isClearable&&null!=this.props.selected?d["default"].createElement("a",{className:"react-datepicker__close-icon",href:"#",onClick:this.onClearClick}):null},render:function(){var e=this.renderCalendar();return this.props.inline?e:d["default"].createElement(u["default"],{classPrefix:"react-datepicker__tether",attachment:this.props.popoverAttachment,targetAttachment:this.props.popoverTargetAttachment,targetOffset:this.props.popoverTargetOffset,renderElementTo:this.props.renderCalendarTo,constraints:this.props.tetherConstraints},d["default"].createElement("div",{className:"react-datepicker__input-container"},this.renderDateInput(),this.renderClearButton()),e)}});e.exports=g},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){var n={};for(var o in e)t.indexOf(o)>=0||Object.prototype.hasOwnProperty.call(e,o)&&(n[o]=e[o]);return n}var a=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},i=n(2),s=o(i),l=n(3),p=o(l),d=n(4),f=p["default"].createClass({displayName:"DateInput",propTypes:{date:p["default"].PropTypes.object,dateFormat:p["default"].PropTypes.oneOfType([p["default"].PropTypes.string,p["default"].PropTypes.array]),disabled:p["default"].PropTypes.bool,excludeDates:p["default"].PropTypes.array,filterDate:p["default"].PropTypes.func,includeDates:p["default"].PropTypes.array,locale:p["default"].PropTypes.string,maxDate:p["default"].PropTypes.object,minDate:p["default"].PropTypes.object,onBlur:p["default"].PropTypes.func,onChange:p["default"].PropTypes.func,onChangeDate:p["default"].PropTypes.func},getDefaultProps:function(){return{dateFormat:"L"}},getInitialState:function(){return{value:this.safeDateFormat(this.props)}},componentWillReceiveProps:function(e){(0,d.isSameDay)(e.date,this.props.date)&&e.locale===this.props.locale&&e.dateFormat===this.props.dateFormat||this.setState({value:this.safeDateFormat(e)})},handleChange:function(e){this.props.onChange&&this.props.onChange(e),e.isDefaultPrevented()||this.handleChangeDate(e.target.value)},handleChangeDate:function(e){if(this.props.onChangeDate){var t=(0,s["default"])(e,this.props.dateFormat,this.props.locale||s["default"].locale(),!0);t.isValid()&&!(0,d.isDayDisabled)(t,this.props)?this.props.onChangeDate(t):""===e&&this.props.onChangeDate(null)}this.setState({value:e})},safeDateFormat:function(e){return e.date&&e.date.clone().locale(e.locale||s["default"].locale()).format(Array.isArray(e.dateFormat)?e.dateFormat[0]:e.dateFormat)||""},handleBlur:function(e){this.setState({value:this.safeDateFormat(this.props)}),this.props.onBlur&&this.props.onBlur(e)},focus:function(){this.refs.input.focus()},render:function(){var e=this.props,t=(e.date,e.locale,e.minDate,e.maxDate,e.excludeDates,e.includeDates,e.filterDate,e.dateFormat,e.onChangeDate,r(e,["date","locale","minDate","maxDate","excludeDates","includeDates","filterDate","dateFormat","onChangeDate"]));return p["default"].createElement("input",a({ref:"input",type:"text"},t,{value:this.state.value,onBlur:this.handleBlur,onChange:this.handleChange}))}});e.exports=f},function(t,n){t.exports=e},function(e,n){e.exports=t},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e,t){return e&&t?e.isSame(t,"day"):!e&&!t}function a(e){var t=arguments.length<=1||void 0===arguments[1]?{}:arguments[1],n=t.minDate,o=t.maxDate,a=t.excludeDates,i=t.includeDates,s=t.filterDate;return n&&e.isBefore(n,"day")||o&&e.isAfter(o,"day")||a&&a.some(function(t){return r(e,t)})||i&&!i.some(function(t){return r(e,t)})||s&&!s(e.clone())||!1}function i(e,t){var n=arguments.length<=2||void 0===arguments[2]?{}:arguments[2],o=n.minDate,r=n.includeDates,a=e.clone().subtract(1,t);return o&&a.isBefore(o,t)||r&&r.every(function(e){return a.isBefore(e,t)})||!1}function s(e,t){var n=arguments.length<=2||void 0===arguments[2]?{}:arguments[2],o=n.maxDate,r=n.includeDates,a=e.clone().add(1,t);return o&&a.isAfter(o,t)||r&&r.every(function(e){return a.isAfter(e,t)})||!1}function l(e){var t=e.minDate,n=e.includeDates;return n&&t?f["default"].min(n.filter(function(e){return t.isSameOrBefore(e,"day")})):n?f["default"].min(n):t}function p(e){var t=e.maxDate,n=e.includeDates;return n&&t?f["default"].max(n.filter(function(e){return t.isSameOrAfter(e,"day")})):n?f["default"].max(n):t}Object.defineProperty(t,"__esModule",{value:!0}),t.isSameDay=r,t.isDayDisabled=a,t.allDaysDisabledBefore=i,t.allDaysDisabledAfter=s,t.getEffectiveMinDate=l,t.getEffectiveMaxDate=p;var d=n(2),f=o(d)},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(2),a=o(r),i=n(6),s=o(i),l=n(9),p=o(l),d=n(3),f=o(d),u=n(4),c=f["default"].createClass({displayName:"Calendar",propTypes:{dateFormat:f["default"].PropTypes.string.isRequired,endDate:f["default"].PropTypes.object,excludeDates:f["default"].PropTypes.array,filterDate:f["default"].PropTypes.func,fixedHeight:f["default"].PropTypes.bool,includeDates:f["default"].PropTypes.array,locale:f["default"].PropTypes.string,maxDate:f["default"].PropTypes.object,minDate:f["default"].PropTypes.object,onClickOutside:f["default"].PropTypes.func.isRequired,onSelect:f["default"].PropTypes.func.isRequired,openToDate:f["default"].PropTypes.object,selected:f["default"].PropTypes.object,showYearDropdown:f["default"].PropTypes.bool,startDate:f["default"].PropTypes.object,todayButton:f["default"].PropTypes.string},mixins:[n(8)],getInitialState:function(){return{date:this.localizeMoment(this.getDateInView())}},componentWillReceiveProps:function(e){e.selected&&!(0,u.isSameDay)(e.selected,this.props.selected)&&this.setState({date:this.localizeMoment(e.selected)})},handleClickOutside:function(e){this.props.onClickOutside(e)},getDateInView:function(){var e=this.props,t=e.selected,n=e.openToDate,o=(0,u.getEffectiveMinDate)(this.props),r=(0,u.getEffectiveMaxDate)(this.props),i=(0,a["default"])();return t?t:o&&r&&n&&n.isBetween(o,r)?n:o&&n&&n.isAfter(o)?n:o&&o.isAfter(i)?o:r&&n&&n.isBefore(r)?n:r&&r.isBefore(i)?r:n?n:i},localizeMoment:function(e){return e.clone().locale(this.props.locale||a["default"].locale())},increaseMonth:function(){this.setState({date:this.state.date.clone().add(1,"month")})},decreaseMonth:function(){this.setState({date:this.state.date.clone().subtract(1,"month")})},handleDayClick:function(e){this.props.onSelect(e)},changeYear:function(e){this.setState({date:this.state.date.clone().set("year",e)})},header:function(){var e=this.state.date.clone().startOf("week");return[0,1,2,3,4,5,6].map(function(t){var n=e.clone().add(t,"days");return f["default"].createElement("div",{key:t,className:"react-datepicker__day-name"},n.localeData().weekdaysMin(n))})},renderPreviousMonthButton:function(){if(!(0,u.allDaysDisabledBefore)(this.state.date,"month",this.props))return f["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--previous",onClick:this.decreaseMonth})},renderNextMonthButton:function(){if(!(0,u.allDaysDisabledAfter)(this.state.date,"month",this.props))return f["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--next",onClick:this.increaseMonth})},renderCurrentMonth:function(){var e=["react-datepicker__current-month"];return this.props.showYearDropdown&&e.push("react-datepicker__current-month--hasYearDropdown"),f["default"].createElement("div",{className:e.join(" ")},this.state.date.format(this.props.dateFormat))},renderYearDropdown:function(){if(this.props.showYearDropdown)return f["default"].createElement(s["default"],{onChange:this.changeYear,year:this.state.date.year()})},renderTodayButton:function(){var e=this;if(this.props.todayButton)return f["default"].createElement("div",{className:"react-datepicker__today-button",onClick:function(){return e.props.onSelect((0,a["default"])())}},this.props.todayButton)},render:function(){return f["default"].createElement("div",{className:"react-datepicker"},f["default"].createElement("div",{className:"react-datepicker__triangle"}),f["default"].createElement("div",{className:"react-datepicker__header"},this.renderPreviousMonthButton(),this.renderCurrentMonth(),this.renderYearDropdown(),this.renderNextMonthButton(),f["default"].createElement("div",null,this.header())),f["default"].createElement(p["default"],{day:this.state.date,onDayClick:this.handleDayClick,minDate:this.props.minDate,maxDate:this.props.maxDate,excludeDates:this.props.excludeDates,includeDates:this.props.includeDates,fixedHeight:this.props.fixedHeight,filterDate:this.props.filterDate,selected:this.props.selected,startDate:this.props.startDate,endDate:this.props.endDate}),this.renderTodayButton())}});e.exports=c},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(7),s=o(i),l=a["default"].createClass({displayName:"YearDropdown",propTypes:{onChange:a["default"].PropTypes.func.isRequired,year:a["default"].PropTypes.number.isRequired},getInitialState:function(){return{dropdownVisible:!1}},renderReadView:function(){return a["default"].createElement("div",{className:"react-datepicker__year-read-view",onClick:this.toggleDropdown},a["default"].createElement("span",{className:"react-datepicker__year-read-view--selected-year"},this.props.year),a["default"].createElement("span",{className:"react-datepicker__year-read-view--down-arrow"}))},renderDropdown:function(){return a["default"].createElement(s["default"],{ref:"options",year:this.props.year,onChange:this.onChange,onCancel:this.toggleDropdown})},onChange:function(e){this.toggleDropdown(),e!==this.props.year&&this.props.onChange(e)},toggleDropdown:function(){this.setState({dropdownVisible:!this.state.dropdownVisible})},render:function(){return a["default"].createElement("div",null,this.state.dropdownVisible?this.renderDropdown():this.renderReadView())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}function r(e){for(var t=[],n=0;n<5;n++)t.push(e-n);return t}var a=n(3),i=o(a),s=i["default"].createClass({displayName:"YearDropdownOptions",propTypes:{onCancel:i["default"].PropTypes.func.isRequired,onChange:i["default"].PropTypes.func.isRequired,year:i["default"].PropTypes.number.isRequired},mixins:[n(8)],getInitialState:function(){return{yearsList:r(this.props.year)}},renderOptions:function(){var e=this,t=this.props.year,n=this.state.yearsList.map(function(n){return i["default"].createElement("div",{className:"react-datepicker__year-option",key:n,onClick:e.onChange.bind(e,n)},t===n?i["default"].createElement("span",{className:"react-datepicker__year-option--selected"},"✓"):"",n)});return n.unshift(i["default"].createElement("div",{className:"react-datepicker__year-option",ref:"upcoming",key:"upcoming",onClick:this.incrementYears},i["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-upcoming"}))),n.push(i["default"].createElement("div",{className:"react-datepicker__year-option",ref:"previous",key:"previous",onClick:this.decrementYears},i["default"].createElement("a",{className:"react-datepicker__navigation react-datepicker__navigation--years react-datepicker__navigation--years-previous"}))),n},onChange:function(e){this.props.onChange(e)},handleClickOutside:function(){this.props.onCancel()},shiftYears:function(e){var t=this.state.yearsList.map(function(t){return t+e});this.setState({yearsList:t})},incrementYears:function(){return this.shiftYears(1)},decrementYears:function(){return this.shiftYears(-1)},render:function(){return i["default"].createElement("div",{className:"react-datepicker__year-dropdown"},this.renderOptions())}});e.exports=s},function(e,t){e.exports=n},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(10),s=o(i),l=a["default"].createClass({displayName:"Month",propTypes:{day:a["default"].PropTypes.object.isRequired,endDate:a["default"].PropTypes.object,excludeDates:a["default"].PropTypes.array,filterDate:a["default"].PropTypes.func,fixedHeight:a["default"].PropTypes.bool,includeDates:a["default"].PropTypes.array,maxDate:a["default"].PropTypes.object,minDate:a["default"].PropTypes.object,onDayClick:a["default"].PropTypes.func,selected:a["default"].PropTypes.object,startDate:a["default"].PropTypes.object},handleDayClick:function(e){this.props.onDayClick&&this.props.onDayClick(e)},isWeekInMonth:function(e){var t=this.props.day,n=e.clone().add(6,"days");return e.isSame(t,"month")||n.isSame(t,"month")},renderWeeks:function(){var e=this,t=this.props.day.clone().startOf("month").startOf("week");return[0,1,2,3,4,5].map(function(e){return t.clone().add(e,"weeks")}).filter(function(t){return e.props.fixedHeight||e.isWeekInMonth(t)}).map(function(t,n){return a["default"].createElement(s["default"],{key:n,day:t,month:e.props.day.month(),onDayClick:e.handleDayClick,minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,filterDate:e.props.filterDate,selected:e.props.selected,startDate:e.props.startDate,endDate:e.props.endDate})})},render:function(){return a["default"].createElement("div",{className:"react-datepicker__month",role:"listbox"},this.renderWeeks())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(3),a=o(r),i=n(11),s=o(i),l=a["default"].createClass({displayName:"Week",propTypes:{day:a["default"].PropTypes.object.isRequired,endDate:a["default"].PropTypes.object,excludeDates:a["default"].PropTypes.array,filterDate:a["default"].PropTypes.func,includeDates:a["default"].PropTypes.array,maxDate:a["default"].PropTypes.object,minDate:a["default"].PropTypes.object,month:a["default"].PropTypes.number,onDayClick:a["default"].PropTypes.func,selected:a["default"].PropTypes.object,startDate:a["default"].PropTypes.object},handleDayClick:function(e){this.props.onDayClick&&this.props.onDayClick(e)},renderDays:function(){var e=this,t=this.props.day.clone().startOf("week");return[0,1,2,3,4,5,6].map(function(n){var o=t.clone().add(n,"days");return a["default"].createElement(s["default"],{key:n,day:o,month:e.props.month,onClick:e.handleDayClick.bind(e,o),minDate:e.props.minDate,maxDate:e.props.maxDate,excludeDates:e.props.excludeDates,includeDates:e.props.includeDates,filterDate:e.props.filterDate,selected:e.props.selected,startDate:e.props.startDate,endDate:e.props.endDate})})},render:function(){return a["default"].createElement("div",{className:"react-datepicker__week"},this.renderDays())}});e.exports=l},function(e,t,n){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var r=n(2),a=o(r),i=n(3),s=o(i),l=n(12),p=o(l),d=n(4),f=s["default"].createClass({displayName:"Day",propTypes:{day:s["default"].PropTypes.object.isRequired,endDate:s["default"].PropTypes.object,excludeDates:s["default"].PropTypes.array,filterDate:s["default"].PropTypes.func,includeDates:s["default"].PropTypes.array,maxDate:s["default"].PropTypes.object,minDate:s["default"].PropTypes.object,month:s["default"].PropTypes.number,onClick:s["default"].PropTypes.func,selected:s["default"].PropTypes.object,startDate:s["default"].PropTypes.object},handleClick:function(e){!this.isDisabled()&&this.props.onClick&&this.props.onClick(e)},isSameDay:function(e){return(0,d.isSameDay)(this.props.day,e)},isDisabled:function(){return(0,d.isDayDisabled)(this.props.day,this.props)},isInRange:function(){var e=this.props,t=e.day,n=e.startDate,o=e.endDate;if(!n||!o)return!1;var r=n.clone().startOf("day").subtract(1,"seconds"),a=o.clone().startOf("day").add(1,"seconds");return t.clone().startOf("day").isBetween(r,a)},isWeekend:function(){var e=this.props.day.day();return 0===e||6===e},isOutsideMonth:function(){return void 0!==this.props.month&&this.props.month!==this.props.day.month()},getClassNames:function(){return(0,p["default"])("react-datepicker__day",{"react-datepicker__day--disabled":this.isDisabled(),"react-datepicker__day--selected":this.isSameDay(this.props.selected),"react-datepicker__day--in-range":this.isInRange(),"react-datepicker__day--today":this.isSameDay((0,a["default"])()),"react-datepicker__day--weekend":this.isWeekend(),"react-datepicker__day--outside-month":this.isOutsideMonth()})},render:function(){return s["default"].createElement("div",{className:this.getClassNames(),onClick:this.handleClick,"aria-label":"day-"+this.props.day.date(),role:"option"},this.props.day.date())}});e.exports=f},function(e,t,n){var o,r;/*!
 		  Copyright (c) 2016 Jed Watson.
 		  Licensed under the MIT License (MIT), see
 		  http://jedwatson.github.io/classnames
@@ -33127,7 +33175,7 @@
 	!function(a,i){o=i,r="function"==typeof o?o.call(t,n,t,e):o,!(void 0!==r&&(e.exports=r))}(this,function(e,t,n){"use strict";function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e){var t=e.getBoundingClientRect(),n={};for(var o in t)n[o]=t[o];if(e.ownerDocument!==document){var a=e.ownerDocument.defaultView.frameElement;if(a){var i=r(a);n.top+=i.top,n.bottom+=i.top,n.left+=i.left,n.right+=i.left}}return n}function a(e){var t=getComputedStyle(e)||{},n=t.position,o=[];if("fixed"===n)return[e];for(var r=e;(r=r.parentNode)&&r&&1===r.nodeType;){var a=void 0;try{a=getComputedStyle(r)}catch(i){}if("undefined"==typeof a||null===a)return o.push(r),o;var s=a,l=s.overflow,p=s.overflowX,d=s.overflowY;/(auto|scroll)/.test(l+d+p)&&("absolute"!==n||["relative","absolute","fixed"].indexOf(a.position)>=0)&&o.push(r)}return o.push(e.ownerDocument.body),e.ownerDocument!==document&&o.push(e.ownerDocument.defaultView),o}function i(){_&&document.body.removeChild(_),_=null}function s(e){var t=void 0;e===document?(t=document,e=document.documentElement):t=e.ownerDocument;var n=t.documentElement,o=r(e),a=k();return o.top-=a.top,o.left-=a.left,"undefined"==typeof o.width&&(o.width=document.body.scrollWidth-o.left-o.right),"undefined"==typeof o.height&&(o.height=document.body.scrollHeight-o.top-o.bottom),o.top=o.top-n.clientTop,o.left=o.left-n.clientLeft,o.right=t.body.clientWidth-o.width-o.left,o.bottom=t.body.clientHeight-o.height-o.top,o}function l(e){return e.offsetParent||document.documentElement}function p(){var e=document.createElement("div");e.style.width="100%",e.style.height="200px";var t=document.createElement("div");d(t.style,{position:"absolute",top:0,left:0,pointerEvents:"none",visibility:"hidden",width:"200px",height:"150px",overflow:"hidden"}),t.appendChild(e),document.body.appendChild(t);var n=e.offsetWidth;t.style.overflow="scroll";var o=e.offsetWidth;n===o&&(o=t.clientWidth),document.body.removeChild(t);var r=n-o;return{width:r,height:r}}function d(){var e=arguments.length<=0||void 0===arguments[0]?{}:arguments[0],t=[];return Array.prototype.push.apply(t,arguments),t.slice(1).forEach(function(t){if(t)for(var n in t)({}).hasOwnProperty.call(t,n)&&(e[n]=t[n])}),e}function f(e,t){if("undefined"!=typeof e.classList)t.split(" ").forEach(function(t){t.trim()&&e.classList.remove(t)});else{var n=new RegExp("(^| )"+t.split(" ").join("|")+"( |$)","gi"),o=h(e).replace(n," ");m(e,o)}}function u(e,t){if("undefined"!=typeof e.classList)t.split(" ").forEach(function(t){t.trim()&&e.classList.add(t)});else{f(e,t);var n=h(e)+(" "+t);m(e,n)}}function c(e,t){if("undefined"!=typeof e.classList)return e.classList.contains(t);var n=h(e);return new RegExp("(^| )"+t+"( |$)","gi").test(n)}function h(e){return e.className instanceof e.ownerDocument.defaultView.SVGAnimatedString?e.className.baseVal:e.className}function m(e,t){e.setAttribute("class",t)}function y(e,t,n){n.forEach(function(n){t.indexOf(n)===-1&&c(e,n)&&f(e,n)}),t.forEach(function(t){c(e,t)||u(e,t)})}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function g(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function v(e,t){var n=arguments.length<=2||void 0===arguments[2]?1:arguments[2];return e+n>=t&&t>=e-n}function b(){return"undefined"!=typeof performance&&"undefined"!=typeof performance.now?performance.now():+new Date}function D(){for(var e={top:0,left:0},t=arguments.length,n=Array(t),o=0;o<t;o++)n[o]=arguments[o];return n.forEach(function(t){var n=t.top,o=t.left;"string"==typeof n&&(n=parseFloat(n,10)),"string"==typeof o&&(o=parseFloat(o,10)),e.top+=n,e.left+=o}),e}function T(e,t){return"string"==typeof e.left&&e.left.indexOf("%")!==-1&&(e.left=parseFloat(e.left,10)/100*t.width),"string"==typeof e.top&&e.top.indexOf("%")!==-1&&(e.top=parseFloat(e.top,10)/100*t.height),e}function C(e,t){return"scrollParent"===t?t=e.scrollParents[0]:"window"===t&&(t=[pageXOffset,pageYOffset,innerWidth+pageXOffset,innerHeight+pageYOffset]),t===document&&(t=t.documentElement),"undefined"!=typeof t.nodeType&&!function(){var e=t,n=s(t),o=n,r=getComputedStyle(t);if(t=[o.left,o.top,n.width+o.left,n.height+o.top],e.ownerDocument!==document){var a=e.ownerDocument.defaultView;t[0]+=a.pageXOffset,t[1]+=a.pageYOffset,t[2]+=a.pageXOffset,t[3]+=a.pageYOffset}K.forEach(function(e,n){e=e[0].toUpperCase()+e.substr(1),"Top"===e||"Left"===e?t[n]+=parseFloat(r["border"+e+"Width"]):t[n]-=parseFloat(r["border"+e+"Width"])})}(),t}var P=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),w=void 0;"undefined"==typeof w&&(w={modules:[]});var _=null,x=function(){var e=0;return function(){return++e}}(),O={},k=function(){var e=_;e||(e=document.createElement("div"),e.setAttribute("data-tether-id",x()),d(e.style,{top:0,left:0,position:"absolute"}),document.body.appendChild(e),_=e);var t=e.getAttribute("data-tether-id");return"undefined"==typeof O[t]&&(O[t]=r(e),j(function(){delete O[t]})),O[t]},E=[],j=function(e){E.push(e)},S=function(){for(var e=void 0;e=E.pop();)e()},N=function(){function e(){o(this,e)}return P(e,[{key:"on",value:function(e,t,n){var o=!(arguments.length<=3||void 0===arguments[3])&&arguments[3];"undefined"==typeof this.bindings&&(this.bindings={}),"undefined"==typeof this.bindings[e]&&(this.bindings[e]=[]),this.bindings[e].push({handler:t,ctx:n,once:o})}},{key:"once",value:function(e,t,n){this.on(e,t,n,!0)}},{key:"off",value:function(e,t){if("undefined"!=typeof this.bindings&&"undefined"!=typeof this.bindings[e])if("undefined"==typeof t)delete this.bindings[e];else for(var n=0;n<this.bindings[e].length;)this.bindings[e][n].handler===t?this.bindings[e].splice(n,1):++n}},{key:"trigger",value:function(e){if("undefined"!=typeof this.bindings&&this.bindings[e]){for(var t=0,n=arguments.length,o=Array(n>1?n-1:0),r=1;r<n;r++)o[r-1]=arguments[r];for(;t<this.bindings[e].length;){var a=this.bindings[e][t],i=a.handler,s=a.ctx,l=a.once,p=s;"undefined"==typeof p&&(p=this),i.apply(p,o),l?this.bindings[e].splice(t,1):++t}}}}]),e}();w.Utils={getActualBoundingClientRect:r,getScrollParents:a,getBounds:s,getOffsetParent:l,extend:d,addClass:u,removeClass:f,hasClass:c,updateClasses:y,defer:j,flush:S,uniqueId:x,Evented:N,getScrollBarSize:p,removeUtilElements:i};var M=function(){function e(e,t){var n=[],o=!0,r=!1,a=void 0;try{for(var i,s=e[Symbol.iterator]();!(o=(i=s.next()).done)&&(n.push(i.value),!t||n.length!==t);o=!0);}catch(l){r=!0,a=l}finally{try{!o&&s["return"]&&s["return"]()}finally{if(r)throw a}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),P=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),A=function(e,t,n){for(var o=!0;o;){var r=e,a=t,i=n;o=!1,null===r&&(r=Function.prototype);var s=Object.getOwnPropertyDescriptor(r,a);if(void 0!==s){if("value"in s)return s.value;var l=s.get;if(void 0===l)return;return l.call(i)}var p=Object.getPrototypeOf(r);if(null===p)return;e=p,t=a,n=i,o=!0,s=p=void 0}};if("undefined"==typeof w)throw new Error("You must include the utils.js file before tether.js");var B=w.Utils,a=B.getScrollParents,s=B.getBounds,l=B.getOffsetParent,d=B.extend,u=B.addClass,f=B.removeClass,y=B.updateClasses,j=B.defer,S=B.flush,p=B.getScrollBarSize,i=B.removeUtilElements,F=function(){if("undefined"==typeof document)return"";for(var e=document.createElement("div"),t=["transform","WebkitTransform","OTransform","MozTransform","msTransform"],n=0;n<t.length;++n){var o=t[n];if(void 0!==e.style[o])return o}}(),Y=[],W=function(){Y.forEach(function(e){e.position(!1)}),S()};!function(){var e=null,t=null,n=null,o=function r(){return"undefined"!=typeof t&&t>16?(t=Math.min(t-16,250),void(n=setTimeout(r,250))):void("undefined"!=typeof e&&b()-e<10||(null!=n&&(clearTimeout(n),n=null),e=b(),W(),t=b()-e))};"undefined"!=typeof window&&"undefined"!=typeof window.addEventListener&&["resize","scroll","touchmove"].forEach(function(e){window.addEventListener(e,o)})}();var q={center:"center",left:"right",right:"left"},I={middle:"middle",top:"bottom",bottom:"top"},R={top:0,left:0,middle:"50%",center:"50%",bottom:"100%",right:"100%"},z=function(e,t){var n=e.left,o=e.top;return"auto"===n&&(n=q[t.left]),"auto"===o&&(o=I[t.top]),{left:n,top:o}},H=function(e){var t=e.left,n=e.top;return"undefined"!=typeof R[e.left]&&(t=R[e.left]),"undefined"!=typeof R[e.top]&&(n=R[e.top]),{left:t,top:n}},L=function(e){var t=e.split(" "),n=M(t,2),o=n[0],r=n[1];return{top:o,left:r}},V=L,X=function(e){function t(e){var n=this;o(this,t),A(Object.getPrototypeOf(t.prototype),"constructor",this).call(this),this.position=this.position.bind(this),Y.push(this),this.history=[],this.setOptions(e,!1),w.modules.forEach(function(e){"undefined"!=typeof e.initialize&&e.initialize.call(n)}),this.position()}return g(t,e),P(t,[{key:"getClass",value:function(){var e=arguments.length<=0||void 0===arguments[0]?"":arguments[0],t=this.options.classes;return"undefined"!=typeof t&&t[e]?this.options.classes[e]:this.options.classPrefix?this.options.classPrefix+"-"+e:e}},{key:"setOptions",value:function(e){var t=this,n=arguments.length<=1||void 0===arguments[1]||arguments[1],o={offset:"0 0",targetOffset:"0 0",targetAttachment:"auto auto",classPrefix:"tether"};this.options=d(o,e);var r=this.options,i=r.element,s=r.target,l=r.targetModifier;if(this.element=i,this.target=s,this.targetModifier=l,"viewport"===this.target?(this.target=document.body,this.targetModifier="visible"):"scroll-handle"===this.target&&(this.target=document.body,this.targetModifier="scroll-handle"),["element","target"].forEach(function(e){if("undefined"==typeof t[e])throw new Error("Tether Error: Both element and target must be defined");"undefined"!=typeof t[e].jquery?t[e]=t[e][0]:"string"==typeof t[e]&&(t[e]=document.querySelector(t[e]))}),u(this.element,this.getClass("element")),this.options.addTargetClasses!==!1&&u(this.target,this.getClass("target")),!this.options.attachment)throw new Error("Tether Error: You must provide an attachment");this.targetAttachment=V(this.options.targetAttachment),this.attachment=V(this.options.attachment),this.offset=L(this.options.offset),this.targetOffset=L(this.options.targetOffset),"undefined"!=typeof this.scrollParents&&this.disable(),"scroll-handle"===this.targetModifier?this.scrollParents=[this.target]:this.scrollParents=a(this.target),this.options.enabled!==!1&&this.enable(n)}},{key:"getTargetBounds",value:function(){if("undefined"==typeof this.targetModifier)return s(this.target);if("visible"===this.targetModifier){if(this.target===document.body)return{top:pageYOffset,left:pageXOffset,height:innerHeight,width:innerWidth};var e=s(this.target),t={height:e.height,width:e.width,top:e.top,left:e.left};return t.height=Math.min(t.height,e.height-(pageYOffset-e.top)),t.height=Math.min(t.height,e.height-(e.top+e.height-(pageYOffset+innerHeight))),t.height=Math.min(innerHeight,t.height),t.height-=2,t.width=Math.min(t.width,e.width-(pageXOffset-e.left)),t.width=Math.min(t.width,e.width-(e.left+e.width-(pageXOffset+innerWidth))),t.width=Math.min(innerWidth,t.width),t.width-=2,t.top<pageYOffset&&(t.top=pageYOffset),t.left<pageXOffset&&(t.left=pageXOffset),t}if("scroll-handle"===this.targetModifier){var e=void 0,n=this.target;n===document.body?(n=document.documentElement,e={left:pageXOffset,top:pageYOffset,height:innerHeight,width:innerWidth}):e=s(n);var o=getComputedStyle(n),r=n.scrollWidth>n.clientWidth||[o.overflow,o.overflowX].indexOf("scroll")>=0||this.target!==document.body,a=0;r&&(a=15);var i=e.height-parseFloat(o.borderTopWidth)-parseFloat(o.borderBottomWidth)-a,t={width:15,height:.975*i*(i/n.scrollHeight),left:e.left+e.width-parseFloat(o.borderLeftWidth)-15},l=0;i<408&&this.target===document.body&&(l=-11e-5*Math.pow(i,2)-.00727*i+22.58),this.target!==document.body&&(t.height=Math.max(t.height,24));var p=this.target.scrollTop/(n.scrollHeight-i);return t.top=p*(i-t.height-l)+e.top+parseFloat(o.borderTopWidth),this.target===document.body&&(t.height=Math.max(t.height,24)),t}}},{key:"clearCache",value:function(){this._cache={}}},{key:"cache",value:function(e,t){return"undefined"==typeof this._cache&&(this._cache={}),"undefined"==typeof this._cache[e]&&(this._cache[e]=t.call(this)),this._cache[e]}},{key:"enable",value:function(){var e=this,t=arguments.length<=0||void 0===arguments[0]||arguments[0];this.options.addTargetClasses!==!1&&u(this.target,this.getClass("enabled")),u(this.element,this.getClass("enabled")),this.enabled=!0,this.scrollParents.forEach(function(t){t!==e.target.ownerDocument&&t.addEventListener("scroll",e.position)}),t&&this.position()}},{key:"disable",value:function(){var e=this;f(this.target,this.getClass("enabled")),f(this.element,this.getClass("enabled")),this.enabled=!1,"undefined"!=typeof this.scrollParents&&this.scrollParents.forEach(function(t){t.removeEventListener("scroll",e.position)})}},{key:"destroy",value:function(){var e=this;this.disable(),Y.forEach(function(t,n){t===e&&Y.splice(n,1)}),0===Y.length&&i()}},{key:"updateAttachClasses",value:function(e,t){var n=this;e=e||this.attachment,t=t||this.targetAttachment;var o=["left","top","bottom","right","middle","center"];"undefined"!=typeof this._addAttachClasses&&this._addAttachClasses.length&&this._addAttachClasses.splice(0,this._addAttachClasses.length),"undefined"==typeof this._addAttachClasses&&(this._addAttachClasses=[]);var r=this._addAttachClasses;e.top&&r.push(this.getClass("element-attached")+"-"+e.top),e.left&&r.push(this.getClass("element-attached")+"-"+e.left),t.top&&r.push(this.getClass("target-attached")+"-"+t.top),t.left&&r.push(this.getClass("target-attached")+"-"+t.left);var a=[];o.forEach(function(e){a.push(n.getClass("element-attached")+"-"+e),a.push(n.getClass("target-attached")+"-"+e)}),j(function(){"undefined"!=typeof n._addAttachClasses&&(y(n.element,n._addAttachClasses,a),n.options.addTargetClasses!==!1&&y(n.target,n._addAttachClasses,a),delete n._addAttachClasses)})}},{key:"position",value:function(){var e=this,t=arguments.length<=0||void 0===arguments[0]||arguments[0];if(this.enabled){this.clearCache();var n=z(this.targetAttachment,this.attachment);this.updateAttachClasses(this.attachment,n);var o=this.cache("element-bounds",function(){return s(e.element)}),r=o.width,a=o.height;if(0===r&&0===a&&"undefined"!=typeof this.lastSize){var i=this.lastSize;r=i.width,a=i.height}else this.lastSize={width:r,height:a};var d=this.cache("target-bounds",function(){return e.getTargetBounds()}),f=d,u=T(H(this.attachment),{width:r,height:a}),c=T(H(n),f),h=T(this.offset,{width:r,height:a}),m=T(this.targetOffset,f);u=D(u,h),c=D(c,m);for(var y=d.left+c.left-u.left,g=d.top+c.top-u.top,v=0;v<w.modules.length;++v){var b=w.modules[v],C=b.position.call(this,{left:y,top:g,targetAttachment:n,targetPos:d,elementPos:o,offset:u,targetOffset:c,manualOffset:h,manualTargetOffset:m,scrollbarSize:O,attachment:this.attachment});if(C===!1)return!1;"undefined"!=typeof C&&"object"==typeof C&&(g=C.top,y=C.left)}var P={page:{top:g,left:y},viewport:{top:g-pageYOffset,bottom:pageYOffset-g-a+innerHeight,left:y-pageXOffset,right:pageXOffset-y-r+innerWidth}},_=this.target.ownerDocument,x=_.defaultView,O=void 0;return _.body.scrollWidth>x.innerWidth&&(O=this.cache("scrollbar-size",p),P.viewport.bottom-=O.height),_.body.scrollHeight>x.innerHeight&&(O=this.cache("scrollbar-size",p),P.viewport.right-=O.width),["","static"].indexOf(_.body.style.position)!==-1&&["","static"].indexOf(_.body.parentElement.style.position)!==-1||(P.page.bottom=_.body.scrollHeight-g-a,P.page.right=_.body.scrollWidth-y-r),"undefined"!=typeof this.options.optimizations&&this.options.optimizations.moveElement!==!1&&"undefined"==typeof this.targetModifier&&!function(){var t=e.cache("target-offsetparent",function(){return l(e.target)}),n=e.cache("target-offsetparent-bounds",function(){return s(t)}),o=getComputedStyle(t),r=n,a={};if(["Top","Left","Bottom","Right"].forEach(function(e){a[e.toLowerCase()]=parseFloat(o["border"+e+"Width"])}),n.right=_.body.scrollWidth-n.left-r.width+a.right,n.bottom=_.body.scrollHeight-n.top-r.height+a.bottom,P.page.top>=n.top+a.top&&P.page.bottom>=n.bottom&&P.page.left>=n.left+a.left&&P.page.right>=n.right){var i=t.scrollTop,p=t.scrollLeft;P.offset={top:P.page.top-n.top+i-a.top,left:P.page.left-n.left+p-a.left}}}(),this.move(P),this.history.unshift(P),this.history.length>3&&this.history.pop(),t&&S(),!0}}},{key:"move",value:function(e){var t=this;if("undefined"!=typeof this.element.parentNode){var n={};for(var o in e){n[o]={};for(var r in e[o]){for(var a=!1,i=0;i<this.history.length;++i){var s=this.history[i];if("undefined"!=typeof s[o]&&!v(s[o][r],e[o][r])){a=!0;break}}a||(n[o][r]=!0)}}var p={top:"",left:"",right:"",bottom:""},f=function(e,n){var o="undefined"!=typeof t.options.optimizations,r=o?t.options.optimizations.gpu:null;if(r!==!1){var a=void 0,i=void 0;e.top?(p.top=0,a=n.top):(p.bottom=0,a=-n.bottom),e.left?(p.left=0,i=n.left):(p.right=0,i=-n.right),p[F]="translateX("+Math.round(i)+"px) translateY("+Math.round(a)+"px)","msTransform"!==F&&(p[F]+=" translateZ(0)")}else e.top?p.top=n.top+"px":p.bottom=n.bottom+"px",e.left?p.left=n.left+"px":p.right=n.right+"px"},u=!1;if((n.page.top||n.page.bottom)&&(n.page.left||n.page.right)?(p.position="absolute",f(n.page,e.page)):(n.viewport.top||n.viewport.bottom)&&(n.viewport.left||n.viewport.right)?(p.position="fixed",f(n.viewport,e.viewport)):"undefined"!=typeof n.offset&&n.offset.top&&n.offset.left?!function(){p.position="absolute";var o=t.cache("target-offsetparent",function(){return l(t.target)});l(t.element)!==o&&j(function(){t.element.parentNode.removeChild(t.element),o.appendChild(t.element)}),f(n.offset,e.offset),u=!0}():(p.position="absolute",f({top:!0,left:!0},e.page)),!u){for(var c=!0,h=this.element.parentNode;h&&1===h.nodeType&&"BODY"!==h.tagName;){if("static"!==getComputedStyle(h).position){c=!1;break}h=h.parentNode}c||(this.element.parentNode.removeChild(this.element),this.element.ownerDocument.body.appendChild(this.element))}var m={},y=!1;for(var r in p){var g=p[r],b=this.element.style[r];b!==g&&(y=!0,m[r]=g)}y&&j(function(){d(t.element.style,m),t.trigger("repositioned")})}}}]),t}(N);X.modules=[],w.position=W;var U=d(X,w),M=function(){function e(e,t){var n=[],o=!0,r=!1,a=void 0;try{for(var i,s=e[Symbol.iterator]();!(o=(i=s.next()).done)&&(n.push(i.value),!t||n.length!==t);o=!0);}catch(l){r=!0,a=l}finally{try{!o&&s["return"]&&s["return"]()}finally{if(r)throw a}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),B=w.Utils,s=B.getBounds,d=B.extend,y=B.updateClasses,j=B.defer,K=["left","top","right","bottom"];w.modules.push({position:function(e){var t=this,n=e.top,o=e.left,r=e.targetAttachment;if(!this.options.constraints)return!0;var a=this.cache("element-bounds",function(){return s(t.element)}),i=a.height,l=a.width;if(0===l&&0===i&&"undefined"!=typeof this.lastSize){var p=this.lastSize;l=p.width,i=p.height}var f=this.cache("target-bounds",function(){return t.getTargetBounds()}),u=f.height,c=f.width,h=[this.getClass("pinned"),this.getClass("out-of-bounds")];this.options.constraints.forEach(function(e){var t=e.outOfBoundsClass,n=e.pinnedClass;t&&h.push(t),n&&h.push(n)}),h.forEach(function(e){["left","top","right","bottom"].forEach(function(t){h.push(e+"-"+t)})});var m=[],g=d({},r),v=d({},this.attachment);return this.options.constraints.forEach(function(e){var a=e.to,s=e.attachment,p=e.pin;"undefined"==typeof s&&(s="");var d=void 0,f=void 0;if(s.indexOf(" ")>=0){var h=s.split(" "),y=M(h,2);f=y[0],d=y[1]}else d=f=s;var b=C(t,a);"target"!==f&&"both"!==f||(n<b[1]&&"top"===g.top&&(n+=u,g.top="bottom"),n+i>b[3]&&"bottom"===g.top&&(n-=u,g.top="top")),"together"===f&&("top"===g.top&&("bottom"===v.top&&n<b[1]?(n+=u,g.top="bottom",n+=i,v.top="top"):"top"===v.top&&n+i>b[3]&&n-(i-u)>=b[1]&&(n-=i-u,g.top="bottom",v.top="bottom")),"bottom"===g.top&&("top"===v.top&&n+i>b[3]?(n-=u,g.top="top",n-=i,v.top="bottom"):"bottom"===v.top&&n<b[1]&&n+(2*i-u)<=b[3]&&(n+=i-u,g.top="top",v.top="top")),"middle"===g.top&&(n+i>b[3]&&"top"===v.top?(n-=i,v.top="bottom"):n<b[1]&&"bottom"===v.top&&(n+=i,v.top="top"))),"target"!==d&&"both"!==d||(o<b[0]&&"left"===g.left&&(o+=c,g.left="right"),o+l>b[2]&&"right"===g.left&&(o-=c,g.left="left")),"together"===d&&(o<b[0]&&"left"===g.left?"right"===v.left?(o+=c,g.left="right",o+=l,v.left="left"):"left"===v.left&&(o+=c,g.left="right",o-=l,v.left="right"):o+l>b[2]&&"right"===g.left?"left"===v.left?(o-=c,g.left="left",o-=l,v.left="right"):"right"===v.left&&(o-=c,g.left="left",o+=l,v.left="left"):"center"===g.left&&(o+l>b[2]&&"left"===v.left?(o-=l,v.left="right"):o<b[0]&&"right"===v.left&&(o+=l,v.left="left"))),"element"!==f&&"both"!==f||(n<b[1]&&"bottom"===v.top&&(n+=i,v.top="top"),n+i>b[3]&&"top"===v.top&&(n-=i,v.top="bottom")),"element"!==d&&"both"!==d||(o<b[0]&&("right"===v.left?(o+=l,v.left="left"):"center"===v.left&&(o+=l/2,v.left="left")),o+l>b[2]&&("left"===v.left?(o-=l,v.left="right"):"center"===v.left&&(o-=l/2,v.left="right"))),"string"==typeof p?p=p.split(",").map(function(e){return e.trim()}):p===!0&&(p=["top","left","right","bottom"]),p=p||[];var D=[],T=[];n<b[1]&&(p.indexOf("top")>=0?(n=b[1],D.push("top")):T.push("top")),n+i>b[3]&&(p.indexOf("bottom")>=0?(n=b[3]-i,D.push("bottom")):T.push("bottom")),o<b[0]&&(p.indexOf("left")>=0?(o=b[0],D.push("left")):T.push("left")),o+l>b[2]&&(p.indexOf("right")>=0?(o=b[2]-l,D.push("right")):T.push("right")),D.length&&!function(){var e=void 0;e="undefined"!=typeof t.options.pinnedClass?t.options.pinnedClass:t.getClass("pinned"),m.push(e),D.forEach(function(t){m.push(e+"-"+t)})}(),T.length&&!function(){var e=void 0;e="undefined"!=typeof t.options.outOfBoundsClass?t.options.outOfBoundsClass:t.getClass("out-of-bounds"),m.push(e),T.forEach(function(t){m.push(e+"-"+t)})}(),(D.indexOf("left")>=0||D.indexOf("right")>=0)&&(v.left=g.left=!1),(D.indexOf("top")>=0||D.indexOf("bottom")>=0)&&(v.top=g.top=!1),g.top===r.top&&g.left===r.left&&v.top===t.attachment.top&&v.left===t.attachment.left||(t.updateAttachClasses(v,g),t.trigger("update",{attachment:v,targetAttachment:g}))}),j(function(){t.options.addTargetClasses!==!1&&y(t.target,m,h),y(t.element,m,h)}),{top:n,left:o}}});var B=w.Utils,s=B.getBounds,y=B.updateClasses,j=B.defer;w.modules.push({position:function(e){var t=this,n=e.top,o=e.left,r=this.cache("element-bounds",function(){return s(t.element)}),a=r.height,i=r.width,l=this.getTargetBounds(),p=n+a,d=o+i,f=[];n<=l.bottom&&p>=l.top&&["left","right"].forEach(function(e){var t=l[e];t!==o&&t!==d||f.push(e)}),o<=l.right&&d>=l.left&&["top","bottom"].forEach(function(e){var t=l[e];t!==n&&t!==p||f.push(e)});var u=[],c=[],h=["left","top","right","bottom"];return u.push(this.getClass("abutted")),h.forEach(function(e){u.push(t.getClass("abutted")+"-"+e)}),f.length&&c.push(this.getClass("abutted")),f.forEach(function(e){c.push(t.getClass("abutted")+"-"+e)}),j(function(){t.options.addTargetClasses!==!1&&y(t.target,c,u),y(t.element,c,u)}),!0}});var M=function(){function e(e,t){var n=[],o=!0,r=!1,a=void 0;try{for(var i,s=e[Symbol.iterator]();!(o=(i=s.next()).done)&&(n.push(i.value),!t||n.length!==t);o=!0);}catch(l){r=!0,a=l}finally{try{!o&&s["return"]&&s["return"]()}finally{if(r)throw a}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}();return w.modules.push({position:function(e){var t=e.top,n=e.left;if(this.options.shift){var o=this.options.shift;"function"==typeof this.options.shift&&(o=this.options.shift.call(this,{top:t,left:n}));var r=void 0,a=void 0;if("string"==typeof o){o=o.split(" "),o[1]=o[1]||o[0];var i=o,s=M(i,2);r=s[0],a=s[1],r=parseFloat(r,10),a=parseFloat(a,10)}else r=o.top,a=o.left;return t+=r,n+=a,{top:t,left:n}}}}),U})}])});
 
 /***/ },
-/* 257 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -33265,7 +33313,7 @@
 
 
 /***/ },
-/* 258 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33286,16 +33334,16 @@
 	module.exports = AdminDaySolution;
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(260);
+	var content = __webpack_require__(258);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(262)(content, {});
+	var update = __webpack_require__(260)(content, {});
 	if(content.placeholders) module.exports = content.placeholders;
 	// Hot Module Replacement
 	if(false) {
@@ -33312,10 +33360,10 @@
 	}
 
 /***/ },
-/* 260 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(261)();
+	exports = module.exports = __webpack_require__(259)();
 	// imports
 
 
@@ -33326,7 +33374,7 @@
 
 
 /***/ },
-/* 261 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/*
@@ -33382,7 +33430,7 @@
 
 
 /***/ },
-/* 262 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -33606,7 +33654,7 @@
 
 
 /***/ },
-/* 263 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33615,10 +33663,10 @@
 	 * Created by Tobias on 03.10.2016.
 	 */
 	var React = __webpack_require__(1);
-	var moment = __webpack_require__(220);
-	var DatePicker = __webpack_require__(256);
+	var moment = __webpack_require__(221);
+	var DatePicker = __webpack_require__(254);
 	var debug = __webpack_require__(172)('AdminAddDay');
-	var adminDayAction = __webpack_require__(252);
+	var adminDayAction = __webpack_require__(250);
 
 	var AdminAddDay = React.createClass({
 	    displayName: 'AdminAddDay',
@@ -33818,50 +33866,6 @@
 	});
 
 	module.exports = AdminAddDay;
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-	var SingleGuessDayContainer = __webpack_require__(238);
-	var UserStatisticsContainer = __webpack_require__(240);
-	var TopScoreContainer = __webpack_require__(247);
-	var DaysContainer = __webpack_require__(175);
-	var Block = __webpack_require__(229);
-
-	var Main = React.createClass({
-	    displayName: 'Main',
-
-
-	    render: function render() {
-
-	        var imgStyle = { margin: "0 auto" };
-
-	        return React.createElement(
-	            Block,
-	            { backgroundColor: 'white', borderRadius: '5px', width: '980px', margin: '0 auto' },
-	            React.createElement(
-	                Block,
-	                null,
-	                React.createElement(
-	                    'h1',
-	                    null,
-	                    'Musikkjulekalender 2016!'
-	                ),
-	                React.createElement('img', { style: imgStyle, src: '/static/images/santas.jpg', alt: 'Responsive image' })
-	            ),
-	            React.createElement(SingleGuessDayContainer, null),
-	            React.createElement(UserStatisticsContainer, null),
-	            React.createElement(TopScoreContainer, null),
-	            React.createElement(DaysContainer, null)
-	        );
-	    }
-	});
-
-	module.exports = Main;
 
 /***/ }
 /******/ ]);

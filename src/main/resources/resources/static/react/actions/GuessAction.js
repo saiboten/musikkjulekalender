@@ -1,7 +1,7 @@
 "use strict"
 var alt = require('../alt');
 var GuessSource = require('../sources/GuessSource');
-var debug = require('debug')('SongActions');
+var debug = require('debug')('GuessAction');
 
 class GuessAction {
     guess(song) {

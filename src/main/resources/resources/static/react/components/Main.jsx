@@ -7,15 +7,14 @@ var Block = require('jsxstyle/Block');
 
 var Main = React.createClass({
 
-
     render: function() {
 
-       var imgStyle = { margin: "0 auto" };
+       var imgStyle = { width: "100%" };
 
         return (
-            <Block backgroundColor="white" borderRadius="5px" width="980px" margin="0 auto">
+            <Block className="main-wrapper" backgroundColor="white" borderRadius="5px" margin="0 auto">
                 <Block>
-                    <h1>Musikkjulekalender 2016!</h1>
+                    <Block component="h1" textAlign="center">Musikkjulekalender 2016!</Block>
                     <img style={imgStyle} src="/static/images/santas.jpg" alt="Responsive image" />
                 </Block>
                 <SingleGuessDayContainer />

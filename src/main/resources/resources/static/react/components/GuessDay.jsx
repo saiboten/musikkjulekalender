@@ -4,6 +4,8 @@ var GuessAction = require('../actions/GuessAction');
 var DayAction = require('../actions/DayAction');
 var GuessStore = require('../stores/GuessStore');
 var moment = require('moment');
+var Inline = require('jsxstyle/Inline');
+var Block = require('jsxstyle/Block');
 
 var GuessDay = React.createClass({
 
@@ -23,7 +25,7 @@ var GuessDay = React.createClass({
     },
 
     guessChanged() {
-        debug("Guess changed, refetching data just in case something has changed", GuessState.getState());
+        debug("Guess changed, refetching data just in case something has changed", GuessStore.getState());
         
 
         this.setState({
@@ -44,6 +46,11 @@ var GuessDay = React.createClass({
     render() {
 
         debug("Props: ", this.props);
+        var audioProps = {
+            src: this.props.day.link,
+            preload: "none",
+            controls: "yes"
+        };
 
         var answerThisDay = undefined;
         if(this.props.answers) {
@@ -63,23 +70,22 @@ var GuessDay = React.createClass({
         else {
             formOrFeedback = (
                 <form onSubmit={this.submit}>
-                    <div className="form-group">
-                        <label htmlFor="songInput">Sang</label>
-                        <input type="text" ref="song" className="form-control" id="songInput" placeholder="Sang"
-                               name="song" onChange={this.handleChange} value={this.state.guess.guess}/>
+                    <div>
+                        <input className="guess-form__input" placeholder="Sang" onChange={this.handleChange} value={this.state.guess.guess}/>
+                        <Inline margin="10px"><button className="guess-form__submitbutton" type="submit">Gjett!</button></Inline>
                     </div>
-                    <p>{this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : ""}</p>
-                    <button type="submit" className="btn btn-default">Lagre forslag</button>
+                    <p>{this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : ""}  </p>
+
                 </form>
             );
         }
 
         return (
-            <span><p>{this.props.day.description}</p>
-
-                <audio src={this.props.day.link} preload="none" controls>
+            <span>
+                <p>{this.props.day.description}</p>
+                <Block width="100%" component="audio" props={audioProps}>
                     <a href={this.props.day.link}>Last ned låt</a>
-                </audio>
+                </Block>
 
                 {this.props.user ? formOrFeedback : ""}</span>
         );

@@ -2,6 +2,7 @@ var React = require('react');
 var debug = require('debug')('UserResultDay');
 var UserResultDayUser = require('./UserResultDayUser.jsx');
 var moment = require('moment');
+var Block = require('jsxstyle/Block');
 
 var UserResultDay = React.createClass({
 
@@ -32,7 +33,7 @@ var UserResultDay = React.createClass({
          </ul>);
         }
         else {
-            maybeempty = (<p>Ingen riktige svar</p>);
+            maybeempty = (<Block padding="10px">Ingen riktige svar</Block>);
        }
         return (
           <div>

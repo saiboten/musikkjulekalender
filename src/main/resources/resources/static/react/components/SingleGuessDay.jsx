@@ -21,7 +21,7 @@ var Days = React.createClass({
                     if(day.revealDateAsString === this.props.date) {
                         return (<AltContainer store={GuessStore}>
                           <h1>Dagens oppgave</h1>
-                            <div className={this.props.class}>
+                            <div>
                                 <h3>{moment(this.props.date).format("DD. MMMM")}</h3>
                                 <GuessDay key={day.revealDateAsInt} today={this.props.today} date={this.props.date} day={day} answers={this.props.answers} user={this.props.user} />
                             </div>
