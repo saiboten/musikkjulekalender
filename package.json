@@ -48,7 +48,8 @@
     "gulp-notify": "^2.2.0",
     "jsxstyle": "0.0.22",
     "reactify": "^0.17.1",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "style-loader": "~0.13.1"
   },
   "scripts": {
     "build": "browserify -t [reactify --es6] src/App.jsx > build/app.js",
