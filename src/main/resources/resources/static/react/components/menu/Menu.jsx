@@ -1,0 +1,54 @@
+var React = require('react');
+
+var Menu = React.createClass({
+
+  getInitialState: function() {
+    return {
+      menuOpen: false
+    }
+  },
+
+  toggleMenu: function() {
+    this.setState( {
+      menuOpen: !this.state.menuOpen
+    })
+  },
+
+  frontPage: function() {
+    window.location = "/";
+  },
+
+  about: function() {
+    window.location = "/om";
+  },
+
+  logInOrOut: function()  {
+    this.props.loggedIn === true ? window.location = "/logout" : window.location = "/secure";
+  },
+
+  render: function() {
+    // Quick note: this.props.loggedIn is a string
+    var loggedInLink = this.props.loggedIn==="true" ? (<a className="header__menu-item" href="/logout">Logg ut</a>) : (<a className="header__menu-item" href="/secure">Logg inn</a>);
+    var openMenuContent = (
+      <ul className="header__menu-dropdown-list">
+       <li className="header__menu-dropdown-list-element" onClick={this.frontPage}>Forsiden</li>
+       <li className="header__menu-dropdown-list-element" onClick={this.about}>Om</li>
+       <li className="header__menu-dropdown-list-element" onClick={this.logInOrOut}>{this.props.loggedIn==="true" ? "Logg ut":"Logg inn"}</li>
+      </ul>
+    )
+
+    return (
+      <nav className="header">
+        <a className="header__menu-item" href="#"><img width="50px" height="34px" src="/static/images/santawhite.jpg" /></a>
+        <a className="header__menu-item" href="/"> Forsiden </a>
+        <a className="header__menu-item" href="/om"> Om </a>
+        {loggedInLink}
+        {this.state.menuOpen ? openMenuContent: ""}
+        <div className="fa fa-bars header__menu-hamburger" onClick={this.toggleMenu}></div>
+
+    </nav>
+    );
+  }
+});
+
+module.exports = Menu;
