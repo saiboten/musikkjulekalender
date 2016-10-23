@@ -5,6 +5,7 @@ var adminDayAction = require('../../actions/AdminDayAction');
 var DatePicker = require('react-datepicker');
 var AdminDaySolution = require('./AdminDaySolution');
 var DateHeader = require('../DateHeader.jsx');
+var SongAudio =require('../SongAudio.jsx');
 
 require('react-datepicker/dist/react-datepicker.css');
 
@@ -172,9 +173,8 @@ var AdminDay = React.createClass({
                         <button onClick={this.saveChanges}>Lagre endringer</button>
                         <button onClick={this.deleteDay}>Slett dag</button>{this.state.confirmDelete ? "Bekreft":""}
                     </p>
-                    <audio src={this.state.link} controls>
-                        <a href={this.state.link}>Last ned låt</a>
-                    </audio>
+
+                    <SongAudio link={this.state.link} />
                 </div>
             </div>
         );

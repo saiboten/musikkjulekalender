@@ -6,6 +6,7 @@ var GuessStore = require('../stores/GuessStore');
 var moment = require('moment');
 var Inline = require('jsxstyle/Inline');
 var Block = require('jsxstyle/Block');
+var SongAudio = require('./SongAudio.jsx');
 
 var GuessDay = React.createClass({
 
@@ -46,11 +47,7 @@ var GuessDay = React.createClass({
     render() {
 
         debug("Props: ", this.props);
-        var audioProps = {
-            src: this.props.day.link,
-            preload: "none",
-            controls: "yes"
-        };
+
 
         var answerThisDay = undefined;
         if(this.props.answers) {
@@ -72,7 +69,7 @@ var GuessDay = React.createClass({
                 <form onSubmit={this.submit}>
                     <div>
                         <input className="guess-form__input" placeholder="Sang" onChange={this.handleChange} value={this.state.guess.guess}/>
-                        <Inline margin="10px"><button className="guess-form__submitbutton" type="submit">Gjett!</button></Inline>
+                        <Inline margin="10px" width="10%"><button className="guess-form__submitbutton" type="submit">Gjett!</button></Inline>
                     </div>
                     <p>{this.state.guessResponse.guess ? this.state.guessResponse.guess.feedback : ""}  </p>
 
@@ -83,9 +80,7 @@ var GuessDay = React.createClass({
         return (
             <span>
                 <p>{this.props.day.description}</p>
-                <Block width="100%" component="audio" props={audioProps}>
-                    <a href={this.props.day.link}>Last ned låt</a>
-                </Block>
+                <SongAudio link={this.props.day.link} />
 
                 {this.props.user ? formOrFeedback : ""}</span>
         );

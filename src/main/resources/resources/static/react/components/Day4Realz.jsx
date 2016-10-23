@@ -5,17 +5,20 @@ var React = require('react');
 var Block = require('jsxstyle/Block');
 var Flex = require('jsxstyle/Flex');
 var Inline = require('jsxstyle/Inline');
+var SongAudio = require('./SongAudio.jsx');
+
 
 
 var Day4Realz = React.createClass({
     render() {
-       return (<Block backgroundColor="white" padding="10px">
-              <Block >{this.props.day.description}</Block>
-              <p><button onClick={this.props.showSolutionCallback}>Vis fasit</button></p>
-              <audio className="audio" src={this.props.day.link} preload="none" controls>
-                <a href={this.props.day.link}>Last ned låt</a>
-              </audio>
-            </Block>);
+        return (<Block backgroundColor="white" padding="10px">
+            <Block >{this.props.day.description}</Block>
+            <p>
+                <button onClick={this.props.showSolutionCallback}>Vis fasit</button>
+            </p>
+            <SongAudio link={this.props.day.link}/>
+
+        </Block>);
     }
 });
 

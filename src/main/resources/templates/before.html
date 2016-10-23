@@ -22,6 +22,7 @@
 
         h1 {
             margin: 10px;
+            font-size: 1.4em;
         }
 
         h3 {
@@ -34,6 +35,21 @@
             width: 500px;
             padding: 10px;
             border-radius: 5px;
+            display: flex;
+            align-items: inherit;
+            justify-content: space-between;
+        }
+
+        .header__menu-item {
+            border: 1px solid black;
+            border-radius:2px;
+            margin: 5px;
+            padding: 5px 5px 5px 5px;
+            min-width: 18%;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            overflow-wrap: break-word;
         }
 
         .day__container {
@@ -45,7 +61,7 @@
             text-align: center;
             margin: 10px auto;
             width: 225px;
-            padding :10px;
+            padding: 10px;
             border-radius: 5px;
         }
 
@@ -70,7 +86,7 @@
         }
 
         .guess-form__input {
-            width: 80%;
+            width: 75%;
             margin: 10px 0;
         }
 
@@ -127,8 +143,7 @@
             }
         }
 
-
-        @media (max-width: 500px) {
+        @media (max-width: 980px) {
             .main-wrapper {
                 width: 320px;
             }
@@ -142,7 +157,7 @@
             }
 
             .guess-day__container {
-                width: 100%;
+                width: 90%;
             }
         }
 
@@ -173,13 +188,11 @@
 
 <div th:fragment="menu">
     <nav class="header">
-        <a href="#">Musikkjulekalender 2016</a>
-        <ul>
-            <li><a href="/"> Forsiden </a></li>
-            <li><a href="/om"> Om kalenderen </a></li>
-            <li><a th:href="${loggedin} ? '/logout' : '/secure'" th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a>
-            </li>
-        </ul>
+        <a class="header__menu-item header__menu-link" href="#"><img width="50px" height="34px" src="/static/images/santawhite.jpg" /></a>
+        <a class="header__menu-item header__menu-link" href="/"> Forsiden </a>
+        <a class="header__menu-item header__menu-link" href="/om"> Om </a>
+        <a class="header__menu-item header__menu-link" th:href="${loggedin} ? '/logout' : '/secure'"
+                 th:text="${loggedin} ? 'Logg ut' : 'Logg inn'"></a>
     </nav>
 </div>
 

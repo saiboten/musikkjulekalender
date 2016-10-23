@@ -21950,7 +21950,7 @@
 	var UserStatisticsContainer = __webpack_require__(240);
 	var TopScoreContainer = __webpack_require__(244);
 	var DaysContainer = __webpack_require__(247);
-	var Block = __webpack_require__(230);
+	var Block = __webpack_require__(234);
 
 	var Main = React.createClass({
 	    displayName: 'Main',
@@ -21995,7 +21995,7 @@
 	var DayActions = __webpack_require__(205);
 	var Days = __webpack_require__(219);
 	var SingleGuessDay = __webpack_require__(239);
-	var Block = __webpack_require__(230);
+	var Block = __webpack_require__(234);
 
 	var SingleGuessDayContainer = React.createClass({
 	    displayName: 'SingleGuessDayContainer',
@@ -26994,7 +26994,7 @@
 	var Day = __webpack_require__(220);
 	var GuessDay = __webpack_require__(223);
 	var GuessStore = __webpack_require__(226);
-	var Flex = __webpack_require__(237);
+	var Flex = __webpack_require__(238);
 
 	var Days = React.createClass({
 	    displayName: 'Days',
@@ -27027,11 +27027,11 @@
 	var debug = __webpack_require__(172)('Day');
 	var moment = __webpack_require__(221);
 	var GuessDay = __webpack_require__(223);
-	var DateHeader = __webpack_require__(227);
-	var ShowSolution = __webpack_require__(228);
-	var Day4Realz = __webpack_require__(229);
-	var Block = __webpack_require__(230);
-	var Flex = __webpack_require__(237);
+	var DateHeader = __webpack_require__(235);
+	var ShowSolution = __webpack_require__(236);
+	var Day4Realz = __webpack_require__(237);
+	var Block = __webpack_require__(234);
+	var Flex = __webpack_require__(238);
 
 	var Day = React.createClass({
 	    displayName: 'Day',
@@ -31348,8 +31348,9 @@
 	var DayAction = __webpack_require__(205);
 	var GuessStore = __webpack_require__(226);
 	var moment = __webpack_require__(221);
-	var Inline = __webpack_require__(238);
-	var Block = __webpack_require__(230);
+	var Inline = __webpack_require__(227);
+	var Block = __webpack_require__(234);
+	var SongAudio = __webpack_require__(262);
 
 	var GuessDay = React.createClass({
 	    displayName: 'GuessDay',
@@ -31386,11 +31387,6 @@
 	    render: function render() {
 
 	        debug("Props: ", this.props);
-	        var audioProps = {
-	            src: this.props.day.link,
-	            preload: "none",
-	            controls: "yes"
-	        };
 
 	        var answerThisDay = undefined;
 	        if (this.props.answers) {
@@ -31421,7 +31417,7 @@
 	                    React.createElement('input', { className: 'guess-form__input', placeholder: 'Sang', onChange: this.handleChange, value: this.state.guess.guess }),
 	                    React.createElement(
 	                        Inline,
-	                        { margin: '10px' },
+	                        { margin: '10px', width: '10%' },
 	                        React.createElement(
 	                            'button',
 	                            { className: 'guess-form__submitbutton', type: 'submit' },
@@ -31446,15 +31442,7 @@
 	                null,
 	                this.props.day.description
 	            ),
-	            React.createElement(
-	                Block,
-	                { width: '100%', component: 'audio', props: audioProps },
-	                React.createElement(
-	                    'a',
-	                    { href: this.props.day.link },
-	                    'Last ned l\xE5t'
-	                )
-	            ),
+	            React.createElement(SongAudio, { link: this.props.day.link }),
 	            this.props.user ? formOrFeedback : ""
 	        );
 	    }
@@ -31609,26 +31597,8 @@
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	module.exports = __webpack_require__(228).Inline;
 
-	var React = __webpack_require__(1);
-	var moment = __webpack_require__(221);
-	var debug = __webpack_require__(172)("DateHeader");
-
-	var DateHeader = React.createClass({
-	    displayName: 'DateHeader',
-
-	    render: function render() {
-	        debug('this.props.unixDate', this.props.unixDate);
-	        return React.createElement(
-	            'h3',
-	            null,
-	            moment(this.props.unixDate).format('DD. MMMM')
-	        );
-	    }
-	});
-
-	module.exports = DateHeader;
 
 /***/ },
 /* 228 */
@@ -31636,122 +31606,8 @@
 
 	'use strict';
 
-	/**
-	 * Created by Tobias on 16.10.2016.
-	 */
-
-	var React = __webpack_require__(1);
-	var debug = __webpack_require__(172)('ShowSolution');
-
-	var ShowSolution = React.createClass({
-	    displayName: 'ShowSolution',
-	    createMarkup: function createMarkup() {
-	        debug('Creating markup for the following solution video: ', this.props.day.optionalSolutionVideo);
-	        return { __html: this.props.day.optionalSolutionVideo };
-	    },
-
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'p',
-	                null,
-	                this.props.day.description
-	            ),
-	            React.createElement(
-	                'p',
-	                null,
-	                React.createElement(
-	                    'span',
-	                    null,
-	                    this.props.day.solutionArtist,
-	                    ' - ',
-	                    this.props.day.solutionsSong,
-	                    ' ',
-	                    this.props.day.optionalSolutionVideo ? React.createElement('span', { className: 'youtube', dangerouslySetInnerHTML: this.createMarkup() }) : ""
-	                )
-	            ),
-	            React.createElement(
-	                'audio',
-	                { src: this.props.day.link, controls: true },
-	                React.createElement(
-	                    'a',
-	                    { href: this.props.day.link },
-	                    'Last ned l\xE5t'
-	                )
-	            )
-	        );
-	    }
-	});
-
-	module.exports = ShowSolution;
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	/**
-	 * Created by Tobias on 16.10.2016.
-	 */
-	var React = __webpack_require__(1);
-	var Block = __webpack_require__(230);
-	var Flex = __webpack_require__(237);
-	var Inline = __webpack_require__(238);
-
-	var Day4Realz = React.createClass({
-	  displayName: 'Day4Realz',
-	  render: function render() {
-	    return React.createElement(
-	      Block,
-	      { backgroundColor: 'white', padding: '10px' },
-	      React.createElement(
-	        Block,
-	        null,
-	        this.props.day.description
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        React.createElement(
-	          'button',
-	          { onClick: this.props.showSolutionCallback },
-	          'Vis fasit'
-	        )
-	      ),
-	      React.createElement(
-	        'audio',
-	        { className: 'audio', src: this.props.day.link, preload: 'none', controls: true },
-	        React.createElement(
-	          'a',
-	          { href: this.props.day.link },
-	          'Last ned l\xE5t'
-	        )
-	      )
-	    );
-	  }
-	});
-
-	module.exports = Day4Realz;
-
-/***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(231).Block;
-
-
-/***/ },
-/* 231 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var CSSDisplayNames = __webpack_require__(232);
-	var makeStyleComponentClass = __webpack_require__(233);
+	var CSSDisplayNames = __webpack_require__(229);
+	var makeStyleComponentClass = __webpack_require__(230);
 
 	var Display = {};
 
@@ -31764,7 +31620,7 @@
 
 
 /***/ },
-/* 232 */
+/* 229 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31784,12 +31640,12 @@
 
 
 /***/ },
-/* 233 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var GlobalStylesheets = __webpack_require__(234);
+	var GlobalStylesheets = __webpack_require__(231);
 	var React = __webpack_require__(1);
 
 	var assign = __webpack_require__(4);
@@ -31859,7 +31715,7 @@
 
 
 /***/ },
-/* 234 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31867,8 +31723,8 @@
 	var CSSPropertyOperations = __webpack_require__(97);
 
 	var assign = __webpack_require__(4);
-	var autoprefix = __webpack_require__(235);
-	var invariant = __webpack_require__(236);
+	var autoprefix = __webpack_require__(232);
+	var invariant = __webpack_require__(233);
 
 	var PREFIX = 'jsxstyle';
 
@@ -31972,7 +31828,7 @@
 
 
 /***/ },
-/* 235 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32071,7 +31927,7 @@
 
 
 /***/ },
-/* 236 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -32129,17 +31985,135 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(228).Block;
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var moment = __webpack_require__(221);
+	var debug = __webpack_require__(172)("DateHeader");
+
+	var DateHeader = React.createClass({
+	    displayName: 'DateHeader',
+
+	    render: function render() {
+	        debug('this.props.unixDate', this.props.unixDate);
+	        return React.createElement(
+	            'h3',
+	            null,
+	            moment(this.props.unixDate).format('DD. MMMM')
+	        );
+	    }
+	});
+
+	module.exports = DateHeader;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	/**
+	 * Created by Tobias on 16.10.2016.
+	 */
+
+	var React = __webpack_require__(1);
+	var debug = __webpack_require__(172)('ShowSolution');
+	var SongAudio = __webpack_require__(262);
+
+	var ShowSolution = React.createClass({
+	    displayName: 'ShowSolution',
+	    createMarkup: function createMarkup() {
+	        debug('Creating markup for the following solution video: ', this.props.day.optionalSolutionVideo);
+	        return { __html: this.props.day.optionalSolutionVideo };
+	    },
+
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'p',
+	                null,
+	                this.props.day.description
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                React.createElement(
+	                    'span',
+	                    null,
+	                    this.props.day.solutionArtist,
+	                    ' - ',
+	                    this.props.day.solutionsSong,
+	                    ' ',
+	                    this.props.day.optionalSolutionVideo ? React.createElement('span', { className: 'youtube', dangerouslySetInnerHTML: this.createMarkup() }) : ""
+	                )
+	            ),
+	            React.createElement(SongAudio, { link: this.props.day.link })
+	        );
+	    }
+	});
+
+	module.exports = ShowSolution;
+
+/***/ },
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(231).Flex;
+	'use strict';
 
+	/**
+	 * Created by Tobias on 16.10.2016.
+	 */
+	var React = __webpack_require__(1);
+	var Block = __webpack_require__(234);
+	var Flex = __webpack_require__(238);
+	var Inline = __webpack_require__(227);
+	var SongAudio = __webpack_require__(262);
+
+	var Day4Realz = React.createClass({
+	    displayName: 'Day4Realz',
+	    render: function render() {
+	        return React.createElement(
+	            Block,
+	            { backgroundColor: 'white', padding: '10px' },
+	            React.createElement(
+	                Block,
+	                null,
+	                this.props.day.description
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                React.createElement(
+	                    'button',
+	                    { onClick: this.props.showSolutionCallback },
+	                    'Vis fasit'
+	                )
+	            ),
+	            React.createElement(SongAudio, { link: this.props.day.link })
+	        );
+	    }
+	});
+
+	module.exports = Day4Realz;
 
 /***/ },
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(231).Inline;
+	module.exports = __webpack_require__(228).Flex;
 
 
 /***/ },
@@ -32280,7 +32254,7 @@
 	var debug = __webpack_require__(172)('UserResultDay');
 	var UserResultDayUser = __webpack_require__(243);
 	var moment = __webpack_require__(221);
-	var Block = __webpack_require__(230);
+	var Block = __webpack_require__(234);
 
 	var UserResultDay = React.createClass({
 	    displayName: 'UserResultDay',
@@ -32489,7 +32463,7 @@
 	var DayActions = __webpack_require__(205);
 	var Days = __webpack_require__(219);
 	var debug = __webpack_require__(172)('DaysContainer');
-	var Block = __webpack_require__(230);
+	var Block = __webpack_require__(234);
 
 	var DaysContainer = React.createClass({
 	    displayName: 'DaysContainer',
@@ -32886,7 +32860,8 @@
 	var adminDayAction = __webpack_require__(250);
 	var DatePicker = __webpack_require__(254);
 	var AdminDaySolution = __webpack_require__(256);
-	var DateHeader = __webpack_require__(227);
+	var DateHeader = __webpack_require__(235);
+	var SongAudio = __webpack_require__(262);
 
 	__webpack_require__(257);
 
@@ -33146,15 +33121,7 @@
 	                    ),
 	                    this.state.confirmDelete ? "Bekreft" : ""
 	                ),
-	                React.createElement(
-	                    'audio',
-	                    { src: this.state.link, controls: true },
-	                    React.createElement(
-	                        'a',
-	                        { href: this.state.link },
-	                        'Last ned l\xE5t'
-	                    )
-	                )
+	                React.createElement(SongAudio, { link: this.state.link })
 	            )
 	        );
 	    }
@@ -33866,6 +33833,41 @@
 	});
 
 	module.exports = AdminAddDay;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Block = __webpack_require__(234);
+
+	var SongAudio = React.createClass({
+	    displayName: 'SongAudio',
+
+
+	    render: function render() {
+
+	        var audioProps = {
+	            src: this.props.link,
+	            preload: "none",
+	            controls: "yes"
+	        };
+
+	        return React.createElement(
+	            Block,
+	            { width: '100%', component: 'audio', props: audioProps },
+	            React.createElement(
+	                'a',
+	                { href: this.props.link },
+	                'Last ned l\xE5t'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = SongAudio;
 
 /***/ }
 /******/ ]);

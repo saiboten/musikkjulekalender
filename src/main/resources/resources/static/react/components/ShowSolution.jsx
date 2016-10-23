@@ -4,6 +4,7 @@
 
 var React = require("react");
 var debug = require('debug')('ShowSolution');
+var SongAudio = require('./SongAudio.jsx');
 
 var ShowSolution = React.createClass({
 
@@ -18,9 +19,7 @@ var ShowSolution = React.createClass({
             <p>
                 <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
             </p>
-            <audio src={this.props.day.link} controls>
-                <a href={this.props.day.link}>Last ned låt</a>
-            </audio>
+            <SongAudio link={this.props.day.link} />
         </div>);
     }
 });
