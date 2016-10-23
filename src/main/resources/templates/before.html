@@ -38,12 +38,12 @@
             border-radius: 5px;
             display: flex;
             align-items: inherit;
-            justify-content: space-between;
+            justify-content: space-around;
         }
 
         .header__menu-item {
-            border: 1px solid black;
-            border-radius:2px;
+            /*border: 1px solid black;
+            border-radius:2px;*/
             margin: 5px;
             padding: 5px 5px 5px 5px;
             min-width: 18%;
@@ -55,6 +55,15 @@
 
         .header__menu-hamburger {
           display: none;
+          cursor: pointer;
+        }
+
+        .header__menu-dropdown-list {
+          margin-right: auto;
+        }
+
+        .header__menu-dropdown-list-element {
+          cursor: pointer;
         }
 
         .day__container {

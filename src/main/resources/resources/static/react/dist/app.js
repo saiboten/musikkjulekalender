@@ -44443,11 +44443,6 @@
 	      { className: "header" },
 	      React.createElement(
 	        "a",
-	        { className: "header__menu-item", href: "#" },
-	        React.createElement("img", { width: "50px", height: "34px", src: "/static/images/santawhite.jpg" })
-	      ),
-	      React.createElement(
-	        "a",
 	        { className: "header__menu-item", href: "/" },
 	        " Forsiden "
 	      ),

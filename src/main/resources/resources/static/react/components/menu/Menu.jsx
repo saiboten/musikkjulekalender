@@ -39,7 +39,6 @@ var Menu = React.createClass({
 
     return (
       <nav className="header">
-        <a className="header__menu-item" href="#"><img width="50px" height="34px" src="/static/images/santawhite.jpg" /></a>
         <a className="header__menu-item" href="/"> Forsiden </a>
         <a className="header__menu-item" href="/om"> Om </a>
         {loggedInLink}
