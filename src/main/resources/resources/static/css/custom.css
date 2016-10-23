@@ -72,6 +72,15 @@ nav.header {
     width: 60%;
 }
 
+.admin-day__description-textarea {
+  width: 300px;
+  height: 140px;
+}
+
+.admin-day__input {
+  width: 100%;
+}
+
 .wrapper {
     background: none;
     font-family: 'Rubik', sans-serif;

@@ -1,5 +1,5 @@
 var React = require('react');
-var debug = require('debug')('day');
+var debug = require('debug')('AdminDay');
 var moment = require('moment');
 var adminDayAction = require('../../actions/AdminDayAction');
 var DatePicker = require('react-datepicker');
@@ -7,6 +7,8 @@ var AdminDaySolution = require('./AdminDaySolution');
 var DateHeader = require('../DateHeader.jsx');
 var SongAudio =require('../SongAudio.jsx');
 var Block = require('jsxstyle/Block');
+var Dropzone = require('react-dropzone');
+var request = require('superagent');
 
 require('react-datepicker/dist/react-datepicker.css');
 
@@ -26,7 +28,8 @@ var AdminDay = React.createClass({
             revealDate: moment(this.props.day.revealDate),
             solutionDate: moment(this.props.day.solutionDate),
             addSolution: undefined,
-            confirmDelete: false
+            confirmDelete: false,
+            file: {}
         }
     },
 
@@ -115,11 +118,48 @@ var AdminDay = React.createClass({
       }
     },
 
+    onDrop: function (files) {
+       debug('Received files: ', files);
+       this.setState({
+           file: files[0]
+       })
+   },
+
+   upload() {
+        var req = request.post('/admin/upload/' + this.props.day.revealDateAsString);
+        req.query({ filename: this.state.file.name });
+        req.attach("file", this.state.file);
+
+        var songname = this.state.file.name;
+        var that = this;
+
+        req.end(function(err, res) {
+            debug("err, ", err);
+            debug("res, ", res);
+            if(res) {
+              // Call stuff
+                adminDayAction.getDays();
+            }
+
+
+            that.setState({
+                file: {}
+            })
+        });
+    },
+
+    abortUpload() {
+        this.setState({
+            file: {}
+        })
+    },
+
     render() {
         var day = "";
+        var fileupload = (<p>Fil som blir lastet opp: {this.state.file.name}<button onClick={this.upload}>Last opp</button><button onClick={this.abortUpload}>Avbryt opplasting</button></p>);
 
         return (
-            <Block className="admin-day__container">
+            <Block border="1px solid black" borderRadius="5px" margin="5px" padding="5px" className="admin-day__container">
                 <DateHeader unixDate={this.props.day.revealDateAsString}></DateHeader>
 
                 <div>
@@ -135,23 +175,23 @@ var AdminDay = React.createClass({
                             </tr>
                             <tr>
                                 <td>Beskrivelse</td>
-                                <td><input type="text" onChange={this.changeDescription} value={this.state.description}/></td>
+                                <td><textarea className="admin-day__description-textarea" type="text" onChange={this.changeDescription} value={this.state.description}/></td>
                             </tr>
                             <tr>
                                 <td>Artist</td>
-                                <td><input type="text" onChange={this.changeSolutionArtist} value={this.state.solutionArtist}/></td>
+                                <td><input className="admin-day__input" type="text" onChange={this.changeSolutionArtist} value={this.state.solutionArtist}/></td>
                             </tr>
                             <tr>
                                 <td>Sang</td>
-                                <td><input type="text" onChange={this.changeSolutionSong} value={this.state.solutionSong}/></td>
+                                <td><input className="admin-day__input" type="text" onChange={this.changeSolutionSong} value={this.state.solutionSong}/></td>
                             </tr>
                             <tr>
                                 <td>Video</td>
-                                <td><input type="text" onChange={this.changeOptionalSolutionVideo} value={this.state.optionalSolutionVideo}/></td>
+                                <td><input className="admin-day__input" type="text" onChange={this.changeOptionalSolutionVideo} value={this.state.optionalSolutionVideo}/></td>
                             </tr>
                             <tr>
                                 <td>Link</td>
-                                <td><input type="text" onChange={this.changeLink} value={this.state.link}/></td>
+                                <td><input className="admin-day__input" readOnly disabled type="text" onChange={this.changeLink} value={this.state.link}/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -163,6 +203,11 @@ var AdminDay = React.createClass({
                         }
                     </ul>
                     <input type="text" value={this.state.addSolution} placeholder="Legg til løsning" onChange={this.addSolutionChange} /><button onClick={this.addSolution}>Legg til</button>
+
+                    <Dropzone ref="dropzone" className="dropzone" onDrop={this.onDrop}>
+                      <p>Last opp låt</p>
+                      </Dropzone>
+                      {this.state.file.name ? fileupload : ""}
 
                     <p>
                         <span>
