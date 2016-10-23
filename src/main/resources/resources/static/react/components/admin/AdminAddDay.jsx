@@ -87,25 +87,10 @@ var AdminAddDay = React.createClass({
                             <td><DatePicker selected={this.state.solutionDate} onChange={this.changeSolutionDate} /></td>
                         </tr>
                         <tr>
-                            <td>Beskrivelse</td>
-                            <td><input type="text" onChange={this.changeDescription} value={this.state.description}/></td>
-                        </tr>
-                        <tr>
-                            <td>Artist</td>
-                            <td><input type="text" onChange={this.changeSolutionArtist} value={this.state.solutionArtist}/></td>
-                        </tr>
-                        <tr>
-                            <td>Sang</td>
+                            <td>Sang/Fasit</td>
                             <td><input type="text" onChange={this.changeSolutionSong} value={this.state.solutionSong}/></td>
                         </tr>
-                        <tr>
-                            <td>Video</td>
-                            <td><input type="text" onChange={this.changeOptionalSolutionVideo} value={this.state.optionalSolutionVideo}/></td>
-                        </tr>
-                        <tr>
-                            <td>Link</td>
-                            <td><input type="text" onChange={this.changeLink} value={this.state.link}/></td>
-                        </tr>
+
                         </tbody>
                     </table>
 

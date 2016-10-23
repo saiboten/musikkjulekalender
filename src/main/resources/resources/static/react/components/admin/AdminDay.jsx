@@ -6,6 +6,7 @@ var DatePicker = require('react-datepicker');
 var AdminDaySolution = require('./AdminDaySolution');
 var DateHeader = require('../DateHeader.jsx');
 var SongAudio =require('../SongAudio.jsx');
+var Block = require('jsxstyle/Block');
 
 require('react-datepicker/dist/react-datepicker.css');
 
@@ -118,7 +119,7 @@ var AdminDay = React.createClass({
         var day = "";
 
         return (
-            <div className="col-md-6 pane">
+            <Block className="admin-day__container">
                 <DateHeader unixDate={this.props.day.revealDateAsString}></DateHeader>
 
                 <div>
@@ -176,7 +177,7 @@ var AdminDay = React.createClass({
 
                     <SongAudio link={this.state.link} />
                 </div>
-            </div>
+            </Block>
         );
     }
 });

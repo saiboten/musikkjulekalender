@@ -1,0 +1,178 @@
+body {
+    background-color: #adc3de;
+}
+
+.main-wrapper {
+    width: 980px;
+}
+
+.admin__container {
+  width: 980px;
+}
+
+h1 {
+    margin: 10px;
+    font-size: 1.4em;
+}
+
+h3 {
+    margin: 10px;
+}
+
+nav.header {
+    margin: 10px auto;
+    background: white;
+    width: 500px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: inherit;
+    justify-content: space-around;
+}
+
+.header__menu-item {
+    /*border: 1px solid black;
+    border-radius:2px;*/
+    margin: 5px;
+    padding: 5px 5px 5px 5px;
+    min-width: 18%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: break-word;
+}
+
+.header__menu-hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.header__menu-dropdown-list {
+  margin-right: auto;
+}
+
+.header__menu-dropdown-list-element {
+  cursor: pointer;
+}
+
+.day__container {
+    width: 50%;
+}
+
+.footer-copyright {
+    background-color: white;
+    text-align: center;
+    margin: 10px auto;
+    width: 225px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.guess-day__container {
+    width: 60%;
+}
+
+.wrapper {
+    background: none;
+    font-family: 'Rubik', sans-serif;
+    background-image: url('/static/images/s1.png'), url('/static/images/s2.png'), url('/static/images/s3.png');
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    -webkit-animation: snow 10s linear infinite;
+    -moz-animation: snow 10s linear infinite;
+    -ms-animation: snow 10s linear infinite;
+    animation: snow 10s linear infinite;
+}
+
+.guess-form__input {
+    width: 75%;
+    margin: 10px 0;
+}
+
+.guess-form__submitbutton {
+    width: 15%;
+    margin: 10px 0;
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px;
+    }
+}
+
+@-moz-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+    100% {
+        background-position: 400px 1000px, 200px 400px, 100px 300px;
+    }
+}
+
+@-webkit-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px;
+    }
+}
+
+@-ms-keyframes snow {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0px 0px;
+    }
+    50% {
+        background-position: 500px 500px, 100px 200px, -100px 150px;
+    }
+    100% {
+        background-position: 500px 1000px, 200px 400px, -100px 300px;
+    }
+}
+
+@media (max-width: 980px) {
+    .main-wrapper {
+        width: 320px;
+    }
+
+    .admin__container {
+      width: 320px;
+    }
+
+    nav.header {
+        width: 300px;
+        justify-content: flex-end;
+    }
+
+    .day__container {
+        width: 100%;
+    }
+
+    .guess-day__container {
+        width: 90%;
+    }
+
+    .header__menu-hamburger {
+      display: block;
+    }
+
+    .header__menu-item {
+      display: none;
+    }
+}

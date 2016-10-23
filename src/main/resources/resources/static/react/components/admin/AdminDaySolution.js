@@ -9,7 +9,7 @@ var AdminDaySolution = React.createClass({
 
     render() {
         return (
-            <li>Solution: {this.props.solution.solution}</li>
+            <li>Løsning: {this.props.solution.solution}</li>
         );
     }
 });
