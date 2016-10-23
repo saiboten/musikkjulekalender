@@ -43629,6 +43629,11 @@
 	                            React.createElement(
 	                                'td',
 	                                null,
+	                                React.createElement(
+	                                    'p',
+	                                    null,
+	                                    'G\xE5 inn p\xE5 youtubevideoen, trykk "share", velg Embed, og lim inn hele sulamitten i feltet under'
+	                                ),
 	                                React.createElement('input', { className: 'admin-day__input', type: 'text', onChange: this.changeOptionalSolutionVideo, value: this.state.optionalSolutionVideo })
 	                            )
 	                        ),

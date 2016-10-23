@@ -187,7 +187,7 @@ var AdminDay = React.createClass({
                             </tr>
                             <tr>
                                 <td>Video</td>
-                                <td><input className="admin-day__input" type="text" onChange={this.changeOptionalSolutionVideo} value={this.state.optionalSolutionVideo}/></td>
+                                <td><p>Gå inn på youtubevideoen, trykk "share", velg Embed, og lim inn hele sulamitten i feltet under</p><input className="admin-day__input" type="text" onChange={this.changeOptionalSolutionVideo} value={this.state.optionalSolutionVideo}/></td>
                             </tr>
                             <tr>
                                 <td>Link</td>

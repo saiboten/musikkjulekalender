@@ -5,10 +5,10 @@ psql.exe -U postgres musikkjulekalender
 CREATE TABLE day (
 	id bigint UNIQUE,
     image varchar(80),
-    description varchar(80),
-	optional_solution_video varchar(80),
+    description varchar(500),
+	optional_solution_video varchar(500),
 	reveal_date_as_string varchar(20) UNIQUE, 
-	link varchar(80),
+	link varchar(150),
     solution_date date,
     reveal_date date,
     solution_artist varchar(200),
