@@ -1,5 +1,12 @@
 body {
     background-color: #adc3de;
+    background-image: url('/static/images/s1.png'), url('/static/images/s2.png'), url('/static/images/s3.png');
+    z-index: 1;
+    -webkit-animation: snow 10s linear infinite;
+    -moz-animation: snow 10s linear infinite;
+    -ms-animation: snow 10s linear infinite;
+    animation: snow 10s linear infinite;
+    font-family: 'Rubik', sans-serif;
 }
 
 .main-wrapper {
@@ -49,10 +56,17 @@ nav.header {
 
 .header__menu-dropdown-list {
   margin-right: auto;
+  padding: 5px;
 }
 
 .header__menu-dropdown-list-element {
   cursor: pointer;
+  height: 40px;
+  font-size: 1.2em;
+  border: 1px solid black;
+  border-radius: 5px;
+  list-style-type: none;
+  padding:10px;
 }
 
 .day__container {
@@ -79,22 +93,6 @@ nav.header {
 
 .admin-day__input {
   width: 100%;
-}
-
-.wrapper {
-    background: none;
-    font-family: 'Rubik', sans-serif;
-    background-image: url('/static/images/s1.png'), url('/static/images/s2.png'), url('/static/images/s3.png');
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    -webkit-animation: snow 10s linear infinite;
-    -moz-animation: snow 10s linear infinite;
-    -ms-animation: snow 10s linear infinite;
-    animation: snow 10s linear infinite;
 }
 
 .guess-form__input {
@@ -183,5 +181,13 @@ nav.header {
 
     .header__menu-item {
       display: none;
+    }
+
+    input {
+      height: 40px;
+    }
+
+    button {
+      height: 40px;
     }
 }
