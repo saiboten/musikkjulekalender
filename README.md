@@ -33,6 +33,9 @@ keycloak.securityConstraints[0].securityCollections[1].patterns[0] = /admin*
 
 upload-dir=/home/somedirectory/where/songs/are/uploaded
 
+spring.http.multipart.max-file-size=10MB
+spring.http.multipart.max-request-size=10MB
+
 # Below is for local development
 spring.resources.chain.enabled=false
 spring.resources.chain.cache=false

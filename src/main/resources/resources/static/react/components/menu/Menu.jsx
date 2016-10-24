@@ -42,8 +42,9 @@ var Menu = React.createClass({
         <a className="header__menu-item" href="/"> Forsiden </a>
         <a className="header__menu-item" href="/om"> Om </a>
         {loggedInLink}
-        {this.state.menuOpen ? openMenuContent: ""}
+
         <div className="fa fa-bars fa-3x header__menu-hamburger" onClick={this.toggleMenu}></div>
+        {this.state.menuOpen ? openMenuContent: ""}
 
     </nav>
     );
