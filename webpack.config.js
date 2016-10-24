@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     entry: {
         'src/main/resources/resources/static/react/dist': './src/main/resources/resources/static/react/App.jsx',
@@ -35,6 +37,14 @@ module.exports = {
                 loader: "file-loader"
             }
 
-        ]
-    }
+        ],
+
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production')
+        }
+      })
+    ],
 };
