@@ -56,9 +56,9 @@ spring.devtools.livereload.port=35729
 Front end:
 * React
 * Thymeleaf for html rendering
-* Gulp
-* browserify
-* bootstrap
+* webpack
+* jsxstyle
+* BEM.info - css
 
 Back end:
 * Spring MVC
@@ -69,10 +69,6 @@ Back end:
 
 External
 * Keycloak
-
-## Plans ahead
-* Switch to webpack
-* Remove bootstrap - create all CSS some other way.
 
 ## Contributing
 
