@@ -31,6 +31,8 @@ keycloak.securityConstraints[0].securityCollections[1].name = admin stuff
 keycloak.securityConstraints[0].securityCollections[1].authRoles[0] = admin
 keycloak.securityConstraints[0].securityCollections[1].patterns[0] = /admin*
 
+upload-dir=/home/somedirectory/where/songs/are/uploaded
+
 # Below is for local development
 spring.resources.chain.enabled=false
 spring.resources.chain.cache=false
