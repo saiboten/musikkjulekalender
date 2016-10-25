@@ -1,5 +1,5 @@
 var React = require('react');
-var debug = require('debug')('days');
+var debug = require('debug')('Days');
 var Day = require('./Day.jsx')
 var GuessDay = require('./GuessDay.jsx');
 var GuessStore = require('../stores/GuessStore');

@@ -33,14 +33,19 @@ nav.header {
     padding: 10px;
     border-radius: 5px;
     display: flex;
-    align-items: flex-end;
-    flex-direction: column;
+    flex-direction: column;;
     justify-content: space-around;
+    align-items: flex-end;
+}
+
+.header__fullscreen {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
 }
 
 .header__menu-item {
-    /*border: 1px solid black;
-    border-radius:2px;*/
     margin: 5px;
     padding: 5px 5px 5px 5px;
     min-width: 18%;
@@ -59,6 +64,7 @@ nav.header {
   margin-left: auto;
   clear:both;
   padding: 5px;
+  align-items: flex-end;
 }
 
 .header__menu-dropdown-list-element {

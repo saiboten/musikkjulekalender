@@ -39,9 +39,11 @@ var Menu = React.createClass({
 
     return (
       <nav className="header">
-        <a className="header__menu-item" href="/"> Forsiden </a>
-        <a className="header__menu-item" href="/om"> Om </a>
-        {loggedInLink}
+        <div className="header__fullscreen">
+          <a className="header__menu-item" href="/"> Forsiden </a>
+          <a className="header__menu-item" href="/om"> Om </a>
+          {loggedInLink}
+        </div>
 
         <div className="fa fa-bars fa-3x header__menu-hamburger" onClick={this.toggleMenu}></div>
         {this.state.menuOpen ? openMenuContent: ""}

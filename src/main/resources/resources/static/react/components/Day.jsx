@@ -17,6 +17,7 @@ var Day = React.createClass({
     },
 
     showSolution() {
+      debug("Showing solution");
         this.setState({
             showSolution: true
         });
