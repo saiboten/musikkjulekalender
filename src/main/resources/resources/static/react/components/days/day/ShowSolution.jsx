@@ -4,7 +4,7 @@
 
 var React = require("react");
 var debug = require('debug')('ShowSolution');
-var SongAudio = require('./SongAudio.jsx');
+var SongAudio = require('./SongAudio');
 
 var ShowSolution = React.createClass({
 
@@ -25,4 +25,3 @@ var ShowSolution = React.createClass({
 });
 
 module.exports = ShowSolution;
-

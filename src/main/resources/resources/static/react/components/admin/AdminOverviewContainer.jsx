@@ -2,7 +2,7 @@ var React = require('react');
 var AltContainer = require('alt-container');
 var AdminDayStore = require('../../stores/AdminDayStore');
 var AdminDayActions = require('../../actions/AdminDayAction');
-var AdminOverview = require('./AdminOverview.jsx');
+var AdminOverview = require('./AdminOverview');
 var debug = require('debug')('AdminOverviewContainer');
 
 var AdminOverviewContainer = React.createClass({

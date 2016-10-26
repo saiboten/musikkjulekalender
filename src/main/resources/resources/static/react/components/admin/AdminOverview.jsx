@@ -1,9 +1,9 @@
 var React = require('react');
 var debug = require('debug')('AdminOverview');
-var AdminDay = require('./AdminDay.jsx')
-var GuessDay = require('./../GuessDay.jsx');
+var AdminDay = require('./AdminDay')
+var GuessDay = require('./../days/day/GuessDay');
 var GuessStore = require('../../stores/GuessStore');
-var AdminAddDay = require('./AdminAddDay.jsx');
+var AdminAddDay = require('./AdminAddDay');
 var Block = require('jsxstyle/Block');
 var Flex = require('jsxstyle/Flex');
 

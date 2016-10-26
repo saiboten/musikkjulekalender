@@ -2,10 +2,10 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var debug = require('debug')('App');
 
-var Main = require('./components/Main.jsx');
-var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer.jsx');
+var Main = require('./components/Main');
+var AdminOverviewContainer = require('./components/admin/AdminOverviewContainer');
 var DayActions = require('./actions/DayAction');
-var Menu = require('./components/menu/Menu.jsx');
+var Menu = require('./components/menu/Menu');
 
 if(document.getElementById('main')) {
     ReactDOM.render(

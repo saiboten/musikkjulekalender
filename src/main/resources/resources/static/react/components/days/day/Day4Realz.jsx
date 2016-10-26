@@ -5,7 +5,7 @@ var React = require('react');
 var Block = require('jsxstyle/Block');
 var Flex = require('jsxstyle/Flex');
 var Inline = require('jsxstyle/Inline');
-var SongAudio = require('./SongAudio.jsx');
+var SongAudio = require('./SongAudio');
 
 
 

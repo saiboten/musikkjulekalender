@@ -1,10 +1,8 @@
 var React = require('react');
 var debug = require('debug')('UserStatistics');
-var Day = require('./Day.jsx')
-var GuessDay = require('./GuessDay.jsx');
 var AltContainer = require('alt-container');
 var GuessStore = require('../stores/GuessStore');
-var UserResultDay = require('./UserResultDay.jsx')
+var UserResultDay = require('./UserResultDay')
 
 var UserStatistics = React.createClass({
 

@@ -1,9 +1,9 @@
 var React = require('react');
 var AltContainer = require('alt-container');
-var DayStore = require('../stores/DayStore');
-var DayActions = require('../actions/DayAction');
-var Days = require('./Days.jsx');
-var SingleGuessDay = require('./SingleGuessDay.jsx');
+var DayStore = require('../../../stores/DayStore');
+var DayActions = require('../../../actions/DayAction');
+var Days = require('./../Days');
+var SingleGuessDay = require('./SingleGuessDay');
 var Block = require('jsxstyle/Block');
 
 var SingleGuessDayContainer = React.createClass({

@@ -1,12 +1,12 @@
 var React = require('react');
 var debug = require('debug')('GuessDay');
-var GuessAction = require('../actions/GuessAction');
-var DayAction = require('../actions/DayAction');
-var GuessStore = require('../stores/GuessStore');
+var GuessAction = require('../../../actions/GuessAction');
+var DayAction = require('../../../actions/DayAction');
+var GuessStore = require('../../../stores/GuessStore');
 var moment = require('moment');
 var Inline = require('jsxstyle/Inline');
 var Block = require('jsxstyle/Block');
-var SongAudio = require('./SongAudio.jsx');
+var SongAudio = require('./SongAudio');
 
 var GuessDay = React.createClass({
 
@@ -27,7 +27,7 @@ var GuessDay = React.createClass({
 
     guessChanged() {
         debug("Guess changed, refetching data just in case something has changed", GuessStore.getState());
-        
+
 
         this.setState({
             guessResponse: GuessStore.getState()

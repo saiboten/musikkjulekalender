@@ -2,9 +2,9 @@ var React = require('react');
 var debug = require('debug')('Day');
 var moment = require('moment');
 var GuessDay = require('./GuessDay.jsx');
-var DateHeader = require('./DateHeader.jsx');
-var ShowSolution = require('./ShowSolution.jsx');
-var Day4Realz = require('./Day4Realz.jsx');
+var DateHeader = require('./../../DateHeader');
+var ShowSolution = require('./ShowSolution');
+var Day4Realz = require('./Day4Realz');
 var Block = require('jsxstyle/Block');
 var Flex = require('jsxstyle/Flex');
 

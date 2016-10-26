@@ -1,6 +1,6 @@
 var React = require('react');
 var debug = require('debug')('UserResultDay');
-var UserResultDayUser = require('./UserResultDayUser.jsx');
+var UserResultDayUser = require('./UserResultDayUser');
 var moment = require('moment');
 var Block = require('jsxstyle/Block');
 
