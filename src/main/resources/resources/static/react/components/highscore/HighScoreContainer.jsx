@@ -1,19 +1,19 @@
 var React = require('react');
 var AltContainer = require('alt-container');
 var DayStore = require('../../stores/DayStore');
-var TopScores = require('./TopScores.jsx');
+var HighScoreList = require('./HighScoreList.jsx');
 
-var TopScoreContainer = React.createClass({
+var HighScoreContainer = React.createClass({
     render() {
         return (
             <div>
                 <h1>Toppscorelisten!</h1>
                 <AltContainer store={DayStore}>
-                    <TopScores />
+                    <HighScoreList />
                 </AltContainer>
             </div>
         );
     }
 });
 
-module.exports = TopScoreContainer;
+module.exports = HighScoreContainer;

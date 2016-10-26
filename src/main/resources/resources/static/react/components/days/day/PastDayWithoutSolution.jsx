@@ -9,7 +9,7 @@ var SongAudio = require('./SongAudio');
 
 
 
-var Day4Realz = React.createClass({
+var PastDayWithoutSolution = React.createClass({
     render() {
         return (<Block backgroundColor="white" padding="10px">
             <Block >{this.props.day.description}</Block>
@@ -22,4 +22,4 @@ var Day4Realz = React.createClass({
     }
 });
 
-module.exports = Day4Realz;
+module.exports = PastDayWithoutSolution;

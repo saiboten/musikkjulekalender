@@ -1,14 +1,14 @@
 var React = require('react');
 var debug = require('debug')('Day');
 var moment = require('moment');
-var GuessDay = require('./GuessDay.jsx');
+var GuessDay = require('./GuessDay');
 var DateHeader = require('./../../DateHeader');
-var ShowSolution = require('./ShowSolution');
-var Day4Realz = require('./Day4Realz');
+var PastDayWithSolution = require('./PastDayWithSolution');
+var PastDayWithoutSolution = require('./PastDayWithoutSolution');
 var Block = require('jsxstyle/Block');
 var Flex = require('jsxstyle/Flex');
 
-var Day = React.createClass({
+var DaySelector = React.createClass({
 
     getInitialState() {
         return {
@@ -35,7 +35,7 @@ var Day = React.createClass({
 
         if(this.state.showSolution && this.props.day.solutionArtist) {
             day = (
-                <ShowSolution day={this.props.day}/>
+                <PastDayWithSolution day={this.props.day}/>
             );
         }
         else if(this.props.day.revealDateAsString === this.props.date) {
@@ -44,7 +44,7 @@ var Day = React.createClass({
         }
         else if(this.props.day.description) {
             day = (
-                <Day4Realz day={this.props.day} showSolutionCallback={this.showSolution}/>
+                <PastDayWithoutSolution day={this.props.day} showSolutionCallback={this.showSolution}/>
             );
         }
         else {
@@ -60,4 +60,4 @@ var Day = React.createClass({
     }
 });
 
-module.exports = Day;
+module.exports = DaySelector;

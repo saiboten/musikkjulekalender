@@ -1,8 +1,8 @@
 var React = require('react');
-var debug = require('debug')('UserResultDayUser');
+var debug = require('debug')('UserResultElement');
 var moment = require('moment');
 
-var UserResultDayUser = React.createClass({
+var UserResultElement = React.createClass({
     render() {
 
         var momentTime = moment(this.props.user.time).format("HH:mm");
@@ -15,4 +15,4 @@ var UserResultDayUser = React.createClass({
     }
 });
 
-module.exports = UserResultDayUser;
+module.exports = UserResultElement;

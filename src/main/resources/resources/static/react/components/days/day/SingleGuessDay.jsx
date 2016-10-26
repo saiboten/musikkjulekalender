@@ -1,7 +1,6 @@
 var React = require('react');
 var debug = require('debug')('SingleGuessDay');
 var moment = require('moment');
-var Day = require('./Day.jsx');
 var GuessDay = require('./GuessDay');
 var AltContainer = require('alt-container');
 var GuessStore = require('../../../stores/GuessStore');

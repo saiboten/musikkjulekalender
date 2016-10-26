@@ -6,7 +6,7 @@ var React = require("react");
 var debug = require('debug')('ShowSolution');
 var SongAudio = require('./SongAudio');
 
-var ShowSolution = React.createClass({
+var PastDayWithSolution = React.createClass({
 
     createMarkup() {
         debug('Creating markup for the following solution video: ',this.props.day.optionalSolutionVideo);
@@ -24,4 +24,4 @@ var ShowSolution = React.createClass({
     }
 });
 
-module.exports = ShowSolution;
+module.exports = PastDayWithSolution;

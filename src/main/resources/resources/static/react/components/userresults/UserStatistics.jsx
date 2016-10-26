@@ -1,8 +1,6 @@
 var React = require('react');
 var debug = require('debug')('UserStatistics');
-var AltContainer = require('alt-container');
-var GuessStore = require('../stores/GuessStore');
-var UserResultDay = require('./UserResultDay')
+var UserResultList = require('./UserResultList')
 
 var UserStatistics = React.createClass({
 
@@ -17,9 +15,8 @@ var UserStatistics = React.createClass({
             <div>
                 {this.props.days.map((day, i) => {
                       if(day.id === this.props.today) {
-                        return <UserResultDay key={day.id} day={day} userResult={this.props.userResult}  />;
+                        return <UserResultList key={day.id} day={day} userResult={this.props.userResult}  />;
                       }
-
                 })}
             </div>
         );

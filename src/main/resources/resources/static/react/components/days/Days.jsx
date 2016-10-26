@@ -1,6 +1,6 @@
 var React = require('react');
 var debug = require('debug')('Days');
-var Day = require('./day/Day.jsx')
+var DaySelector = require('./day/DaySelector')
 var GuessDay = require('./day/GuessDay');
 var GuessStore = require('../../stores/GuessStore');
 var Flex = require('jsxstyle/Flex');
@@ -34,7 +34,7 @@ var Days = React.createClass({
                 <Flex flexDirection="row" flexWrap="wrap" padding="10px">
                     {this.state.days.map((day, i) => {
                         if (day.realDate !== new Date(this.state.date).getDate().toString()) {
-                            return <Day key={day.id} answers={this.state.answers} user={this.state.user} today={this.state.today} date={this.state.date} day={day}/>;
+                            return <DaySelector key={day.id} answers={this.state.answers} user={this.state.user} today={this.state.today} date={this.state.date} day={day}/>;
                         }
                     })}
                 </Flex>

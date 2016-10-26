@@ -1,10 +1,10 @@
 var React = require('react');
-var debug = require('debug')('UserResultDay');
-var UserResultDayUser = require('./UserResultDayUser');
+var debug = require('debug')('UserResultList');
+var UserResultElement = require('./UserResultElement');
 var moment = require('moment');
 var Block = require('jsxstyle/Block');
 
-var UserResultDay = React.createClass({
+var UserResultList = React.createClass({
 
     render() {
         debug("props: ", this.props);
@@ -44,4 +44,4 @@ var UserResultDay = React.createClass({
     }
 });
 
-module.exports = UserResultDay;
+module.exports = UserResultList;
