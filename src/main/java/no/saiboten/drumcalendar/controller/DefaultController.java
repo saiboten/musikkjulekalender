@@ -69,6 +69,7 @@ public class DefaultController {
 	    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
 	        Resource file = storageService.loadAsResource(filename);
+	        logger.debug("File: " + file);
 	        return ResponseEntity
 	                .ok()
 	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
