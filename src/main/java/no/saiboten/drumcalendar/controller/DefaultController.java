@@ -67,6 +67,7 @@ public class DefaultController {
 	 @GetMapping("/songs/{filename:.+}")
 	    @ResponseBody
 	    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	        logger.debug("Request for: " + filename);
 
 	        Resource file = storageService.loadAsResource(filename);
 	        logger.debug("File: " + file);
