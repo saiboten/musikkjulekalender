@@ -10,4 +10,7 @@ public interface SolutionRepository extends CrudRepository<Solution, Long> {
 	
     @Transactional
 	public void deleteByDay(Long day);
+    
+    @Transactional
+	public void deleteByDayAndSolution(Long day, String solution);
 }

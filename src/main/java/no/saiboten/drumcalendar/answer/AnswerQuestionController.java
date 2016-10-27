@@ -121,4 +121,14 @@ public class AnswerQuestionController {
 		return response;
 	}
 	
+	@RequestMapping(method=RequestMethod.POST, value="/admin/deletesolution/{day}/{solution}")
+	public @ResponseBody Map<String,Object> deleteSolution(@PathVariable Long day, @PathVariable(value="solution") String solutionString) {
+	
+		solutionRepository.deleteByDayAndSolution(day, solutionString);
+		
+		Map<String,Object> response = new HashMap<String,Object>();
+		response.put("success", true);
+		return response;
+	}
+	
 }

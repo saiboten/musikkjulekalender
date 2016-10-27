@@ -68,6 +68,16 @@ class AdminDayAction {
             })
     }
 
+    deleteSolution(solutionObject) {
+        AdminDaySource.deleteSolution(solutionObject)
+            .then((response) => {
+                this.actions.getDays();
+            })
+            .catch((errorMessage) => {
+                debug("Error: ", errorMessage);
+            })
+    }
+
     updateDaysFailed(errorMessage) {
         debug("dispatching getDaysFailed");
         this.dispatch(errorMessage);

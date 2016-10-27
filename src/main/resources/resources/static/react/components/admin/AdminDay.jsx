@@ -198,8 +198,9 @@ var AdminDay = React.createClass({
                     <ul>
                         {
                             this.props.day.solutions.map(function(solution) {
-                                return <AdminDaySolution key={solution.solution} solution={solution}></AdminDaySolution>
-                            })
+                                debug("This props:", this);
+                                return <AdminDaySolution key={solution.solution} dayId={this.props.day.id} solution={solution}></AdminDaySolution>
+                            },this)
                         }
                     </ul>
                     <input type="text" value={this.state.addSolution} placeholder="Legg til løsning" onChange={this.addSolutionChange} /><button onClick={this.addSolution}>Legg til</button>
