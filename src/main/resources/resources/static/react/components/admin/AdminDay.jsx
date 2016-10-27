@@ -27,9 +27,10 @@ var AdminDay = React.createClass({
             link: this.props.day.link,
             revealDate: moment(this.props.day.revealDate),
             solutionDate: moment(this.props.day.solutionDate),
-            addSolution: undefined,
+            addSolution: "",
             confirmDelete: false,
-            file: {}
+            file: {},
+            feedback: ""
         }
     },
 
@@ -93,13 +94,20 @@ var AdminDay = React.createClass({
 
     addSolution: function(e) {
         debug("Adding solution: ", this.state.addSolution);
-        var solutionObject = {};
-        solutionObject.solution = this.state.addSolution;
-        solutionObject.id = this.props.day.id;
-        adminDayAction.addSolution(solutionObject);
-        this.setState({
-            addSolution: ""
-        })
+        if(this.state.addSolution != "") {
+          var solutionObject = {};
+          solutionObject.solution = this.state.addSolution;
+          solutionObject.id = this.props.day.id;
+          adminDayAction.addSolution(solutionObject);
+          this.setState({
+              addSolution: ""
+          })
+        }
+        else {
+            this.setState({
+              feedback: "Løsning er tom!"
+            })
+        }
     },
 
     createMarkup() {
@@ -219,6 +227,7 @@ var AdminDay = React.createClass({
                     <p>
                         <button onClick={this.saveChanges}>Lagre endringer</button>
                         <button onClick={this.deleteDay}>Slett dag</button>{this.state.confirmDelete ? "Bekreft":""}
+                        <p>{this.state.feedback}</p>
                     </p>
 
                     <SongAudio link={this.state.link} />
