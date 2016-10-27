@@ -61,7 +61,7 @@ nav.header {
 }
 
 .header__menu-dropdown-list {
-  margin-left: auto;
+  margin: 0 auto;
   clear:both;
   padding: 5px;
   align-items: flex-end;
