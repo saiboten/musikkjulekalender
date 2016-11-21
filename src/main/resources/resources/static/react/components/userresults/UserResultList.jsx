@@ -28,7 +28,7 @@ var UserResultList = React.createClass({
 
           maybeempty = (<ul>
            {copy.map((user, i) => {
-             return <UserResultDayUser user={user}  />;
+             return <UserResultElement user={user}  />;
            })}
          </ul>);
         }

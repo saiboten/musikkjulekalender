@@ -26,9 +26,6 @@ var GuessDay = React.createClass({
     },
 
     guessChanged() {
-        debug("Guess changed, refetching data just in case something has changed", GuessStore.getState());
-
-
         this.setState({
             guessResponse: GuessStore.getState()
         });
@@ -48,7 +45,6 @@ var GuessDay = React.createClass({
 
         debug("Props: ", this.props);
 
-
         var answerThisDay = undefined;
         if(this.props.answers) {
             answerThisDay = this.props.answers.find(function(el) {
@@ -63,6 +59,9 @@ var GuessDay = React.createClass({
         if(answerThisDay && answerThisDay.correctSongAnswer) {
             formOrFeedback = (<p>Du har allerede svart rett på denne oppgaven! Svaret
                 var: {answerThisDay.guessedSong} </p>);
+        }
+        else if(this.state.guessResponse.guess && this.state.guessResponse.guess.correct) {
+          formOrFeedback = (<p>Gratulerer, det var rett!</p>);
         }
         else {
             formOrFeedback = (
