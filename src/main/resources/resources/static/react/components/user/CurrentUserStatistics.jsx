@@ -1,18 +1,23 @@
 var React = require('react');
 var debug = require('debug')('CurrentUserStatistics');
 var CurrentUserResultDay = require('./CurrentUserResultDay.jsx')
+var moment = require('moment');
 
 var CurrentUserStatistics = React.createClass({
 
     componentDidMount() {
-        debug("componentDidMount");
         debug("this.props.days",this.props.days);
     },
 
     render() {
+
+        debug("this.props: ", this.props);
+
+
         var userstat = this.props.days.map((day, i) => {
-          if(day.solutionArtist || day.realDate === new Date(this.props.date).getDate().toString()) {
-            return <CurrentUserResultDay day={day} user={this.props.user}  />;
+          debug("Day: ", day);
+          if(day.solutionArtist || day.revealDateAsString === this.props.today) {
+            return <CurrentUserResultDay day={day} user={this.props.user} answers={this.props.answers}  />;
           }
         });
 

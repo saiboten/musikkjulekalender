@@ -1,6 +1,8 @@
 var React = require('react');
 var SingleGuessDayContainer = require('./days/day/SingleGuessDayContainer');
 var UserStatisticsContainer = require('./userresults/UserStatisticsContainer');
+var CurrentUserStatisticsContainer = require('./user/CurrentUserStatisticsContainer');
+
 var HighScoreContainer = require('./highscore/HighScoreContainer');
 var Days = require('./days/Days');
 var Block = require('jsxstyle/Block');
@@ -24,6 +26,7 @@ var Main = React.createClass({
                 <SingleGuessDayContainer />
                 <UserStatisticsContainer />
                 <HighScoreContainer />
+                <CurrentUserStatisticsContainer />
                 <Days />
         </Block>)
     }
