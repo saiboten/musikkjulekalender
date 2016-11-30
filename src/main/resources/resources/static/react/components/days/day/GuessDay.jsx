@@ -3,7 +3,6 @@ var debug = require('debug')('GuessDay');
 var GuessAction = require('../../../actions/GuessAction');
 var DayAction = require('../../../actions/DayAction');
 var GuessStore = require('../../../stores/GuessStore');
-var moment = require('moment');
 var Inline = require('jsxstyle/Inline');
 var Block = require('jsxstyle/Block');
 var SongAudio = require('./SongAudio');

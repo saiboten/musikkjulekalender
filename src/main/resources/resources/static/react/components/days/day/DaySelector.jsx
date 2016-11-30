@@ -1,6 +1,5 @@
 var React = require('react');
 var debug = require('debug')('Day');
-var moment = require('moment');
 var GuessDay = require('./GuessDay');
 var DateHeader = require('./../../DateHeader');
 var PastDayWithSolution = require('./PastDayWithSolution');

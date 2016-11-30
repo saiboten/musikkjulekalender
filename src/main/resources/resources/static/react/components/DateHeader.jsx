@@ -1,5 +1,6 @@
 var React = require('react');
 var moment = require('moment');
+moment.locale('fr');
 var debug = require('debug')("DateHeader");
 
 var DateHeader = React.createClass({
