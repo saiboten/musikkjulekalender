@@ -9,7 +9,7 @@ var HighScoreElement = React.createClass({
     },
 
     render() {
-        return (<strong>{this.props.topListUser.user}: {this.props.topListUser.score}</strong>);
+        return (<li>{this.props.topListUser.user}: <strong>{this.props.topListUser.score}</strong></li>);
     }
 });
 

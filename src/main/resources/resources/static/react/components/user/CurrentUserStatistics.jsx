@@ -26,8 +26,8 @@ var CurrentUserStatistics = React.createClass({
 
         return (
           <div>
-            <p>{userinfo}</p>
-            {exist}
+            <p className="smallspace">{userinfo}</p>
+            <p className="smallspace">{exist}</p>
           </div>
         );
     }

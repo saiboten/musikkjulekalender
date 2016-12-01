@@ -17,6 +17,11 @@ body {
   width: 980px;
 }
 
+.smallspace {
+  margin: 5px;
+  padding: 5px;
+}
+
 h1 {
     margin: 10px;
     font-size: 1.4em;

@@ -80,7 +80,7 @@ var GuessDay = React.createClass({
                 <p>{this.props.day.description}</p>
                 <SongAudio link={this.props.day.link} />
 
-                {this.props.user ? formOrFeedback : ""}</span>
+                {this.props.user ? formOrFeedback : (<div><input className="guess-form__input" disabled="true" placeholder="Sang" /><p>Logg inn for å besvare (se menyen)</p></div>)}</span>
         );
     }
 });

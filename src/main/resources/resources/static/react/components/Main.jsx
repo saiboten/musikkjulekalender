@@ -27,6 +27,7 @@ var Main = React.createClass({
                 <UserStatisticsContainer />
                 <HighScoreContainer />
                 <CurrentUserStatisticsContainer />
+                  <p className="smallspace">Følg oss gjerne på <a href="https://www.facebook.com/musikkjulekalender">facebook!</a></p>
                 <Days />
         </Block>)
     }
