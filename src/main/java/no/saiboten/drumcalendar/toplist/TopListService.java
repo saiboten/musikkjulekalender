@@ -10,6 +10,7 @@ import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
 import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +42,7 @@ public class TopListService {
 					score++;
 				}
 			}
-			topList.add(new TopListModel((user.getNickName() != null ? user.getNickName() : user.getUserNameNotMail()), score));
+			topList.add(new TopListModel((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()), score));
 		}
 		
 		Collections.sort(topList,new Comparator<TopListModel>() {
