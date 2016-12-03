@@ -41,7 +41,7 @@ public class TopListService {
 					score++;
 				}
 			}
-			topList.add(new TopListModel(user.getUserNameNotMail(), score));
+			topList.add(new TopListModel((user.getNickName() != null ? user.getNickName() : user.getUserNameNotMail()), score));
 		}
 		
 		Collections.sort(topList,new Comparator<TopListModel>() {
