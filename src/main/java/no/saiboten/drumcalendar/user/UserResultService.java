@@ -12,6 +12,7 @@ import no.saiboten.drumcalendar.user.bean.UserResultSingleDay;
 import no.saiboten.drumcalendar.user.bean.UserResultSingleUser;
 import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +43,7 @@ public class UserResultService {
 				for(AnswerPostgres answer: answers) {
 					if(answer != null && answer.isCorrectSongAnswer()) {
 						UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
-						userResultSingleUser.setName(user.getUserNameNotMail());
+						userResultSingleUser.setName((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()));
 						userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
 						userResultSingleDay.addUser(userResultSingleUser);
 					}
