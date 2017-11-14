@@ -20,7 +20,7 @@ var Main = React.createClass({
         return (
             <Block className="main-wrapper" backgroundColor="white" borderRadius="5px" margin="0 auto">
                 <Block>
-                    <Block padding-top="10px" component="h1" textAlign="center">Musikkjulekalender 2016!</Block>
+                    <Block padding-top="10px" component="h1" textAlign="center">Musikkjulekalender 2017!</Block>
                     <Block width="100%" component="img" props={imgAttributes} />
                 </Block>
                 <SingleGuessDayContainer />
