@@ -121,9 +121,38 @@ nav.header {
     margin: 10px 0;
 }
 
+.difficult {
+	border-radius: 50%;
+	width: 20px;
+    height: 20px; 
+    background-color: red;
+}
+
+.easy {
+	border-radius: 50%;
+	width: 20px;
+    height: 20px; 
+    background-color: green;
+}
+
+.medium {
+	border-radius: 50%;
+	width: 20px;
+    height: 20px; 
+    background-color: grey;
+}
+
 .guess-form__submitbutton {
     width: 15%;
     margin: 10px 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
 }
 
 @keyframes snow {

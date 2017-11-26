@@ -40,6 +40,12 @@ var GuessDay = React.createClass({
         this.setState({guess: event.target.value});
     },
 
+    getDescription(description) {
+        return {
+            __html: description
+        }
+    },
+
     render() {
 
         debug("Props: ", this.props);
@@ -77,7 +83,7 @@ var GuessDay = React.createClass({
 
         return (
             <span>
-                <p>{this.props.day.description}</p>
+                <p dangerouslySetInnerHTML={this.getDescription(this.props.day.description)}></p>
                 <SongAudio link={this.props.day.link} />
 
                 {this.props.user ? formOrFeedback : (<div><input className="guess-form__input" disabled="true" placeholder="Sang" /><p>Logg inn for å besvare (se menyen)</p></div>)}</span>
