@@ -8,6 +8,12 @@ var SongAudio = require('./SongAudio');
 
 var PastDayWithSolution = React.createClass({
 
+    getDescription(description) {
+        return {
+            __html: description
+        }
+    },
+
     createMarkup() {
         debug('Creating markup for the following solution video: ',this.props.day.optionalSolutionVideo);
         return {__html: this.props.day.optionalSolutionVideo};
@@ -15,7 +21,7 @@ var PastDayWithSolution = React.createClass({
 
     render: function() {
         return (<div>
-            <p>{this.props.day.description}</p>
+            <p><div dangerouslySetInnerHTML={this.getDescription(this.props.day.description)}></div></p>
             <p>
                 <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
             </p>

@@ -7,12 +7,19 @@ var Flex = require('jsxstyle/Flex');
 var Inline = require('jsxstyle/Inline');
 var SongAudio = require('./SongAudio');
 
-
+ 
 
 var PastDayWithoutSolution = React.createClass({
+
+    getDescription(description) {
+        return {
+            __html: description
+        }
+    },
+
     render() {
         return (<Block backgroundColor="white" padding="10px">
-            <Block >{this.props.day.description}</Block>
+            <Block><div dangerouslySetInnerHTML={this.getDescription(this.props.day.description)}></div></Block>
             <p>
                 <button onClick={this.props.showSolutionCallback}>Vis fasit</button>
             </p>

@@ -48,16 +48,21 @@ nav.header {
   display: flex;
   width: 100%;
   justify-content: space-around;
+
 }
 
 .header__menu-item {
     margin: 5px;
-    padding: 5px 5px 5px 5px;
+    padding: 30px 5px 5px 5px;
     min-width: 18%;
     display: block;
     text-align: center;
     text-decoration: none;
     overflow-wrap: break-word;
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 50px;
+    
 }
 
 .header__menu-hamburger {
@@ -139,13 +144,30 @@ nav.header {
 	border-radius: 50%;
 	width: 20px;
     height: 20px; 
-    background-color: grey;
+    background-color: orange;
 }
 
 .guess-form__submitbutton {
     width: 15%;
     margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #888888;
+    transition: 0.2s ease-in-out;
+    height: 50px; 
 }
+
+.guess-form__submitbutton:hover {
+    background-color: rgba(143, 0, 0, 0.822);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.guess-form__submitbutton:checked {
+    background-color: rgba(143, 0, 0, 0.822);
+    color: white;
+    transform: translateY(1px);
+}
+
 
 .flex {
     display: flex;
@@ -153,6 +175,17 @@ nav.header {
 
 .column {
     flex-direction: column;
+}
+
+.difficulty-text {
+    margin-right: 5px;
+}
+
+.contributors {
+    margin-top: 10px;
+}
+.quiz-description {
+    margin-top: 10px;
 }
 
 @keyframes snow {
