@@ -8,12 +8,6 @@ var Menu = React.createClass({
     }
   },
 
-  toggleMenu: function() {
-    this.setState( {
-      menuOpen: !this.state.menuOpen
-    })
-  },
-
   frontPage: function() {
     window.location = "/";
   },
@@ -44,9 +38,6 @@ var Menu = React.createClass({
           <a className="header__menu-item" href="/om"> Om </a>
           {loggedInLink}
         </div>
-
-        <div className="fa fa-bars fa-3x header__menu-hamburger" onClick={this.toggleMenu}></div>
-        {this.state.menuOpen ? openMenuContent: ""}
 
     </nav>
     );
