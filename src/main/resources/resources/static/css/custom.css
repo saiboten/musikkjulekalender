@@ -101,7 +101,7 @@ nav.header {
 }
 
 .guess-form__input {
-    width: 75%;
+    width: 55%;
     margin: 10px 0;
 }
 
@@ -127,7 +127,7 @@ nav.header {
 }
 
 .guess-form__submitbutton {
-    width: 15%;
+    width: 70px;
     margin: 10px 0;
     border-radius: 5px;
     box-shadow: 2px 2px 2px #888888;
