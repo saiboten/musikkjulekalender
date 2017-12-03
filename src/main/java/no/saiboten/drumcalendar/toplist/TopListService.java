@@ -3,7 +3,9 @@ package no.saiboten.drumcalendar.toplist;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import no.saiboten.drumcalendar.answer.postgres.AnswerPostgres;
 import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
@@ -11,7 +13,6 @@ import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
 import org.apache.commons.lang3.StringUtils;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,14 +35,22 @@ public class TopListService {
 		
 		List<CalendarUserPostgres> calendarUsers = calendarUserService.getAllUsers();
 		for(CalendarUserPostgres user : calendarUsers) {
-			int score = 0;
+			
+			Map<Long, Boolean> resultMap = new HashMap<Long,Boolean>();
 		
 			List<AnswerPostgres> answers = answerRepository.findByUserName(user.getUserName());
 			for(AnswerPostgres answer : answers) {
-				if(answer.isCorrectSongAnswer()) {
-					score++;
+				if(answer.isCorrectSongAnswer()) {					
+					resultMap.put(answer.getDay(), true);
 				}
 			}
+			
+			int score = 0;
+			
+			for(boolean val : resultMap.values()) {
+				if(val) score++;
+			}
+			
 			topList.add(new TopListModel((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()), score));
 		}
 		
