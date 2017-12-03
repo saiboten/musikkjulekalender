@@ -1,4 +1,7 @@
-var React = require('react');
+
+import React from 'react';
+import { Facebook } from './facebook/Facebook';
+
 var SingleGuessDayContainer = require('./days/day/SingleGuessDayContainer');
 var UserStatisticsContainer = require('./userresults/UserStatisticsContainer');
 var CurrentUserStatisticsContainer = require('./user/CurrentUserStatisticsContainer');
@@ -6,6 +9,7 @@ var CurrentUserStatisticsContainer = require('./user/CurrentUserStatisticsContai
 var HighScoreContainer = require('./highscore/HighScoreContainer');
 var Days = require('./days/Days');
 var Block = require('jsxstyle/Block');
+
 
 var Main = React.createClass({
 
@@ -23,7 +27,10 @@ var Main = React.createClass({
                     <Block padding-top="10px" component="h1" textAlign="center">Musikkjulekalender 2017!</Block>
                     <Block width="100%" component="img" props={imgAttributes} />
                 </Block>
-                <SingleGuessDayContainer />
+                <Block display="flex" flexWrap="wrap" padding="15px">
+                    <SingleGuessDayContainer />
+                    <Facebook />
+                </Block>
                 <UserStatisticsContainer />
                 <HighScoreContainer />
                 <CurrentUserStatisticsContainer />
