@@ -14,7 +14,7 @@ var SingleGuessDayContainer = React.createClass({
 
     render() {
         return (
-            <Block className="guess-day__container" margin="20px auto" padding="10px"  borderRadius="5px" backgroundColor="white">
+            <Block className="guess-day__container" margin="0 auto" padding="5px"  borderRadius="5px" backgroundColor="white">
                 <AltContainer store={DayStore}>
                     <SingleGuessDay />
                 </AltContainer>
