@@ -35,21 +35,8 @@ public class TopListService {
 		
 		List<CalendarUserPostgres> calendarUsers = calendarUserService.getAllUsers();
 		for(CalendarUserPostgres user : calendarUsers) {
-			
-			Map<Long, Boolean> resultMap = new HashMap<Long,Boolean>();
-		
-			List<AnswerPostgres> answers = answerRepository.findByUserName(user.getUserName());
-			for(AnswerPostgres answer : answers) {
-				if(answer.isCorrectSongAnswer()) {					
-					resultMap.put(answer.getDay(), true);
-				}
-			}
-			
-			int score = 0;
-			
-			for(boolean val : resultMap.values()) {
-				if(val) score++;
-			}
+			List<AnswerPostgres> answers = answerRepository.findDistinctByUserNameAndCorrectSongAnswer(user.getUserName(), true);
+			int score = answers.size();
 			
 			topList.add(new TopListModel((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()), score));
 		}

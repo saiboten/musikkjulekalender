@@ -9,6 +9,8 @@ public interface AnswerRepository extends CrudRepository<AnswerPostgres, Long> {
 
 	public List<AnswerPostgres> findByUserName(String userName);
 	
+	public List<AnswerPostgres> findDistinctByUserNameAndCorrectSongAnswer(String user, boolean correctSongAnswer);  
+	
 	public List<AnswerPostgres> findByDay(Long userName);
 	
 	public List<AnswerPostgres> findByUserNameAndDay(String userName, Long day);
