@@ -1,15 +1,11 @@
 package no.saiboten.drumcalendar.security;
 
 import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
-import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
-import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,21 +18,18 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
 public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
 {
+    
+	 /**
+     * Registers the KeycloakAuthenticationProvider with the authentication manager.
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .authenticationProvider(keycloakAuthenticationProvider());
+        auth.authenticationProvider(keycloakAuthenticationProvider());
     }
 
-    @Autowired
-    public KeycloakClientRequestFactory keycloakClientRequestFactory;
-
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public KeycloakRestTemplate keycloakRestTemplate() {
-        return new KeycloakRestTemplate(keycloakClientRequestFactory);
-    }
-
+    /**
+     * Defines the session authentication strategy.
+     */
     @Bean
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
@@ -47,10 +40,10 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         super.configure(http);
-        http.csrf().disable()
+        http
                 .authorizeRequests()
-                .antMatchers("/admin*").hasRole("ADMIN")
                 .antMatchers("/secure*").hasRole("USER")
+                .antMatchers("/admin*").hasRole("ADMIN")
                 .anyRequest().permitAll();
     }
 
