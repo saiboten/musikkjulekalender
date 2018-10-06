@@ -36,7 +36,7 @@
     "serve-favicon": "~2.3.0",
     "superagent": "^1.8.4",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.4.0"
+    "watchify": "^3.4.0",
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -50,8 +50,8 @@
     "gulp-notify": "^2.2.0",
     "jsxstyle": "0.0.22",
     "reactify": "^0.17.1",
-    "webpack": "^1.13.2",
-    "style-loader": "~0.13.1"
+    "style-loader": "~0.13.1",
+    "webpack": "^1.13.2"
   },
   "scripts": {
     "build": "browserify -t [reactify --es6] src/App.jsx > build/app.js",
