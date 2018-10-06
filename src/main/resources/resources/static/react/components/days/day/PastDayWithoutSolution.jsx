@@ -1,10 +1,8 @@
+import { Block, Flex, Inline } from 'jsxstyle';
 /**
  * Created by Tobias on 16.10.2016.
  */
 var React = require('react');
-var Block = require('jsxstyle/Block');
-var Flex = require('jsxstyle/Flex');
-var Inline = require('jsxstyle/Inline');
 var SongAudio = require('./SongAudio');
 
  

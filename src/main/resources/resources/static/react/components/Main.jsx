@@ -1,4 +1,4 @@
-
+import { Block } from 'jsxstyle';
 import React from 'react';
 import { Facebook } from './facebook/Facebook';
 
@@ -8,7 +8,6 @@ var CurrentUserStatisticsContainer = require('./user/CurrentUserStatisticsContai
 
 var HighScoreContainer = require('./highscore/HighScoreContainer');
 var Days = require('./days/Days');
-var Block = require('jsxstyle/Block');
 
 
 var Main = React.createClass({

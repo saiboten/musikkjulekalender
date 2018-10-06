@@ -1,5 +1,6 @@
+import { Block } from 'jsxstyle';
+
 var React = require('react');
-var Block = require('jsxstyle/Block');
 
 var Image = React.createClass({
    render: function() {

@@ -1,8 +1,7 @@
 import ReactAudioPlayer from 'react-audio-player';
+import { Block } from 'jsxstyle';
 
 var React = require('react');
-var Block = require('jsxstyle/Block');
-
 
 var SongAudio = React.createClass({
 

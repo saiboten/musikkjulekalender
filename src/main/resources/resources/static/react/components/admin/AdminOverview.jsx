@@ -1,11 +1,11 @@
+import { Block, Flex } from 'jsxstyle';
+
 var React = require('react');
 var debug = require('debug')('AdminOverview');
 var AdminDay = require('./AdminDay')
 var GuessDay = require('./../days/day/GuessDay');
 var GuessStore = require('../../stores/GuessStore');
 var AdminAddDay = require('./AdminAddDay');
-var Block = require('jsxstyle/Block');
-var Flex = require('jsxstyle/Flex');
 
 var AdminOverview = React.createClass({
 

@@ -1,10 +1,10 @@
+import { Block, Inline } from 'jsxstyle';
+
 var React = require('react');
 var debug = require('debug')('GuessDay');
 var GuessAction = require('../../../actions/GuessAction');
 var DayAction = require('../../../actions/DayAction');
 var GuessStore = require('../../../stores/GuessStore');
-var Inline = require('jsxstyle/Inline');
-var Block = require('jsxstyle/Block');
 var SongAudio = require('./SongAudio');
 
 var GuessDay = React.createClass({

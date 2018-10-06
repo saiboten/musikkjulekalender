@@ -54,8 +54,8 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "build": "browserify -t [reactify --es6] src/App.jsx > build/app.js",
     "start": "node ./bin/www",
+    "build": "webpack --config webpack.config.js",
     "webpack": "webpack -p --config webpack.config.js"
   },
   "author": "Josh Perez <josh@goatslacker.com>",

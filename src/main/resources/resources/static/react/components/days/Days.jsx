@@ -1,11 +1,10 @@
+import { Block, Flex } from 'jsxstyle';
 var React = require('react');
 var debug = require('debug')('Days');
 var DaySelector = require('./day/DaySelector')
 var GuessDay = require('./day/GuessDay');
 var GuessStore = require('../../stores/GuessStore');
-var Flex = require('jsxstyle/Flex');
 var DayStore = require('../../stores/DayStore');
-var Block = require('jsxstyle/Block');
 
 var Days = React.createClass({
 

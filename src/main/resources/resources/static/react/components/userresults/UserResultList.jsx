@@ -1,8 +1,9 @@
+import { Block } from 'jsxstyle';
+
 var React = require('react');
 var debug = require('debug')('UserResultList');
 var UserResultElement = require('./UserResultElement');
 var moment = require('moment');
-var Block = require('jsxstyle/Block');
 
 var UserResultList = React.createClass({
 

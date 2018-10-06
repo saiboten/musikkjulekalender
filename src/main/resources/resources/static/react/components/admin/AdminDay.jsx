@@ -1,3 +1,5 @@
+import { Block } from 'jsxstyle';
+
 var React = require('react');
 var debug = require('debug')('AdminDay');
 var moment = require('moment');
@@ -6,7 +8,7 @@ var DatePicker = require('react-datepicker');
 var AdminDaySolution = require('./AdminDaySolution');
 var DateHeader = require('../DateHeader.jsx');
 var SongAudio =require('../days/day/SongAudio');
-var Block = require('jsxstyle/Block');
+
 var Dropzone = require('react-dropzone');
 var request = require('superagent');
 
