@@ -1,13 +1,16 @@
 package no.saiboten.drumcalendar;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@EnableCaching
+@EnableCaching 
+@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
@@ -18,6 +21,7 @@ public class Application extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(Application.class);
 	}
+
 
 
 }

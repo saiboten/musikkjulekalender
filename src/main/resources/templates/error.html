@@ -4,7 +4,12 @@
 			<h2 class="title">Noe har gått galt</h2>
 
 			<div style="clear: both;">&nbsp;</div>
-			<div class="entry"><a href="/">Noe har gått galt. Vennligst gå tilbake til forsiden</a></div>
+			<div class="entry">
+				<div th:text="${exception}">
+				</div>
+				
+				<a href="/">Noe har gått galt. Vennligst gå tilbake til forsiden</a>
+			</div>
 		</div>
 
 		<div style="clear: both;">&nbsp;</div>

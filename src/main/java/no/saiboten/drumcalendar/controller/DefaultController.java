@@ -49,9 +49,10 @@ public class DefaultController {
 
 	@RequestMapping(value = "/logout")
 	public RedirectView secure(HttpServletRequest request) {
-		logger.debug("Request for front page");
+		logger.debug("User is requesting to log out");
 		try {
 			request.logout();
+			logger.debug("Are we logged out? Hope so.");
 		} catch (ServletException e) {
 			logger.error("Logout failed: " + e.getMessage());
 		}

@@ -5,20 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@ControllerAdvice
 public class MusikkjulekalenderExceptionHandler {
 	
-    Logger logger = LoggerFactory.getLogger(MusikkjulekalenderExceptionHandler.class);
+	Logger logger = LoggerFactory.getLogger(MusikkjulekalenderExceptionHandler.class);
 	
-	 @ExceptionHandler(Exception.class)
+	 @ExceptionHandler(value = Exception.class)
 	  public ModelAndView handleError(HttpServletRequest req, Exception exception) {
-	    logger.error("Request: " + req.getRequestURL() + " raised " + exception);
+	    logger.debug("Request: " + req.getRequestURL() + " raised " + exception);
 
 	    ModelAndView mav = new ModelAndView();
-	    mav.addObject("exception", exception);
+	    mav.addObject("exception", exception.getMessage());
 	    mav.addObject("url", req.getRequestURL());
 	    mav.setViewName("error");
 	    return mav;
