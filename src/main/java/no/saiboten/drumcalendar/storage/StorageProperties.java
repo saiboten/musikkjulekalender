@@ -5,20 +5,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("config/application.properties")
+@ConfigurationProperties
 public class StorageProperties {
-	 /**
-     * Folder location for storing files
-     */
+	/**
+	 * Folder location for storing files
+	 */
 	@Value("${upload-dir}")
-    private String location = "replace";
+	private String location = "replace";
 
-    public String getLocation() {
-        return location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 }

@@ -132,7 +132,7 @@ public class DayServicePostgresImpl implements DayService {
 
 	@Override
 	public boolean deleteDay(Long dayNumber) {
-		dayRepository.delete(dayNumber);
+		dayRepository.deleteById(dayNumber);
 		return true;
 	}
 

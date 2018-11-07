@@ -22,24 +22,28 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 
 	Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
 
-	@Autowired
-	CalendarUserService userService;
-
-	@Autowired
 	private LoggedInRequestHolder loggedIn;
 
+	private CalendarUserService userService;
+	
+	@Autowired
+	public SecurityInterceptor(LoggedInRequestHolder loggedIn, CalendarUserService userService) {
+		this.loggedIn = loggedIn;
+		this.userService = userService;
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object arg2) throws Exception {
 
-		RefreshableKeycloakSecurityContext hm = (RefreshableKeycloakSecurityContext) request
-	    .getAttribute(KeycloakSecurityContext.class.getName());
-		
+		logger.debug("Okidoki");
+		KeycloakSecurityContext hm = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+
 		logger.debug("Keycloak security context: " + hm);
-		if(hm != null) {
+		if (hm != null && hm.getToken() != null) {
 			String email = hm.getToken().getEmail();
 			String nickName = hm.getToken().getPreferredUsername();
-			if(email != null) {
+			if (email != null) {
 				loggedIn.setLoggedIn(true);
 				loggedIn.setUserName(email);
 				loggedIn.setNickName(nickName);
