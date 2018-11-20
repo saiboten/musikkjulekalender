@@ -18,6 +18,5 @@ hs_err_pid*
 
 .classpath
 .settings
-**/app.js
 **/keycloak.json
 **/keycloak.json.backup
