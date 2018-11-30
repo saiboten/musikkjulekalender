@@ -32,7 +32,8 @@ h3 {
 }
 
 nav.header {
-    
+    max-width: 980px;
+    margin: 0 auto;
 }
 
 .header__fullscreen {
@@ -55,7 +56,7 @@ nav.header {
     margin-left: 10px;
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 450px) {
     .header__fullscreen {
         flex-direction: column;
         height: 150px;
