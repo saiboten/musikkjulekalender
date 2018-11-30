@@ -32,35 +32,48 @@ h3 {
 }
 
 nav.header {
-    margin: 10px auto;
-    max-width: 500px;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;;
-    justify-content: space-around;
-    align-items: flex-end;
+    
 }
 
 .header__fullscreen {
-  flex-direction: row;
   display: flex;
-  width: 100%;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
 .header__menu-item {
-    margin: 5px;
-    padding: 30px 5px 5px 5px;
-    min-width: 18%;
-    display: block;
+    padding: 10px;
+    min-width: 75px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     text-align: center;
     text-decoration: none;
     overflow-wrap: break-word;
-    border: 1px solid black;
-    border-radius: 15px;
-    height: 50px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 8px black;
     background-color: white;
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 350px) {
+    .header__fullscreen {
+        flex-direction: column;
+        height: 150px;
+    }
+
+    .header__menu-item {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+  }
+
+
+.header__menu-item:visited {
+    color: black;
+}
+
+.header__menu-item:link {
+    color: black;
 }
 
 .day__container {
