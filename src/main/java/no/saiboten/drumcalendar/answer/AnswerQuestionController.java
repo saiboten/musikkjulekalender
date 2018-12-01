@@ -75,11 +75,10 @@ public class AnswerQuestionController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today.getRevealDate());
 
-		List<AnswerPostgres> existingAnswers = answerRepository.findByDay(today
-				.getId());
+		List<AnswerPostgres> existingAnswers = answerRepository.findByUserNameAndDay(user.getUserName(), today.getId());
 
 		LOGGER.debug("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
-		if (user != null) { // && !answerExists(existingAnswers, song)) {
+		if (user != null && !answerExists(existingAnswers, song)) {
 			AnswerPostgres answerPostgres = storeAnswer(song, user, today);
 			if (answerPostgres.isCorrectSongAnswer()) {
 				answerMap.put("feedback", "Riktig! Svaret var: " + song
