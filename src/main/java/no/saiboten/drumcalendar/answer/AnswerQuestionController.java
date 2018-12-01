@@ -39,9 +39,11 @@ public class AnswerQuestionController {
 	private AnswerRepository answerRepository;
 
 	private SolutionRepository solutionRepository;
-	
+
 	@Autowired
-	public AnswerQuestionController(DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository, SolutionRepository solutionRepository) {
+	public AnswerQuestionController(DayService dayService,
+			LoggedInRequestHolder loggedIn, AnswerRepository answerRepository,
+			SolutionRepository solutionRepository) {
 		this.dayService = dayService;
 		this.loggedIn = loggedIn;
 		this.answerRepository = answerRepository;
@@ -49,8 +51,9 @@ public class AnswerQuestionController {
 	}
 
 	@RequestMapping("/answer")
-	public @ResponseBody Map<String,Object> answerQuestion(@RequestParam(value = "song") String song) {
-		Map<String,Object> answerMap = new HashMap<String,Object>();
+	public @ResponseBody
+	Map<String, Object> answerQuestion(@RequestParam(value = "song") String song) {
+		Map<String, Object> answerMap = new HashMap<String, Object>();
 		if (song == null || song.equals("")) {
 			answerMap.put("feedback", "Sang var tom. Vennligst prøv igjen..");
 			return answerMap;
@@ -61,8 +64,9 @@ public class AnswerQuestionController {
 		Pattern pattern = Pattern.compile("(\\w|\\s|[0-9]|\\?|\\&|ø|æ|å)+");
 		Matcher matchSong = pattern.matcher(song);
 		if (!matchSong.matches()) {
-			answerMap.put("feedback",
-					"Forslaget inneholdt ulovlige tegn. Kun bokstaver og tall er tillatt. Dersom svaret ditt inneholder spesielle tegn, kan du fjerne disse, vi har i så fall gjort det samme i fasiten");
+			answerMap
+					.put("feedback",
+							"Forslaget inneholdt ulovlige tegn. Kun bokstaver og tall er tillatt. Dersom svaret ditt inneholder spesielle tegn, kan du fjerne disse, vi har i så fall gjort det samme i fasiten");
 			return answerMap;
 		}
 
@@ -71,64 +75,92 @@ public class AnswerQuestionController {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(today.getRevealDate());
 
+		List<AnswerPostgres> existingAnswers = answerRepository.findByDay(today
+				.getId());
+
 		LOGGER.debug("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
-		if (user != null) {
-			AnswerPostgres answerPostgres = new AnswerPostgres();
-			
-			List<Solution> solutions = solutionRepository.findByDay(today.getId());
-			
-			LOGGER.debug("Solutions: " + solutions);
-			answerPostgres.setDay(today.getId());
-			answerPostgres.setGuessedSong(song);
-			answerPostgres.setUserName(user.getUserName());
-			
-			for(Solution songSolution : solutions) {
-				if(songSolution.getSolution().toLowerCase().equals(song.toLowerCase())) {
-					answerPostgres.setCorrectSongAnswer(true);
-					answerPostgres.setTimeOfCorrectAnswerInMillis(new Date().getTime());
-				}
-			}
-			
-			answerRepository.save(answerPostgres);
-			
-			if(answerPostgres.isCorrectSongAnswer()) {
-				answerMap.put("feedback", "Riktig! Svaret var: " + song + ". Godt jobbet!");
+		if (user != null && !answerExists(existingAnswers, song)) {
+			AnswerPostgres answerPostgres = storeAnswer(song, user, today);
+			if (answerPostgres.isCorrectSongAnswer()) {
+				answerMap.put("feedback", "Riktig! Svaret var: " + song
+						+ ". Godt jobbet!");
 				answerMap.put("correct", true);
-			}
-			else {
-				answerMap.put("feedback", "Beklager, svaret var feil! Du tippet: " + song);
+			} else {
+				answerMap.put("feedback",
+						"Beklager, svaret var feil! Du tippet: " + song);
 				answerMap.put("correct", false);
 
 			}
-			
+
 		} else {
-			answerMap.put("feedback", "Noe gikk galt. Er du innlogget?");
+			answerMap.put("feedback", "Dette svaret har du prøvd tidligere!");
 			answerMap.put("correct", false);
 		}
 
 		return answerMap;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/admin/addsolution/{day}/{solution}")
-	public @ResponseBody Map<String,Object> addSolution(@PathVariable Long day, @PathVariable(value="solution") String solutionString) {
+
+	private boolean answerExists(List<AnswerPostgres> existingAnswers,
+			String song) {
+		boolean exists = false;
+		
+		for (AnswerPostgres answerPostgres : existingAnswers) {
+			if(song.equals(answerPostgres.getGuessedSong())) {
+				exists = true;
+			}
+		}
+		
+		return exists;
+	}
+
+	private AnswerPostgres storeAnswer(String song, CalendarUserPostgres user,
+			DayPostgres today) {
+		AnswerPostgres answerPostgres = new AnswerPostgres();
+
+		List<Solution> solutions = solutionRepository.findByDay(today.getId());
+
+		LOGGER.debug("Solutions: " + solutions);
+		answerPostgres.setDay(today.getId());
+		answerPostgres.setGuessedSong(song);
+		answerPostgres.setUserName(user.getUserName());
+
+		for (Solution songSolution : solutions) {
+			if (songSolution.getSolution().toLowerCase()
+					.equals(song.toLowerCase())) {
+				answerPostgres.setCorrectSongAnswer(true);
+				answerPostgres.setTimeOfCorrectAnswerInMillis(new Date()
+						.getTime());
+			}
+		}
+
+		answerRepository.save(answerPostgres);
+		return answerPostgres;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/admin/addsolution/{day}/{solution}")
+	public @ResponseBody
+	Map<String, Object> addSolution(@PathVariable Long day,
+			@PathVariable(value = "solution") String solutionString) {
 		Solution solution = new Solution();
 		solution.setDay(day);
 		solution.setSolution(solutionString);
 		solutionRepository.save(solution);
-		
-		Map<String,Object> response = new HashMap<String,Object>();
+
+		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("success", true);
 		return response;
 	}
-	
-	@RequestMapping(method=RequestMethod.POST, value="/admin/deletesolution/{day}/{solution}")
-	public @ResponseBody Map<String,Object> deleteSolution(@PathVariable Long day, @PathVariable(value="solution") String solutionString) {
-	
+
+	@RequestMapping(method = RequestMethod.POST, value = "/admin/deletesolution/{day}/{solution}")
+	public @ResponseBody
+	Map<String, Object> deleteSolution(@PathVariable Long day,
+			@PathVariable(value = "solution") String solutionString) {
+
 		solutionRepository.deleteByDayAndSolution(day, solutionString);
-		
-		Map<String,Object> response = new HashMap<String,Object>();
+
+		Map<String, Object> response = new HashMap<String, Object>();
 		response.put("success", true);
 		return response;
 	}
-	
+
 }
