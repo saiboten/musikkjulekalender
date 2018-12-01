@@ -12,10 +12,6 @@ var Menu = React.createClass({
     window.location = "/";
   },
 
-  about: function() {
-    window.location = "/om";
-  },
-
   logInOrOut: function()  {
     this.props.loggedIn === true ? window.location = "/logout" : window.location = "/secure";
   },
@@ -26,7 +22,6 @@ var Menu = React.createClass({
     var openMenuContent = (
       <ul className="header__menu-dropdown-list">
        <li className="header__menu-dropdown-list-element" onClick={this.frontPage}>Forsiden</li>
-       <li className="header__menu-dropdown-list-element" onClick={this.about}>Om</li>
        <li className="header__menu-dropdown-list-element" onClick={this.logInOrOut}>{this.props.loggedIn==="true" ? "Logg ut":"Logg inn"}</li>
       </ul>
     )
@@ -35,7 +30,6 @@ var Menu = React.createClass({
       <nav className="header">
         <div className="header__fullscreen">
           <a className="header__menu-item" href="/"> Forsiden </a>
-          <a className="header__menu-item" href="/om"> Om </a>
           {loggedInLink}
         </div>
 

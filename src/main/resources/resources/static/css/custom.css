@@ -33,7 +33,7 @@ h3 {
 
 nav.header {
     max-width: 980px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .header__fullscreen {
@@ -59,7 +59,7 @@ nav.header {
 @media screen and (max-width: 450px) {
     .header__fullscreen {
         flex-direction: column;
-        height: 150px;
+        height: 100px;
     }
 
     .header__menu-item {
@@ -96,7 +96,7 @@ nav.header {
     background-color: white;
     text-align: center;
     margin: 10px auto;
-    width: 225px;
+    width: 330px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -116,6 +116,8 @@ nav.header {
 
 .guess-form__input {
     width: 55%;
+    height: 50px;
+    text-align: center;
     margin: 10px 0;
 }
 
@@ -147,6 +149,7 @@ nav.header {
     box-shadow: 2px 2px 2px #888888;
     transition: 0.2s ease-in-out;
     height: 50px; 
+    background-color: #fff;
 }
 
 .guess-form__submitbutton:hover {

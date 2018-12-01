@@ -12,19 +12,39 @@ var Days = require('./days/Days');
 
 var Main = React.createClass({
 
-    render: function() {
+    render: function () {
 
-       var imgStyle = { width: "100%" };
-      var imgAttributes = {
-        src: "/static/images/santas.jpg",
-        alt: "Julenisse"
-      }
+        var imgStyle = { width: "100%" };
+        var imgAttributes = {
+            src: "/static/images/santas.jpg",
+            alt: "Julenisse"
+        }
 
         return (
             <Block className="main-wrapper" backgroundColor="white" borderRadius="5px" margin="0 auto">
-                <Block>
-                    <Block padding-top="10px" component="h1" textAlign="center">Musikkjulekalender!</Block>
-                    <Block width="100%" component="img" props={imgAttributes} />
+                <Block
+                    mediaQueries={{
+                        sm: 'screen and (max-width: 450px)',
+                    }}
+                    display="flex"
+                    flexDirection="column"
+                    smFlexDirection="row"
+                    smJustifyContent="space-between"
+                    smAlignItems="center"
+                    smPadding="5px"
+                >
+                    <Block component="h1" textAlign="center">Musikkjulekalender!</Block>
+                    <Block
+                        mediaQueries={{
+                            sm: 'screen and (max-width: 450px)',
+                        }}
+                        width="100%"
+                        smWidth="50px"
+                        smHeight="50px"
+                        smMarginRight="10px"
+                        smBorderRadius="50%"
+                        component="img"
+                        props={imgAttributes} />
                 </Block>
                 <Block display="flex" flexWrap="wrap" padding="5px">
                     <SingleGuessDayContainer />
@@ -33,9 +53,9 @@ var Main = React.createClass({
                 <UserStatisticsContainer />
                 <HighScoreContainer />
                 <CurrentUserStatisticsContainer />
-                  <p className="smallspace">Følg oss gjerne på <a href="https://www.facebook.com/musikkjulekalender">facebook!</a></p>
+                <p className="smallspace">Følg oss gjerne på <a href="https://www.facebook.com/musikkjulekalender">facebook!</a></p>
                 <Days />
-        </Block>)
+            </Block>)
     }
 });
 

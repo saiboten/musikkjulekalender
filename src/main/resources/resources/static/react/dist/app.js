@@ -21295,13 +21295,33 @@
 	            { className: 'main-wrapper', backgroundColor: 'white', borderRadius: '5px', margin: '0 auto' },
 	            _react2.default.createElement(
 	                _jsxstyle.Block,
-	                null,
+	                {
+	                    mediaQueries: {
+	                        sm: 'screen and (max-width: 450px)'
+	                    },
+	                    display: 'flex',
+	                    flexDirection: 'column',
+	                    smFlexDirection: 'row',
+	                    smJustifyContent: 'space-between',
+	                    smAlignItems: 'center',
+	                    smPadding: '5px'
+	                },
 	                _react2.default.createElement(
 	                    _jsxstyle.Block,
-	                    { 'padding-top': '10px', component: 'h1', textAlign: 'center' },
+	                    { component: 'h1', textAlign: 'center' },
 	                    'Musikkjulekalender!'
 	                ),
-	                _react2.default.createElement(_jsxstyle.Block, { width: '100%', component: 'img', props: imgAttributes })
+	                _react2.default.createElement(_jsxstyle.Block, {
+	                    mediaQueries: {
+	                        sm: 'screen and (max-width: 450px)'
+	                    },
+	                    width: '100%',
+	                    smWidth: '50px',
+	                    smHeight: '50px',
+	                    smMarginRight: '10px',
+	                    smBorderRadius: '50%',
+	                    component: 'img',
+	                    props: imgAttributes })
 	            ),
 	            _react2.default.createElement(
 	                _jsxstyle.Block,
@@ -47392,10 +47412,6 @@
 	    window.location = "/";
 	  },
 
-	  about: function about() {
-	    window.location = "/om";
-	  },
-
 	  logInOrOut: function logInOrOut() {
 	    this.props.loggedIn === true ? window.location = "/logout" : window.location = "/secure";
 	  },
@@ -47421,11 +47437,6 @@
 	      ),
 	      React.createElement(
 	        "li",
-	        { className: "header__menu-dropdown-list-element", onClick: this.about },
-	        "Om"
-	      ),
-	      React.createElement(
-	        "li",
 	        { className: "header__menu-dropdown-list-element", onClick: this.logInOrOut },
 	        this.props.loggedIn === "true" ? "Logg ut" : "Logg inn"
 	      )
@@ -47441,11 +47452,6 @@
 	          "a",
 	          { className: "header__menu-item", href: "/" },
 	          " Forsiden "
-	        ),
-	        React.createElement(
-	          "a",
-	          { className: "header__menu-item", href: "/om" },
-	          " Om "
 	        ),
 	        loggedInLink
 	      )
