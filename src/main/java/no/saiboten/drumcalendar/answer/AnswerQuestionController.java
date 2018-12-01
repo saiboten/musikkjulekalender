@@ -79,7 +79,7 @@ public class AnswerQuestionController {
 				.getId());
 
 		LOGGER.debug("Date is: " + cal.getTimeInMillis() + ". User is: " + user);
-		if (user != null && !answerExists(existingAnswers, song)) {
+		if (user != null) { // && !answerExists(existingAnswers, song)) {
 			AnswerPostgres answerPostgres = storeAnswer(song, user, today);
 			if (answerPostgres.isCorrectSongAnswer()) {
 				answerMap.put("feedback", "Riktig! Svaret var: " + song
