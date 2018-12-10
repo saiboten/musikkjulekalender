@@ -23,7 +23,7 @@ var PastDayWithSolution = React.createClass({
         return (<div>
             <p><div dangerouslySetInnerHTML={this.getDescription(this.props.day.description)}></div></p>
             <p>
-                <span>{this.props.day.solutionArtist} - {this.props.day.solutionsSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
+                <span>{this.props.day.solutionArtist} - {this.props.day.solutionSong} {this.props.day.optionalSolutionVideo ? <span className="youtube" dangerouslySetInnerHTML={this.createMarkup()}></span> : ""}</span>
             </p>
             <SongAudio link={this.props.day.link} />
         </div>);
