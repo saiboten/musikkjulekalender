@@ -16,7 +16,7 @@ var Main = React.createClass({
 
         var imgStyle = { width: "100%" };
         var imgAttributes = {
-            src: "/static/images/santas.jpg",
+            src: "/static/images/santas.png",
             alt: "Julenisse"
         }
 
@@ -38,7 +38,9 @@ var Main = React.createClass({
                         mediaQueries={{
                             sm: 'screen and (max-width: 450px)',
                         }}
-                        width="100%"
+                        height="300px"
+                        width="232px"
+                        margin="0 auto"
                         smWidth="50px"
                         smHeight="50px"
                         smMarginRight="10px"
