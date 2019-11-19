@@ -50,7 +50,7 @@ public class AnswerQuestionController {
 		this.solutionRepository = solutionRepository;
 	}
 
-	@RequestMapping("/answer")
+	@RequestMapping(path="/api/answer", method=RequestMethod.POST)
 	public @ResponseBody
 	Map<String, Object> answerQuestion(@RequestParam(value = "song") String song) {
 		Map<String, Object> answerMap = new HashMap<String, Object>();

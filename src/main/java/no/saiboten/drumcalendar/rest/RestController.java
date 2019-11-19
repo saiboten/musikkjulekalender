@@ -50,7 +50,7 @@ public class RestController {
 		this.answerRepository = answerRepository;
 	}
 
-	@RequestMapping("/alldata")
+	@RequestMapping("/api/alldata")
 	public @ResponseBody Map<String,Object> getDays(Principal principal) {
 		logger.debug("Principal: " + principal);
 		

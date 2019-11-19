@@ -7,8 +7,6 @@ import no.saiboten.drumcalendar.user.CalendarUserService;
 import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
 import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
-import org.keycloak.KeycloakSecurityContext;
-import org.keycloak.adapters.RefreshableKeycloakSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +23,22 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter implements
 	private LoggedInRequestHolder loggedIn;
 
 	private CalendarUserService userService;
+
+	private AuthenticationFacade authenticationFacade;
 	
 	@Autowired
-	public SecurityInterceptor(LoggedInRequestHolder loggedIn, CalendarUserService userService) {
+	public SecurityInterceptor(LoggedInRequestHolder loggedIn, CalendarUserService userService, AuthenticationFacade authenticationFacade) {
 		this.loggedIn = loggedIn;
 		this.userService = userService;
+		this.authenticationFacade = authenticationFacade;
 	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object arg2) throws Exception {
-
-		logger.debug("Okidoki");
-		KeycloakSecurityContext hm = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
-
-		logger.debug("Keycloak security context: " + hm);
-		if (hm != null && hm.getToken() != null) {
-			String email = hm.getToken().getEmail();
-			String nickName = hm.getToken().getPreferredUsername();
+		if (authenticationFacade.getEmail() != null) {
+			String email = authenticationFacade.getEmail();
+			String nickName = authenticationFacade.getEmail();
 			if (email != null) {
 				loggedIn.setLoggedIn(true);
 				loggedIn.setUserName(email);

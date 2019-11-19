@@ -4,6 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
+import no.saiboten.drumcalendar.day.postgres.DayPostgres;
+import no.saiboten.drumcalendar.day.service.DayService;
+import no.saiboten.drumcalendar.solution.SolutionRepository;
+import no.saiboten.drumcalendar.storage.StorageService;
+import no.saiboten.drumcalendar.user.CalendarUserService;
+import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
+import no.saiboten.drumcalendar.winner.WinnerService;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -19,15 +28,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import no.saiboten.drumcalendar.answer.postgres.AnswerRepository;
-import no.saiboten.drumcalendar.day.postgres.DayPostgres;
-import no.saiboten.drumcalendar.day.service.DayService;
-import no.saiboten.drumcalendar.solution.SolutionRepository;
-import no.saiboten.drumcalendar.storage.StorageService;
-import no.saiboten.drumcalendar.user.CalendarUserService;
-import no.saiboten.drumcalendar.user.LoggedInRequestHolder;
-import no.saiboten.drumcalendar.winner.WinnerService;
 
 @Controller
 public class AdminController {
@@ -50,8 +50,9 @@ public class AdminController {
 
 	@Autowired
 	public AdminController(CalendarUserService userService,
-			 WinnerService winnerService,
-			DayService dayService, LoggedInRequestHolder loggedIn, AnswerRepository answerRepository, SolutionRepository solutionRepository, StorageService storageService) {
+			WinnerService winnerService, DayService dayService,
+			LoggedInRequestHolder loggedIn, AnswerRepository answerRepository,
+			SolutionRepository solutionRepository, StorageService storageService) {
 		this.userService = userService;
 		this.winnerService = winnerService;
 		this.dayService = dayService;
@@ -61,7 +62,7 @@ public class AdminController {
 		this.storageService = storageService;
 	}
 
-	@RequestMapping("/admin/newwinner/{day}")
+	@RequestMapping("/api/admin/newwinner/{day}")
 	public String addWinner(@PathVariable("day") String day) {
 		winnerService.addWinner(day);
 		return "users";
@@ -73,13 +74,13 @@ public class AdminController {
 
 		return "admin";
 	}
-	
-	@RequestMapping("/admin/alldata")
-	public @ResponseBody Map<String,Object> getDays() {
+
+	@RequestMapping("/api/admin/alldata")
+	public @ResponseBody Map<String, Object> getDays() {
 		logger.debug("Getting data");
 
-		Map<String,Object> returnMap = new HashMap<String,Object>();
-		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+
 		returnMap.put("days", dayService.getDays());
 		returnMap.put("user", loggedIn.getCalendarUser());
 		returnMap.put("answers",
@@ -91,19 +92,19 @@ public class AdminController {
 		returnMap.put("date", fmt.print(new DateTime()));
 		return returnMap;
 	}
-	
-	@PostMapping("/admin/upload/{dayIdAsString}")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable String dayIdAsString,
-                                   RedirectAttributes redirectAttributes) {
+
+	@PostMapping("/api/admin/upload/{dayIdAsString}")
+	public String handleFileUpload(@RequestParam("file") MultipartFile file,
+			@PathVariable String dayIdAsString,
+			RedirectAttributes redirectAttributes) {
 		logger.debug("File upload began! Day id: " + dayIdAsString);
 		DayPostgres day = dayService.getDay(dayIdAsString);
 		String songName = UUID.randomUUID().toString() + ".mp3";
 		day.setLink("/songs/" + songName);
-		
-        storageService.store(file, songName);
-        dayService.updateDay(day);
-        return "redirect:/";
-    }
 
+		storageService.store(file, songName);
+		dayService.updateDay(day);
+		return "redirect:/";
+	}
 
 }

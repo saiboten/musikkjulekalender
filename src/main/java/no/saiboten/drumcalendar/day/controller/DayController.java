@@ -41,7 +41,7 @@ public class DayController {
 		this.answerRepository = answerRepository;
 	}
 	
-	@RequestMapping(value = "/admin/day", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/admin/day", method = RequestMethod.POST)
 	public @ResponseBody GenericResponse addDay(@RequestBody Day day) {
 		GenericResponse response = new GenericResponse();
 		DayPostgres postGresDay = convertToPostgresDay(day);
@@ -78,7 +78,7 @@ public class DayController {
 		return dayPostgres;
 	}
 
-	@RequestMapping(value = "/admin/day", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/admin/update", method = RequestMethod.PUT)
 	public @ResponseBody GenericResponse updateDay(@RequestBody DayPostgres day) {
 		GenericResponse response = new GenericResponse();
 
@@ -95,19 +95,19 @@ public class DayController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/admin/day/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/admin/day/{id}", method = RequestMethod.GET)
 	public @ResponseBody DayPostgres getDay(@PathVariable("id") String revealDateAsString) {
 		logger.debug("Getting day: " + revealDateAsString);
 		return dayService.getDay(revealDateAsString);
 	}
 	
-	@RequestMapping(value = "/admin/days", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/admin/days", method = RequestMethod.GET)
 	public @ResponseBody List<DayPostgres> getDays(Long revealDateAsInt) {
 		return dayService.getDays();
 	}
 	
 	
-	@RequestMapping(value = "/admin/day/{day}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/admin/day/{day}", method = RequestMethod.DELETE)
 	public @ResponseBody GenericResponse deleteDay(@PathVariable(value="day") Long revealDateAsString) {
 		GenericResponse response = new GenericResponse();
 		if(answerRepository.findByDay(revealDateAsString) != null) {

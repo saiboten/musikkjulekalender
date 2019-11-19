@@ -20,3 +20,4 @@ hs_err_pid*
 .settings
 **/keycloak.json
 **/keycloak.json.backup
+src/main/resources/application.yml

@@ -1,0 +1,103 @@
+{
+  "date":"2019-11-09",
+  "userResult":{
+     "2019-11-07":{
+        "users":[
+
+        ]
+     },
+     "2019-11-09":{
+        "users":[
+
+        ]
+     },
+     "2019-11-08":{
+        "users":[
+
+        ]
+     },
+     "2019-11-10":{
+        "users":[
+
+        ]
+     }
+  },
+  "today":191,
+  "answers":[
+
+  ],
+  "topList":[
+     {
+        "user":"saiboten",
+        "score":0
+     },
+     {
+        "user":"testbruker3",
+        "score":0
+     },
+     {
+        "user":"testuser",
+        "score":0
+     },
+     {
+        "user":"tobias",
+        "score":0
+     }
+  ],
+  "days":[
+     {
+        "id":187,
+        "revealDateAsString":"2019-11-07",
+        "image":null,
+        "description":"Hurra",
+        "optionalSolutionVideo":"",
+        "link":"",
+        "solutionDate":"2019-11-07T23:00:00.000+0000",
+        "revealDate":"2019-11-06T23:00:00.000+0000",
+        "solutionArtist":"test",
+        "solutionSong":"dasdas",
+        "new":false
+     },
+     {
+        "id":189,
+        "revealDateAsString":"2019-11-08",
+        "image":null,
+        "description":"Åttende november",
+        "optionalSolutionVideo":"",
+        "link":"",
+        "solutionDate":"2019-11-08T23:00:00.000+0000",
+        "revealDate":"2019-11-07T23:00:00.000+0000",
+        "solutionArtist":"En Artist",
+        "solutionSong":"Jepp",
+        "new":false
+     },
+     {
+        "id":191,
+        "revealDateAsString":"2019-11-09",
+        "image":null,
+        "description":"En beskrivelse",
+        "optionalSolutionVideo":"",
+        "link":"",
+        "solutionDate":"2019-11-09T23:00:00.000+0000",
+        "revealDate":"2019-11-08T23:00:00.000+0000",
+        "solutionArtist":"En artist",
+        "solutionSong":"Niende",
+        "new":false
+     },
+     {
+        "id":193,
+        "revealDateAsString":"2019-11-10",
+        "image":null,
+        "description":"Siste for nå",
+        "optionalSolutionVideo":null,
+        "link":"",
+        "solutionDate":"2019-11-10T23:00:00.000+0000",
+        "revealDate":"2019-11-09T23:00:00.000+0000",
+        "solutionArtist":null,
+        "solutionSong":null,
+        "new":false
+     }
+  ],
+  "isLoggedIn":true,
+  "user": null
+}

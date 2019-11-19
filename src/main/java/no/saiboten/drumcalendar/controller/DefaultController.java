@@ -29,7 +29,8 @@ public class DefaultController {
 	private StorageService storageService;
 
 	@Autowired
-	public DefaultController(LoggedInRequestHolder loggedInRequestHolder, StorageService storageService) {
+	public DefaultController(LoggedInRequestHolder loggedInRequestHolder,
+			StorageService storageService) {
 		this.loggedInRequestHolder = loggedInRequestHolder;
 		this.storageService = storageService;
 	}
@@ -39,12 +40,6 @@ public class DefaultController {
 		logger.debug("Request for front page");
 		model.addAttribute("loggedin", loggedInRequestHolder.isLoggedIn());
 		return "main";
-	}
-
-	@RequestMapping(value = "/secure")
-	public RedirectView login(Model model) {
-		logger.debug("/secure is secured - will be a login");
-		return new RedirectView("/");
 	}
 
 	@RequestMapping(value = "/logout")
@@ -58,25 +53,24 @@ public class DefaultController {
 		}
 		return new RedirectView("/");
 	}
-
-	@RequestMapping("/om")
-	public String om(Model model) {
-		model.addAttribute("loggedin", loggedInRequestHolder.isLoggedIn());
-		return "om";
-	}
 	
-	 @GetMapping("/songs/{filename:.+}")
-	    @ResponseBody
-	    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-	        logger.debug("Request for: " + filename);
+	@RequestMapping(value = "/loginadmin")
+	public String AdminLogin(HttpServletRequest request) {
+		return "loginadmin";
+	}
 
-	        Resource file = storageService.loadAsResource(filename);
-	        logger.debug("File: " + file);
-	        return ResponseEntity
-	                .ok()
-	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
-	                .body(file);
-	    }
+	@GetMapping("/songs/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+		logger.debug("Request for: " + filename);
 
+		Resource file = storageService.loadAsResource(filename);
+		logger.debug("File: " + file);
+		return ResponseEntity
+				.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + file.getFilename() + "\"")
+				.body(file);
+	}
 
 }
