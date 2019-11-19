@@ -9,8 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -18,16 +19,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
+import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@EnableOAuth2Client
 @RestController
+@EnableOAuth2Client
+@EnableAuthorizationServer
+@Order(6)
 public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -36,36 +40,56 @@ public class Application extends WebSecurityConfigurerAdapter {
 	@Value("${admin.password}")
 	private String adminPassword;
 
-	 @Bean
-	 @ConfigurationProperties("admin.password")
-	    public UserDetailsService userDetailsService() {
-	        User.UserBuilder users = User.withDefaultPasswordEncoder();
-	        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-	        manager.createUser(users.username("admin").password(adminPassword).roles("USER", "ADMIN").build());
-	        return manager;
-	    }
-	
+	@Bean
+	@ConfigurationProperties("admin.password")
+	public UserDetailsService userDetailsService() {
+		User.UserBuilder users = User.withDefaultPasswordEncoder();
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		manager.createUser(users.username("admin").password(adminPassword)
+				.roles("USER", "ADMIN").build());
+		return manager;
+	}
+
+	@Bean
+	public FilterRegistrationBean<OAuth2ClientContextFilter> oauth2ClientFilterRegistration(
+			OAuth2ClientContextFilter filter) {
+		FilterRegistrationBean<OAuth2ClientContextFilter> registration = new FilterRegistrationBean<OAuth2ClientContextFilter>();
+		registration.setFilter(filter);
+		registration.setOrder(-100);
+		return registration;
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http.csrf()
 				.disable()
 				.authorizeRequests()
-				.antMatchers("/admin").hasRole("ADMIN")
-				.antMatchers("/", "/login**", "/login/process", "/api/alldata", "/static/**", "/error**").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/admin")
+				.hasRole("ADMIN")
+				.antMatchers("/", "/login**", "/login/process", "/api/alldata",
+						"/static/**", "/error**")
+				.permitAll()
+				.anyRequest()
+				.authenticated()
 				.and()
-		          .formLogin()
-		          .loginPage("/loginadmin")
-		          .loginProcessingUrl("/login/process")
-		          .defaultSuccessUrl("/admin", true)
+				.formLogin()
+				.loginPage("/loginadmin")
+				.loginProcessingUrl("/login/process")
+				.defaultSuccessUrl("/admin", true)
 				.and()
-//				.exceptionHandling()
-//				.authenticationEntryPoint(
-//						new LoginUrlAuthenticationEntryPoint("/loginadmin.html")).and()
-				.logout().logoutSuccessUrl("/").permitAll().and()
-				.addFilterBefore(ssoFilterGoogle(), BasicAuthenticationFilter.class)
-				.addFilterBefore(ssoFilterFacebook(), BasicAuthenticationFilter.class);
+				// .exceptionHandling()
+				// .authenticationEntryPoint(
+				// new
+				// LoginUrlAuthenticationEntryPoint("/loginadmin.html")).and()
+				.logout()
+				.logoutSuccessUrl("/")
+				.permitAll()
+				.and()
+				.addFilterBefore(ssoFilterGoogle(),
+						BasicAuthenticationFilter.class)
+				.addFilterBefore(ssoFilterFacebook(),
+						BasicAuthenticationFilter.class);
 		// @formatter:on
 	}
 
