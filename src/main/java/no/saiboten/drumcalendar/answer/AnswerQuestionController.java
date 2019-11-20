@@ -52,7 +52,7 @@ public class AnswerQuestionController {
 
 	@RequestMapping(path="/api/answer", method=RequestMethod.POST)
 	public @ResponseBody
-	Map<String, Object> answerQuestion(@RequestParam(value = "song") String song) {
+	Map<String, Object> answerQuestion(@RequestParam(value = "guess") String song) {
 		Map<String, Object> answerMap = new HashMap<String, Object>();
 		if (song == null || song.equals("")) {
 			answerMap.put("feedback", "Sang var tom. Vennligst prøv igjen..");
