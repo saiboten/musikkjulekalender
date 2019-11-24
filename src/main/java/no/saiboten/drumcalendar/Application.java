@@ -65,9 +65,9 @@ public class Application extends WebSecurityConfigurerAdapter {
 		http.csrf()
 				.disable()
 				.authorizeRequests()
-//				.antMatchers("/admin")
-//				.hasRole("ADMIN")
-				.antMatchers("/", "/login**", "/login/process", "/api/alldata", "/api/admin/**",
+				.antMatchers("/admin")
+				.hasRole("ADMIN")
+				.antMatchers("/", "/login**", "/login/process", "/api/alldata",
 						"/static/**", "/error**")
 				.permitAll()
 				.anyRequest()
