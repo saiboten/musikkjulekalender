@@ -136,7 +136,7 @@ public class AnswerQuestionController {
 		return answerPostgres;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/admin/addsolution/{day}/{solution}")
+	@RequestMapping(method = RequestMethod.POST, value = "/api/admin/addsolution/{day}/{solution}")
 	public @ResponseBody
 	Map<String, Object> addSolution(@PathVariable Long day,
 			@PathVariable(value = "solution") String solutionString) {
@@ -150,7 +150,7 @@ public class AnswerQuestionController {
 		return response;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/admin/deletesolution/{day}/{solution}")
+	@RequestMapping(method = RequestMethod.POST, value = "/api/admin/deletesolution/{day}/{solution}")
 	public @ResponseBody
 	Map<String, Object> deleteSolution(@PathVariable Long day,
 			@PathVariable(value = "solution") String solutionString) {
