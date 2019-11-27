@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceS
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableOAuth2Client
 @EnableAuthorizationServer
 @Order(6)
+@EnableCaching
 public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -67,7 +69,7 @@ public class Application extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/admin")
 				.hasRole("ADMIN")
-				.antMatchers("/", "/login**", "/login/process", "/api/alldata",
+				.antMatchers("/", "/om", "/login", "/login**", "/login/process", "/api/alldata",
 						"/static/**", "/error**")
 				.permitAll()
 				.anyRequest()

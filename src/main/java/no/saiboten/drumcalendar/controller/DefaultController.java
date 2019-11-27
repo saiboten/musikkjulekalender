@@ -41,6 +41,20 @@ public class DefaultController {
 		model.addAttribute("loggedin", loggedInRequestHolder.isLoggedIn());
 		return "main";
 	}
+	
+	@RequestMapping(value = "/om")
+	public String about(Model model) {
+		logger.debug("Request for front page");
+		model.addAttribute("loggedin", loggedInRequestHolder.isLoggedIn());
+		return "main";
+	}
+	
+	@RequestMapping(value = "/login")
+	public String login(Model model) {
+		logger.debug("Request for front page");
+		model.addAttribute("loggedin", loggedInRequestHolder.isLoggedIn());
+		return "main";
+	}
 
 	@RequestMapping(value = "/logout")
 	public RedirectView secure(HttpServletRequest request) {
