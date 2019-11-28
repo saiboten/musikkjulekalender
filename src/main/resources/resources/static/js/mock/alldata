@@ -1,1 +1,139 @@
-{"date":"2019-11-20","userResult":{"2019-11-09":{"users":[]},"2019-11-08":{"users":[]},"2019-11-10":{"users":[]},"2019-11-21":{"users":[]},"2019-11-20":{"users":[{"name":"saiboten","time":1574279377763}]}},"today":197,"answers":[{"id":null,"day":197,"userName":"saiboten@gmail.com","guessedSong":"Fasit","correctSongAnswer":true,"timeOfCorrectAnswerInMillis":1574279377763,"new":true}],"topList":[{"user":"saiboten","score":1},{"user":"testbruker3","score":0},{"user":"testuser","score":0},{"user":"tobias","score":0}],"days":[{"id":189,"revealDateAsString":"2019-11-08","image":null,"description":"Åttende november","optionalSolutionVideo":"","link":"","solutionDate":"2019-11-08T23:00:00.000+0000","revealDate":"2019-11-07T23:00:00.000+0000","solutionArtist":"En Artist","solutionSong":"Jepp","new":false},{"id":191,"revealDateAsString":"2019-11-09","image":null,"description":"En beskrivelse","optionalSolutionVideo":"","link":"","solutionDate":"2019-11-09T23:00:00.000+0000","revealDate":"2019-11-08T23:00:00.000+0000","solutionArtist":"En artist","solutionSong":"Niende","new":false},{"id":193,"revealDateAsString":"2019-11-10","image":null,"description":"Siste for nå","optionalSolutionVideo":"","link":"","solutionDate":"2019-11-10T23:00:00.000+0000","revealDate":"2019-11-09T23:00:00.000+0000","solutionArtist":"En artist","solutionSong":"Tiende","new":false},{"id":197,"revealDateAsString":"2019-11-20","image":null,"description":"Hvem er best? Ja, si det","optionalSolutionVideo":null,"link":"","solutionDate":"2019-11-20T23:00:00.000+0000","revealDate":"2019-11-19T23:00:00.000+0000","solutionArtist":null,"solutionSong":null,"new":false},{"id":195,"revealDateAsString":"2019-11-21","image":null,"description":null,"optionalSolutionVideo":null,"link":null,"solutionDate":"2019-11-21T23:00:00.000+0000","revealDate":"2019-11-20T23:00:00.000+0000","solutionArtist":null,"solutionSong":null,"new":false}],"isLoggedIn":true,"user":{"id":57,"userName":"saiboten@gmail.com","nickName":null,"daysCalculated":0,"daysGuessedRight":0,"userNameNotMail":"saiboten"}}
+{
+   "date":"2019-11-21",
+   "userResult":{
+      "2019-11-09":{
+         "users":[
+
+         ]
+      },
+      "2019-11-08":{
+         "users":[
+
+         ]
+      },
+      "2019-11-10":{
+         "users":[
+
+         ]
+      },
+      "2019-11-21":{
+         "users":[
+
+         ]
+      },
+      "2019-11-20":{
+         "users":[
+            {
+               "name":"saiboten",
+               "time":1574279377763
+            }
+         ]
+      }
+   },
+   "today":195,
+   "answers":[
+      {
+         "id":null,
+         "day":197,
+         "userName":"saiboten@gmail.com",
+         "guessedSong":"Fasit",
+         "correctSongAnswer":true,
+         "timeOfCorrectAnswerInMillis":1574279377763,
+         "new":true
+      }
+   ],
+   "topList":[
+      {
+         "user":"saiboten",
+         "score":1
+      },
+      {
+         "user":"testbruker3",
+         "score":0
+      },
+      {
+         "user":"testuser",
+         "score":0
+      },
+      {
+         "user":"tobias",
+         "score":0
+      }
+   ],
+   "days":[
+      {
+         "id":189,
+         "revealDateAsString":"2019-11-08",
+         "image":null,
+         "description":"Åttende november",
+         "optionalSolutionVideo":"",
+         "link":"",
+         "solutionDate":"2019-11-08T23:00:00.000+0000",
+         "revealDate":"2019-11-07T23:00:00.000+0000",
+         "solutionArtist":"En Artist",
+         "solutionSong":"Jepp",
+         "new":false
+      },
+      {
+         "id":191,
+         "revealDateAsString":"2019-11-09",
+         "image":null,
+         "description":"En beskrivelse",
+         "optionalSolutionVideo":"",
+         "link":"",
+         "solutionDate":"2019-11-09T23:00:00.000+0000",
+         "revealDate":"2019-11-08T23:00:00.000+0000",
+         "solutionArtist":"En artist",
+         "solutionSong":"Niende",
+         "new":false
+      },
+      {
+         "id":193,
+         "revealDateAsString":"2019-11-10",
+         "image":null,
+         "description":"Siste for nå",
+         "optionalSolutionVideo":"",
+         "link":"",
+         "solutionDate":"2019-11-10T23:00:00.000+0000",
+         "revealDate":"2019-11-09T23:00:00.000+0000",
+         "solutionArtist":"En artist",
+         "solutionSong":"Tiende",
+         "new":false
+      },
+      {
+         "id":197,
+         "revealDateAsString":"2019-11-20",
+         "image":null,
+         "description":"Hvem er best? Ja, si det",
+         "optionalSolutionVideo":null,
+         "link":"",
+         "solutionDate":"2019-11-20T23:00:00.000+0000",
+         "revealDate":"2019-11-19T23:00:00.000+0000",
+         "solutionArtist":null,
+         "solutionSong":null,
+         "new":false
+      },
+      {
+         "id":195,
+         "revealDateAsString":"2019-11-21",
+         "image":null,
+         "description":null,
+         "optionalSolutionVideo":null,
+         "link":null,
+         "solutionDate":"2019-11-21T23:00:00.000+0000",
+         "revealDate":"2019-11-20T23:00:00.000+0000",
+         "solutionArtist":null,
+         "solutionSong":null,
+         "new":false
+      }
+   ],
+   "isLoggedIn":true,
+   "user":{
+      "id":57,
+      "userName":"saiboten@gmail.com",
+      "nickName":null,
+      "daysCalculated":0,
+      "daysGuessedRight":0,
+      "userNameNotMail":"saiboten"
+   }
+}
