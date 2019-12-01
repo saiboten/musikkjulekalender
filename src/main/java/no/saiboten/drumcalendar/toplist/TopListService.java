@@ -12,9 +12,6 @@ import no.saiboten.drumcalendar.user.postgres.CalendarUserPostgres;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,22 +19,13 @@ public class TopListService {
 	
 	private CalendarUserService calendarUserService;
 	private AnswerRepository answerRepository;
-	
-	
 
 	@Autowired
 	public TopListService(CalendarUserService calendarUserService, AnswerRepository answerRepository) {
 		this.calendarUserService = calendarUserService;
 		this.answerRepository = answerRepository;
 	}
-
-	@CacheEvict(allEntries = true, cacheNames = { "toplist" })
-	@Scheduled(fixedDelay =   30000) 
-	public void clearTopListCache() {
-
-	}
 	
-    @Cacheable("toplist")
 	public List<TopListModel> getTopList() {
 		List<TopListModel> topList = new ArrayList<TopListModel>();
 		

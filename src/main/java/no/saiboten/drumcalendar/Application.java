@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableOAuth2Client
 @EnableAuthorizationServer
 @Order(6)
-@EnableCaching
 public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
