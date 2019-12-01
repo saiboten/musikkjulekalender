@@ -69,7 +69,7 @@ public class Application extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/admin")
 				.hasRole("ADMIN")
-				.antMatchers("/", "/om", "/login", "/login**", "/login/process", "/api/alldata",
+				.antMatchers("/", "/om", "/login", "/songs/*", "/login**", "/login/process", "/api/alldata",
 						"/static/**", "/error**")
 				.permitAll()
 				.anyRequest()
