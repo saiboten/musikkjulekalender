@@ -32,7 +32,7 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
 			
 			email = details.get("email");
 			
-			if(email != null) {
+			if(email == null) {
 				email = details.get("id") + "@unknown.no";
 			}
 			
