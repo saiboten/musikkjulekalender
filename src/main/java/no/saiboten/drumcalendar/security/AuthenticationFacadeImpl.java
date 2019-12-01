@@ -31,7 +31,13 @@ public class AuthenticationFacadeImpl implements AuthenticationFacade {
 			logger.warn("Details: " + details);
 			
 			email = details.get("email");
+			
+			if(email != null) {
+				email = details.get("id") + "@unknown.no";
+			}
+			
 		}
+		
 
 		return email;
 	}
