@@ -28,30 +28,33 @@ public class UserResultService {
 		this.dayService = dayService;
 		this.calendarUserService = calendarUserService;
 		this.answerRepository = answerRepository;
-		
 	}
 	
 	public Map<String,UserResultSingleDay> getUserResults() {
 		Map<String,UserResultSingleDay> result = new HashMap<String,UserResultSingleDay>();
 		
-		for(DayPostgres day : dayService.getDays()) {
-			UserResultSingleDay userResultSingleDay = new UserResultSingleDay();
-			
-			for(CalendarUserPostgres user : calendarUserService.getAllUsers()) {
-				
-				List<AnswerPostgres> answers = answerRepository.findByUserNameAndDay(user.getUserName(), day.getId());
-				for(AnswerPostgres answer: answers) {
-					if(answer != null && answer.isCorrectSongAnswer()) {
-						UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
-						userResultSingleUser.setName((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()));
-						userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
-						userResultSingleDay.addUser(userResultSingleUser);
-					}
-				}
-			}
-			result.put(day.getRevealDateAsString(), userResultSingleDay);
+		DayPostgres day = dayService.getToday();
+		
+		if(day == null) {
+			return null;
 		}
 		
+		UserResultSingleDay userResultSingleDay = new UserResultSingleDay();
+		
+		for(CalendarUserPostgres user : calendarUserService.getAllUsers()) {
+			
+			List<AnswerPostgres> answers = answerRepository.findByUserNameAndDay(user.getUserName(), day.getId());
+			for(AnswerPostgres answer: answers) {
+				if(answer != null && answer.isCorrectSongAnswer()) {
+					UserResultSingleUser userResultSingleUser = new UserResultSingleUser();
+					userResultSingleUser.setName((user.getNickName() != null && StringUtils.containsNone(user.getNickName(), "@")? user.getNickName() : user.getUserNameNotMail()));
+					userResultSingleUser.setTime(answer.getTimeOfCorrectAnswerInMillis());
+					userResultSingleDay.addUser(userResultSingleUser);
+				}
+			}
+		}
+		result.put(day.getRevealDateAsString(), userResultSingleDay);
+	
 		return result;
 	}
 	
