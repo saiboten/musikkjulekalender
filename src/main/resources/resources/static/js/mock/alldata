@@ -100,43 +100,43 @@
    "topList":[
       {
          "user":"saiboten",
+         "score":50
+      },
+      {
+         "user":"testbruker3",
+         "score":50
+      },
+      {
+         "user":"testuser",
+         "score":49
+      },
+      {
+         "user":"tobias",
+         "score":30
+      },
+      {
+         "user":"testbruker3",
+         "score":30
+      },
+      {
+         "user":"testuser",
+         "score":5
+      },
+      {
+         "user":"tobias",
          "score":1
       },
       {
          "user":"testbruker3",
-         "score":50
+         "score":1
       },
       {
          "user":"testuser",
-         "score":12
+         "score":1
       },
       {
          "user":"tobias",
-         "score":23
-      },
-      {
-         "user":"testbruker3",
-         "score":50
-      },
-      {
-         "user":"testuser",
-         "score":12
-      },
-      {
-         "user":"tobias",
-         "score":23
-      },
-      {
-         "user":"testbruker3",
-         "score":50
-      },
-      {
-         "user":"testuser",
-         "score":12
-      },
-      {
-         "user":"tobias",
-         "score":23
+         "score":0
       }
    ],
    "days":[
