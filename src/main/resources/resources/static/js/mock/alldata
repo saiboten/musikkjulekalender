@@ -41,6 +41,38 @@
                         {
                "name":"saiboten",
                "time":1574279377763
+            },
+            {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                         {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                         {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                        {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+            {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                         {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                         {
+               "name":"saiboten",
+               "time":1574279377763
+            },
+                        {
+               "name":"saiboten",
+               "time":1574279377763
             }
          ]
       },
@@ -69,6 +101,30 @@
       {
          "user":"saiboten",
          "score":1
+      },
+      {
+         "user":"testbruker3",
+         "score":50
+      },
+      {
+         "user":"testuser",
+         "score":12
+      },
+      {
+         "user":"tobias",
+         "score":23
+      },
+      {
+         "user":"testbruker3",
+         "score":50
+      },
+      {
+         "user":"testuser",
+         "score":12
+      },
+      {
+         "user":"tobias",
+         "score":23
       },
       {
          "user":"testbruker3",
