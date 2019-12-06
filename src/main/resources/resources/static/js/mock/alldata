@@ -127,7 +127,7 @@
          "score":1
       },
       {
-         "|":"testbruker3",
+         "user":"testbruker3",
          "score":1
       },
       {
@@ -207,12 +207,5 @@
       }
    ],
    "isLoggedIn":true,
-   "user":{
-      "id":57,
-      "userName":"saiboten@gmail.com",
-      "nickName":null,
-      "daysCalculated":0,
-      "daysGuessedRight":0,
-      "userNameNotMail":"saiboten"
-   }
+   "user": null
 }
