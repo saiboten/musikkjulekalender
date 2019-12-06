@@ -4,8 +4,10 @@ psql.exe -U postgres musikkjulekalender
 
 CREATE TABLE day (
 	id bigint UNIQUE,
+	difficulty int,
+	points int,
     image varchar(80),
-    description varchar(500),
+    description text,
 	optional_solution_video varchar(500),
 	reveal_date_as_string varchar(20) UNIQUE, 
 	link varchar(150),
@@ -20,6 +22,12 @@ CREATE TABLE solution (
     day bigint references day(id),
     solution varchar(200)
 );
+
+CREATE TABLE collaborator (
+	id bigint,
+    name varchart(500)
+);
+
 
 CREATE TABLE winner (
 	id bigint,
@@ -41,6 +49,16 @@ CREATE TABLE answer (
 	guessed_song varchar(80),
 	correct_song_answer boolean,
 	time_of_correct_answer_in_millis bigint
+);
+
+CREATE UNIQUE INDEX idx_one_right_answer
+ON answer(day, user_name, correct_song_answer)
+WHERE correct_song_answer = true;
+
+ALTER TABLE answer ADD CONSTRAINT only_one_right_answer_per_day CHECK (
+   price > 0
+   AND discount >= 0
+   AND price > discount
 );
 
 // Drop all tables

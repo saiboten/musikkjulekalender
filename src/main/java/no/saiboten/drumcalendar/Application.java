@@ -25,6 +25,8 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,6 +39,9 @@ public class Application extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	OAuth2ClientContext oauth2ClientContext;
+	
+	@Autowired
+	CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
 	@Value("${admin.password}")
 	private String adminPassword;
@@ -59,38 +64,39 @@ public class Application extends WebSecurityConfigurerAdapter {
 		registration.setOrder(-100);
 		return registration;
 	}
+	
+	private AuthenticationSuccessHandler getSuccessHandler() {
+	    SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler(
+	            "/");
+	    successHandler.setTargetUrlParameter("redirect");
+	    return successHandler;
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
-		http.csrf()
-				.disable()
-				.authorizeRequests()
-				.antMatchers("/admin")
-				.hasRole("ADMIN")
-				.antMatchers("/", "/om", "/login", "/songs/*", "/login**", "/login/process", "/api/alldata",
-						"/static/**", "/error**")
-				.permitAll()
-				.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()
-				.loginPage("/loginadmin")
+		http
+			.formLogin()
+				.loginPage("/login")
+				.failureUrl("/login?error")
 				.loginProcessingUrl("/login/process")
-				.defaultSuccessUrl("/admin", true)
+				.successHandler(getSuccessHandler())
 				.and()
-				// .exceptionHandling()
-				// .authenticationEntryPoint(
-				// new
-				// LoginUrlAuthenticationEntryPoint("/loginadmin.html")).and()
-				.logout()
-				.logoutSuccessUrl("/")
-				.permitAll()
+			.authorizeRequests()
+				.antMatchers("/admin").hasRole("ADMIN")
+				.antMatchers("/", "/om", "/login", "/songs/*", "/login**", "/login/process", "/api/alldata",
+						"/static/**", "/error**").permitAll()
+				.anyRequest().authenticated()
 				.and()
-				.addFilterBefore(ssoFilterGoogle(),
-						BasicAuthenticationFilter.class)
-				.addFilterBefore(ssoFilterFacebook(),
-						BasicAuthenticationFilter.class);
+			.logout()
+				.logoutSuccessUrl("/").permitAll()
+				.and()
+			.addFilterBefore(ssoFilterGoogle(),
+					BasicAuthenticationFilter.class)
+			.addFilterBefore(ssoFilterFacebook(),
+					BasicAuthenticationFilter.class)
+			.csrf()
+				.disable();
 		// @formatter:on
 	}
 
