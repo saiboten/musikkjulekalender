@@ -77,10 +77,9 @@ public class Application extends WebSecurityConfigurerAdapter {
 		// @formatter:off
 		http
 			.formLogin()
-				.loginPage("/login")
-				.failureUrl("/login?error")
+				.loginPage("/loginadmin")
 				.loginProcessingUrl("/login/process")
-				.successHandler(getSuccessHandler())
+				.defaultSuccessUrl("/admin", true)
 				.and()
 			.authorizeRequests()
 				.antMatchers("/admin").hasRole("ADMIN")

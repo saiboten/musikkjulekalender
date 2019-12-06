@@ -32,8 +32,26 @@ public class DayPostgres extends AbstractPersistable<Long> {
 	private String link;
 	private Date solutionDate;
 	private Date revealDate;
+	private Integer difficulty;
+	private String cooperator;
 
 	private String solutionArtist;
+	public Integer getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Integer difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public String getCooperator() {
+		return cooperator;
+	}
+
+	public void setCooperator(String cooperator) {
+		this.cooperator = cooperator;
+	}
+
 	private String solutionSong;
 
 	public String getSolutionArtist() {
@@ -118,13 +136,14 @@ public class DayPostgres extends AbstractPersistable<Long> {
 
 	@Override
 	public String toString() {
-		return "DayPostgres [id=" + id + ", revealDateAsInt=" + revealDateAsString
-				+ ", image=" + image + ", description=" + description
-				+ ", optionalSolutionVideo=" + optionalSolutionVideo
-				+ ", link=" + link + ", solutionDate=" + solutionDate
-				+ ", revealDate=" + revealDate + ", solutionArtist="
-				+ solutionArtist + ", solutionSong=" + solutionSong + "]";
+		return "DayPostgres [id=" + id + ", revealDateAsString="
+				+ revealDateAsString + ", image=" + image + ", description="
+				+ description + ", optionalSolutionVideo="
+				+ optionalSolutionVideo + ", link=" + link + ", solutionDate="
+				+ solutionDate + ", revealDate=" + revealDate + ", difficulty="
+				+ difficulty + ", cooperator=" + cooperator
+				+ ", solutionArtist=" + solutionArtist + ", solutionSong="
+				+ solutionSong + "]";
 	}
-	
-	
+
 }
