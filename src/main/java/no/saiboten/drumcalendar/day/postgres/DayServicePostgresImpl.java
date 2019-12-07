@@ -83,7 +83,8 @@ public class DayServicePostgresImpl implements DayService {
 				}
 				else {
 					logger.debug("We show nothing");
-
+					day.setDifficulty(null);
+					day.setCooperator(null);
 					day.setSolutionArtist(null);
 					day.setSolutionSong(null);
 					day.setOptionalSolutionVideo(null);
