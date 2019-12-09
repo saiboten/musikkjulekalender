@@ -64,6 +64,7 @@ public class RestController {
 
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 		returnMap.put("date", fmt.print(new DateTime()));
+		returnMap.put("now", new DateTime());
 		DayPostgres today = dayService.getToday();
 		returnMap.put("today", today != null ? today.getId() : null);
 
