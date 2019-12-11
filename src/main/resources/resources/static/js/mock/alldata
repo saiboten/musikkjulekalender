@@ -202,7 +202,7 @@
          "image":null,
          "cooperator": "Tobias",
          "difficulty": 2,
-         "description": null,
+         "description": "Dagnes oppgave",
          "optionalSolutionVideo":null,
          "link":null,
          "solutionDate":"2019-11-21T23:00:00.000+0000",
@@ -213,5 +213,10 @@
       }
    ],
    "isLoggedIn":true,
-   "user": null
+   "user":{
+      "id":1,
+      "userName":"saiboten@gmail.com",
+      "nickName":"hesterbest",
+      "daysCalculated":0,
+      "daysGuessedRight":0,"userNameNotMail":"saiboten"}
 }
