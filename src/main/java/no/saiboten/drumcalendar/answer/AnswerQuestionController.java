@@ -61,7 +61,7 @@ public class AnswerQuestionController {
 
 		song = song.trim();
 
-		Pattern pattern = Pattern.compile("(\\w|\\s|[0-9]|\\?|\\&|ø|æ|å)+");
+		Pattern pattern = Pattern.compile("(\\w|\\s|[0-9]|\\?|\\&|ø|æ|å|ä|ö)+");
 		Matcher matchSong = pattern.matcher(song);
 		if (!matchSong.matches()) {
 			answerMap
