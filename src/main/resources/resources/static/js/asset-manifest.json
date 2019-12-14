@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/static/js/main.ddae195b.chunk.js",
-    "main.js.map": "/static/js/main.ddae195b.chunk.js.map",
+    "main.js": "/static/js/main.94aecf40.chunk.js",
+    "main.js.map": "/static/js/main.94aecf40.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.71b3833e.js",
     "runtime-main.js.map": "/static/js/runtime-main.71b3833e.js.map",
     "static/css/2.b90ce945.chunk.css": "/static/css/2.b90ce945.chunk.css",
     "static/js/2.f625202c.chunk.js": "/static/js/2.f625202c.chunk.js",
     "static/js/2.f625202c.chunk.js.map": "/static/js/2.f625202c.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.cef878bca7d7801a4351ae41f8b84bb8.js": "/precache-manifest.cef878bca7d7801a4351ae41f8b84bb8.js",
+    "precache-manifest.fed035b2fd9805c4af0d47548e7de171.js": "/precache-manifest.fed035b2fd9805c4af0d47548e7de171.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.b90ce945.chunk.css.map": "/static/css/2.b90ce945.chunk.css.map",
     "static/media/Facebook.af62c4b3.svg": "/static/media/Facebook.af62c4b3.svg",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.71b3833e.js",
     "static/css/2.b90ce945.chunk.css",
     "static/js/2.f625202c.chunk.js",
-    "static/js/main.ddae195b.chunk.js"
+    "static/js/main.94aecf40.chunk.js"
   ]
 }

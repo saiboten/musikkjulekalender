@@ -213,10 +213,5 @@
       }
    ],
    "isLoggedIn":true,
-   "user":{
-      "id":1,
-      "userName":"saiboten@gmail.com",
-      "nickName":"tobias",
-      "daysCalculated":0,
-      "daysGuessedRight":0,"userNameNotMail":"saiboten"}
+   "user":null
 }
