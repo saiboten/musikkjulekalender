@@ -62,7 +62,7 @@ public class DayServicePostgresImpl implements DayService {
 			for (DayPostgres day : days) {
 				DateTime dayRevealTime = new DateTime(
 						day.getRevealDateAsString());
-				dayRevealTime = dayRevealTime.plusHours(9); // Opening time is at 09:00 hours.
+				dayRevealTime = dayRevealTime.plusHours(8); // Opening time is at 08:00 hours.
 				DateTime solution = new DateTime(day.getSolutionDate());
 				
 				logger.debug("Now: " + new DateTime());

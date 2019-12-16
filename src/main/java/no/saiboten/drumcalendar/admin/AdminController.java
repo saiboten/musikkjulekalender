@@ -75,7 +75,7 @@ public class AdminController {
 		return "admin";
 	}
 
-	@RequestMapping("/api/admin/alldata")
+	@RequestMapping("/api/admin/alldata.json")
 	public @ResponseBody Map<String, Object> getDays() {
 		logger.debug("Getting data");
 
@@ -90,6 +90,14 @@ public class AdminController {
 
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 		returnMap.put("date", fmt.print(new DateTime()));
+		return returnMap;
+	}
+
+	@RequestMapping("/api/admin/day/{dayNumber}.json")
+	public @ResponseBody Map<String, Object> getDay(
+			@PathVariable String dayNumber) {
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("day", dayService.getDay(dayNumber));
 		return returnMap;
 	}
 
