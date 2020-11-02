@@ -45,7 +45,7 @@ spring.devtools.livereload.enabled=true
 spring.devtools.livereload.port=35729
 ```
 
-* mvn sprint-boot:run
+* mvn spring-boot:run
 * Open localhost:8080
 * To log in - you need a Keycloak server set up correctly.
   * Download Keycloak 2.2.1
@@ -59,19 +59,14 @@ spring.devtools.livereload.port=35729
 Front end:
 * React
 * Thymeleaf for html rendering
-* webpack
-* jsxstyle
-* BEM.info - css
+* create-react-app
+* styled-components
 
 Back end:
 * Spring MVC
 * Postgres
 * Spring Boot
 * Spring Security
-* Keycloak Client Adapters
-
-External
-* Keycloak
 
 ## Contributing
 
