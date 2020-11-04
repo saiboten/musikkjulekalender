@@ -1,0 +1,14 @@
+{
+  "id": 2,
+  "revealDateAsString": "2019-12-01",
+  "image": null,
+  "description": "<p>Oppdatering: Problemet skal være løst</p><br />↵↵<p>Hei og velkommen til første dag i musikkjulekalenderen 2019!</p><br />↵↵<p>Hjertelig velkommen tilbake. Vi har freshet opp siden litt siden sist, håper dere liker den litt mer nattlige looken vi har på siden.</p><br />↵↵<p>En sang som passer fint i dag.</p><br />",
+  "optionalSolutionVideo": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/EM4vblG6BVQ\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>",
+  "link": "/songs/360b04e8-1257-40aa-885f-10cab75db77f.mp3",
+  "solutionDate": "2019-12-01T23:00:00.000+0000",
+  "revealDate": "2019-11-30T23:00:00.000+0000",
+  "difficulty": 1,
+  "cooperator": "Tobias",
+  "solutionArtist": "U2",
+  "solutionSong": "Sunday Bloody Sunday"
+}
