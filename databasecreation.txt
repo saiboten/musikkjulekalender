@@ -1,3 +1,11 @@
+
+// Create db unix
+sudo su postgres
+psql
+create database musikkjulekalender2021;
+\c musikkjulekalender2021;
+
+// Windows
 createdb.exe -U postgres musikkjulekalender
 
 psql.exe -U postgres musikkjulekalender
@@ -55,6 +63,8 @@ CREATE UNIQUE INDEX idx_one_right_answer
 ON answer(day, user_name, correct_song_answer)
 WHERE correct_song_answer = true;
 
+
+// What's going on here?!
 ALTER TABLE answer ADD CONSTRAINT only_one_right_answer_per_day CHECK (
    price > 0
    AND discount >= 0
